@@ -1,0 +1,2722 @@
+[
+  {
+    "__docId__": 0,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/fields.js",
+    "memberof": null,
+    "longname": "src/fields.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 31,
+    "content": "\n/**\n * {@link SearchBuilder#fields}メソッドにパラメータを指定する際のヘルパー。\n * @typedef {Object} Fields\n * @property {number} title 小説名\n * @property {string} ncode Nコード\n * @property {string} userid 作者のユーザID(数値)\n * @property {string} writer 作者名\n * @property {string} story 小説のあらすじ\n * @property {string} genre ジャンル\n * @property {string} keyword キーワード\n * @property {string} general_firstup 初回掲載日\n * @property {string} general_lastup 最終掲載日\n * @property {string} noveltype 連載の場合は1、短編の場合は2\n * @property {string} end 連載の場合は1、短編の場合は2\n * @property {string} general_all_no 全掲載話数です。短編の場合は1です。\n * @property {string} length 全掲載話数です。短編の場合は1です。\n * @property {string} time 読了時間(分単位)です。読了時間は小説文字数÷500を切り上げした数値です。\n * @property {string} isstop 長期連載中は1、それ以外は0です。\n * @property {string} pc_or_k 1はケータイのみ、2はPCのみ、3はPCとケータイで投稿された作品です。対象は投稿と次話投稿時のみで、どの端末で執筆されたかを表すものではありません。\n * @property {string} global_point 総合得点(=(ブックマーク数×2)+評価点)\n * @property {string} fav_novel_cnt ブックマーク数\n * @property {string} review_cnt レビュー数\n * @property {string} all_point 評価点\n * @property {string} all_hyoka_cnt 評価者数\n * @property {string} sasie_cnt 挿絵の数\n * @property {string} kaiwaritu 会話率\n * @property {string} novelupdated_at 小説の更新日時\n * @property {string} updated_at 最終更新日時(注意：システム用で小説更新時とは関係ありません)\n */\nexport default {\n    title: \"t\",\n    ncode: \"n\",\n    userid: \"u\",\n    writer: \"w\",\n    story: \"s\",\n    genre: \"g\",\n    keyword: \"k\",\n    general_firstup: \"gf\",\n    general_lastup: \"gl\",\n    noveltype: \"nt\",\n    end: \"e\",\n    general_all_no: \"ga\",\n    length: \"l\",\n    time: \"ti\",\n    isstop: \"i\",\n    pc_or_k: \"p\",\n    global_point: \"gp\",\n    fav_novel_cnt: \"f\",\n    review_cnt: \"r\",\n    all_point: \"a\",\n    all_hyoka_cnt: \"ah\",\n    sasie_cnt: \"sa\",\n    kaiwaritu: \"ka\",\n    novelupdated_at: \"nu\",\n    updated_at: \"ua\"\n}"
+  },
+  {
+    "__docId__": 1,
+    "kind": "typedef",
+    "static": true,
+    "variation": null,
+    "name": "Fields",
+    "memberof": "src/fields.js",
+    "longname": "src/fields.js~Fields",
+    "access": null,
+    "description": "{@link SearchBuilder#fields}メソッドにパラメータを指定する際のヘルパー。",
+    "lineNumber": 31,
+    "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "title",
+        "description": "小説名"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "ncode",
+        "description": "Nコード"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "userid",
+        "description": "作者のユーザID(数値)"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "writer",
+        "description": "作者名"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "story",
+        "description": "小説のあらすじ"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "genre",
+        "description": "ジャンル"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "keyword",
+        "description": "キーワード"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "general_firstup",
+        "description": "初回掲載日"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "general_lastup",
+        "description": "最終掲載日"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "noveltype",
+        "description": "連載の場合は1、短編の場合は2"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "end",
+        "description": "連載の場合は1、短編の場合は2"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "general_all_no",
+        "description": "全掲載話数です。短編の場合は1です。"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "length",
+        "description": "全掲載話数です。短編の場合は1です。"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "time",
+        "description": "読了時間(分単位)です。読了時間は小説文字数÷500を切り上げした数値です。"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "isstop",
+        "description": "長期連載中は1、それ以外は0です。"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "pc_or_k",
+        "description": "1はケータイのみ、2はPCのみ、3はPCとケータイで投稿された作品です。対象は投稿と次話投稿時のみで、どの端末で執筆されたかを表すものではありません。"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "global_point",
+        "description": "総合得点(=(ブックマーク数×2)+評価点)"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "fav_novel_cnt",
+        "description": "ブックマーク数"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "review_cnt",
+        "description": "レビュー数"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "all_point",
+        "description": "評価点"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "all_hyoka_cnt",
+        "description": "評価者数"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "sasie_cnt",
+        "description": "挿絵の数"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "kaiwaritu",
+        "description": "会話率"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "novelupdated_at",
+        "description": "小説の更新日時"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "updated_at",
+        "description": "最終更新日時(注意：システム用で小説更新時とは関係ありません)"
+      }
+    ],
+    "type": {
+      "types": [
+        "Object"
+      ],
+      "optional": false,
+      "name": "Fields"
+    }
+  },
+  {
+    "__docId__": 2,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/index.js",
+    "memberof": null,
+    "longname": "src/index.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import SearchBuilder from \"./search-builder\";\nimport SearchBuilderR18 from\"./search-builder-r18\";\nimport fields from \"./fields\";\n\n/**\n * なろうAPI\n * @global\n */\nexport default class Index {\n\n    /**\n    * {@link SearchBuilder#fields}メソッドにパラメータを指定する際のヘルパー。\n    * @type {Fields}\n    */\n    static get fields() { return fields; };\n    \n    /**\n     * 検索\n     * @param {string} [word] - 検索ワード\n     * @returns {SearchBuilder}\n     */\n    static search(word = null) {\n        var builder = new SearchBuilder();\n        if (word != null) builder.word(word);\n        return builder;\n    };\n    \n    /**\n     * 検索\n     * @param {string} [word] - 検索ワード\n     * @returns {SearchBuilder}\n     */\n    static searchR18(word = null) {\n        var builder = new SearchBuilderR18();\n        if (word != null) builder.word(word);\n        return builder;\n    };\n}\n"
+  },
+  {
+    "__docId__": 3,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "Index",
+    "memberof": "src/index.js",
+    "longname": "src/index.js~Index",
+    "access": null,
+    "export": true,
+    "importPath": "narou",
+    "importStyle": "Index",
+    "description": "なろうAPI",
+    "lineNumber": 9,
+    "unknown": [
+      {
+        "tagName": "@global",
+        "tagValue": ""
+      }
+    ],
+    "interface": false
+  },
+  {
+    "__docId__": 4,
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "fields",
+    "memberof": "src/index.js~Index",
+    "longname": "src/index.js~Index.fields",
+    "access": null,
+    "description": "{@link SearchBuilder#fields}メソッドにパラメータを指定する際のヘルパー。",
+    "lineNumber": 15,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Fields"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 5,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "search",
+    "memberof": "src/index.js~Index",
+    "longname": "src/index.js~Index.search",
+    "access": null,
+    "description": "検索",
+    "lineNumber": 22,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{SearchBuilder}"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "word",
+        "description": "検索ワード"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 6,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "searchR18",
+    "memberof": "src/index.js~Index",
+    "longname": "src/index.js~Index.searchR18",
+    "access": null,
+    "description": "検索",
+    "lineNumber": 33,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{SearchBuilder}"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "word",
+        "description": "検索ワード"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 7,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/narou-search-results.js",
+    "memberof": null,
+    "longname": "src/narou-search-results.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 6,
+    "content": "\n/**\n * なろう小説API検索結果\n * @class NarouSearchResults\n */\nexport default class {\n    /**\n     * @constractor\n     * @private\n     */\n    constructor(result, params) {\n        let count = result.shift().allcount;\n        \n        let limit = 20;\n        if (params.hasOwnProperty(\"lim\")) {\n            limit = params.lim;\n        }\n\n        let start = 0;\n        if (params.hasOwnProperty(\"start\")) {\n            start = params.start;\n        }\n        \n        /**\n         * 検索結果数\n         * @type {number}\n         */\n        this.allcount = count;\n        /**\n         * 結果表示上限数\n         * @type {number}\n         */\n        this.limit = limit;\n        /**\n         * 結果表示開始数\n         * @type {number}\n         */\n        this.start = start;\n        /**\n         * 結果表示ページ数\n         * @type {number}\n         */\n        this.page = start / limit;\n        /**\n         * 結果数\n         * @type {number}\n         */\n        this.length = result.length;\n        /**\n         * 検索結果\n         * @type {NarouSearchResult[]}\n         */\n        this.values = result;\n    }\n};\n\n/**\n * @typedef {Object} NarouSearchResult\n * @property {number} title 小説名\n * @property {string} ncode Nコード\n * @property {number} userid 作者のユーザID(数値)\n * @property {string} writer 作者名\n * @property {string} story 小説のあらすじ\n * @property {number} genre ジャンル\n * @property {string} keyword キーワード\n * @property {string} general_firstup 初回掲載日 YYYY-MM-DD HH:MM:SSの形式\n * @property {string} general_lastup 最終掲載日 YYYY-MM-DD HH:MM:SSの形式\n * @property {number} noveltype 連載の場合は1、短編の場合は2\n * @property {number} end 連載の場合は1、短編の場合は2\n * @property {number} general_all_no 全掲載話数です。短編の場合は1です。\n * @property {number} length 全掲載話数です。短編の場合は1です。\n * @property {number} time 読了時間(分単位)です。読了時間は小説文字数÷500を切り上げした数値です。\n * @property {number} isstop 長期連載中は1、それ以外は0です。\n * @property {number} pc_or_k 1はケータイのみ、2はPCのみ、3はPCとケータイで投稿された作品です。対象は投稿と次話投稿時のみで、どの端末で執筆されたかを表すものではありません。\n * @property {number} global_point 総合得点(=(ブックマーク数×2)+評価点)\n * @property {number} fav_novel_cnt ブックマーク数\n * @property {number} review_cnt レビュー数\n * @property {number} all_point 評価点\n * @property {number} all_hyoka_cnt 評価者数\n * @property {number} sasie_cnt 挿絵の数\n * @property {number} kaiwaritu 会話率\n * @property {number} novelupdated_at 小説の更新日時\n * @property {number} updated_at 最終更新日時(注意：システム用で小説更新時とは関係ありません)\n */\n"
+  },
+  {
+    "__docId__": 8,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "narousearchresults",
+    "memberof": "src/narou-search-results.js",
+    "longname": "src/narou-search-results.js~narousearchresults",
+    "access": null,
+    "export": true,
+    "importPath": "narou/lib/narou-search-results.js",
+    "importStyle": "narousearchresults",
+    "description": "なろう小説API検索結果",
+    "lineNumber": 6,
+    "unknown": [
+      {
+        "tagName": "@class",
+        "tagValue": "NarouSearchResults"
+      }
+    ],
+    "interface": false
+  },
+  {
+    "__docId__": 9,
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "src/narou-search-results.js~narousearchresults",
+    "longname": "src/narou-search-results.js~narousearchresults#constructor",
+    "access": "private",
+    "description": null,
+    "lineNumber": 11,
+    "unknown": [
+      {
+        "tagName": "@constractor",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "result",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "params",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 10,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "allcount",
+    "memberof": "src/narou-search-results.js~narousearchresults",
+    "longname": "src/narou-search-results.js~narousearchresults#allcount",
+    "access": null,
+    "description": "検索結果数",
+    "lineNumber": 28,
+    "type": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 11,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "limit",
+    "memberof": "src/narou-search-results.js~narousearchresults",
+    "longname": "src/narou-search-results.js~narousearchresults#limit",
+    "access": null,
+    "description": "結果表示上限数",
+    "lineNumber": 33,
+    "type": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 12,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "start",
+    "memberof": "src/narou-search-results.js~narousearchresults",
+    "longname": "src/narou-search-results.js~narousearchresults#start",
+    "access": null,
+    "description": "結果表示開始数",
+    "lineNumber": 38,
+    "type": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 13,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "page",
+    "memberof": "src/narou-search-results.js~narousearchresults",
+    "longname": "src/narou-search-results.js~narousearchresults#page",
+    "access": null,
+    "description": "結果表示ページ数",
+    "lineNumber": 43,
+    "type": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 14,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "length",
+    "memberof": "src/narou-search-results.js~narousearchresults",
+    "longname": "src/narou-search-results.js~narousearchresults#length",
+    "access": null,
+    "description": "結果数",
+    "lineNumber": 48,
+    "type": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 15,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "values",
+    "memberof": "src/narou-search-results.js~narousearchresults",
+    "longname": "src/narou-search-results.js~narousearchresults#values",
+    "access": null,
+    "description": "検索結果",
+    "lineNumber": 53,
+    "type": {
+      "nullable": null,
+      "types": [
+        "NarouSearchResult[]"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 16,
+    "kind": "typedef",
+    "static": true,
+    "variation": null,
+    "name": "NarouSearchResult",
+    "memberof": "src/narou-search-results.js",
+    "longname": "src/narou-search-results.js~NarouSearchResult",
+    "access": null,
+    "description": null,
+    "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "title",
+        "description": "小説名"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "ncode",
+        "description": "Nコード"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "userid",
+        "description": "作者のユーザID(数値)"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "writer",
+        "description": "作者名"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "story",
+        "description": "小説のあらすじ"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "genre",
+        "description": "ジャンル"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "keyword",
+        "description": "キーワード"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "general_firstup",
+        "description": "初回掲載日 YYYY-MM-DD HH:MM:SSの形式"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "general_lastup",
+        "description": "最終掲載日 YYYY-MM-DD HH:MM:SSの形式"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "noveltype",
+        "description": "連載の場合は1、短編の場合は2"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "end",
+        "description": "連載の場合は1、短編の場合は2"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "general_all_no",
+        "description": "全掲載話数です。短編の場合は1です。"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "length",
+        "description": "全掲載話数です。短編の場合は1です。"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "time",
+        "description": "読了時間(分単位)です。読了時間は小説文字数÷500を切り上げした数値です。"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "isstop",
+        "description": "長期連載中は1、それ以外は0です。"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "pc_or_k",
+        "description": "1はケータイのみ、2はPCのみ、3はPCとケータイで投稿された作品です。対象は投稿と次話投稿時のみで、どの端末で執筆されたかを表すものではありません。"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "global_point",
+        "description": "総合得点(=(ブックマーク数×2)+評価点)"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "fav_novel_cnt",
+        "description": "ブックマーク数"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "review_cnt",
+        "description": "レビュー数"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "all_point",
+        "description": "評価点"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "all_hyoka_cnt",
+        "description": "評価者数"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "sasie_cnt",
+        "description": "挿絵の数"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "kaiwaritu",
+        "description": "会話率"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "novelupdated_at",
+        "description": "小説の更新日時"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "updated_at",
+        "description": "最終更新日時(注意：システム用で小説更新時とは関係ありません)"
+      }
+    ],
+    "type": {
+      "types": [
+        "Object"
+      ],
+      "optional": false,
+      "name": "NarouSearchResult"
+    }
+  },
+  {
+    "__docId__": 17,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/narou.js",
+    "memberof": null,
+    "longname": "src/narou.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import request from 'request';\nimport zlib from 'zlib';\nimport {WritableStreamBuffer} from 'stream-buffers';\nimport NarouSearchResults from './narou-search-results.js';\n\n/**\n * なろう小説APIへのリクエストを実行する\n * @class NarouNovel\n * @private\n */\nexport default class NarouNovel {\n\n    /**\n     * なろう小説APIへの検索リクエストを実行する\n     * @param params クエリパラメータ\n     * @param endpoint APIエンドポイント\n     * @returns {Promise<NarouSearchResults>} 検索結果\n     */\n    static execute(params, endpoint = 'http://api.syosetu.com/novelapi/api/') {\n\n        let query = Object.assign(params, {out: 'json'});\n\n        var req = request({\n            method: 'GET',\n            url: endpoint,\n            qs: query,\n        });\n        var stream = new WritableStreamBuffer();\n\n\n        if (query.gzip) {\n            req = req.pipe(zlib.createUnzip());\n        }\n        \n        var pipe = req.pipe(stream);\n        \n        var promise = new Promise((resolve, failure) =>\n            pipe.on('error', e => failure(e))\n                .on('finish', () => resolve(stream.getContents()))\n        );\n\n        return promise\n            .then((text) => JSON.parse(text))\n            .then((json) => new NarouSearchResults(json, params));\n    }\n\n    static executeNovel(params) {\n        return this.execute(params, 'http://api.syosetu.com/novelapi/api/');\n    }\n\n    static executeNovel18(params) {\n        return this.execute(params, 'http://api.syosetu.com/novel18api/api/');\n    }\n}\n\n"
+  },
+  {
+    "__docId__": 18,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "NarouNovel",
+    "memberof": "src/narou.js",
+    "longname": "src/narou.js~NarouNovel",
+    "access": "private",
+    "export": true,
+    "importPath": "narou/lib/narou.js",
+    "importStyle": "NarouNovel",
+    "description": "なろう小説APIへのリクエストを実行する",
+    "lineNumber": 11,
+    "unknown": [
+      {
+        "tagName": "@class",
+        "tagValue": "NarouNovel"
+      }
+    ],
+    "interface": false
+  },
+  {
+    "__docId__": 19,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "execute",
+    "memberof": "src/narou.js~NarouNovel",
+    "longname": "src/narou.js~NarouNovel.execute",
+    "access": null,
+    "description": "なろう小説APIへの検索リクエストを実行する",
+    "lineNumber": 19,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Promise<NarouSearchResults>} 検索結果"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "params",
+        "description": "クエリパラメータ"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "endpoint",
+        "description": "APIエンドポイント"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise<NarouSearchResults>"
+      ],
+      "spread": false,
+      "description": "検索結果"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 20,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "executeNovel",
+    "memberof": "src/narou.js~NarouNovel",
+    "longname": "src/narou.js~NarouNovel.executeNovel",
+    "access": null,
+    "description": null,
+    "lineNumber": 47,
+    "undocument": true,
+    "params": [
+      {
+        "name": "params",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 21,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "executeNovel18",
+    "memberof": "src/narou.js~NarouNovel",
+    "longname": "src/narou.js~NarouNovel.executeNovel18",
+    "access": null,
+    "description": null,
+    "lineNumber": 51,
+    "undocument": true,
+    "params": [
+      {
+        "name": "params",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 22,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/search-builder-r18.js",
+    "memberof": null,
+    "longname": "src/search-builder-r18.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import api from \"./narou\";\nimport SearchBuilder from \"./search-builder\";\n\n/**\n * 18禁API検索ヘルパー\n * @class SearchBuilderR18\n */\nexport default class SearchBuilderR18 extends SearchBuilder {\n    /**\n     * なろう小説APIへの検索リクエストを実行する\n     * @override\n     * @returns {Promise<NarouSearchResult>} 検索結果\n     */\n    execute() {\n        return api.executeNovel18(this.params);\n    }\n}\n\n"
+  },
+  {
+    "__docId__": 23,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "SearchBuilderR18",
+    "memberof": "src/search-builder-r18.js",
+    "longname": "src/search-builder-r18.js~SearchBuilderR18",
+    "access": null,
+    "export": true,
+    "importPath": "narou/lib/search-builder-r18.js",
+    "importStyle": "SearchBuilderR18",
+    "description": "18禁API検索ヘルパー",
+    "lineNumber": 8,
+    "unknown": [
+      {
+        "tagName": "@class",
+        "tagValue": "SearchBuilderR18"
+      }
+    ],
+    "interface": false,
+    "extends": [
+      "src/search-builder~SearchBuilder"
+    ]
+  },
+  {
+    "__docId__": 24,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "execute",
+    "memberof": "src/search-builder-r18.js~SearchBuilderR18",
+    "longname": "src/search-builder-r18.js~SearchBuilderR18#execute",
+    "access": null,
+    "description": "なろう小説APIへの検索リクエストを実行する",
+    "lineNumber": 14,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Promise<NarouSearchResult>} 検索結果"
+      }
+    ],
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise<NarouSearchResult>"
+      ],
+      "spread": false,
+      "description": "検索結果"
+    },
+    "override": true,
+    "generator": false
+  },
+  {
+    "__docId__": 25,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/search-builder.js",
+    "memberof": null,
+    "longname": "src/search-builder.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import api from \"./narou\";\n\n/**\n * 検索ヘルパー\n * @class SearchBuilder\n */\nexport default class SearchBuilder {\n    /**\n     * constructor\n     * @private\n     */\n    constructor(params = {}) {\n        /**\n         * クエリパラメータ\n         * @protected\n         */\n        this.params = params;\n    }\n\n    /**\n     * a\n     * @return {SearchBuilder} this\n     */\n    word(word) {\n        this.set({word: word});\n        return this;\n    }\n\n    /**\n     * \n     * @return {SearchBuilder} this\n     */\n    notWord(word) {\n        this.set({word: word});\n        return this;\n    }\n\n    /**\n     * \n     * @return {SearchBuilder} this\n     */\n    isR15(bool = true) {\n        this.set({isr15: bool ? 1 : 0});\n        return this;\n    }\n\n    /**\n     * \n     * @return {SearchBuilder} this\n     */\n    isBL(bool = true) {\n        this.set({isbl: bool ? 1 : 0});\n        return this;\n    }\n\n    /**\n     * \n     * @return {SearchBuilder} this\n     */\n    isGL(bool = true) {\n        this.set({isgl: bool ? 1 : 0});\n        return this;\n    }\n\n    /**\n     * \n     * @return {SearchBuilder} this\n     */\n    isZankoku(bool = true) {\n        this.set({iszankoku: bool ? 1 : 0});\n        return this;\n    }\n\n    /**\n     * \n     * @return {SearchBuilder} this\n     */\n    length(length) {\n        let len = length;\n        if (Array.isArray(len)) {\n            len = len.join(\"-\");\n        }\n        this.set({length: len});\n        return this;\n    }\n\n    /**\n     * \n     * @return {SearchBuilder} this\n     */\n    kaiwaritu(num) {\n        let n = num;\n        if (Array.isArray(n)) {\n            n = n.join(\"-\");\n        }\n        this.set({kaiwaritu: n});\n        return this;\n    }\n\n    /**\n     * \n     * @return {SearchBuilder} this\n     */\n    sasie(num) {\n        let n = num;\n        if (Array.isArray(n)) {\n            n = n.join(\"-\");\n        }\n        this.set({kaiwaritu: n});\n        return this;\n    }\n\n    /**\n     * \n     * @return {SearchBuilder} this\n     */\n    time(num) {\n        let n = num;\n        if (Array.isArray(n)) {\n            n = n.join(\"-\");\n        }\n        this.set({kaiwaritu: n});\n        return this;\n    }\n\n    /**\n     * \n     * @return {SearchBuilder} this\n     */\n    ncode(codes) {\n        let code = codes;\n        if (Array.isArray(code)) {\n            code = code.join(\"-\");\n        }\n        code = code.toLowerCase();\n        this.set({ncode: code});\n        return this;\n    }\n\n    /**\n     * \n     * @return {SearchBuilder} this\n     */\n    type(t) {\n        this.set({type: t});\n        return this;\n    }\n\n    /**\n     * \n     * @return {SearchBuilder} this\n     */\n    buntai(codes) {\n        let code = codes;\n        if (Array.isArray(code)) {\n            code = code.join(\"-\");\n        }\n        this.set({buntai: code});\n        return this;\n    }\n\n    /**\n     * \n     * @return {SearchBuilder} this\n     */\n    isStop(bool = true) {\n        this.set({stop: bool ? 1 : 0});\n        return this;\n    }\n\n    /**\n     * \n     * @return {SearchBuilder} this\n     */\n    isPickup(bool = true) {\n        this.set({ispickup: bool ? 1 : 0});\n        return this;\n    }\n\n    /**\n     * \n     * @return {SearchBuilder} this\n     */\n    lastUpdate(date) {\n        var lastup = date;\n        if (Array.isArray(lastup)) {\n            for(var n in lastup) {\n\n            }\n            lastup = lastup.join(\"-\");\n        }\n        this.set({lastup: lastup});\n        return this;\n\n    }\n\n    /**\n     * \n     * @return {SearchBuilder} this\n     */\n    fields(fields) {\n        var of = fields;\n        if (Array.isArray(of)) {\n            of = of.join(\"-\");\n        }\n        this.set({of: of});\n        return this;\n    }\n\n    /**\n     * \n     * @return {SearchBuilder} this\n     */\n    limit(num) {\n        this.set({lim: num});\n        return this;\n    }\n\n    /**\n     * \n     * @return {SearchBuilder} this\n     */\n    start(num) {\n        this.set({st: num});\n        return this;\n    }\n\n    /**\n     * \n     * @return {SearchBuilder} this\n     */\n    page(no, count = 20) {\n        return this.limit(count).start(no * count);\n    }\n\n    /**\n    * 出力順序を指定する。指定しない場合は新着順となります。\n    * \n    * @description\n    * allunique\t閲覧者の多い順(未実装)\n    * favnovelcnt\tブックマーク数の多い順\n    * reviewcnt\tレビュー数の多い順\n    * hyoka\t総合評価の高い順\n    * hyokaasc\t総合評価の低い順\n    * impressioncnt\t感想の多い順\n    * hyokacnt\t評価者数の多い順\n    * hyokacntasc\t評価者数の少ない順\n    * weekly\t週間ユニークユーザの多い順 毎週火曜日早朝リセット\n    * (前週の日曜日から土曜日分)\n    * lengthdesc\t小説本文の文字数が多い順\n    * lengthasc\t小説本文の文字数が少ない順\n    * ncodedesc\tNコードが新しい順\n    * old\t古い順\n    * @param {string} order 出力順序\n    * @return {SearchBuilder} this\n    */\n    order(order) {\n        this.set({order: order});\n        return this;\n    }\n\n    /**\n     * gzip圧縮する。\n     * \n     * 転送量上限を減らすためにも推奨\n     * @param {number} level gzip圧縮レベル(1～5)\n     * @return {SearchBuilder} this\n     */\n    gzip(level) {\n        this.set({gzip: level});\n        return this;\n    }\n\n    /**\n     * クエリパラメータをセットする\n     * @private\n     * @return {SearchBuilder} this\n     */\n    set(obj) {\n        Object.assign(this.params, obj);\n        return this;\n    }\n\n    /**\n     * なろう小説APIへの検索リクエストを実行する\n     * @returns {Promise<NarouSearchResults>} 検索結果\n     */\n    execute() {\n        return api.executeNovel(this.params);\n    }\n}\n\n"
+  },
+  {
+    "__docId__": 26,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "SearchBuilder",
+    "memberof": "src/search-builder.js",
+    "longname": "src/search-builder.js~SearchBuilder",
+    "access": null,
+    "export": true,
+    "importPath": "narou/lib/search-builder.js",
+    "importStyle": "SearchBuilder",
+    "description": "検索ヘルパー",
+    "lineNumber": 7,
+    "unknown": [
+      {
+        "tagName": "@class",
+        "tagValue": "SearchBuilder"
+      }
+    ],
+    "interface": false
+  },
+  {
+    "__docId__": 27,
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#constructor",
+    "access": "private",
+    "description": "constructor",
+    "lineNumber": 12,
+    "params": [
+      {
+        "name": "params",
+        "optional": true,
+        "types": [
+          "{}"
+        ],
+        "defaultRaw": {},
+        "defaultValue": "{}"
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 28,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "params",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#params",
+    "access": "protected",
+    "description": "クエリパラメータ",
+    "lineNumber": 17,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 29,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "word",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#word",
+    "access": null,
+    "description": "a",
+    "lineNumber": 24,
+    "params": [
+      {
+        "name": "word",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": "this"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 30,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "notWord",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#notWord",
+    "access": null,
+    "description": "",
+    "lineNumber": 33,
+    "params": [
+      {
+        "name": "word",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": "this"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 31,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "isR15",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#isR15",
+    "access": null,
+    "description": "",
+    "lineNumber": 42,
+    "params": [
+      {
+        "name": "bool",
+        "optional": true,
+        "types": [
+          "boolean"
+        ],
+        "defaultRaw": true,
+        "defaultValue": "true"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": "this"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 32,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "isBL",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#isBL",
+    "access": null,
+    "description": "",
+    "lineNumber": 51,
+    "params": [
+      {
+        "name": "bool",
+        "optional": true,
+        "types": [
+          "boolean"
+        ],
+        "defaultRaw": true,
+        "defaultValue": "true"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": "this"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 33,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "isGL",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#isGL",
+    "access": null,
+    "description": "",
+    "lineNumber": 60,
+    "params": [
+      {
+        "name": "bool",
+        "optional": true,
+        "types": [
+          "boolean"
+        ],
+        "defaultRaw": true,
+        "defaultValue": "true"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": "this"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 34,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "isZankoku",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#isZankoku",
+    "access": null,
+    "description": "",
+    "lineNumber": 69,
+    "params": [
+      {
+        "name": "bool",
+        "optional": true,
+        "types": [
+          "boolean"
+        ],
+        "defaultRaw": true,
+        "defaultValue": "true"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": "this"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 35,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "length",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#length",
+    "access": null,
+    "description": "",
+    "lineNumber": 78,
+    "params": [
+      {
+        "name": "length",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": "this"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 36,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "kaiwaritu",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#kaiwaritu",
+    "access": null,
+    "description": "",
+    "lineNumber": 91,
+    "params": [
+      {
+        "name": "num",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": "this"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 37,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "sasie",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#sasie",
+    "access": null,
+    "description": "",
+    "lineNumber": 104,
+    "params": [
+      {
+        "name": "num",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": "this"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 38,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "time",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#time",
+    "access": null,
+    "description": "",
+    "lineNumber": 117,
+    "params": [
+      {
+        "name": "num",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": "this"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 39,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "ncode",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#ncode",
+    "access": null,
+    "description": "",
+    "lineNumber": 130,
+    "params": [
+      {
+        "name": "codes",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": "this"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 40,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "type",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#type",
+    "access": null,
+    "description": "",
+    "lineNumber": 144,
+    "params": [
+      {
+        "name": "t",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": "this"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 41,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "buntai",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#buntai",
+    "access": null,
+    "description": "",
+    "lineNumber": 153,
+    "params": [
+      {
+        "name": "codes",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": "this"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 42,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "isStop",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#isStop",
+    "access": null,
+    "description": "",
+    "lineNumber": 166,
+    "params": [
+      {
+        "name": "bool",
+        "optional": true,
+        "types": [
+          "boolean"
+        ],
+        "defaultRaw": true,
+        "defaultValue": "true"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": "this"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 43,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "isPickup",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#isPickup",
+    "access": null,
+    "description": "",
+    "lineNumber": 175,
+    "params": [
+      {
+        "name": "bool",
+        "optional": true,
+        "types": [
+          "boolean"
+        ],
+        "defaultRaw": true,
+        "defaultValue": "true"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": "this"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 44,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "lastUpdate",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#lastUpdate",
+    "access": null,
+    "description": "",
+    "lineNumber": 184,
+    "params": [
+      {
+        "name": "date",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": "this"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 45,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "fields",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#fields",
+    "access": null,
+    "description": "",
+    "lineNumber": 201,
+    "params": [
+      {
+        "name": "fields",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": "this"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 46,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "limit",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#limit",
+    "access": null,
+    "description": "",
+    "lineNumber": 214,
+    "params": [
+      {
+        "name": "num",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": "this"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 47,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "start",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#start",
+    "access": null,
+    "description": "",
+    "lineNumber": 223,
+    "params": [
+      {
+        "name": "num",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": "this"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 48,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "page",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#page",
+    "access": null,
+    "description": "",
+    "lineNumber": 232,
+    "params": [
+      {
+        "name": "no",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "count",
+        "optional": true,
+        "types": [
+          "number"
+        ],
+        "defaultRaw": 20,
+        "defaultValue": "20"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": "this"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 49,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "order",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#order",
+    "access": null,
+    "description": "出力順序を指定する。指定しない場合は新着順となります。",
+    "lineNumber": 257,
+    "unknown": [
+      {
+        "tagName": "@description",
+        "tagValue": "allunique\t閲覧者の多い順(未実装)\nfavnovelcnt\tブックマーク数の多い順\nreviewcnt\tレビュー数の多い順\nhyoka\t総合評価の高い順\nhyokaasc\t総合評価の低い順\nimpressioncnt\t感想の多い順\nhyokacnt\t評価者数の多い順\nhyokacntasc\t評価者数の少ない順\nweekly\t週間ユニークユーザの多い順 毎週火曜日早朝リセット\n(前週の日曜日から土曜日分)\nlengthdesc\t小説本文の文字数が多い順\nlengthasc\t小説本文の文字数が少ない順\nncodedesc\tNコードが新しい順\nold\t古い順"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "order",
+        "description": "出力順序"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": "this"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 50,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "gzip",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#gzip",
+    "access": null,
+    "description": "gzip圧縮する。\n\n転送量上限を減らすためにも推奨",
+    "lineNumber": 269,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "level",
+        "description": "gzip圧縮レベル(1～5)"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": "this"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 51,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "set",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#set",
+    "access": "private",
+    "description": "クエリパラメータをセットする",
+    "lineNumber": 279,
+    "params": [
+      {
+        "name": "obj",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SearchBuilder"
+      ],
+      "spread": false,
+      "description": "this"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 52,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "execute",
+    "memberof": "src/search-builder.js~SearchBuilder",
+    "longname": "src/search-builder.js~SearchBuilder#execute",
+    "access": null,
+    "description": "なろう小説APIへの検索リクエストを実行する",
+    "lineNumber": 288,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Promise<NarouSearchResults>} 検索結果"
+      }
+    ],
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise<NarouSearchResults>"
+      ],
+      "spread": false,
+      "description": "検索結果"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 54,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Infinity",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 55,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~NaN",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 56,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~undefined",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 57,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~null",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 58,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Object",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 59,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~object",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 60,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Function",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 61,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~function",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 62,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Boolean",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 63,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~boolean",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 64,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Symbol",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 65,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Error",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 66,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~EvalError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 67,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~InternalError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 68,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~RangeError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 69,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~ReferenceError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 70,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~SyntaxError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 71,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~TypeError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 72,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~URIError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 73,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Number",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 74,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~number",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 75,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Date",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 76,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~String",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 77,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~string",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 78,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~RegExp",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 79,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 80,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int8Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 81,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 82,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8ClampedArray",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 83,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int16Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 84,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint16Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 85,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int32Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 86,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint32Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 87,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float32Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 88,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float64Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 89,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Map",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 90,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Set",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 91,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakMap",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 92,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakSet",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 93,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~ArrayBuffer",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 94,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~DataView",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 95,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~JSON",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 96,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Promise",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 97,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Generator",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 98,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~GeneratorFunction",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 99,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Reflect",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 100,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Proxy",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 102,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "CanvasRenderingContext2D",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~CanvasRenderingContext2D",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 103,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "DocumentFragment",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~DocumentFragment",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 104,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Element",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Element",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~Element",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 105,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Event",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Event",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~Event",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 106,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Node",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Node",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~Node",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 107,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "NodeList",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/NodeList",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~NodeList",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 108,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "XMLHttpRequest",
+    "externalLink": "https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~XMLHttpRequest",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 109,
+    "kind": "testFile",
+    "static": true,
+    "variation": null,
+    "name": "test/narou-test.js",
+    "memberof": null,
+    "longname": "test/narou-test.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 2,
+    "content": "// LICENSE : MIT\n\"use strict\";\nimport 'source-map-support/register';\nimport assert from 'power-assert';\n\nimport narou from \"../\";\n\ndescribe(\"narou-test\", function () {\n    context(\"search\", () => {\n        it(\"if limit = 1 then length = 1\", () =>\n            narou\n                .search()\n                .limit(1)\n                .fields([])\n                .execute()\n                .then((json) => {\n                        assert(json.values.length === 1);\n                    })\n        );\n        it(\"ncode n1701bm is 異世界食堂\", () =>\n                narou\n                    .search()\n                    .ncode(\"n1701bm\")\n                    .fields([narou.fields.title])\n                    .execute()\n                    .then((json) => {\n                        assert(json.values.length === 1);\n                        assert(json.values[0].title == \"異世界食堂\");\n                    })\n        )\n        it(\"ncode n1701bm, n1443bp is 異世界食堂. 異世界はスマートフォンとともに。\", () =>\n                narou\n                    .search()\n                    .ncode([\"n1701bm\", \"n1443bp\"])\n                    .fields([narou.fields.title])\n                    .execute()\n                    .then((json) => {\n                        assert(json.values.length === 2);\n                        assert(json.values[1].title == \"異世界食堂\");\n                        assert(json.values[0].title == \"異世界はスマートフォンとともに。\");\n                    })\n        )\n\n        it(\"ncode N1707CX is テスト小説なのです。\", () =>\n                narou\n                    .search()\n                    .ncode(\"N1707CX\")\n                    .fields([narou.fields.title])\n                    .execute()\n                    .then((json) => {\n                        assert(json.values.length === 1);\n                        assert(json.values[0].title == \"テスト小説なのです。\");\n                    })\n        )\n\n        it(\"word テスト小説なのです。\", () =>\n                narou\n                    .search()\n                    .word(\"テスト小説なのです。\")\n                    .fields([narou.fields.title])\n                    .execute()\n                    .then((json) => {\n                        assert(json.values.length === 1);\n                        assert(json.values[0].title == \"テスト小説なのです。\");\n                    })\n        )\n\n        it(\"gzip support\", () =>\n                Promise.all([narou\n                    .search()\n                    .ncode(\"N1707CX\")\n                    .fields([narou.fields.title])\n                    .gzip(5)\n                    .execute()\n                    .then((json) => {\n                        assert(json.values.length === 1);\n                        assert(json.values[0].title == \"テスト小説なのです。\");\n                    }), narou\n                    .search()\n                    .ncode(\"N1707CX\")\n                    .fields([narou.fields.title])\n                    .gzip(0)\n                    .execute()\n                    .then((json) => {\n                        assert(json.values.length === 1);\n                        assert(json.values[0].title == \"テスト小説なのです。\");\n                    })])\n        )\n\n    })\n});\n"
+  },
+  {
+    "__docId__": 110,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe0",
+    "testId": 0,
+    "memberof": "test/narou-test.js",
+    "testDepth": 0,
+    "longname": "test/narou-test.js~describe0",
+    "access": null,
+    "description": "narou-test",
+    "lineNumber": 8
+  },
+  {
+    "__docId__": 111,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "context1",
+    "testId": 1,
+    "memberof": "test/narou-test.js~describe0",
+    "testDepth": 1,
+    "longname": "test/narou-test.js~describe0.context1",
+    "access": null,
+    "description": "search",
+    "lineNumber": 9
+  },
+  {
+    "__docId__": 112,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it2",
+    "testId": 2,
+    "memberof": "test/narou-test.js~describe0.context1",
+    "testDepth": 2,
+    "longname": "test/narou-test.js~describe0.context1.it2",
+    "access": null,
+    "description": "if limit = 1 then length = 1",
+    "lineNumber": 10
+  },
+  {
+    "__docId__": 113,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it3",
+    "testId": 3,
+    "memberof": "test/narou-test.js~describe0.context1",
+    "testDepth": 2,
+    "longname": "test/narou-test.js~describe0.context1.it3",
+    "access": null,
+    "description": "ncode n1701bm is 異世界食堂",
+    "lineNumber": 20
+  },
+  {
+    "__docId__": 114,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it4",
+    "testId": 4,
+    "memberof": "test/narou-test.js~describe0.context1",
+    "testDepth": 2,
+    "longname": "test/narou-test.js~describe0.context1.it4",
+    "access": null,
+    "description": "ncode n1701bm, n1443bp is 異世界食堂. 異世界はスマートフォンとともに。",
+    "lineNumber": 31
+  },
+  {
+    "__docId__": 115,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it5",
+    "testId": 5,
+    "memberof": "test/narou-test.js~describe0.context1",
+    "testDepth": 2,
+    "longname": "test/narou-test.js~describe0.context1.it5",
+    "access": null,
+    "description": "ncode N1707CX is テスト小説なのです。",
+    "lineNumber": 44
+  },
+  {
+    "__docId__": 116,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it6",
+    "testId": 6,
+    "memberof": "test/narou-test.js~describe0.context1",
+    "testDepth": 2,
+    "longname": "test/narou-test.js~describe0.context1.it6",
+    "access": null,
+    "description": "word テスト小説なのです。",
+    "lineNumber": 56
+  },
+  {
+    "__docId__": 117,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it7",
+    "testId": 7,
+    "memberof": "test/narou-test.js~describe0.context1",
+    "testDepth": 2,
+    "longname": "test/narou-test.js~describe0.context1.it7",
+    "access": null,
+    "description": "gzip support",
+    "lineNumber": 68
+  }
+]

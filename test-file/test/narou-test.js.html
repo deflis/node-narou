@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">test/narou-test.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="https://github.com/deflis/node-narou.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~Index.html">Index</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/narou-search-results.js~narousearchresults.html">narousearchresults</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/search-builder-r18.js~SearchBuilderR18.html">SearchBuilderR18</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/search-builder.js~SearchBuilder.html">SearchBuilder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Fields">Fields</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-NarouSearchResult">NarouSearchResult</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">test/narou-test.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">// LICENSE : MIT
+&quot;use strict&quot;;
+import &apos;source-map-support/register&apos;;
+import assert from &apos;power-assert&apos;;
+
+import narou from &quot;../&quot;;
+
+describe(&quot;narou-test&quot;, function () {
+    context(&quot;search&quot;, () =&gt; {
+        it(&quot;if limit = 1 then length = 1&quot;, () =&gt;
+            narou
+                .search()
+                .limit(1)
+                .fields([])
+                .execute()
+                .then((json) =&gt; {
+                        assert(json.values.length === 1);
+                    })
+        );
+        it(&quot;ncode n1701bm is &#x7570;&#x4E16;&#x754C;&#x98DF;&#x5802;&quot;, () =&gt;
+                narou
+                    .search()
+                    .ncode(&quot;n1701bm&quot;)
+                    .fields([narou.fields.title])
+                    .execute()
+                    .then((json) =&gt; {
+                        assert(json.values.length === 1);
+                        assert(json.values[0].title == &quot;&#x7570;&#x4E16;&#x754C;&#x98DF;&#x5802;&quot;);
+                    })
+        )
+        it(&quot;ncode n1701bm, n1443bp is &#x7570;&#x4E16;&#x754C;&#x98DF;&#x5802;. &#x7570;&#x4E16;&#x754C;&#x306F;&#x30B9;&#x30DE;&#x30FC;&#x30C8;&#x30D5;&#x30A9;&#x30F3;&#x3068;&#x3068;&#x3082;&#x306B;&#x3002;&quot;, () =&gt;
+                narou
+                    .search()
+                    .ncode([&quot;n1701bm&quot;, &quot;n1443bp&quot;])
+                    .fields([narou.fields.title])
+                    .execute()
+                    .then((json) =&gt; {
+                        assert(json.values.length === 2);
+                        assert(json.values[1].title == &quot;&#x7570;&#x4E16;&#x754C;&#x98DF;&#x5802;&quot;);
+                        assert(json.values[0].title == &quot;&#x7570;&#x4E16;&#x754C;&#x306F;&#x30B9;&#x30DE;&#x30FC;&#x30C8;&#x30D5;&#x30A9;&#x30F3;&#x3068;&#x3068;&#x3082;&#x306B;&#x3002;&quot;);
+                    })
+        )
+
+        it(&quot;ncode N1707CX is &#x30C6;&#x30B9;&#x30C8;&#x5C0F;&#x8AAC;&#x306A;&#x306E;&#x3067;&#x3059;&#x3002;&quot;, () =&gt;
+                narou
+                    .search()
+                    .ncode(&quot;N1707CX&quot;)
+                    .fields([narou.fields.title])
+                    .execute()
+                    .then((json) =&gt; {
+                        assert(json.values.length === 1);
+                        assert(json.values[0].title == &quot;&#x30C6;&#x30B9;&#x30C8;&#x5C0F;&#x8AAC;&#x306A;&#x306E;&#x3067;&#x3059;&#x3002;&quot;);
+                    })
+        )
+
+        it(&quot;word &#x30C6;&#x30B9;&#x30C8;&#x5C0F;&#x8AAC;&#x306A;&#x306E;&#x3067;&#x3059;&#x3002;&quot;, () =&gt;
+                narou
+                    .search()
+                    .word(&quot;&#x30C6;&#x30B9;&#x30C8;&#x5C0F;&#x8AAC;&#x306A;&#x306E;&#x3067;&#x3059;&#x3002;&quot;)
+                    .fields([narou.fields.title])
+                    .execute()
+                    .then((json) =&gt; {
+                        assert(json.values.length === 1);
+                        assert(json.values[0].title == &quot;&#x30C6;&#x30B9;&#x30C8;&#x5C0F;&#x8AAC;&#x306A;&#x306E;&#x3067;&#x3059;&#x3002;&quot;);
+                    })
+        )
+
+        it(&quot;gzip support&quot;, () =&gt;
+                Promise.all([narou
+                    .search()
+                    .ncode(&quot;N1707CX&quot;)
+                    .fields([narou.fields.title])
+                    .gzip(5)
+                    .execute()
+                    .then((json) =&gt; {
+                        assert(json.values.length === 1);
+                        assert(json.values[0].title == &quot;&#x30C6;&#x30B9;&#x30C8;&#x5C0F;&#x8AAC;&#x306A;&#x306E;&#x3067;&#x3059;&#x3002;&quot;);
+                    }), narou
+                    .search()
+                    .ncode(&quot;N1707CX&quot;)
+                    .fields([narou.fields.title])
+                    .gzip(0)
+                    .execute()
+                    .then((json) =&gt; {
+                        assert(json.values.length === 1);
+                        assert(json.values[0].title == &quot;&#x30C6;&#x30B9;&#x30C8;&#x5C0F;&#x8AAC;&#x306A;&#x306E;&#x3067;&#x3059;&#x3002;&quot;);
+                    })])
+        )
+
+    })
+});
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.0)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

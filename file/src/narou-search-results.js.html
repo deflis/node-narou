@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/narou-search-results.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="https://github.com/deflis/node-narou.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~Index.html">Index</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/narou-search-results.js~narousearchresults.html">narousearchresults</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/search-builder-r18.js~SearchBuilderR18.html">SearchBuilderR18</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/search-builder.js~SearchBuilder.html">SearchBuilder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Fields">Fields</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-NarouSearchResult">NarouSearchResult</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/narou-search-results.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">
+/**
+ * &#x306A;&#x308D;&#x3046;&#x5C0F;&#x8AAC;API&#x691C;&#x7D22;&#x7D50;&#x679C;
+ * @class NarouSearchResults
+ */
+export default class {
+    /**
+     * @constractor
+     * @private
+     */
+    constructor(result, params) {
+        let count = result.shift().allcount;
+        
+        let limit = 20;
+        if (params.hasOwnProperty(&quot;lim&quot;)) {
+            limit = params.lim;
+        }
+
+        let start = 0;
+        if (params.hasOwnProperty(&quot;start&quot;)) {
+            start = params.start;
+        }
+        
+        /**
+         * &#x691C;&#x7D22;&#x7D50;&#x679C;&#x6570;
+         * @type {number}
+         */
+        this.allcount = count;
+        /**
+         * &#x7D50;&#x679C;&#x8868;&#x793A;&#x4E0A;&#x9650;&#x6570;
+         * @type {number}
+         */
+        this.limit = limit;
+        /**
+         * &#x7D50;&#x679C;&#x8868;&#x793A;&#x958B;&#x59CB;&#x6570;
+         * @type {number}
+         */
+        this.start = start;
+        /**
+         * &#x7D50;&#x679C;&#x8868;&#x793A;&#x30DA;&#x30FC;&#x30B8;&#x6570;
+         * @type {number}
+         */
+        this.page = start / limit;
+        /**
+         * &#x7D50;&#x679C;&#x6570;
+         * @type {number}
+         */
+        this.length = result.length;
+        /**
+         * &#x691C;&#x7D22;&#x7D50;&#x679C;
+         * @type {NarouSearchResult[]}
+         */
+        this.values = result;
+    }
+};
+
+/**
+ * @typedef {Object} NarouSearchResult
+ * @property {number} title &#x5C0F;&#x8AAC;&#x540D;
+ * @property {string} ncode N&#x30B3;&#x30FC;&#x30C9;
+ * @property {number} userid &#x4F5C;&#x8005;&#x306E;&#x30E6;&#x30FC;&#x30B6;ID(&#x6570;&#x5024;)
+ * @property {string} writer &#x4F5C;&#x8005;&#x540D;
+ * @property {string} story &#x5C0F;&#x8AAC;&#x306E;&#x3042;&#x3089;&#x3059;&#x3058;
+ * @property {number} genre &#x30B8;&#x30E3;&#x30F3;&#x30EB;
+ * @property {string} keyword &#x30AD;&#x30FC;&#x30EF;&#x30FC;&#x30C9;
+ * @property {string} general_firstup &#x521D;&#x56DE;&#x63B2;&#x8F09;&#x65E5; YYYY-MM-DD HH:MM:SS&#x306E;&#x5F62;&#x5F0F;
+ * @property {string} general_lastup &#x6700;&#x7D42;&#x63B2;&#x8F09;&#x65E5; YYYY-MM-DD HH:MM:SS&#x306E;&#x5F62;&#x5F0F;
+ * @property {number} noveltype &#x9023;&#x8F09;&#x306E;&#x5834;&#x5408;&#x306F;1&#x3001;&#x77ED;&#x7DE8;&#x306E;&#x5834;&#x5408;&#x306F;2
+ * @property {number} end &#x9023;&#x8F09;&#x306E;&#x5834;&#x5408;&#x306F;1&#x3001;&#x77ED;&#x7DE8;&#x306E;&#x5834;&#x5408;&#x306F;2
+ * @property {number} general_all_no &#x5168;&#x63B2;&#x8F09;&#x8A71;&#x6570;&#x3067;&#x3059;&#x3002;&#x77ED;&#x7DE8;&#x306E;&#x5834;&#x5408;&#x306F;1&#x3067;&#x3059;&#x3002;
+ * @property {number} length &#x5168;&#x63B2;&#x8F09;&#x8A71;&#x6570;&#x3067;&#x3059;&#x3002;&#x77ED;&#x7DE8;&#x306E;&#x5834;&#x5408;&#x306F;1&#x3067;&#x3059;&#x3002;
+ * @property {number} time &#x8AAD;&#x4E86;&#x6642;&#x9593;(&#x5206;&#x5358;&#x4F4D;)&#x3067;&#x3059;&#x3002;&#x8AAD;&#x4E86;&#x6642;&#x9593;&#x306F;&#x5C0F;&#x8AAC;&#x6587;&#x5B57;&#x6570;&#xF7;500&#x3092;&#x5207;&#x308A;&#x4E0A;&#x3052;&#x3057;&#x305F;&#x6570;&#x5024;&#x3067;&#x3059;&#x3002;
+ * @property {number} isstop &#x9577;&#x671F;&#x9023;&#x8F09;&#x4E2D;&#x306F;1&#x3001;&#x305D;&#x308C;&#x4EE5;&#x5916;&#x306F;0&#x3067;&#x3059;&#x3002;
+ * @property {number} pc_or_k 1&#x306F;&#x30B1;&#x30FC;&#x30BF;&#x30A4;&#x306E;&#x307F;&#x3001;2&#x306F;PC&#x306E;&#x307F;&#x3001;3&#x306F;PC&#x3068;&#x30B1;&#x30FC;&#x30BF;&#x30A4;&#x3067;&#x6295;&#x7A3F;&#x3055;&#x308C;&#x305F;&#x4F5C;&#x54C1;&#x3067;&#x3059;&#x3002;&#x5BFE;&#x8C61;&#x306F;&#x6295;&#x7A3F;&#x3068;&#x6B21;&#x8A71;&#x6295;&#x7A3F;&#x6642;&#x306E;&#x307F;&#x3067;&#x3001;&#x3069;&#x306E;&#x7AEF;&#x672B;&#x3067;&#x57F7;&#x7B46;&#x3055;&#x308C;&#x305F;&#x304B;&#x3092;&#x8868;&#x3059;&#x3082;&#x306E;&#x3067;&#x306F;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;
+ * @property {number} global_point &#x7DCF;&#x5408;&#x5F97;&#x70B9;(=(&#x30D6;&#x30C3;&#x30AF;&#x30DE;&#x30FC;&#x30AF;&#x6570;&#xD7;2)+&#x8A55;&#x4FA1;&#x70B9;)
+ * @property {number} fav_novel_cnt &#x30D6;&#x30C3;&#x30AF;&#x30DE;&#x30FC;&#x30AF;&#x6570;
+ * @property {number} review_cnt &#x30EC;&#x30D3;&#x30E5;&#x30FC;&#x6570;
+ * @property {number} all_point &#x8A55;&#x4FA1;&#x70B9;
+ * @property {number} all_hyoka_cnt &#x8A55;&#x4FA1;&#x8005;&#x6570;
+ * @property {number} sasie_cnt &#x633F;&#x7D75;&#x306E;&#x6570;
+ * @property {number} kaiwaritu &#x4F1A;&#x8A71;&#x7387;
+ * @property {number} novelupdated_at &#x5C0F;&#x8AAC;&#x306E;&#x66F4;&#x65B0;&#x65E5;&#x6642;
+ * @property {number} updated_at &#x6700;&#x7D42;&#x66F4;&#x65B0;&#x65E5;&#x6642;(&#x6CE8;&#x610F;&#xFF1A;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x7528;&#x3067;&#x5C0F;&#x8AAC;&#x66F4;&#x65B0;&#x6642;&#x3068;&#x306F;&#x95A2;&#x4FC2;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;)
+ */
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.0)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

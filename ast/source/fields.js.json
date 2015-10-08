@@ -1,0 +1,1567 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ExportDefaultDeclaration",
+      "declaration": {
+        "type": "ObjectExpression",
+        "properties": [
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "title",
+              "range": [
+                1259,
+                1264
+              ],
+              "loc": {
+                "start": {
+                  "line": 32,
+                  "column": 4
+                },
+                "end": {
+                  "line": 32,
+                  "column": 9
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "t",
+              "raw": "\"t\"",
+              "range": [
+                1266,
+                1269
+              ],
+              "loc": {
+                "start": {
+                  "line": 32,
+                  "column": 11
+                },
+                "end": {
+                  "line": 32,
+                  "column": 14
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1259,
+              1269
+            ],
+            "loc": {
+              "start": {
+                "line": 32,
+                "column": 4
+              },
+              "end": {
+                "line": 32,
+                "column": 14
+              }
+            }
+          },
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "ncode",
+              "range": [
+                1275,
+                1280
+              ],
+              "loc": {
+                "start": {
+                  "line": 33,
+                  "column": 4
+                },
+                "end": {
+                  "line": 33,
+                  "column": 9
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "n",
+              "raw": "\"n\"",
+              "range": [
+                1282,
+                1285
+              ],
+              "loc": {
+                "start": {
+                  "line": 33,
+                  "column": 11
+                },
+                "end": {
+                  "line": 33,
+                  "column": 14
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1275,
+              1285
+            ],
+            "loc": {
+              "start": {
+                "line": 33,
+                "column": 4
+              },
+              "end": {
+                "line": 33,
+                "column": 14
+              }
+            }
+          },
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "userid",
+              "range": [
+                1291,
+                1297
+              ],
+              "loc": {
+                "start": {
+                  "line": 34,
+                  "column": 4
+                },
+                "end": {
+                  "line": 34,
+                  "column": 10
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "u",
+              "raw": "\"u\"",
+              "range": [
+                1299,
+                1302
+              ],
+              "loc": {
+                "start": {
+                  "line": 34,
+                  "column": 12
+                },
+                "end": {
+                  "line": 34,
+                  "column": 15
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1291,
+              1302
+            ],
+            "loc": {
+              "start": {
+                "line": 34,
+                "column": 4
+              },
+              "end": {
+                "line": 34,
+                "column": 15
+              }
+            }
+          },
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "writer",
+              "range": [
+                1308,
+                1314
+              ],
+              "loc": {
+                "start": {
+                  "line": 35,
+                  "column": 4
+                },
+                "end": {
+                  "line": 35,
+                  "column": 10
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "w",
+              "raw": "\"w\"",
+              "range": [
+                1316,
+                1319
+              ],
+              "loc": {
+                "start": {
+                  "line": 35,
+                  "column": 12
+                },
+                "end": {
+                  "line": 35,
+                  "column": 15
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1308,
+              1319
+            ],
+            "loc": {
+              "start": {
+                "line": 35,
+                "column": 4
+              },
+              "end": {
+                "line": 35,
+                "column": 15
+              }
+            }
+          },
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "story",
+              "range": [
+                1325,
+                1330
+              ],
+              "loc": {
+                "start": {
+                  "line": 36,
+                  "column": 4
+                },
+                "end": {
+                  "line": 36,
+                  "column": 9
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "s",
+              "raw": "\"s\"",
+              "range": [
+                1332,
+                1335
+              ],
+              "loc": {
+                "start": {
+                  "line": 36,
+                  "column": 11
+                },
+                "end": {
+                  "line": 36,
+                  "column": 14
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1325,
+              1335
+            ],
+            "loc": {
+              "start": {
+                "line": 36,
+                "column": 4
+              },
+              "end": {
+                "line": 36,
+                "column": 14
+              }
+            }
+          },
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "genre",
+              "range": [
+                1341,
+                1346
+              ],
+              "loc": {
+                "start": {
+                  "line": 37,
+                  "column": 4
+                },
+                "end": {
+                  "line": 37,
+                  "column": 9
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "g",
+              "raw": "\"g\"",
+              "range": [
+                1348,
+                1351
+              ],
+              "loc": {
+                "start": {
+                  "line": 37,
+                  "column": 11
+                },
+                "end": {
+                  "line": 37,
+                  "column": 14
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1341,
+              1351
+            ],
+            "loc": {
+              "start": {
+                "line": 37,
+                "column": 4
+              },
+              "end": {
+                "line": 37,
+                "column": 14
+              }
+            }
+          },
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "keyword",
+              "range": [
+                1357,
+                1364
+              ],
+              "loc": {
+                "start": {
+                  "line": 38,
+                  "column": 4
+                },
+                "end": {
+                  "line": 38,
+                  "column": 11
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "k",
+              "raw": "\"k\"",
+              "range": [
+                1366,
+                1369
+              ],
+              "loc": {
+                "start": {
+                  "line": 38,
+                  "column": 13
+                },
+                "end": {
+                  "line": 38,
+                  "column": 16
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1357,
+              1369
+            ],
+            "loc": {
+              "start": {
+                "line": 38,
+                "column": 4
+              },
+              "end": {
+                "line": 38,
+                "column": 16
+              }
+            }
+          },
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "general_firstup",
+              "range": [
+                1375,
+                1390
+              ],
+              "loc": {
+                "start": {
+                  "line": 39,
+                  "column": 4
+                },
+                "end": {
+                  "line": 39,
+                  "column": 19
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "gf",
+              "raw": "\"gf\"",
+              "range": [
+                1392,
+                1396
+              ],
+              "loc": {
+                "start": {
+                  "line": 39,
+                  "column": 21
+                },
+                "end": {
+                  "line": 39,
+                  "column": 25
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1375,
+              1396
+            ],
+            "loc": {
+              "start": {
+                "line": 39,
+                "column": 4
+              },
+              "end": {
+                "line": 39,
+                "column": 25
+              }
+            }
+          },
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "general_lastup",
+              "range": [
+                1402,
+                1416
+              ],
+              "loc": {
+                "start": {
+                  "line": 40,
+                  "column": 4
+                },
+                "end": {
+                  "line": 40,
+                  "column": 18
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "gl",
+              "raw": "\"gl\"",
+              "range": [
+                1418,
+                1422
+              ],
+              "loc": {
+                "start": {
+                  "line": 40,
+                  "column": 20
+                },
+                "end": {
+                  "line": 40,
+                  "column": 24
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1402,
+              1422
+            ],
+            "loc": {
+              "start": {
+                "line": 40,
+                "column": 4
+              },
+              "end": {
+                "line": 40,
+                "column": 24
+              }
+            }
+          },
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "noveltype",
+              "range": [
+                1428,
+                1437
+              ],
+              "loc": {
+                "start": {
+                  "line": 41,
+                  "column": 4
+                },
+                "end": {
+                  "line": 41,
+                  "column": 13
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "nt",
+              "raw": "\"nt\"",
+              "range": [
+                1439,
+                1443
+              ],
+              "loc": {
+                "start": {
+                  "line": 41,
+                  "column": 15
+                },
+                "end": {
+                  "line": 41,
+                  "column": 19
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1428,
+              1443
+            ],
+            "loc": {
+              "start": {
+                "line": 41,
+                "column": 4
+              },
+              "end": {
+                "line": 41,
+                "column": 19
+              }
+            }
+          },
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "end",
+              "range": [
+                1449,
+                1452
+              ],
+              "loc": {
+                "start": {
+                  "line": 42,
+                  "column": 4
+                },
+                "end": {
+                  "line": 42,
+                  "column": 7
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "e",
+              "raw": "\"e\"",
+              "range": [
+                1454,
+                1457
+              ],
+              "loc": {
+                "start": {
+                  "line": 42,
+                  "column": 9
+                },
+                "end": {
+                  "line": 42,
+                  "column": 12
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1449,
+              1457
+            ],
+            "loc": {
+              "start": {
+                "line": 42,
+                "column": 4
+              },
+              "end": {
+                "line": 42,
+                "column": 12
+              }
+            }
+          },
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "general_all_no",
+              "range": [
+                1463,
+                1477
+              ],
+              "loc": {
+                "start": {
+                  "line": 43,
+                  "column": 4
+                },
+                "end": {
+                  "line": 43,
+                  "column": 18
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "ga",
+              "raw": "\"ga\"",
+              "range": [
+                1479,
+                1483
+              ],
+              "loc": {
+                "start": {
+                  "line": 43,
+                  "column": 20
+                },
+                "end": {
+                  "line": 43,
+                  "column": 24
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1463,
+              1483
+            ],
+            "loc": {
+              "start": {
+                "line": 43,
+                "column": 4
+              },
+              "end": {
+                "line": 43,
+                "column": 24
+              }
+            }
+          },
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "length",
+              "range": [
+                1489,
+                1495
+              ],
+              "loc": {
+                "start": {
+                  "line": 44,
+                  "column": 4
+                },
+                "end": {
+                  "line": 44,
+                  "column": 10
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "l",
+              "raw": "\"l\"",
+              "range": [
+                1497,
+                1500
+              ],
+              "loc": {
+                "start": {
+                  "line": 44,
+                  "column": 12
+                },
+                "end": {
+                  "line": 44,
+                  "column": 15
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1489,
+              1500
+            ],
+            "loc": {
+              "start": {
+                "line": 44,
+                "column": 4
+              },
+              "end": {
+                "line": 44,
+                "column": 15
+              }
+            }
+          },
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "time",
+              "range": [
+                1506,
+                1510
+              ],
+              "loc": {
+                "start": {
+                  "line": 45,
+                  "column": 4
+                },
+                "end": {
+                  "line": 45,
+                  "column": 8
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "ti",
+              "raw": "\"ti\"",
+              "range": [
+                1512,
+                1516
+              ],
+              "loc": {
+                "start": {
+                  "line": 45,
+                  "column": 10
+                },
+                "end": {
+                  "line": 45,
+                  "column": 14
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1506,
+              1516
+            ],
+            "loc": {
+              "start": {
+                "line": 45,
+                "column": 4
+              },
+              "end": {
+                "line": 45,
+                "column": 14
+              }
+            }
+          },
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "isstop",
+              "range": [
+                1522,
+                1528
+              ],
+              "loc": {
+                "start": {
+                  "line": 46,
+                  "column": 4
+                },
+                "end": {
+                  "line": 46,
+                  "column": 10
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "i",
+              "raw": "\"i\"",
+              "range": [
+                1530,
+                1533
+              ],
+              "loc": {
+                "start": {
+                  "line": 46,
+                  "column": 12
+                },
+                "end": {
+                  "line": 46,
+                  "column": 15
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1522,
+              1533
+            ],
+            "loc": {
+              "start": {
+                "line": 46,
+                "column": 4
+              },
+              "end": {
+                "line": 46,
+                "column": 15
+              }
+            }
+          },
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "pc_or_k",
+              "range": [
+                1539,
+                1546
+              ],
+              "loc": {
+                "start": {
+                  "line": 47,
+                  "column": 4
+                },
+                "end": {
+                  "line": 47,
+                  "column": 11
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "p",
+              "raw": "\"p\"",
+              "range": [
+                1548,
+                1551
+              ],
+              "loc": {
+                "start": {
+                  "line": 47,
+                  "column": 13
+                },
+                "end": {
+                  "line": 47,
+                  "column": 16
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1539,
+              1551
+            ],
+            "loc": {
+              "start": {
+                "line": 47,
+                "column": 4
+              },
+              "end": {
+                "line": 47,
+                "column": 16
+              }
+            }
+          },
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "global_point",
+              "range": [
+                1557,
+                1569
+              ],
+              "loc": {
+                "start": {
+                  "line": 48,
+                  "column": 4
+                },
+                "end": {
+                  "line": 48,
+                  "column": 16
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "gp",
+              "raw": "\"gp\"",
+              "range": [
+                1571,
+                1575
+              ],
+              "loc": {
+                "start": {
+                  "line": 48,
+                  "column": 18
+                },
+                "end": {
+                  "line": 48,
+                  "column": 22
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1557,
+              1575
+            ],
+            "loc": {
+              "start": {
+                "line": 48,
+                "column": 4
+              },
+              "end": {
+                "line": 48,
+                "column": 22
+              }
+            }
+          },
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "fav_novel_cnt",
+              "range": [
+                1581,
+                1594
+              ],
+              "loc": {
+                "start": {
+                  "line": 49,
+                  "column": 4
+                },
+                "end": {
+                  "line": 49,
+                  "column": 17
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "f",
+              "raw": "\"f\"",
+              "range": [
+                1596,
+                1599
+              ],
+              "loc": {
+                "start": {
+                  "line": 49,
+                  "column": 19
+                },
+                "end": {
+                  "line": 49,
+                  "column": 22
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1581,
+              1599
+            ],
+            "loc": {
+              "start": {
+                "line": 49,
+                "column": 4
+              },
+              "end": {
+                "line": 49,
+                "column": 22
+              }
+            }
+          },
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "review_cnt",
+              "range": [
+                1605,
+                1615
+              ],
+              "loc": {
+                "start": {
+                  "line": 50,
+                  "column": 4
+                },
+                "end": {
+                  "line": 50,
+                  "column": 14
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "r",
+              "raw": "\"r\"",
+              "range": [
+                1617,
+                1620
+              ],
+              "loc": {
+                "start": {
+                  "line": 50,
+                  "column": 16
+                },
+                "end": {
+                  "line": 50,
+                  "column": 19
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1605,
+              1620
+            ],
+            "loc": {
+              "start": {
+                "line": 50,
+                "column": 4
+              },
+              "end": {
+                "line": 50,
+                "column": 19
+              }
+            }
+          },
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "all_point",
+              "range": [
+                1626,
+                1635
+              ],
+              "loc": {
+                "start": {
+                  "line": 51,
+                  "column": 4
+                },
+                "end": {
+                  "line": 51,
+                  "column": 13
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "a",
+              "raw": "\"a\"",
+              "range": [
+                1637,
+                1640
+              ],
+              "loc": {
+                "start": {
+                  "line": 51,
+                  "column": 15
+                },
+                "end": {
+                  "line": 51,
+                  "column": 18
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1626,
+              1640
+            ],
+            "loc": {
+              "start": {
+                "line": 51,
+                "column": 4
+              },
+              "end": {
+                "line": 51,
+                "column": 18
+              }
+            }
+          },
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "all_hyoka_cnt",
+              "range": [
+                1646,
+                1659
+              ],
+              "loc": {
+                "start": {
+                  "line": 52,
+                  "column": 4
+                },
+                "end": {
+                  "line": 52,
+                  "column": 17
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "ah",
+              "raw": "\"ah\"",
+              "range": [
+                1661,
+                1665
+              ],
+              "loc": {
+                "start": {
+                  "line": 52,
+                  "column": 19
+                },
+                "end": {
+                  "line": 52,
+                  "column": 23
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1646,
+              1665
+            ],
+            "loc": {
+              "start": {
+                "line": 52,
+                "column": 4
+              },
+              "end": {
+                "line": 52,
+                "column": 23
+              }
+            }
+          },
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "sasie_cnt",
+              "range": [
+                1671,
+                1680
+              ],
+              "loc": {
+                "start": {
+                  "line": 53,
+                  "column": 4
+                },
+                "end": {
+                  "line": 53,
+                  "column": 13
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "sa",
+              "raw": "\"sa\"",
+              "range": [
+                1682,
+                1686
+              ],
+              "loc": {
+                "start": {
+                  "line": 53,
+                  "column": 15
+                },
+                "end": {
+                  "line": 53,
+                  "column": 19
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1671,
+              1686
+            ],
+            "loc": {
+              "start": {
+                "line": 53,
+                "column": 4
+              },
+              "end": {
+                "line": 53,
+                "column": 19
+              }
+            }
+          },
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "kaiwaritu",
+              "range": [
+                1692,
+                1701
+              ],
+              "loc": {
+                "start": {
+                  "line": 54,
+                  "column": 4
+                },
+                "end": {
+                  "line": 54,
+                  "column": 13
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "ka",
+              "raw": "\"ka\"",
+              "range": [
+                1703,
+                1707
+              ],
+              "loc": {
+                "start": {
+                  "line": 54,
+                  "column": 15
+                },
+                "end": {
+                  "line": 54,
+                  "column": 19
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1692,
+              1707
+            ],
+            "loc": {
+              "start": {
+                "line": 54,
+                "column": 4
+              },
+              "end": {
+                "line": 54,
+                "column": 19
+              }
+            }
+          },
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "novelupdated_at",
+              "range": [
+                1713,
+                1728
+              ],
+              "loc": {
+                "start": {
+                  "line": 55,
+                  "column": 4
+                },
+                "end": {
+                  "line": 55,
+                  "column": 19
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "nu",
+              "raw": "\"nu\"",
+              "range": [
+                1730,
+                1734
+              ],
+              "loc": {
+                "start": {
+                  "line": 55,
+                  "column": 21
+                },
+                "end": {
+                  "line": 55,
+                  "column": 25
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1713,
+              1734
+            ],
+            "loc": {
+              "start": {
+                "line": 55,
+                "column": 4
+              },
+              "end": {
+                "line": 55,
+                "column": 25
+              }
+            }
+          },
+          {
+            "type": "Property",
+            "key": {
+              "type": "Identifier",
+              "name": "updated_at",
+              "range": [
+                1740,
+                1750
+              ],
+              "loc": {
+                "start": {
+                  "line": 56,
+                  "column": 4
+                },
+                "end": {
+                  "line": 56,
+                  "column": 14
+                }
+              }
+            },
+            "value": {
+              "type": "Literal",
+              "value": "ua",
+              "raw": "\"ua\"",
+              "range": [
+                1752,
+                1756
+              ],
+              "loc": {
+                "start": {
+                  "line": 56,
+                  "column": 16
+                },
+                "end": {
+                  "line": 56,
+                  "column": 20
+                }
+              }
+            },
+            "kind": "init",
+            "method": false,
+            "shorthand": false,
+            "computed": false,
+            "range": [
+              1740,
+              1756
+            ],
+            "loc": {
+              "start": {
+                "line": 56,
+                "column": 4
+              },
+              "end": {
+                "line": 56,
+                "column": 20
+              }
+            }
+          }
+        ],
+        "range": [
+          1253,
+          1758
+        ],
+        "loc": {
+          "start": {
+            "line": 31,
+            "column": 15
+          },
+          "end": {
+            "line": 57,
+            "column": 1
+          }
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\n * {@link SearchBuilder#fields}メソッドにパラメータを指定する際のヘルパー。\n * @typedef {Object} Fields\n * @property {number} title 小説名\n * @property {string} ncode Nコード\n * @property {string} userid 作者のユーザID(数値)\n * @property {string} writer 作者名\n * @property {string} story 小説のあらすじ\n * @property {string} genre ジャンル\n * @property {string} keyword キーワード\n * @property {string} general_firstup 初回掲載日\n * @property {string} general_lastup 最終掲載日\n * @property {string} noveltype 連載の場合は1、短編の場合は2\n * @property {string} end 連載の場合は1、短編の場合は2\n * @property {string} general_all_no 全掲載話数です。短編の場合は1です。\n * @property {string} length 全掲載話数です。短編の場合は1です。\n * @property {string} time 読了時間(分単位)です。読了時間は小説文字数÷500を切り上げした数値です。\n * @property {string} isstop 長期連載中は1、それ以外は0です。\n * @property {string} pc_or_k 1はケータイのみ、2はPCのみ、3はPCとケータイで投稿された作品です。対象は投稿と次話投稿時のみで、どの端末で執筆されたかを表すものではありません。\n * @property {string} global_point 総合得点(=(ブックマーク数×2)+評価点)\n * @property {string} fav_novel_cnt ブックマーク数\n * @property {string} review_cnt レビュー数\n * @property {string} all_point 評価点\n * @property {string} all_hyoka_cnt 評価者数\n * @property {string} sasie_cnt 挿絵の数\n * @property {string} kaiwaritu 会話率\n * @property {string} novelupdated_at 小説の更新日時\n * @property {string} updated_at 最終更新日時(注意：システム用で小説更新時とは関係ありません)\n ",
+            "range": [
+              1,
+              1237
+            ],
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 0
+              },
+              "end": {
+                "line": 30,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": []
+      },
+      "range": [
+        1238,
+        1758
+      ],
+      "loc": {
+        "start": {
+          "line": 31,
+          "column": 0
+        },
+        "end": {
+          "line": 57,
+          "column": 1
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * {@link SearchBuilder#fields}メソッドにパラメータを指定する際のヘルパー。\n * @typedef {Object} Fields\n * @property {number} title 小説名\n * @property {string} ncode Nコード\n * @property {string} userid 作者のユーザID(数値)\n * @property {string} writer 作者名\n * @property {string} story 小説のあらすじ\n * @property {string} genre ジャンル\n * @property {string} keyword キーワード\n * @property {string} general_firstup 初回掲載日\n * @property {string} general_lastup 最終掲載日\n * @property {string} noveltype 連載の場合は1、短編の場合は2\n * @property {string} end 連載の場合は1、短編の場合は2\n * @property {string} general_all_no 全掲載話数です。短編の場合は1です。\n * @property {string} length 全掲載話数です。短編の場合は1です。\n * @property {string} time 読了時間(分単位)です。読了時間は小説文字数÷500を切り上げした数値です。\n * @property {string} isstop 長期連載中は1、それ以外は0です。\n * @property {string} pc_or_k 1はケータイのみ、2はPCのみ、3はPCとケータイで投稿された作品です。対象は投稿と次話投稿時のみで、どの端末で執筆されたかを表すものではありません。\n * @property {string} global_point 総合得点(=(ブックマーク数×2)+評価点)\n * @property {string} fav_novel_cnt ブックマーク数\n * @property {string} review_cnt レビュー数\n * @property {string} all_point 評価点\n * @property {string} all_hyoka_cnt 評価者数\n * @property {string} sasie_cnt 挿絵の数\n * @property {string} kaiwaritu 会話率\n * @property {string} novelupdated_at 小説の更新日時\n * @property {string} updated_at 最終更新日時(注意：システム用で小説更新時とは関係ありません)\n ",
+          "range": [
+            1,
+            1237
+          ],
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 0
+            },
+            "end": {
+              "line": 30,
+              "column": 3
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "sourceType": "module",
+  "range": [
+    1238,
+    1758
+  ],
+  "loc": {
+    "start": {
+      "line": 31,
+      "column": 0
+    },
+    "end": {
+      "line": 57,
+      "column": 1
+    }
+  },
+  "comments": [
+    {
+      "type": "Block",
+      "value": "*\n * {@link SearchBuilder#fields}メソッドにパラメータを指定する際のヘルパー。\n * @typedef {Object} Fields\n * @property {number} title 小説名\n * @property {string} ncode Nコード\n * @property {string} userid 作者のユーザID(数値)\n * @property {string} writer 作者名\n * @property {string} story 小説のあらすじ\n * @property {string} genre ジャンル\n * @property {string} keyword キーワード\n * @property {string} general_firstup 初回掲載日\n * @property {string} general_lastup 最終掲載日\n * @property {string} noveltype 連載の場合は1、短編の場合は2\n * @property {string} end 連載の場合は1、短編の場合は2\n * @property {string} general_all_no 全掲載話数です。短編の場合は1です。\n * @property {string} length 全掲載話数です。短編の場合は1です。\n * @property {string} time 読了時間(分単位)です。読了時間は小説文字数÷500を切り上げした数値です。\n * @property {string} isstop 長期連載中は1、それ以外は0です。\n * @property {string} pc_or_k 1はケータイのみ、2はPCのみ、3はPCとケータイで投稿された作品です。対象は投稿と次話投稿時のみで、どの端末で執筆されたかを表すものではありません。\n * @property {string} global_point 総合得点(=(ブックマーク数×2)+評価点)\n * @property {string} fav_novel_cnt ブックマーク数\n * @property {string} review_cnt レビュー数\n * @property {string} all_point 評価点\n * @property {string} all_hyoka_cnt 評価者数\n * @property {string} sasie_cnt 挿絵の数\n * @property {string} kaiwaritu 会話率\n * @property {string} novelupdated_at 小説の更新日時\n * @property {string} updated_at 最終更新日時(注意：システム用で小説更新時とは関係ありません)\n ",
+      "range": [
+        1,
+        1237
+      ],
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 0
+        },
+        "end": {
+          "line": 30,
+          "column": 3
+        }
+      }
+    }
+  ]
+}

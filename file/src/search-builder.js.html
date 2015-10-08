@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/search-builder.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="https://github.com/deflis/node-narou.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~Index.html">Index</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/narou-search-results.js~narousearchresults.html">narousearchresults</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/search-builder-r18.js~SearchBuilderR18.html">SearchBuilderR18</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/search-builder.js~SearchBuilder.html">SearchBuilder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Fields">Fields</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-NarouSearchResult">NarouSearchResult</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/search-builder.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import api from &quot;./narou&quot;;
+
+/**
+ * &#x691C;&#x7D22;&#x30D8;&#x30EB;&#x30D1;&#x30FC;
+ * @class SearchBuilder
+ */
+export default class SearchBuilder {
+    /**
+     * constructor
+     * @private
+     */
+    constructor(params = {}) {
+        /**
+         * &#x30AF;&#x30A8;&#x30EA;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;
+         * @protected
+         */
+        this.params = params;
+    }
+
+    /**
+     * a
+     * @return {SearchBuilder} this
+     */
+    word(word) {
+        this.set({word: word});
+        return this;
+    }
+
+    /**
+     * 
+     * @return {SearchBuilder} this
+     */
+    notWord(word) {
+        this.set({word: word});
+        return this;
+    }
+
+    /**
+     * 
+     * @return {SearchBuilder} this
+     */
+    isR15(bool = true) {
+        this.set({isr15: bool ? 1 : 0});
+        return this;
+    }
+
+    /**
+     * 
+     * @return {SearchBuilder} this
+     */
+    isBL(bool = true) {
+        this.set({isbl: bool ? 1 : 0});
+        return this;
+    }
+
+    /**
+     * 
+     * @return {SearchBuilder} this
+     */
+    isGL(bool = true) {
+        this.set({isgl: bool ? 1 : 0});
+        return this;
+    }
+
+    /**
+     * 
+     * @return {SearchBuilder} this
+     */
+    isZankoku(bool = true) {
+        this.set({iszankoku: bool ? 1 : 0});
+        return this;
+    }
+
+    /**
+     * 
+     * @return {SearchBuilder} this
+     */
+    length(length) {
+        let len = length;
+        if (Array.isArray(len)) {
+            len = len.join(&quot;-&quot;);
+        }
+        this.set({length: len});
+        return this;
+    }
+
+    /**
+     * 
+     * @return {SearchBuilder} this
+     */
+    kaiwaritu(num) {
+        let n = num;
+        if (Array.isArray(n)) {
+            n = n.join(&quot;-&quot;);
+        }
+        this.set({kaiwaritu: n});
+        return this;
+    }
+
+    /**
+     * 
+     * @return {SearchBuilder} this
+     */
+    sasie(num) {
+        let n = num;
+        if (Array.isArray(n)) {
+            n = n.join(&quot;-&quot;);
+        }
+        this.set({kaiwaritu: n});
+        return this;
+    }
+
+    /**
+     * 
+     * @return {SearchBuilder} this
+     */
+    time(num) {
+        let n = num;
+        if (Array.isArray(n)) {
+            n = n.join(&quot;-&quot;);
+        }
+        this.set({kaiwaritu: n});
+        return this;
+    }
+
+    /**
+     * 
+     * @return {SearchBuilder} this
+     */
+    ncode(codes) {
+        let code = codes;
+        if (Array.isArray(code)) {
+            code = code.join(&quot;-&quot;);
+        }
+        code = code.toLowerCase();
+        this.set({ncode: code});
+        return this;
+    }
+
+    /**
+     * 
+     * @return {SearchBuilder} this
+     */
+    type(t) {
+        this.set({type: t});
+        return this;
+    }
+
+    /**
+     * 
+     * @return {SearchBuilder} this
+     */
+    buntai(codes) {
+        let code = codes;
+        if (Array.isArray(code)) {
+            code = code.join(&quot;-&quot;);
+        }
+        this.set({buntai: code});
+        return this;
+    }
+
+    /**
+     * 
+     * @return {SearchBuilder} this
+     */
+    isStop(bool = true) {
+        this.set({stop: bool ? 1 : 0});
+        return this;
+    }
+
+    /**
+     * 
+     * @return {SearchBuilder} this
+     */
+    isPickup(bool = true) {
+        this.set({ispickup: bool ? 1 : 0});
+        return this;
+    }
+
+    /**
+     * 
+     * @return {SearchBuilder} this
+     */
+    lastUpdate(date) {
+        var lastup = date;
+        if (Array.isArray(lastup)) {
+            for(var n in lastup) {
+
+            }
+            lastup = lastup.join(&quot;-&quot;);
+        }
+        this.set({lastup: lastup});
+        return this;
+
+    }
+
+    /**
+     * 
+     * @return {SearchBuilder} this
+     */
+    fields(fields) {
+        var of = fields;
+        if (Array.isArray(of)) {
+            of = of.join(&quot;-&quot;);
+        }
+        this.set({of: of});
+        return this;
+    }
+
+    /**
+     * 
+     * @return {SearchBuilder} this
+     */
+    limit(num) {
+        this.set({lim: num});
+        return this;
+    }
+
+    /**
+     * 
+     * @return {SearchBuilder} this
+     */
+    start(num) {
+        this.set({st: num});
+        return this;
+    }
+
+    /**
+     * 
+     * @return {SearchBuilder} this
+     */
+    page(no, count = 20) {
+        return this.limit(count).start(no * count);
+    }
+
+    /**
+    * &#x51FA;&#x529B;&#x9806;&#x5E8F;&#x3092;&#x6307;&#x5B9A;&#x3059;&#x308B;&#x3002;&#x6307;&#x5B9A;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#x306F;&#x65B0;&#x7740;&#x9806;&#x3068;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;
+    * 
+    * @description
+    * allunique	&#x95B2;&#x89A7;&#x8005;&#x306E;&#x591A;&#x3044;&#x9806;(&#x672A;&#x5B9F;&#x88C5;)
+    * favnovelcnt	&#x30D6;&#x30C3;&#x30AF;&#x30DE;&#x30FC;&#x30AF;&#x6570;&#x306E;&#x591A;&#x3044;&#x9806;
+    * reviewcnt	&#x30EC;&#x30D3;&#x30E5;&#x30FC;&#x6570;&#x306E;&#x591A;&#x3044;&#x9806;
+    * hyoka	&#x7DCF;&#x5408;&#x8A55;&#x4FA1;&#x306E;&#x9AD8;&#x3044;&#x9806;
+    * hyokaasc	&#x7DCF;&#x5408;&#x8A55;&#x4FA1;&#x306E;&#x4F4E;&#x3044;&#x9806;
+    * impressioncnt	&#x611F;&#x60F3;&#x306E;&#x591A;&#x3044;&#x9806;
+    * hyokacnt	&#x8A55;&#x4FA1;&#x8005;&#x6570;&#x306E;&#x591A;&#x3044;&#x9806;
+    * hyokacntasc	&#x8A55;&#x4FA1;&#x8005;&#x6570;&#x306E;&#x5C11;&#x306A;&#x3044;&#x9806;
+    * weekly	&#x9031;&#x9593;&#x30E6;&#x30CB;&#x30FC;&#x30AF;&#x30E6;&#x30FC;&#x30B6;&#x306E;&#x591A;&#x3044;&#x9806; &#x6BCE;&#x9031;&#x706B;&#x66DC;&#x65E5;&#x65E9;&#x671D;&#x30EA;&#x30BB;&#x30C3;&#x30C8;
+    * (&#x524D;&#x9031;&#x306E;&#x65E5;&#x66DC;&#x65E5;&#x304B;&#x3089;&#x571F;&#x66DC;&#x65E5;&#x5206;)
+    * lengthdesc	&#x5C0F;&#x8AAC;&#x672C;&#x6587;&#x306E;&#x6587;&#x5B57;&#x6570;&#x304C;&#x591A;&#x3044;&#x9806;
+    * lengthasc	&#x5C0F;&#x8AAC;&#x672C;&#x6587;&#x306E;&#x6587;&#x5B57;&#x6570;&#x304C;&#x5C11;&#x306A;&#x3044;&#x9806;
+    * ncodedesc	N&#x30B3;&#x30FC;&#x30C9;&#x304C;&#x65B0;&#x3057;&#x3044;&#x9806;
+    * old	&#x53E4;&#x3044;&#x9806;
+    * @param {string} order &#x51FA;&#x529B;&#x9806;&#x5E8F;
+    * @return {SearchBuilder} this
+    */
+    order(order) {
+        this.set({order: order});
+        return this;
+    }
+
+    /**
+     * gzip&#x5727;&#x7E2E;&#x3059;&#x308B;&#x3002;
+     * 
+     * &#x8EE2;&#x9001;&#x91CF;&#x4E0A;&#x9650;&#x3092;&#x6E1B;&#x3089;&#x3059;&#x305F;&#x3081;&#x306B;&#x3082;&#x63A8;&#x5968;
+     * @param {number} level gzip&#x5727;&#x7E2E;&#x30EC;&#x30D9;&#x30EB;(1&#xFF5E;5)
+     * @return {SearchBuilder} this
+     */
+    gzip(level) {
+        this.set({gzip: level});
+        return this;
+    }
+
+    /**
+     * &#x30AF;&#x30A8;&#x30EA;&#x30D1;&#x30E9;&#x30E1;&#x30FC;&#x30BF;&#x3092;&#x30BB;&#x30C3;&#x30C8;&#x3059;&#x308B;
+     * @private
+     * @return {SearchBuilder} this
+     */
+    set(obj) {
+        Object.assign(this.params, obj);
+        return this;
+    }
+
+    /**
+     * &#x306A;&#x308D;&#x3046;&#x5C0F;&#x8AAC;API&#x3078;&#x306E;&#x691C;&#x7D22;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3092;&#x5B9F;&#x884C;&#x3059;&#x308B;
+     * @returns {Promise&lt;NarouSearchResults&gt;} &#x691C;&#x7D22;&#x7D50;&#x679C;
+     */
+    execute() {
+        return api.executeNovel(this.params);
+    }
+}
+
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.0)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
