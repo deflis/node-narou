@@ -1,6 +1,6 @@
 {
   "name": "narou",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Narou API Wrapper",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
