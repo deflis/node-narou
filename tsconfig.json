@@ -1,10 +1,11 @@
 {
     "compilerOptions": {
         "declaration": true,
-        "module": "CommonJS",
+        "module": "commonjs",
         "target": "es6",
         "noImplicitAny": true,
-        "outDir": "lib"
+        "outDir": "lib",
+        "importHelpers": true
     },
     "files": [
         "src/index.ts"

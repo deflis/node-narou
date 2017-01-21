@@ -3,8 +3,10 @@
   "version": "0.1.2",
   "description": "Narou API Wrapper",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
-    "lib"
+    "lib",
+    "yarn.lock"
   ],
   "scripts": {
     "build": "tsc",
@@ -17,7 +19,8 @@
     "url": "https://github.com/deflis/node-narou.git"
   },
   "dependencies": {
-    "axios": "^0.15.3"
+    "axios": "^0.15.3",
+    "tslib": "^1.5.0"
   },
   "devDependencies": {
     "@types/node": "^7.0.0",
