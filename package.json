@@ -1,10 +1,10 @@
 {
   "name": "narou",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Narou API Wrapper",
   "main": "lib/index.js",
   "files": [
-    "dist"
+    "lib"
   ],
   "scripts": {
     "build": "tsc",
