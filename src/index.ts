@@ -19,7 +19,7 @@ export default class Index {
      * @param {string} [word] - 検索ワード
      * @returns {SearchBuilder}
      */
-    static search(word = null) {
+    static search(word: string = null) {
         var builder = new SearchBuilder();
         if (word != null) builder.word(word);
         return builder;
@@ -30,7 +30,7 @@ export default class Index {
      * @param {string} [word] - 検索ワード
      * @returns {SearchBuilder}
      */
-    static searchR18(word = null) {
+    static searchR18(word: string = null) {
         var builder = new SearchBuilderR18();
         if (word != null) builder.word(word);
         return builder;

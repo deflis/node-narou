@@ -1,16 +1,14 @@
 {
   "name": "narou",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Narou API Wrapper",
   "main": "lib/index.js",
   "files": [
-    "lib"
+    "dist"
   ],
   "scripts": {
-    "build": "gulp build",
-    "watch": "gulp watch",
-    "test": "gulp test",
-    "esdoc": "gulp esdoc"
+    "build": "tsc",
+    "test": "tsc && gulp test"
   },
   "author": "deflis <deflis@gmail.com>",
   "license": "MIT",
@@ -19,23 +17,25 @@
     "url": "https://github.com/deflis/node-narou.git"
   },
   "dependencies": {
+    "axios": "^0.15.3",
     "request": "^2.64.0",
     "stream-buffers": "^2.2.0"
   },
   "devDependencies": {
+    "@types/node": "^7.0.0",
     "babel": "^5.8.23",
     "esdoc": "^0.4.0",
     "esdoc-importpath-plugin": "0.0.1",
     "gulp": "^3.9.0",
     "gulp-babel": "^5.2.1",
-    "gulp-esdoc": "^0.1.0",
     "gulp-espower": "^1.0.1",
     "gulp-mocha": "^2.1.3",
-    "gulp-sourcemaps": "^1.6.0",
+    "gulp-sourcemaps": "^2.4.0",
     "mocha": "^2.3.3",
     "power-assert": "^1.0.1",
     "run-sequence": "^1.1.4",
-    "source-map-support": "^0.3.2"
+    "source-map-support": "^0.3.2",
+    "typescript": "^2.1.5"
   },
   "plugins": [
     {

@@ -3,12 +3,29 @@
  * なろう小説API検索結果
  * @class NarouSearchResults
  */
-export default class {
+
+export interface INarouSearchResults {
+    allcount: number
+    limit: number
+    start: number
+    page: number
+    length: number
+    values: NarouSearchResult[]
+}
+
+export default class NarouSearchResults implements INarouSearchResults {
+    allcount: number
+    limit: number
+    start: number
+    page: number
+    length: number
+    values: NarouSearchResult[]
+    
     /**
      * @constractor
      * @private
      */
-    constructor(result, params) {
+    constructor(result: any[], params: any) {
         let count = result.shift().allcount;
         
         let limit = 20;
@@ -53,6 +70,21 @@ export default class {
         this.values = result;
     }
 };
+
+export interface NarouSearchResult {
+    title: string
+    number: string
+    userid: number
+    writer: string
+    story: string
+    genre: number
+    keyword: string
+    general_firstup: string
+    general_lastup: string
+    noveltype: number
+    end: number
+    general_all_no: string
+}
 
 /**
  * @typedef {Object} NarouSearchResult
