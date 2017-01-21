@@ -17,9 +17,7 @@
     "url": "https://github.com/deflis/node-narou.git"
   },
   "dependencies": {
-    "axios": "^0.15.3",
-    "request": "^2.64.0",
-    "stream-buffers": "^2.2.0"
+    "axios": "^0.15.3"
   },
   "devDependencies": {
     "@types/node": "^7.0.0",
