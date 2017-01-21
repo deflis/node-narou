@@ -71,21 +71,6 @@ export default class NarouSearchResults implements INarouSearchResults {
     }
 };
 
-export interface NarouSearchResult {
-    title: string
-    number: string
-    userid: number
-    writer: string
-    story: string
-    genre: number
-    keyword: string
-    general_firstup: string
-    general_lastup: string
-    noveltype: number
-    end: number
-    general_all_no: string
-}
-
 /**
  * @typedef {Object} NarouSearchResult
  * @property {number} title 小説名
@@ -114,3 +99,18 @@ export interface NarouSearchResult {
  * @property {number} novelupdated_at 小説の更新日時
  * @property {number} updated_at 最終更新日時(注意：システム用で小説更新時とは関係ありません)
  */
+
+export interface NarouSearchResult {
+    title: string
+    number: string
+    userid: number
+    writer: string
+    story: string
+    genre: number
+    keyword: string
+    general_firstup: string
+    general_lastup: string
+    noveltype: number
+    end: number
+    general_all_no: string
+}

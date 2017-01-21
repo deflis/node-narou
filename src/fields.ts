@@ -1,7 +1,7 @@
 
 /**
- * {@link SearchBuilder#fields}メソッドにパラメータを指定する際のヘルパー。
- * @typedef {Object} Fields
+ * {@link SearchBuilder#Field}メソッドにパラメータを指定する際のヘルパー。
+ * @typedef {Object} Field
  * @property {number} title 小説名
  * @property {string} ncode Nコード
  * @property {string} userid 作者のユーザID(数値)
@@ -28,30 +28,33 @@
  * @property {string} novelupdated_at 小説の更新日時
  * @property {string} updated_at 最終更新日時(注意：システム用で小説更新時とは関係ありません)
  */
-export default {
-    title: "t",
-    ncode: "n",
-    userid: "u",
-    writer: "w",
-    story: "s",
-    genre: "g",
-    keyword: "k",
-    general_firstup: "gf",
-    general_lastup: "gl",
-    noveltype: "nt",
-    end: "e",
-    general_all_no: "ga",
-    length: "l",
-    time: "ti",
-    isstop: "i",
-    pc_or_k: "p",
-    global_point: "gp",
-    fav_novel_cnt: "f",
-    review_cnt: "r",
-    all_point: "a",
-    all_hyoka_cnt: "ah",
-    sasie_cnt: "sa",
-    kaiwaritu: "ka",
-    novelupdated_at: "nu",
-    updated_at: "ua"
+
+type Field = "t"| "n"| "u"| "w"| "s"| "g"|"k"|"gf"|"gl"|"nt"|"e"|"ga"|"l"|"ti"| "i"| "p"| "gp"| "f"| "r"| "a"| "ah"| "sa"| "ka"| "nu"| "ua";
+namespace Field {
+    export const title: Field = "t"
+    export const ncode: Field = "n"
+    export const userid: Field = "u"
+    export const writer: Field = "w"
+    export const story: Field = "s"
+    export const genre: Field = "g"
+    export const keyword: Field = "k"
+    export const general_firstup: Field = "gf"
+    export const general_lastup: Field = "gl"
+    export const noveltype: Field = "nt"
+    export const end: Field = "e"
+    export const general_all_no: Field = "ga"
+    export const length: Field = "l"
+    export const time: Field = "ti"
+    export const isstop: Field = "i"
+    export const pc_or_k: Field = "p"
+    export const global_point: Field = "gp"
+    export const fav_novel_cnt: Field = "f"
+    export const review_cnt: Field = "r"
+    export const all_point: Field = "a"
+    export const all_hyoka_cnt: Field = "ah"
+    export const sasie_cnt: Field = "sa"
+    export const kaiwaritu: Field = "ka"
+    export const novelupdated_at: Field = "nu"
+    export const updated_at: Field = "ua"
 }
+export default Field

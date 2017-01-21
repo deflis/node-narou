@@ -1,5 +1,6 @@
 import api from "./narou";
 import INarouSearchResults from "./narou-search-results";
+import Field from "./fields";
 
 /**
  * 検索ヘルパー
@@ -216,7 +217,7 @@ export default class SearchBuilder {
      * 
      * @return {SearchBuilder} this
      */
-    fields(fields: string| string[]) {
+    fields(fields: Field| Field[]) {
         let of: string;
         if (Array.isArray(fields)) {
             of = fields.join("-");
