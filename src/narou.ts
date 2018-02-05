@@ -1,6 +1,11 @@
 import * as zlib from 'zlib';
-import axios from "axios";
-import NarouSearchResults from './narou-search-results.js';
+import Axios, { AxiosInstance } from "axios";
+import NarouSearchResults from './narou-search-results';
+import { SearchParams } from './params';
+
+export const axios: AxiosInstance = Axios.create()
+
+const defaultGzipLevel = 5
 
 /**
  * なろう小説APIへのリクエストを実行する
@@ -15,7 +20,7 @@ export default class NarouNovel {
      * @param endpoint APIエンドポイント
      * @returns {Promise<NarouSearchResults>} 検索結果
      */
-    static async execute(params: any, endpoint = 'http://api.syosetu.com/novelapi/api/'): Promise<NarouSearchResults> {
+    static async execute<T>(params: any, endpoint = 'http://api.syosetu.com/novelapi/api/'): Promise<[T, any]> {
 
         let query = Object.assign(params, {out: 'json'});
 
@@ -24,13 +29,17 @@ export default class NarouNovel {
             url: endpoint,
             params: query,
         };
+
+        if (query.gzip && query.gzip != 0) {
+            query.gzip = defaultGzipLevel;
+        }
         
         if (query.gzip) {
             requestObject = Object.assign(requestObject, { responseType: 'stream'});
         }
         
 
-        let response = await axios(requestObject)
+        let response = await axios.request(requestObject)
         let result = response.data;
         if (query.gzip) {
             let unziped: NodeJS.ReadableStream = <NodeJS.ReadableStream>(response.data).pipe(zlib.createUnzip())
@@ -43,15 +52,27 @@ export default class NarouNovel {
             result = JSON.parse(result);
         }
 
-        return new NarouSearchResults(result, params);
+        return result;
     }
 
-    static executeNovel(params: any) {
-        return this.execute(params, 'http://api.syosetu.com/novelapi/api/');
+    static async executeSearch(params: any, endpoint = 'http://api.syosetu.com/novelapi/api/'): Promise<NarouSearchResults> {
+        return new NarouSearchResults(await this.execute(params, endpoint), params);
     }
 
-    static executeNovel18(params: any) {
-        return this.execute(params, 'http://api.syosetu.com/novel18api/api/');
+    static executeNovel(params: SearchParams) {
+        return this.executeSearch(params, 'http://api.syosetu.com/novelapi/api/');
+    }
+
+    static executeNovel18(params: SearchParams) {
+        return this.executeSearch(params, 'http://api.syosetu.com/novel18api/api/');
+    }
+
+    static executeRanking(params: any) {
+        return this.execute(params, 'http://api.syosetu.com/rank/rankget/');
+    }
+
+    static executeRankingHistory(params: any) {
+        return this.execute(params, 'http://api.syosetu.com/rank/rankin/');
     }
 }
 

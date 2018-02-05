@@ -1,24 +1,26 @@
 import api from "./narou";
 import INarouSearchResults from "./narou-search-results";
-import Field from "./fields";
+import { SearchParams, Fields, Order, Buntai, NovelType, GzipLevel } from "./params";
+
+function array2string<T>(n: T|T[]): (string|T) {
+    if (Array.isArray(n)) {
+        return (<string[]><any>n).join("-");
+    } else {
+        return n;
+    }
+}
 
 /**
  * 検索ヘルパー
  * @class SearchBuilder
  */
 export default class SearchBuilder {
-    params: any
 
     /**
      * constructor
      * @private
      */
-    constructor(params = {}) {
-        /**
-         * クエリパラメータ
-         * @protected
-         */
-        this.params = params;
+    constructor(protected params: SearchParams = {}) {
     }
 
     /**
@@ -35,7 +37,7 @@ export default class SearchBuilder {
      * @return {SearchBuilder} this
      */
     notWord(word: string) {
-        this.set({word: word});
+        this.set({notword: word});
         return this;
     }
 
@@ -43,7 +45,55 @@ export default class SearchBuilder {
      * 
      * @return {SearchBuilder} this
      */
-    isR15(bool = true) {
+    byTitle(bool: boolean = true) {
+        this.set({title: bool ? 1 : 0});
+        return this;
+    }
+
+    /**
+     * 
+     * @return {SearchBuilder} this
+     */
+    byOutline(bool: boolean = true) {
+        this.set({ex: bool ? 1 : 0});
+        return this;
+    }
+
+    /**
+     * 
+     * @return {SearchBuilder} this
+     */
+    byKeyword(bool: boolean = true) {
+        this.set({keyword: bool ? 1 : 0});
+        return this;
+    }
+
+    /**
+     * 
+     * @return {SearchBuilder} this
+     */
+    byAuthor(bool: boolean = true) {
+        this.set({wname: bool ? 1 : 0});
+        return this;
+    }
+
+
+    /**
+
+    /**
+     * 
+     * @return {SearchBuilder} this
+     */
+    userId(ids: number| number[]) {
+        this.set({userid: array2string(ids)});
+        return this;
+    }
+
+    /**
+     * 
+     * @return {SearchBuilder} this
+     */
+    isR15(bool: boolean = true) {
         this.set({isr15: bool ? 1 : 0});
         return this;
     }
@@ -52,7 +102,7 @@ export default class SearchBuilder {
      * 
      * @return {SearchBuilder} this
      */
-    isBL(bool = true) {
+    isBL(bool: boolean = true) {
         this.set({isbl: bool ? 1 : 0});
         return this;
     }
@@ -61,7 +111,7 @@ export default class SearchBuilder {
      * 
      * @return {SearchBuilder} this
      */
-    isGL(bool = true) {
+    isGL(bool: boolean = true) {
         this.set({isgl: bool ? 1 : 0});
         return this;
     }
@@ -70,7 +120,7 @@ export default class SearchBuilder {
      * 
      * @return {SearchBuilder} this
      */
-    isZankoku(bool = true) {
+    isZankoku(bool: boolean = true) {
         this.set({iszankoku: bool ? 1 : 0});
         return this;
     }
@@ -80,13 +130,7 @@ export default class SearchBuilder {
      * @return {SearchBuilder} this
      */
     length(length: number| number[]) {
-        let len: number|string;
-        if (Array.isArray(length)) {
-            len = (<string[]><any>length).join("-");
-        } else {
-            len = length;
-        }
-        this.set({length: len});
+        this.set({length: array2string(length)});
         return this;
     }
 
@@ -94,12 +138,15 @@ export default class SearchBuilder {
      * 
      * @return {SearchBuilder} this
      */
-    kaiwaritu(num: number|number[]) {
+    kaiwaritu(num: number): this
+    kaiwaritu(min: number, max: number): this
+
+    kaiwaritu(min: number, max?: number) {
         let n: number|string;
-        if (Array.isArray(num)) {
-            n = (<string[]><any>num).join("-");
+        if (max != null) {
+            n = `${min}-${max}`
         } else {
-            n = num;
+            n = min;
         }
         this.set({kaiwaritu: n});
         return this;
@@ -110,13 +157,7 @@ export default class SearchBuilder {
      * @return {SearchBuilder} this
      */
     sasie(num: number| number[]) {
-        let n: number|string;
-        if (Array.isArray(num)) {
-            n = (<string[]><any>num).join("-");
-        } else {
-            n = num;
-        }
-        this.set({sasie: n});
+        this.set({sasie: array2string(num)});
         return this;
     }
 
@@ -125,13 +166,7 @@ export default class SearchBuilder {
      * @return {SearchBuilder} this
      */
     time(num: number|number[]) {
-        let n: number|string;
-        if (Array.isArray(num)) {
-            n = (<string[]><any>num).join("-");
-        } else {
-            n = num;
-        }
-        this.set({time: n});
+        this.set({time: array2string(num)});
         return this;
     }
 
@@ -139,15 +174,8 @@ export default class SearchBuilder {
      * 
      * @return {SearchBuilder} this
      */
-    ncode(codes: string|string[]) {
-        let code: string;
-        if (Array.isArray(codes)) {
-            code = codes.join("-");
-        } else {
-            code = codes;
-        }
-        code = code.toLowerCase();
-        this.set({ncode: code});
+    ncode(ncodes: string|string[]) {
+        this.set({ncode: array2string(ncodes)});
         return this;
     }
 
@@ -155,8 +183,8 @@ export default class SearchBuilder {
      * 
      * @return {SearchBuilder} this
      */
-    type(t: string) {
-        this.set({type: t});
+    type(type: NovelType) {
+        this.set({type});
         return this;
     }
 
@@ -164,14 +192,8 @@ export default class SearchBuilder {
      * 
      * @return {SearchBuilder} this
      */
-    buntai(codes: number|number[]) {
-        let code: number|string;
-        if (Array.isArray(codes)) {
-            code = (<string[]><any>codes).join("-");
-        } else {
-            code = codes;
-        }
-        this.set({buntai: code});
+    buntai(buntai: Buntai|Buntai[]) {
+        this.set({buntai: array2string(buntai)});
         return this;
     }
 
@@ -179,7 +201,7 @@ export default class SearchBuilder {
      * 
      * @return {SearchBuilder} this
      */
-    isStop(bool = true) {
+    isStop(bool: boolean = true) {
         this.set({stop: bool ? 1 : 0});
         return this;
     }
@@ -188,7 +210,7 @@ export default class SearchBuilder {
      * 
      * @return {SearchBuilder} this
      */
-    isPickup(bool = true) {
+    isPickup(bool: boolean = true) {
         this.set({ispickup: bool ? 1 : 0});
         return this;
     }
@@ -199,11 +221,14 @@ export default class SearchBuilder {
      */
     lastUpdate(date: string): this
     lastUpdate(from: number, to: number): this
+    lastUpdate(from: Date, to: Date): this
 
-    lastUpdate(x: string|number, y?: number) {
+    lastUpdate(x: string|number|Date, y?: number|Date) {
         let date: string
         if (typeof(x) == "string") {
             date = x;
+        } else if (x instanceof Date && y instanceof Date ) {
+            date = `${Math.floor(x.getTime()/1000)}-${Math.floor(x.getTime()/1000)}`;
         } else {
             date = `${x}-${y}`;
         }
@@ -217,7 +242,7 @@ export default class SearchBuilder {
      * 
      * @return {SearchBuilder} this
      */
-    fields(fields: Field| Field[]) {
+    fields(fields: Fields| Fields[]) {
         let of: string;
         if (Array.isArray(fields)) {
             of = fields.join("-");
@@ -251,7 +276,7 @@ export default class SearchBuilder {
      * 
      * @return {SearchBuilder} this
      */
-    page(no: number, count = 20) {
+    page(no: number, count: number = 20) {
         return this.limit(count).start(no * count);
     }
 
@@ -273,10 +298,10 @@ export default class SearchBuilder {
     * lengthasc	小説本文の文字数が少ない順
     * ncodedesc	Nコードが新しい順
     * old	古い順
-    * @param {string} order 出力順序
+    * @param {Order} order 出力順序
     * @return {SearchBuilder} this
     */
-    order(order: string) {
+    order(order: Order) {
         this.set({order: order});
         return this;
     }
@@ -285,10 +310,10 @@ export default class SearchBuilder {
      * gzip圧縮する。
      * 
      * 転送量上限を減らすためにも推奨
-     * @param {number} level gzip圧縮レベル(1～5)
+     * @param {GzipLevel} level gzip圧縮レベル(1～5)
      * @return {SearchBuilder} this
      */
-    gzip(level: number) {
+    gzip(level: GzipLevel) {
         this.set({gzip: level});
         return this;
     }
@@ -298,7 +323,7 @@ export default class SearchBuilder {
      * @private
      * @return {SearchBuilder} this
      */
-    private set(obj: any) {
+    protected set(obj: SearchParams) {
         Object.assign(this.params, obj);
         return this;
     }
