@@ -35,6 +35,7 @@
     "rimraf": "^2.6.2",
     "run-sequence": "^2.2.1",
     "source-map-support": "^0.5.3",
+    "touch": "^3.1.0",
     "ts-node": "^4.1.0",
     "typedoc": "^0.10.0",
     "typemoq": "^2.1.0",
@@ -48,7 +49,8 @@
     "precover": "npm run clean",
     "cover": "nyc npm test",
     "clean": "rimraf src/**/*.js src/**/*.js.map src/**/*.d.ts",
-    "docs": "typedoc --out ./docs src/index.ts"
+    "docs": "typedoc --out ./docs src/index.ts",
+    "postdocs": "nodetouch ./docs/.nojekyll"
   },
   "nyc": {
     "include": [
