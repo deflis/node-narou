@@ -1,30 +1,25 @@
 import Axios, { AxiosInstance } from "axios";
 import NarouSearchResults from './narou-search-results';
-import { SearchParams } from './params';
+import { SearchParams, GzipLevel } from './params';
 import { NarouRankingResult } from './narou-ranking-results';
 
 export const axios: AxiosInstance = Axios.create();
 
 const isNode = typeof process !== 'undefined'
+let defaultGzipLevel: GzipLevel
 
 if (isNode) {
     const httpAdapter = require("axios/lib/adapters/http");
     axios.defaults.adapter = httpAdapter;
+    const { gzipInterceptor } = require("./axios/gzipInterfepter");
+    
+    axios.interceptors.response.use(gzipInterceptor);
+
+    defaultGzipLevel = 5
+} else {
+    defaultGzipLevel = 0
 }
 
-axios.interceptors.response.use(async (response) => {
-    if (response.data != null && response.data.pipe != null) {
-        const { unzipp } = require("axios/gzipIntecepter");
-        response.data = await unzipp(response.data);
-        return response;
-    } else if (response.data instanceof String) {
-        return Promise.reject(response);
-    } else {
-        return response;
-    }
-});
-
-const defaultGzipLevel = 5
 
 /**
  * なろう小説APIへのリクエストを実行する

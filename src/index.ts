@@ -15,7 +15,6 @@ import { NarouRankingResult, RankingResult } from "./narou-ranking-results";
  */
 export function search(word: string = ""): SearchBuilder {
     var builder = new SearchBuilder();
-    builder.gzip(5);
     if (word != "") builder.word(word);
     return builder;
 }
@@ -27,7 +26,6 @@ export function search(word: string = ""): SearchBuilder {
  */
 export function searchR18(word: string = ""): SearchBuilderR18 {
     var builder = new SearchBuilderR18();
-    builder.gzip(5);
     if (word != "") builder.word(word);
     return builder;
 }
