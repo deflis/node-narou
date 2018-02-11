@@ -4,16 +4,7 @@
  * @class NarouSearchResults
  */
 
-export interface INarouSearchResults {
-    allcount: number
-    limit: number
-    start: number
-    page: number
-    length: number
-    values: NarouSearchResult[]
-}
-
-export default class NarouSearchResults implements INarouSearchResults {
+export default class NarouSearchResults {
     allcount: number
     limit: number
     start: number
@@ -102,7 +93,7 @@ export default class NarouSearchResults implements INarouSearchResults {
 
 export interface NarouSearchResult {
     title: string
-    number: string
+    ncode: string
     userid: number
     writer: string
     story: string
@@ -112,5 +103,18 @@ export interface NarouSearchResult {
     general_lastup: string
     noveltype: number
     end: number
-    general_all_no: string
+    general_all_no: number
+    length: number
+    time: number
+    isstop: number
+    pc_or_k: number
+    global_point: number
+    fav_novel_cnt: number
+    review_cnt: number
+    all_point: number
+    all_hyoka_cnt: number
+    sasie_cnt: number
+    kaiwaritu: number
+    novelupdated_at: number
+    update_at: number
 }

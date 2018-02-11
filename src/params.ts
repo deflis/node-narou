@@ -165,14 +165,31 @@ export enum R18Site {
     Midnight = 4,
 }
 
+export enum R18SiteNotation {
+    "ノクターンノベルズ(男性向け)" = R18Site.Nocturne,
+    "ムーンライトノベルズ(女性向け)" = R18Site.MoonLight,
+    "ムーンライトノベルズ(BL)" = R18Site.MoonLightBL,
+    "ミッドナイトノベルズ(大人向け)" = R18Site.Midnight,
+}
+
 export enum BigGenre {
     Renai = 1,
     Fantasy = 2,
     Bungei = 3,
     Sf = 4,
     Sonota = 99,
-    Nongenre = 98,
+    NonGenre = 98,
 }
+
+export enum BigGenreNotation {
+    "恋愛" = BigGenre.Renai,
+    "ファンタジー" = BigGenre.Fantasy,
+    "文芸" = BigGenre.Bungei,
+    "SF" = BigGenre.Sf,
+    "その他" = BigGenre.Sonota,
+    "ノンジャンル" = BigGenre.NonGenre,
+}
+
 
 export enum Genre {
     RenaiIsekai = 101,
@@ -195,7 +212,31 @@ export enum Genre {
     SonotaEssei = 9903,
     SonotaReplay = 9904,
     SonotaSonota = 9999,
-    Nongenre = 9801,
+    NonGenre = 9801,
+}
+
+export enum GenreNotation {
+    "異世界〔恋愛〕" = Genre.RenaiIsekai,
+    "現実世界〔恋愛〕" = Genre.RenaiGenjitsusekai,
+    "ハイファンタジー〔ファンタジー〕" = Genre.FantasyHigh,
+    "ローファンタジー〔ファンタジー〕" = Genre.FantasyLow,
+    "純文学〔文芸〕" = Genre.BungeiJyunbungei,
+    "ヒューマンドラマ〔文芸〕" = Genre.BungeiHumanDrama,
+    "歴史〔文芸〕" = Genre.BungeiHistory,
+    "推理〔文芸〕" = Genre.BungeiSuiri,
+    "ホラー〔文芸〕" = Genre.BungeiHorror,
+    "アクション〔文芸〕" = Genre.BungeiAction,
+    "コメディー〔文芸〕" = Genre.BungeiComedy,
+    "VRゲーム〔SF〕" = Genre.SfVrgame,
+    "宇宙〔SF〕" = Genre.SfSpace,
+    "空想科学〔SF〕" = Genre.SfKuusoukagaku,
+    "パニック〔SF〕" = Genre.SfPanic,
+    "童話〔その他〕" = Genre.SonotaDouwa,
+    "詩〔その他〕" = Genre.SonotaShi,
+    "エッセイ〔その他〕" = Genre.SonotaEssei,
+    "リプレイ〔その他〕" = Genre.SonotaReplay,
+    "その他〔その他〕" = Genre.SonotaSonota,
+    "ノンジャンル〔ノンジャンル〕" = Genre.NonGenre,
 }
 
 export enum Buntai {

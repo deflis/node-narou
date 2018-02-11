@@ -1,9 +1,28 @@
-import * as zlib from 'zlib';
 import Axios, { AxiosInstance } from "axios";
 import NarouSearchResults from './narou-search-results';
 import { SearchParams } from './params';
+import { NarouRankingResult } from './narou-ranking-results';
 
-export const axios: AxiosInstance = Axios.create()
+export const axios: AxiosInstance = Axios.create();
+
+const isNode = typeof process !== 'undefined'
+
+if (isNode) {
+    const httpAdapter = require("axios/lib/adapters/http");
+    axios.defaults.adapter = httpAdapter;
+}
+
+axios.interceptors.response.use(async (response) => {
+    if (response.data != null && response.data.pipe != null) {
+        const { unzipp } = require("axios/gzipIntecepter");
+        response.data = await unzipp(response.data);
+        return response;
+    } else if (response.data instanceof String) {
+        return Promise.reject(response);
+    } else {
+        return response;
+    }
+});
 
 const defaultGzipLevel = 5
 
@@ -22,7 +41,7 @@ export default class NarouNovel {
      */
     static async execute<T>(params: any, endpoint = 'http://api.syosetu.com/novelapi/api/'): Promise<[T, any]> {
 
-        let query = Object.assign(params, {out: 'json'});
+        let query = Object.assign(params, { out: 'json' });
 
         let requestObject = {
             method: 'GET',
@@ -30,27 +49,21 @@ export default class NarouNovel {
             params: query,
         };
 
-        if (query.gzip && query.gzip != 0) {
-            query.gzip = defaultGzipLevel;
+        if (isNode) {
+            if (query.gzip && query.gzip != 0) {
+                query.gzip = defaultGzipLevel;
+            }
+    
+            if (query.gzip) {
+                requestObject = Object.assign(requestObject, { responseType: 'stream' });
+            }
+        } else {
+            delete query.gzip
         }
-        
-        if (query.gzip) {
-            requestObject = Object.assign(requestObject, { responseType: 'stream'});
-        }
-        
+
 
         let response = await axios.request(requestObject)
         let result = response.data;
-        if (query.gzip) {
-            let unziped: NodeJS.ReadableStream = <NodeJS.ReadableStream>(response.data).pipe(zlib.createUnzip())
-            result = await new Promise((resolve, reject) => {
-                let data = "";
-                unziped.on('data', (chunk: string) => data += chunk);
-                unziped.on('end', () => resolve(data));
-                unziped.on('error', (err: any) => reject(err));
-            });
-            result = JSON.parse(result);
-        }
 
         return result;
     }
@@ -67,7 +80,7 @@ export default class NarouNovel {
         return this.executeSearch(params, 'http://api.syosetu.com/novel18api/api/');
     }
 
-    static executeRanking(params: any) {
+    static executeRanking(params: any): Promise<NarouRankingResult[]> {
         return this.execute(params, 'http://api.syosetu.com/rank/rankget/');
     }
 
