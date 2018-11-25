@@ -1,7 +1,7 @@
 // LICENSE : MIT
 "use strict";
 import 'source-map-support/register';
-import assert from 'power-assert';
+import {assert} from 'chai';
 
 import MockAdapter from 'axios-mock-adapter';
 import NarouAPI, { Fields } from "../src/";

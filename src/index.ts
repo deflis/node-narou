@@ -1,12 +1,20 @@
 import SearchBuilder from "./search-builder";
-import SearchBuilderR18 from"./search-builder-r18";
-import RankingBuilder from"./ranking";
-import { RankingType as RankingType } from"./ranking";
-import { Fields, Order, BigGenre, BigGenreNotation, Genre, GenreNotation, R18Site, R18SiteNotation } from "./params";
+import SearchBuilderR18 from "./search-builder-r18";
+import RankingBuilder from "./ranking";
+import { RankingType } from "./ranking";
+import {
+  Fields,
+  Order,
+  BigGenre,
+  BigGenreNotation,
+  Genre,
+  GenreNotation,
+  R18Site,
+  R18SiteNotation
+} from "./params";
 import { axios } from "./narou";
 import { NarouSearchResult } from "./narou-search-results";
 import { NarouRankingResult, RankingResult } from "./narou-ranking-results";
-
 
 /**
  * 検索
@@ -14,9 +22,9 @@ import { NarouRankingResult, RankingResult } from "./narou-ranking-results";
  * @returns {SearchBuilder}
  */
 export function search(word: string = ""): SearchBuilder {
-    var builder = new SearchBuilder();
-    if (word != "") builder.word(word);
-    return builder;
+  var builder = new SearchBuilder();
+  if (word != "") builder.word(word);
+  return builder;
 }
 
 /**
@@ -25,39 +33,38 @@ export function search(word: string = ""): SearchBuilder {
  * @returns {SearchBuilder}
  */
 export function searchR18(word: string = ""): SearchBuilderR18 {
-    var builder = new SearchBuilderR18();
-    if (word != "") builder.word(word);
-    return builder;
+  var builder = new SearchBuilderR18();
+  if (word != "") builder.word(word);
+  return builder;
 }
 
-
 export function ranking(): RankingBuilder {
-    const builder = new RankingBuilder();
-    return builder;
+  const builder = new RankingBuilder();
+  return builder;
 }
 
 export default {
-    search,
-    ranking,
-    searchR18,
-}
+  search,
+  ranking,
+  searchR18
+};
 
 /**
  * なろうAPI
  * @global
  */
 export {
-    Fields,
-    Order,
-    RankingType,
-    NarouSearchResult,
-    NarouRankingResult,
-    RankingResult,
-    BigGenre,
-    BigGenreNotation,
-    Genre,
-    GenreNotation,
-    R18Site,
-    R18SiteNotation,
-    axios,
-}
+  Fields,
+  Order,
+  RankingType,
+  NarouSearchResult,
+  NarouRankingResult,
+  RankingResult,
+  BigGenre,
+  BigGenreNotation,
+  Genre,
+  GenreNotation,
+  R18Site,
+  R18SiteNotation,
+  axios
+};

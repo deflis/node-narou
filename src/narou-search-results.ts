@@ -1,66 +1,65 @@
-
 /**
  * なろう小説API検索結果
  * @class NarouSearchResults
  */
 
 export default class NarouSearchResults {
-    allcount: number
-    limit: number
-    start: number
-    page: number
-    length: number
-    values: NarouSearchResult[]
-    
-    /**
-     * @constractor
-     * @private
-     */
-    constructor(result: any[], params: any) {
-        let count = result.shift().allcount;
-        
-        let limit = 20;
-        if (params.hasOwnProperty("lim")) {
-            limit = params.lim;
-        }
+  allcount: number;
+  limit: number;
+  start: number;
+  page: number;
+  length: number;
+  values: NarouSearchResult[];
 
-        let start = 0;
-        if (params.hasOwnProperty("start")) {
-            start = params.start;
-        }
-        
-        /**
-         * 検索結果数
-         * @type {number}
-         */
-        this.allcount = count;
-        /**
-         * 結果表示上限数
-         * @type {number}
-         */
-        this.limit = limit;
-        /**
-         * 結果表示開始数
-         * @type {number}
-         */
-        this.start = start;
-        /**
-         * 結果表示ページ数
-         * @type {number}
-         */
-        this.page = start / limit;
-        /**
-         * 結果数
-         * @type {number}
-         */
-        this.length = result.length;
-        /**
-         * 検索結果
-         * @type {NarouSearchResult[]}
-         */
-        this.values = result;
+  /**
+   * @constractor
+   * @private
+   */
+  constructor(result: any[], params: any) {
+    let count = result.shift().allcount;
+
+    let limit = 20;
+    if (params.hasOwnProperty("lim")) {
+      limit = params.lim;
     }
-};
+
+    let start = 0;
+    if (params.hasOwnProperty("start")) {
+      start = params.start;
+    }
+
+    /**
+     * 検索結果数
+     * @type {number}
+     */
+    this.allcount = count;
+    /**
+     * 結果表示上限数
+     * @type {number}
+     */
+    this.limit = limit;
+    /**
+     * 結果表示開始数
+     * @type {number}
+     */
+    this.start = start;
+    /**
+     * 結果表示ページ数
+     * @type {number}
+     */
+    this.page = start / limit;
+    /**
+     * 結果数
+     * @type {number}
+     */
+    this.length = result.length;
+    /**
+     * 検索結果
+     * @type {NarouSearchResult[]}
+     */
+    this.values = result;
+  }
+}
 
 /**
  * @typedef {Object} NarouSearchResult
@@ -92,29 +91,29 @@ export default class NarouSearchResults {
  */
 
 export interface NarouSearchResult {
-    title: string
-    ncode: string
-    userid: number
-    writer: string
-    story: string
-    genre: number
-    keyword: string
-    general_firstup: string
-    general_lastup: string
-    noveltype: number
-    end: number
-    general_all_no: number
-    length: number
-    time: number
-    isstop: number
-    pc_or_k: number
-    global_point: number
-    fav_novel_cnt: number
-    review_cnt: number
-    all_point: number
-    all_hyoka_cnt: number
-    sasie_cnt: number
-    kaiwaritu: number
-    novelupdated_at: number
-    update_at: number
+  title: string;
+  ncode: string;
+  userid: number;
+  writer: string;
+  story: string;
+  genre: number;
+  keyword: string;
+  general_firstup: string;
+  general_lastup: string;
+  noveltype: number;
+  end: number;
+  general_all_no: number;
+  length: number;
+  time: number;
+  isstop: number;
+  pc_or_k: number;
+  global_point: number;
+  fav_novel_cnt: number;
+  review_cnt: number;
+  all_point: number;
+  all_hyoka_cnt: number;
+  sasie_cnt: number;
+  kaiwaritu: number;
+  novelupdated_at: number;
+  update_at: number;
 }

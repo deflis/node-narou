@@ -1,0 +1,10 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./dist.es2015",
+        "target": "es2017",
+        "module": "esnext",
+        "declaration": false,
+        "declarationMap": false
+    }
+}

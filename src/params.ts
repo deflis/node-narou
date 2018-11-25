@@ -1,72 +1,68 @@
-
-export type booleanNumber = 0|1
+export type booleanNumber = 0 | 1;
 
 export interface SearchParams {
-    gzip?: GzipLevel
-    out?: "json"
-    of?: string
-    lim?: number
-    st?: number
-    order?: Order
+  gzip?: GzipLevel;
+  out?: "json";
+  of?: string;
+  lim?: number;
+  st?: number;
+  order?: Order;
 
-    word?: string
-    notword?: string
-    title?: booleanNumber
-    ex?: booleanNumber
-    keyword?: booleanNumber
-    wname?: booleanNumber
+  word?: string;
+  notword?: string;
+  title?: booleanNumber;
+  ex?: booleanNumber;
+  keyword?: booleanNumber;
+  wname?: booleanNumber;
 
-    biggenre?: string|BigGenre
-    notbiggenre?: string|BigGenre
-    genre?: string|Genre
-    notgenre?: string|Genre
-    userid?: string|number
+  biggenre?: string | BigGenre;
+  notbiggenre?: string | BigGenre;
+  genre?: string | Genre;
+  notgenre?: string | Genre;
+  userid?: string | number;
 
+  nocgenre?: string | number;
+  notnocgenre?: string | number;
+  xid?: string | number;
 
-    nocgenre?: string|number
-    notnocgenre?: string|number
-    xid?: string|number
+  isr15?: booleanNumber;
+  isbl?: booleanNumber;
+  isgl?: booleanNumber;
+  iszankoku?: booleanNumber;
+  istensei?: booleanNumber;
+  istenni?: booleanNumber;
+  istt?: booleanNumber;
 
-    isr15?: booleanNumber
-    isbl?: booleanNumber
-    isgl?: booleanNumber
-    iszankoku?: booleanNumber
-    istensei?: booleanNumber
-    istenni?: booleanNumber
-    istt?: booleanNumber
+  notr15?: booleanNumber;
+  notbl?: booleanNumber;
+  notgl?: booleanNumber;
+  notzankoku?: booleanNumber;
+  nottensei?: booleanNumber;
+  nottenni?: booleanNumber;
+  nottt?: booleanNumber;
 
-    notr15?: booleanNumber
-    notbl?: booleanNumber
-    notgl?: booleanNumber
-    notzankoku?: booleanNumber
-    nottensei?: booleanNumber
-    nottenni?: booleanNumber
-    nottt?: booleanNumber
+  minlen?: number;
+  maxlen?: number;
+  length?: number | string;
 
-    minlen?: number
-    maxlen?: number
-    length?: number|string
+  kaiwaritu?: number | string;
+  sasie?: number | string;
 
-    kaiwaritu?: number|string
-    sasie?: number|string
+  mintime?: number;
+  maxtime?: number;
+  time?: number | string;
 
-    mintime?: number
-    maxtime?: number
-    time?: number|string
+  ncode?: string;
 
-    ncode?: string
+  type?: NovelType;
 
-    type?: NovelType
+  buntai?: Buntai | string;
 
-    buntai?: Buntai|string
+  stop?: Stop;
 
-    stop?: Stop
-
-    ispickup?: booleanNumber
-    lastup?: string
-
+  ispickup?: booleanNumber;
+  lastup?: string;
 }
-
 
 /**
  * {@link SearchBuilder#Fields}メソッドにパラメータを指定する際のヘルパー。
@@ -99,164 +95,163 @@ export interface SearchParams {
  */
 
 export enum Fields {
-    title = "t",
-    ncode = "n",
-    userid = "u",
-    writer = "w",
-    story = "s",
-    genre = "g",
-    keyword = "k",
-    general_firstup = "gf",
-    general_lastup = "gl",
-    noveltype = "nt",
-    end = "e",
-    general_all_no = "ga",
-    length = "l",
-    time = "ti",
-    isstop = "i",
-    pc_or_k = "p",
-    global_point = "gp",
-    fav_novel_cnt = "f",
-    review_cnt = "r",
-    all_point = "a",
-    all_hyoka_cnt = "ah",
-    sasie_cnt = "sa",
-    kaiwaritu = "ka",
-    novelupdated_at = "nu",
-    updated_at = "ua",
+  title = "t",
+  ncode = "n",
+  userid = "u",
+  writer = "w",
+  story = "s",
+  genre = "g",
+  keyword = "k",
+  general_firstup = "gf",
+  general_lastup = "gl",
+  noveltype = "nt",
+  end = "e",
+  general_all_no = "ga",
+  length = "l",
+  time = "ti",
+  isstop = "i",
+  pc_or_k = "p",
+  global_point = "gp",
+  fav_novel_cnt = "f",
+  review_cnt = "r",
+  all_point = "a",
+  all_hyoka_cnt = "ah",
+  sasie_cnt = "sa",
+  kaiwaritu = "ka",
+  novelupdated_at = "nu",
+  updated_at = "ua"
 }
 
 /*
-    * allunique 閲覧者の多い順(未実装)
-    * favnovelcnt	ブックマーク数の多い順
-    * reviewcnt	レビュー数の多い順
-    * hyoka	総合評価の高い順
-    * hyokaasc	総合評価の低い順
-    * impressioncnt	感想の多い順
-    * hyokacnt	評価者数の多い順
-    * hyokacntasc	評価者数の少ない順
-    * weekly	週間ユニークユーザの多い順 毎週火曜日早朝リセット
-    * (前週の日曜日から土曜日分)
-    * lengthdesc	小説本文の文字数が多い順
-    * lengthasc	小説本文の文字数が少ない順
-    * ncodedesc	Nコードが新しい順
-    * old	古い順
-*/
+ * allunique 閲覧者の多い順(未実装)
+ * favnovelcnt	ブックマーク数の多い順
+ * reviewcnt	レビュー数の多い順
+ * hyoka	総合評価の高い順
+ * hyokaasc	総合評価の低い順
+ * impressioncnt	感想の多い順
+ * hyokacnt	評価者数の多い順
+ * hyokacntasc	評価者数の少ない順
+ * weekly	週間ユニークユーザの多い順 毎週火曜日早朝リセット
+ * (前週の日曜日から土曜日分)
+ * lengthdesc	小説本文の文字数が多い順
+ * lengthasc	小説本文の文字数が少ない順
+ * ncodedesc	Nコードが新しい順
+ * old	古い順
+ */
 export enum Order {
-    AllUnique = "allunique",
-    FavoriteNovelCount = "favnovelcnt",
-    ReviewCount = "favnovelcnt",
-    HyokaDesc = "hyoka",
-    HyokaAsc = "hyokaasc",
-    ImpressionCount = "impressioncnt",
-    HyokaCountDesc = "hyokacnt",
-    HyokaCountAsc = "hyokacntasc",
-    Weekly = "weekly",
-    LengthDesc = "lengthdesc",
-    LengthAsc = "lengthasc",
-    NCodeDesc = "ncodedesc",
-    NCodeAsc = "old",
+  AllUnique = "allunique",
+  FavoriteNovelCount = "favnovelcnt",
+  ReviewCount = "favnovelcnt",
+  HyokaDesc = "hyoka",
+  HyokaAsc = "hyokaasc",
+  ImpressionCount = "impressioncnt",
+  HyokaCountDesc = "hyokacnt",
+  HyokaCountAsc = "hyokacntasc",
+  Weekly = "weekly",
+  LengthDesc = "lengthdesc",
+  LengthAsc = "lengthasc",
+  NCodeDesc = "ncodedesc",
+  NCodeAsc = "old"
 }
 
 export enum R18Site {
-    Nocturne = 1,
-    MoonLight = 2,
-    MoonLightBL = 3,
-    Midnight = 4,
+  Nocturne = 1,
+  MoonLight = 2,
+  MoonLightBL = 3,
+  Midnight = 4
 }
 
 export enum R18SiteNotation {
-    "ノクターンノベルズ(男性向け)" = R18Site.Nocturne,
-    "ムーンライトノベルズ(女性向け)" = R18Site.MoonLight,
-    "ムーンライトノベルズ(BL)" = R18Site.MoonLightBL,
-    "ミッドナイトノベルズ(大人向け)" = R18Site.Midnight,
+  "ノクターンノベルズ(男性向け)" = R18Site.Nocturne,
+  "ムーンライトノベルズ(女性向け)" = R18Site.MoonLight,
+  "ムーンライトノベルズ(BL)" = R18Site.MoonLightBL,
+  "ミッドナイトノベルズ(大人向け)" = R18Site.Midnight
 }
 
 export enum BigGenre {
-    Renai = 1,
-    Fantasy = 2,
-    Bungei = 3,
-    Sf = 4,
-    Sonota = 99,
-    NonGenre = 98,
+  Renai = 1,
+  Fantasy = 2,
+  Bungei = 3,
+  Sf = 4,
+  Sonota = 99,
+  NonGenre = 98
 }
 
 export enum BigGenreNotation {
-    "恋愛" = BigGenre.Renai,
-    "ファンタジー" = BigGenre.Fantasy,
-    "文芸" = BigGenre.Bungei,
-    "SF" = BigGenre.Sf,
-    "その他" = BigGenre.Sonota,
-    "ノンジャンル" = BigGenre.NonGenre,
+  "恋愛" = BigGenre.Renai,
+  "ファンタジー" = BigGenre.Fantasy,
+  "文芸" = BigGenre.Bungei,
+  "SF" = BigGenre.Sf,
+  "その他" = BigGenre.Sonota,
+  "ノンジャンル" = BigGenre.NonGenre
 }
 
-
 export enum Genre {
-    RenaiIsekai = 101,
-    RenaiGenjitsusekai = 102,
-    FantasyHigh = 201,
-    FantasyLow = 202,
-    BungeiJyunbungei = 301,
-    BungeiHumanDrama = 302,
-    BungeiHistory  = 303,
-    BungeiSuiri = 304,
-    BungeiHorror = 305,
-    BungeiAction = 306,
-    BungeiComedy = 307,
-    SfVrgame = 401,
-    SfSpace = 402,
-    SfKuusoukagaku = 403,
-    SfPanic = 404,
-    SonotaDouwa = 9901,
-    SonotaShi = 9902,
-    SonotaEssei = 9903,
-    SonotaReplay = 9904,
-    SonotaSonota = 9999,
-    NonGenre = 9801,
+  RenaiIsekai = 101,
+  RenaiGenjitsusekai = 102,
+  FantasyHigh = 201,
+  FantasyLow = 202,
+  BungeiJyunbungei = 301,
+  BungeiHumanDrama = 302,
+  BungeiHistory = 303,
+  BungeiSuiri = 304,
+  BungeiHorror = 305,
+  BungeiAction = 306,
+  BungeiComedy = 307,
+  SfVrgame = 401,
+  SfSpace = 402,
+  SfKuusoukagaku = 403,
+  SfPanic = 404,
+  SonotaDouwa = 9901,
+  SonotaShi = 9902,
+  SonotaEssei = 9903,
+  SonotaReplay = 9904,
+  SonotaSonota = 9999,
+  NonGenre = 9801
 }
 
 export enum GenreNotation {
-    "異世界〔恋愛〕" = Genre.RenaiIsekai,
-    "現実世界〔恋愛〕" = Genre.RenaiGenjitsusekai,
-    "ハイファンタジー〔ファンタジー〕" = Genre.FantasyHigh,
-    "ローファンタジー〔ファンタジー〕" = Genre.FantasyLow,
-    "純文学〔文芸〕" = Genre.BungeiJyunbungei,
-    "ヒューマンドラマ〔文芸〕" = Genre.BungeiHumanDrama,
-    "歴史〔文芸〕" = Genre.BungeiHistory,
-    "推理〔文芸〕" = Genre.BungeiSuiri,
-    "ホラー〔文芸〕" = Genre.BungeiHorror,
-    "アクション〔文芸〕" = Genre.BungeiAction,
-    "コメディー〔文芸〕" = Genre.BungeiComedy,
-    "VRゲーム〔SF〕" = Genre.SfVrgame,
-    "宇宙〔SF〕" = Genre.SfSpace,
-    "空想科学〔SF〕" = Genre.SfKuusoukagaku,
-    "パニック〔SF〕" = Genre.SfPanic,
-    "童話〔その他〕" = Genre.SonotaDouwa,
-    "詩〔その他〕" = Genre.SonotaShi,
-    "エッセイ〔その他〕" = Genre.SonotaEssei,
-    "リプレイ〔その他〕" = Genre.SonotaReplay,
-    "その他〔その他〕" = Genre.SonotaSonota,
-    "ノンジャンル〔ノンジャンル〕" = Genre.NonGenre,
+  "異世界〔恋愛〕" = Genre.RenaiIsekai,
+  "現実世界〔恋愛〕" = Genre.RenaiGenjitsusekai,
+  "ハイファンタジー〔ファンタジー〕" = Genre.FantasyHigh,
+  "ローファンタジー〔ファンタジー〕" = Genre.FantasyLow,
+  "純文学〔文芸〕" = Genre.BungeiJyunbungei,
+  "ヒューマンドラマ〔文芸〕" = Genre.BungeiHumanDrama,
+  "歴史〔文芸〕" = Genre.BungeiHistory,
+  "推理〔文芸〕" = Genre.BungeiSuiri,
+  "ホラー〔文芸〕" = Genre.BungeiHorror,
+  "アクション〔文芸〕" = Genre.BungeiAction,
+  "コメディー〔文芸〕" = Genre.BungeiComedy,
+  "VRゲーム〔SF〕" = Genre.SfVrgame,
+  "宇宙〔SF〕" = Genre.SfSpace,
+  "空想科学〔SF〕" = Genre.SfKuusoukagaku,
+  "パニック〔SF〕" = Genre.SfPanic,
+  "童話〔その他〕" = Genre.SonotaDouwa,
+  "詩〔その他〕" = Genre.SonotaShi,
+  "エッセイ〔その他〕" = Genre.SonotaEssei,
+  "リプレイ〔その他〕" = Genre.SonotaReplay,
+  "その他〔その他〕" = Genre.SonotaSonota,
+  "ノンジャンル〔ノンジャンル〕" = Genre.NonGenre
 }
 
 export enum Buntai {
-    NoJisageKaigyouOoi  = 1,
-    NoJisageKaigyoHutsuu  = 2,
-    JisageKaigyoOoi  = 4,
-    JisageKaigyoHutsuu  = 6,
+  NoJisageKaigyouOoi = 1,
+  NoJisageKaigyoHutsuu = 2,
+  JisageKaigyoOoi = 4,
+  JisageKaigyoHutsuu = 6
 }
 
 export enum Stop {
-    NoStopping = 1,
-    Stopping = 2,
+  NoStopping = 1,
+  Stopping = 2
 }
 
 export enum NovelType {
-    Short = "t",
-    RensaiNow = "r",
-    RensaiEnd = "er",
-    Rensai = "re",
-    ShortAndRensai = "ter",
+  Short = "t",
+  RensaiNow = "r",
+  RensaiEnd = "er",
+  Rensai = "re",
+  ShortAndRensai = "ter"
 }
 
-export type GzipLevel = 0|1|2|3|4|5
+export type GzipLevel = 0 | 1 | 2 | 3 | 4 | 5;
