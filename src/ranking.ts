@@ -101,7 +101,10 @@ export default class RankingBuilder {
       const result = await builder.execute();
 
       return ranking.map(r =>
-        Object.assign(r, result.values.find(novel => novel.ncode == r.ncode))
+        Object.assign(
+          r,
+          result.values.find(novel => novel.ncode == r.ncode)
+        )
       );
     });
 

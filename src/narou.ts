@@ -1,4 +1,4 @@
-import Axios, { AxiosInstance } from "axios";
+import Axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import NarouSearchResults from "./narou-search-results";
 import { SearchParams, GzipLevel } from "./params";
 import { NarouRankingResult } from "./narou-ranking-results";
@@ -38,7 +38,7 @@ export default class NarouNovel {
   ): Promise<[T, any]> {
     let query = Object.assign(params, { out: "json" });
 
-    let requestObject = {
+    let requestObject: AxiosRequestConfig = {
       method: "GET",
       url: endpoint,
       params: query
