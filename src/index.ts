@@ -12,9 +12,10 @@ import {
   R18Site,
   R18SiteNotation
 } from "./params";
-import { axios } from "./narou";
+import NarouNovel, { axios } from "./narou";
 import { NarouSearchResult } from "./narou-search-results";
 import { NarouRankingResult, RankingResult } from "./narou-ranking-results";
+import { RankingHistoryRawResult, RankingHistoryResult, formatRankingHistory } from './ranking-history';
 
 /**
  * 検索
@@ -43,6 +44,11 @@ export function ranking(): RankingBuilder {
   return builder;
 }
 
+export async function rankingHistory(ncode: string): Promise<RankingHistoryResult[]> {
+  const result = await NarouNovel.executeRankingHistory({ncode});
+  return result.map(formatRankingHistory);
+}
+
 export default {
   search,
   ranking,
@@ -66,5 +72,8 @@ export {
   GenreNotation,
   R18Site,
   R18SiteNotation,
+  NarouNovel,
+  RankingHistoryRawResult,
+  RankingHistoryResult,
   axios
 };
