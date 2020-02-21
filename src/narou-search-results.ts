@@ -115,7 +115,13 @@ export interface NarouSearchResult {
   istenni: number;
   pc_or_k: number;
   global_point: number;
+  daily_point: number;
+  weekly_point: number;
+  monthly_point: number;
+  quarter_point: number;
+  yearly_point: number;
   fav_novel_cnt: number;
+  impression_cnt: number;
   review_cnt: number;
   all_point: number;
   all_hyoka_cnt: number;
