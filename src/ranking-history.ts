@@ -1,7 +1,7 @@
 import { RankingType } from "./ranking";
 import * as moment from "moment";
 
-const dateFormat = "yyyyMMdd";
+const dateFormat = "YYYYMMDD";
 
 export interface RankingHistoryRawResult {
   rtype: string;
