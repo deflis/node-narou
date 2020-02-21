@@ -2,7 +2,7 @@ import Axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import NarouSearchResults from "./narou-search-results";
 import { SearchParams, GzipLevel } from "./params";
 import { NarouRankingResult } from "./narou-ranking-results";
-import { RankingHistoryRawResult } from './ranking-history';
+import { RankingHistoryRawResult } from "./ranking-history";
 
 export const axios: AxiosInstance = Axios.create();
 
@@ -84,7 +84,9 @@ export default class NarouNovel {
     return this.execute(params, "http://api.syosetu.com/rank/rankget/");
   }
 
-  static executeRankingHistory(params: any): Promise<RankingHistoryRawResult[]> {
+  static executeRankingHistory(
+    params: any
+  ): Promise<RankingHistoryRawResult[]> {
     return this.execute(params, "http://api.syosetu.com/rank/rankin/");
   }
 }

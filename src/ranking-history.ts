@@ -16,7 +16,9 @@ export interface RankingHistoryResult {
   rank: number;
 }
 
-export function formatRankingHistory(rankin: RankingHistoryRawResult): RankingHistoryResult {
+export function formatRankingHistory(
+  rankin: RankingHistoryRawResult
+): RankingHistoryResult {
   const { rtype, pt, rank } = rankin;
   const [_date, _type] = rtype.split("-");
   const date = moment(_date, dateFormat).toDate();
