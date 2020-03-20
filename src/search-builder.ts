@@ -1,5 +1,6 @@
 import api from "./narou";
 import INarouSearchResults from "./narou-search-results";
+import { BigGenre, Genre } from "./params";
 import {
   SearchParams,
   Fields,
@@ -83,11 +84,45 @@ export default class SearchBuilder {
   }
 
   /**
+   *
+   * @return {SearchBuilder} this
+   */
+  bigGenre(genre: BigGenre | BigGenre[]) {
+    this.set({ biggenre: array2string(genre) });
+    return this;
+  }
 
-    /**
-     * 
-     * @return {SearchBuilder} this
-     */
+  /**
+   *
+   * @return {SearchBuilder} this
+   */
+  notBigGenre(genre: BigGenre | BigGenre[]) {
+    this.set({ notbiggenre: array2string(genre) });
+    return this;
+  }
+
+  /**
+   *
+   * @return {SearchBuilder} this
+   */
+  genre(genre: Genre | Genre[]) {
+    this.set({ genre: array2string(genre) });
+    return this;
+  }
+
+  /**
+   *
+   * @return {SearchBuilder} this
+   */
+  notGenre(genre: Genre | Genre[]) {
+    this.set({ notgenre: array2string(genre) });
+    return this;
+  }
+
+  /**
+   *
+   * @return {SearchBuilder} this
+   */
   userId(ids: number | number[]) {
     this.set({ userid: array2string(ids) });
     return this;
@@ -98,7 +133,11 @@ export default class SearchBuilder {
    * @return {SearchBuilder} this
    */
   isR15(bool: boolean = true) {
-    this.set({ isr15: bool ? 1 : 0 });
+    if (bool) {
+      this.set({ isr15: 1 });
+    } else {
+      this.set({ notr15: 1 });
+    }
     return this;
   }
 
@@ -107,7 +146,11 @@ export default class SearchBuilder {
    * @return {SearchBuilder} this
    */
   isBL(bool: boolean = true) {
-    this.set({ isbl: bool ? 1 : 0 });
+    if (bool) {
+      this.set({ isbl: 1 });
+    } else {
+      this.set({ notbl: 1 });
+    }
     return this;
   }
 
@@ -116,7 +159,11 @@ export default class SearchBuilder {
    * @return {SearchBuilder} this
    */
   isGL(bool: boolean = true) {
-    this.set({ isgl: bool ? 1 : 0 });
+    if (bool) {
+      this.set({ isgl: 1 });
+    } else {
+      this.set({ notgl: 1 });
+    }
     return this;
   }
 
@@ -125,7 +172,46 @@ export default class SearchBuilder {
    * @return {SearchBuilder} this
    */
   isZankoku(bool: boolean = true) {
-    this.set({ iszankoku: bool ? 1 : 0 });
+    if (bool) {
+      this.set({ iszankoku: 1 });
+    } else {
+      this.set({ notzankoku: 1 });
+    }
+    return this;
+  }
+
+  /**
+   *
+   * @return {SearchBuilder} this
+   */
+  isTensei(bool: boolean = true) {
+    if (bool) {
+      this.set({ istensei: 1 });
+    } else {
+      this.set({ nottensei: 1 });
+    }
+    return this;
+  }
+
+  /**
+   *
+   * @return {SearchBuilder} this
+   */
+  isTenni(bool: boolean = true) {
+    if (bool) {
+      this.set({ istenni: 1 });
+    } else {
+      this.set({ nottenni: 1 });
+    }
+    return this;
+  }
+
+  /**
+   *
+   * @return {SearchBuilder} this
+   */
+  isTT() {
+    this.set({ istt: 1 });
     return this;
   }
 
