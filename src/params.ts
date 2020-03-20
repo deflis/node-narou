@@ -123,11 +123,16 @@ export enum Fields {
 }
 
 /*
- * allunique 閲覧者の多い順(未実装)
+ * new	新着更新順
  * favnovelcnt	ブックマーク数の多い順
  * reviewcnt	レビュー数の多い順
- * hyoka	総合評価の高い順
- * hyokaasc	総合評価の低い順
+ * hyoka	総合ポイントの高い順
+ * hyokaasc	総合ポイントの低い順
+ * dailypoint	日間ポイントの高い順
+ * weeklypoint	週間ポイントの高い順
+ * monthlypoint	月間ポイントの高い順
+ * quarterpoint	四半期ポイントの高い順
+ * yearlypoint	年間ポイントの高い順
  * impressioncnt	感想の多い順
  * hyokacnt	評価者数の多い順
  * hyokacntasc	評価者数の少ない順
@@ -139,7 +144,6 @@ export enum Fields {
  * old	古い順
  */
 export enum Order {
-  AllUnique = "allunique",
   FavoriteNovelCount = "favnovelcnt",
   ReviewCount = "favnovelcnt",
   HyokaDesc = "hyoka",
@@ -151,7 +155,13 @@ export enum Order {
   LengthDesc = "lengthdesc",
   LengthAsc = "lengthasc",
   NCodeDesc = "ncodedesc",
-  NCodeAsc = "old"
+  New = "new",
+  Old = "old",
+  DailyPoint = "dailypoint",
+  WeeklyPoint = "weeklypoint",
+  MonthlyPoint = "monthlypoint",
+  QuarterPoint = "quarterpoint",
+  YearlyPoint = "yearlypoint"
 }
 
 export enum R18Site {
