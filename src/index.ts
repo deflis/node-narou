@@ -52,7 +52,11 @@ export async function rankingHistory(
   ncode: string
 ): Promise<RankingHistoryResult[]> {
   const result = await NarouNovel.executeRankingHistory({ ncode });
-  return result.map(formatRankingHistory);
+  if (Array.isArray(result)) {
+    return result.map(formatRankingHistory);
+  } else {
+    throw new Error(result);
+  }
 }
 
 export default {
