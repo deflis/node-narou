@@ -1,6 +1,6 @@
 {
   "name": "narou",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Narou API Wrapper",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -83,4 +83,8 @@
     ],
     "sourceMap": true
   }
+
+,"_resolved": "https://registry.npmjs.org/narou/-/narou-0.4.1.tgz"
+,"_integrity": "sha512-ltEUpiB6FNR/KwAD3zWi9LLLvJ4uasnczJdPuRnblkRfKSuGiIO/BpaD1SezxTSkGx8IR1aU4JPW3AaSe/ijVg=="
+,"_from": "narou@0.4.1"
 }
