@@ -1,6 +1,6 @@
 {
   "name": "narou",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Narou API Wrapper",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -55,6 +55,7 @@
     "check": "npm-run-all --parallel check:lint check:build test",
     "check:lint": "tslint --project .",
     "check:build": "tsc --noEmit",
+    "prepare": "npm-run-all format build",
     "format": "npm-run-all format:prettier format:tslint",
     "format:prettier": "prettier --write src/**/*.ts",
     "format:tslint": "tslint --project . --fix",
