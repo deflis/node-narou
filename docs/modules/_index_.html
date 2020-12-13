@@ -74,6 +74,7 @@
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_index_.html#ranking" class="tsd-kind-icon">ranking</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_index_.html#rankinghistory" class="tsd-kind-icon">ranking<wbr>History</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_index_.html#search" class="tsd-kind-icon">search</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_index_.html#searchr18" class="tsd-kind-icon">search<wbr>R18</a></li>
 							</ul>
@@ -93,10 +94,33 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/deflis/node-narou/blob/7f85775/src/index.ts#L41">index.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/deflis/node-narou/blob/9a390ea/src/index.ts#L46">index.ts:46</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="../classes/_ranking_.rankingbuilder.html" class="tsd-signature-type">RankingBuilder</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="rankinghistory" class="tsd-anchor"></a>
+					<h3>ranking<wbr>History</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">ranking<wbr>History<span class="tsd-signature-symbol">(</span>ncode<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_ranking_history_.rankinghistoryresult.html" class="tsd-signature-type">RankingHistoryResult</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/deflis/node-narou/blob/9a390ea/src/index.ts#L51">index.ts:51</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>ncode: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_ranking_history_.rankinghistoryresult.html" class="tsd-signature-type">RankingHistoryResult</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -110,7 +134,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/deflis/node-narou/blob/7f85775/src/index.ts#L24">index.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/deflis/node-narou/blob/9a390ea/src/index.ts#L29">index.ts:29</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -121,7 +145,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> word: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;&quot;</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> word: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="../classes/_search_builder_.searchbuilder.html" class="tsd-signature-type">SearchBuilder</a></h4>
@@ -138,7 +162,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/deflis/node-narou/blob/7f85775/src/index.ts#L35">index.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/deflis/node-narou/blob/9a390ea/src/index.ts#L40">index.ts:40</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -149,7 +173,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> word: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;&quot;</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> word: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="../classes/_search_builder_r18_.searchbuilderr18.html" class="tsd-signature-type">SearchBuilderR18</a></h4>
@@ -168,31 +192,34 @@
 						<span>Internals</span>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="_index_.html">"index"</a>
+						<a href="_index_.html">&quot;index&quot;</a>
 					</li>
 					<li class="label tsd-is-external">
 						<span>Externals</span>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="_narou_.html">"narou"</a>
+						<a href="_narou_.html">&quot;narou&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="_narou_ranking_results_.html">"narou-<wbr>ranking-<wbr>results"</a>
+						<a href="_narou_ranking_results_.html">&quot;narou-<wbr>ranking-<wbr>results&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="_narou_search_results_.html">"narou-<wbr>search-<wbr>results"</a>
+						<a href="_narou_search_results_.html">&quot;narou-<wbr>search-<wbr>results&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="_params_.html">"params"</a>
+						<a href="_params_.html">&quot;params&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="_ranking_.html">"ranking"</a>
+						<a href="_ranking_.html">&quot;ranking&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="_search_builder_.html">"search-<wbr>builder"</a>
+						<a href="_ranking_history_.html">&quot;ranking-<wbr>history&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="_search_builder_r18_.html">"search-<wbr>builder-<wbr>r18"</a>
+						<a href="_search_builder_.html">&quot;search-<wbr>builder&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="_search_builder_r18_.html">&quot;search-<wbr>builder-<wbr>r18&quot;</a>
 					</li>
 				</ul>
 			</nav>
@@ -200,6 +227,9 @@
 				<ul class="before-current">
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_index_.html#ranking" class="tsd-kind-icon">ranking</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_index_.html#rankinghistory" class="tsd-kind-icon">ranking<wbr>History</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_index_.html#search" class="tsd-kind-icon">search</a>
@@ -224,6 +254,7 @@
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -272,7 +303,7 @@
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>
