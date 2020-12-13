@@ -112,7 +112,7 @@ export default class RankingBuilder {
   }
 }
 
-function arrayNgrouped<T>(arr: T[], n: number = 10): T[][] {
+function arrayNgrouped<T>(arr: T[], n: number = 500): T[][] {
   const result: T[][] = [];
   const arr$ = arr.concat();
   while (arr$.length > 0) {

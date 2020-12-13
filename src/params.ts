@@ -62,6 +62,8 @@ export interface SearchParams {
 
   ispickup?: booleanNumber;
   lastup?: string;
+
+  opt?: string;
 }
 
 /**

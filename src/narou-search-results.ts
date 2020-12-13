@@ -129,4 +129,5 @@ export interface NarouSearchResult {
   kaiwaritu: number;
   novelupdated_at: number;
   update_at: number;
+  weekly_unique: number;
 }

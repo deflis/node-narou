@@ -371,6 +371,10 @@ export default class SearchBuilder {
     return this.limit(count).start(no * count);
   }
 
+  opt(option: "weekly" | undefined) {
+    return this.set({ opt: option });
+  }
+
   /**
    * 出力順序を指定する。指定しない場合は新着順となります。
    *
