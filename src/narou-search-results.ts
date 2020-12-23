@@ -3,6 +3,8 @@
  * @class NarouSearchResults
  */
 
+import { SearchParams } from "./params";
+
 export default class NarouSearchResults {
   allcount: number;
   limit: number;
@@ -15,18 +17,13 @@ export default class NarouSearchResults {
    * @constractor
    * @private
    */
-  constructor(result: any[], params: any) {
-    let count = result.shift().allcount;
-
-    let limit = 20;
-    if (params.hasOwnProperty("lim")) {
-      limit = params.lim;
-    }
-
-    let start = 0;
-    if (params.hasOwnProperty("start")) {
-      start = params.start;
-    }
+  constructor(
+    [header, ...result]: [{ allcount: number }, ...NarouSearchResult[]],
+    params: SearchParams
+  ) {
+    const count = header.allcount;
+    const limit = params.lim ?? 20;
+    const start = params.st ?? 0;
 
     /**
      * 検索結果数

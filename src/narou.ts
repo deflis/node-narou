@@ -1,25 +1,13 @@
-import Axios, { AxiosInstance, AxiosRequestConfig } from "axios";
-import NarouSearchResults from "./narou-search-results";
-import { SearchParams, GzipLevel } from "./params";
+import fetch from "node-fetch";
+import { URL } from "url";
+
 import { NarouRankingResult } from "./narou-ranking-results";
+import NarouSearchResults from "./narou-search-results";
+import { RankingHistoryParams, RankingParams, SearchParams } from "./params";
 import { RankingHistoryRawResult } from "./ranking-history";
+import { unzipp } from "./util/unzipp";
 
-export const axios: AxiosInstance = Axios.create();
-
-const isNode = typeof process !== "undefined";
-let defaultGzipLevel: GzipLevel;
-
-if (isNode) {
-  const httpAdapter = require("axios/lib/adapters/http");
-  axios.defaults.adapter = httpAdapter;
-  const { gzipInterceptor } = require("./axios/gzipInterfepter");
-
-  axios.interceptors.response.use(gzipInterceptor);
-
-  defaultGzipLevel = 5;
-} else {
-  defaultGzipLevel = 0;
-}
+type NarouParams = SearchParams | RankingParams | RankingHistoryParams;
 
 /**
  * なろう小説APIへのリクエストを実行する
@@ -33,36 +21,39 @@ export default class NarouNovel {
    * @param endpoint APIエンドポイント
    * @returns {Promise<NarouSearchResults>} 検索結果
    */
-  static async execute<T>(
-    params: any,
+  static async execute(
+    params: NarouParams,
     endpoint = "http://api.syosetu.com/novelapi/api/"
-  ): Promise<[T, any]> {
-    let query = Object.assign(params, { out: "json" });
+  ): Promise<any> {
+    const query = { ...params, out: "json" };
 
-    let requestObject: AxiosRequestConfig = {
-      method: "GET",
-      url: endpoint,
-      params: query
-    };
+    if (query.gzip === undefined) {
+      query.gzip = 5;
+    }
+    const url = new URL(endpoint);
 
-    if (isNode) {
-      if (query.gzip && query.gzip != 0) {
-        query.gzip = defaultGzipLevel;
+    Object.entries(query).forEach(([key, value]) => {
+      if (value) {
+        url.searchParams.append(key, value.toString());
       }
+    });
 
-      if (query.gzip) {
-        requestObject = Object.assign(requestObject, {
-          responseType: "stream"
-        });
-      }
-    } else {
-      delete query.gzip;
+    const res = await fetch(url);
+
+    if (query.gzip === 0) {
+      return await res.json();
     }
 
-    let response = await axios.request(requestObject);
-    let result = response.data;
-
-    return result;
+    const buffer = await res.buffer();
+    try {
+      return await unzipp(buffer);
+    } catch {
+      try {
+        return JSON.stringify(buffer.toString());
+      } catch {
+        return buffer.toString();
+      }
+    }
   }
 
   static async executeSearch(
@@ -72,20 +63,20 @@ export default class NarouNovel {
     return new NarouSearchResults(await this.execute(params, endpoint), params);
   }
 
-  static executeNovel(params: SearchParams) {
+  static executeNovel(params: SearchParams): Promise<NarouSearchResults> {
     return this.executeSearch(params, "http://api.syosetu.com/novelapi/api/");
   }
 
-  static executeNovel18(params: SearchParams) {
+  static executeNovel18(params: SearchParams): Promise<NarouSearchResults> {
     return this.executeSearch(params, "http://api.syosetu.com/novel18api/api/");
   }
 
-  static executeRanking(params: any): Promise<NarouRankingResult[]> {
+  static executeRanking(params: RankingParams): Promise<NarouRankingResult[]> {
     return this.execute(params, "http://api.syosetu.com/rank/rankget/");
   }
 
   static executeRankingHistory(
-    params: any
+    params: RankingHistoryParams
   ): Promise<RankingHistoryRawResult[]> {
     return this.execute(params, "http://api.syosetu.com/rank/rankin/");
   }

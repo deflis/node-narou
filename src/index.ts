@@ -1,8 +1,12 @@
+import NarouNovel from "./narou";
+import RankingBuilder from "./ranking";
+import { formatRankingHistory, RankingHistoryResult } from "./ranking-history";
 import SearchBuilder from "./search-builder";
 import SearchBuilderR18 from "./search-builder-r18";
-import RankingBuilder from "./ranking";
-import { RankingType } from "./ranking";
-import {
+
+export { NarouNovel, RankingHistoryResult };
+export { RankingType } from "./ranking";
+export {
   Fields,
   Order,
   BigGenre,
@@ -12,14 +16,8 @@ import {
   R18Site,
   R18SiteNotation
 } from "./params";
-import NarouNovel, { axios } from "./narou";
-import { NarouSearchResult } from "./narou-search-results";
-import { NarouRankingResult, RankingResult } from "./narou-ranking-results";
-import {
-  RankingHistoryRawResult,
-  RankingHistoryResult,
-  formatRankingHistory
-} from "./ranking-history";
+export { NarouSearchResult } from "./narou-search-results";
+export { NarouRankingResult, RankingResult } from "./narou-ranking-results";
 
 /**
  * 検索
@@ -62,28 +60,6 @@ export async function rankingHistory(
 export default {
   search,
   ranking,
-  searchR18
-};
-
-/**
- * なろうAPI
- * @global
- */
-export {
-  Fields,
-  Order,
-  RankingType,
-  NarouSearchResult,
-  NarouRankingResult,
-  RankingResult,
-  BigGenre,
-  BigGenreNotation,
-  Genre,
-  GenreNotation,
-  R18Site,
-  R18SiteNotation,
-  NarouNovel,
-  RankingHistoryRawResult,
-  RankingHistoryResult,
-  axios
+  searchR18,
+  rankingHistory
 };

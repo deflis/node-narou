@@ -1,7 +1,7 @@
+import { parse } from "date-fns";
 import { RankingType } from "./ranking";
-import * as moment from "moment";
 
-const dateFormat = "YYYYMMDD";
+const dateFormat = "yyyyMMdd";
 
 export interface RankingHistoryRawResult {
   rtype: string;
@@ -21,7 +21,7 @@ export function formatRankingHistory(
 ): RankingHistoryResult {
   const { rtype, pt, rank } = rankin;
   const [_date, _type] = rtype.split("-");
-  const date = moment(_date, dateFormat).toDate();
+  const date = parse(_date, dateFormat, new Date());
   const type = _type as RankingType;
 
   return { type, date, pt, rank };

@@ -7,16 +7,8 @@ import {
   Order,
   Buntai,
   NovelType,
-  GzipLevel
+  GzipLevel,
 } from "./params";
-
-function array2string<T>(n: T | T[]): string | T {
-  if (Array.isArray(n)) {
-    return (<string[]>(<any>n)).join("-");
-  } else {
-    return n;
-  }
-}
 
 /**
  * 検索ヘルパー
@@ -33,7 +25,7 @@ export default class SearchBuilder {
    * a
    * @return {SearchBuilder} this
    */
-  word(word: string) {
+  word(word: string): this {
     this.set({ word: word });
     return this;
   }
@@ -42,7 +34,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  notWord(word: string) {
+  notWord(word: string): this {
     this.set({ notword: word });
     return this;
   }
@@ -51,7 +43,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  byTitle(bool: boolean = true) {
+  byTitle(bool: boolean = true): this {
     this.set({ title: bool ? 1 : 0 });
     return this;
   }
@@ -60,7 +52,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  byOutline(bool: boolean = true) {
+  byOutline(bool: boolean = true): this {
     this.set({ ex: bool ? 1 : 0 });
     return this;
   }
@@ -69,7 +61,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  byKeyword(bool: boolean = true) {
+  byKeyword(bool: boolean = true): this {
     this.set({ keyword: bool ? 1 : 0 });
     return this;
   }
@@ -78,7 +70,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  byAuthor(bool: boolean = true) {
+  byAuthor(bool: boolean = true): this {
     this.set({ wname: bool ? 1 : 0 });
     return this;
   }
@@ -87,7 +79,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  bigGenre(genre: BigGenre | BigGenre[]) {
+  bigGenre(genre: BigGenre | BigGenre[]): this {
     this.set({ biggenre: array2string(genre) });
     return this;
   }
@@ -96,7 +88,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  notBigGenre(genre: BigGenre | BigGenre[]) {
+  notBigGenre(genre: BigGenre | BigGenre[]): this {
     this.set({ notbiggenre: array2string(genre) });
     return this;
   }
@@ -105,7 +97,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  genre(genre: Genre | Genre[]) {
+  genre(genre: Genre | Genre[]): this {
     this.set({ genre: array2string(genre) });
     return this;
   }
@@ -114,7 +106,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  notGenre(genre: Genre | Genre[]) {
+  notGenre(genre: Genre | Genre[]): this {
     this.set({ notgenre: array2string(genre) });
     return this;
   }
@@ -123,7 +115,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  userId(ids: number | number[]) {
+  userId(ids: number | number[]): this {
     this.set({ userid: array2string(ids) });
     return this;
   }
@@ -132,7 +124,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  isR15(bool: boolean = true) {
+  isR15(bool: boolean = true): this {
     if (bool) {
       this.set({ isr15: 1 });
     } else {
@@ -145,7 +137,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  isBL(bool: boolean = true) {
+  isBL(bool: boolean = true): this {
     if (bool) {
       this.set({ isbl: 1 });
     } else {
@@ -158,7 +150,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  isGL(bool: boolean = true) {
+  isGL(bool: boolean = true): this {
     if (bool) {
       this.set({ isgl: 1 });
     } else {
@@ -171,7 +163,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  isZankoku(bool: boolean = true) {
+  isZankoku(bool: boolean = true): this {
     if (bool) {
       this.set({ iszankoku: 1 });
     } else {
@@ -184,7 +176,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  isTensei(bool: boolean = true) {
+  isTensei(bool: boolean = true): this {
     if (bool) {
       this.set({ istensei: 1 });
     } else {
@@ -197,7 +189,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  isTenni(bool: boolean = true) {
+  isTenni(bool: boolean = true): this {
     if (bool) {
       this.set({ istenni: 1 });
     } else {
@@ -210,7 +202,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  isTT() {
+  isTT(): this {
     this.set({ istt: 1 });
     return this;
   }
@@ -219,7 +211,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  length(length: number | number[]) {
+  length(length: number | number[]): this {
     this.set({ length: array2string(length) });
     return this;
   }
@@ -231,7 +223,7 @@ export default class SearchBuilder {
   kaiwaritu(num: number): this;
   kaiwaritu(min: number, max: number): this;
 
-  kaiwaritu(min: number, max?: number) {
+  kaiwaritu(min: number, max?: number): this {
     let n: number | string;
     if (max != null) {
       n = `${min}-${max}`;
@@ -246,7 +238,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  sasie(num: number | number[]) {
+  sasie(num: number | number[]): this {
     this.set({ sasie: array2string(num) });
     return this;
   }
@@ -255,7 +247,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  time(num: number | number[]) {
+  time(num: number | number[]): this {
     this.set({ time: array2string(num) });
     return this;
   }
@@ -264,7 +256,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  ncode(ncodes: string | string[]) {
+  ncode(ncodes: string | string[]): this {
     this.set({ ncode: array2string(ncodes) });
     return this;
   }
@@ -273,7 +265,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  type(type: NovelType) {
+  type(type: NovelType): this {
     this.set({ type });
     return this;
   }
@@ -282,7 +274,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  buntai(buntai: Buntai | Buntai[]) {
+  buntai(buntai: Buntai | Buntai[]): this {
     this.set({ buntai: array2string(buntai) });
     return this;
   }
@@ -291,7 +283,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  isStop(bool: boolean = true) {
+  isStop(bool: boolean = true): this {
     this.set({ stop: bool ? 1 : 0 });
     return this;
   }
@@ -300,7 +292,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  isPickup(bool: boolean = true) {
+  isPickup(bool: boolean = true): this {
     this.set({ ispickup: bool ? 1 : 0 });
     return this;
   }
@@ -313,7 +305,7 @@ export default class SearchBuilder {
   lastUpdate(from: number, to: number): this;
   lastUpdate(from: Date, to: Date): this;
 
-  lastUpdate(x: string | number | Date, y?: number | Date) {
+  lastUpdate(x: string | number | Date, y?: number | Date): this {
     let date: string;
     if (typeof x == "string") {
       date = x;
@@ -333,15 +325,8 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  fields(fields: Fields | Fields[]) {
-    let of: string;
-    if (Array.isArray(fields)) {
-      of = fields.join("-");
-    } else {
-      of = fields;
-    }
-    of = of.toLowerCase();
-    this.set({ of: of });
+  fields(fields: Fields | Fields[]): this {
+    this.set({ of: array2string(fields) });
     return this;
   }
 
@@ -349,7 +334,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  limit(num: number) {
+  limit(num: number): this {
     this.set({ lim: num });
     return this;
   }
@@ -358,7 +343,7 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  start(num: number) {
+  start(num: number): this {
     this.set({ st: num });
     return this;
   }
@@ -367,11 +352,11 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  page(no: number, count: number = 20) {
+  page(no: number, count: number = 20): this {
     return this.limit(count).start(no * count);
   }
 
-  opt(option: "weekly" | undefined) {
+  opt(option: "weekly" | undefined): this {
     return this.set({ opt: option });
   }
 
@@ -396,7 +381,7 @@ export default class SearchBuilder {
    * @param {Order} order 出力順序
    * @return {SearchBuilder} this
    */
-  order(order: Order) {
+  order(order: Order): this {
     this.set({ order: order });
     return this;
   }
@@ -408,7 +393,7 @@ export default class SearchBuilder {
    * @param {GzipLevel} level gzip圧縮レベル(1～5)
    * @return {SearchBuilder} this
    */
-  gzip(level: GzipLevel) {
+  gzip(level: GzipLevel): this {
     this.set({ gzip: level });
     return this;
   }
@@ -418,8 +403,18 @@ export default class SearchBuilder {
    * @private
    * @return {SearchBuilder} this
    */
-  protected set(obj: SearchParams) {
-    Object.assign(this.params, obj);
+  protected set(obj: SearchParams): this {
+    this.params = { ...this.params, ...obj };
+    return this;
+  }
+
+  /**
+   * クエリパラメータを削除する
+   * @private
+   * @return {SearchBuilder} this
+   */
+  protected unset(key: keyof SearchParams): this {
+    delete this.params[key];
     return this;
   }
 
@@ -429,5 +424,17 @@ export default class SearchBuilder {
    */
   execute(): Promise<INarouSearchResults> {
     return api.executeNovel(this.params);
+  }
+}
+
+function distinct<T>(array: T[]): T[] {
+  return Array.from(new Set(array));
+}
+
+function array2string<T extends string | number>(n: T | T[]): string {
+  if (Array.isArray(n)) {
+    return distinct(n).join("-");
+  } else {
+    return n.toString();
   }
 }

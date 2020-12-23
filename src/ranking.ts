@@ -1,9 +1,9 @@
 import api from "./narou";
-import * as moment from "moment";
-import { Moment } from "moment";
 import { NarouRankingResult, RankingResult } from "./narou-ranking-results";
 import { Fields } from "./index";
 import SearchBuilder from "./search-builder";
+import { addDays, format } from "date-fns";
+import { RankingParams } from "./params";
 
 export enum RankingType {
   Daily = "d",
@@ -12,33 +12,31 @@ export enum RankingType {
   Quarterly = "q"
 }
 
+const dateFormat = "yyyyMMdd";
+
 /**
  * ランキングヘルパー
  * @class Ranking
  */
 export default class RankingBuilder {
-  protected date$: Moment;
+  protected date$: Date;
   protected type$: RankingType;
 
   /**
    * constructor
    * @private
    */
-  constructor(protected params = {}) {
+  constructor(protected params: Partial<RankingParams> = {}) {
     /**
      * クエリパラメータ
      * @protected
      */
-    this.date$ = moment().days(-1);
+    this.date$ = addDays(Date.now(), -1);
     this.type$ = RankingType.Daily;
   }
 
-  date(date: Date | Moment) {
-    if (date instanceof Date) {
-      this.date$ = moment(date);
-    } else {
-      this.date$ = date;
-    }
+  date(date: Date) {
+    this.date$ = date;
     return this;
   }
 
@@ -74,49 +72,36 @@ export default class RankingBuilder {
    * @returns ランキング
    */
   execute(): Promise<NarouRankingResult[]> {
-    const date = this.date$.format("YYYYMMDD");
+    const date = format(this.date$, dateFormat);
     this.set({ rtype: `${date}-${this.type$}` });
-    return api.executeRanking(this.params);
+    return api.executeRanking(this.params as RankingParams);
   }
 
   async executeWithFields(
-    fields: Fields | Fields[] = []
+    fields: Fields | Fields[] = [],
+    opt?: "weekly"
   ): Promise<RankingResult[]> {
-    const result = await this.execute();
-    const fields$: Fields[] = (Array.isArray(fields)
+    const ranking = await this.execute();
+    const fields$: Fields[] = Array.isArray(fields)
       ? fields.length == 0
         ? []
-        : fields.concat(Fields.ncode)
-      : [fields, Fields.ncode]
-    ).filter((x, i, self) => self.indexOf(x) === i);
+        : [...fields, Fields.ncode]
+      : [fields, Fields.ncode];
 
-    const rankingWithFields: Promise<RankingResult[]>[] = arrayNgrouped(
-      result
-    ).map(async ranking => {
-      const rankingNcodes = ranking.map(({ ncode }) => ncode);
-      const builder = new SearchBuilder();
-      builder.fields(fields$);
-      builder.ncode(rankingNcodes);
-      builder.limit(ranking.length);
-      const result = await builder.execute();
+    const rankingNcodes = ranking.map(({ ncode }) => ncode);
+    const builder = new SearchBuilder();
+    builder.fields(fields$);
+    if (opt) {
+      builder.opt(opt);
+    }
+    builder.ncode(rankingNcodes);
+    builder.limit(ranking.length);
+    const result = await builder.execute();
 
-      return ranking.map(r =>
-        Object.assign(
-          r,
-          result.values.find(novel => novel.ncode == r.ncode)
-        )
-      );
-    });
-
-    return (await Promise.all(rankingWithFields)).reduce((a, b) => a.concat(b));
+    // TODO: 型的にはNull許容ではないが許容しているのでなんとかする（削除されている小説がある）
+    return ranking.map<RankingResult>(r => ({
+      ...r,
+      ...(result.values.find(novel => novel.ncode == r.ncode) ?? ({} as any))
+    }));
   }
-}
-
-function arrayNgrouped<T>(arr: T[], n: number = 500): T[][] {
-  const result: T[][] = [];
-  const arr$ = arr.concat();
-  while (arr$.length > 0) {
-    result.push(arr$.splice(0, n));
-  }
-  return result;
 }

@@ -20,14 +20,14 @@
     "url": "https://github.com/deflis/node-narou.git"
   },
   "dependencies": {
-    "axios": "^0.19.2",
-    "moment": "^2.20.1"
+    "date-fns": "^2.16.1",
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {
     "@types/chai": "^4.1.2",
     "@types/mocha": "^5.2.7",
     "@types/node": "^13.5.0",
-    "axios-mock-adapter": "^1.12.0",
+    "@types/node-fetch": "^2.5.7",
     "chai": "^4.1.2",
     "husky": "^4.2.1",
     "lint-staged": "^10.0.2",
