@@ -7,7 +7,7 @@ import {
   Order,
   Buntai,
   NovelType,
-  GzipLevel,
+  GzipLevel
 } from "./params";
 
 /**
