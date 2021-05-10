@@ -3,7 +3,7 @@
  * @class NarouSearchResults
  */
 
-import { SearchParams } from "./params";
+import { booleanNumber, Genre, R18Site, SearchParams } from "./params";
 
 export default class NarouSearchResults {
   allcount: number;
@@ -93,23 +93,24 @@ export interface NarouSearchResult {
   userid: number;
   writer: string;
   story: string;
-  genre: number;
+  nocgenre: R18Site;
+  genre: Genre;
   keyword: string;
   general_firstup: string;
   general_lastup: string;
   novel_type: number;
   noveltype: number;
-  end: number;
+  end: booleanNumber;
   general_all_no: number;
   length: number;
   time: number;
-  isstop: number;
-  isr15: number;
-  isbl: number;
-  isgl: number;
-  iszankoku: number;
-  istensei: number;
-  istenni: number;
+  isstop: booleanNumber;
+  isr15: booleanNumber;
+  isbl: booleanNumber;
+  isgl: booleanNumber;
+  iszankoku: booleanNumber;
+  istensei: booleanNumber;
+  istenni: booleanNumber;
   pc_or_k: number;
   global_point: number;
   daily_point: number;
