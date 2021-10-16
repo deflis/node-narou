@@ -1,4 +1,3 @@
-import api from "./narou";
 import SearchBuilder from "./search-builder";
 import INarouSearchResults from "./narou-search-results";
 import { R18Site } from "./params";
@@ -14,7 +13,7 @@ export default class SearchBuilderR18 extends SearchBuilder {
    * @returns {Promise<INarouSearchResults>} 検索結果
    */
   execute(): Promise<INarouSearchResults> {
-    return api.executeNovel18(this.params);
+    return this.api.executeNovel18(this.params);
   }
 
   r18Site(sites: R18Site | R18Site[]) {

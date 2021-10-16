@@ -132,7 +132,7 @@ export enum Fields {
   sasie_cnt = "sa",
   kaiwaritu = "ka",
   novelupdated_at = "nu",
-  updated_at = "ua"
+  updated_at = "ua",
 }
 
 /*
@@ -174,21 +174,21 @@ export enum Order {
   WeeklyPoint = "weeklypoint",
   MonthlyPoint = "monthlypoint",
   QuarterPoint = "quarterpoint",
-  YearlyPoint = "yearlypoint"
+  YearlyPoint = "yearlypoint",
 }
 
 export enum R18Site {
   Nocturne = 1,
   MoonLight = 2,
   MoonLightBL = 3,
-  Midnight = 4
+  Midnight = 4,
 }
 
 export enum R18SiteNotation {
   "ノクターンノベルズ(男性向け)" = R18Site.Nocturne,
   "ムーンライトノベルズ(女性向け)" = R18Site.MoonLight,
   "ムーンライトノベルズ(BL)" = R18Site.MoonLightBL,
-  "ミッドナイトノベルズ(大人向け)" = R18Site.Midnight
+  "ミッドナイトノベルズ(大人向け)" = R18Site.Midnight,
 }
 
 export enum BigGenre {
@@ -197,7 +197,7 @@ export enum BigGenre {
   Bungei = 3,
   Sf = 4,
   Sonota = 99,
-  NonGenre = 98
+  NonGenre = 98,
 }
 
 export enum BigGenreNotation {
@@ -206,7 +206,7 @@ export enum BigGenreNotation {
   "文芸" = BigGenre.Bungei,
   "SF" = BigGenre.Sf,
   "その他" = BigGenre.Sonota,
-  "ノンジャンル" = BigGenre.NonGenre
+  "ノンジャンル" = BigGenre.NonGenre,
 }
 
 export enum Genre {
@@ -230,7 +230,7 @@ export enum Genre {
   SonotaEssei = 9903,
   SonotaReplay = 9904,
   SonotaSonota = 9999,
-  NonGenre = 9801
+  NonGenre = 9801,
 }
 
 export enum GenreNotation {
@@ -254,19 +254,19 @@ export enum GenreNotation {
   "エッセイ〔その他〕" = Genre.SonotaEssei,
   "リプレイ〔その他〕" = Genre.SonotaReplay,
   "その他〔その他〕" = Genre.SonotaSonota,
-  "ノンジャンル〔ノンジャンル〕" = Genre.NonGenre
+  "ノンジャンル〔ノンジャンル〕" = Genre.NonGenre,
 }
 
 export enum Buntai {
   NoJisageKaigyouOoi = 1,
   NoJisageKaigyoHutsuu = 2,
   JisageKaigyoOoi = 4,
-  JisageKaigyoHutsuu = 6
+  JisageKaigyoHutsuu = 6,
 }
 
 export enum Stop {
   NoStopping = 1,
-  Stopping = 2
+  Stopping = 2,
 }
 
 export enum NovelType {
@@ -274,7 +274,7 @@ export enum NovelType {
   RensaiNow = "r",
   RensaiEnd = "er",
   Rensai = "re",
-  ShortAndRensai = "ter"
+  ShortAndRensai = "ter",
 }
 
 export type GzipLevel = 0 | 1 | 2 | 3 | 4 | 5;

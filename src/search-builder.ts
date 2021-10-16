@@ -1,4 +1,6 @@
+import { NarouNovel } from ".";
 import api from "./narou";
+import NarouNovelFetch from "./narou-fetch";
 import INarouSearchResults from "./narou-search-results";
 import { BigGenre, Genre } from "./params";
 import {
@@ -7,7 +9,7 @@ import {
   Order,
   Buntai,
   NovelType,
-  GzipLevel
+  GzipLevel,
 } from "./params";
 
 /**
@@ -19,7 +21,10 @@ export default class SearchBuilder {
    * constructor
    * @private
    */
-  constructor(protected params: SearchParams = {}) {}
+  constructor(
+    protected params: SearchParams = {},
+    protected api: NarouNovel = new NarouNovelFetch()
+  ) {}
 
   /**
    * a
@@ -423,7 +428,7 @@ export default class SearchBuilder {
    * @returns {Promise<NarouSearchResults>} 検索結果
    */
   execute(): Promise<INarouSearchResults> {
-    return api.executeNovel(this.params);
+    return this.api.executeNovel(this.params);
   }
 }
 

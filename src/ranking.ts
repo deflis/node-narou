@@ -1,15 +1,16 @@
-import api from "./narou";
 import { NarouRankingResult, RankingResult } from "./narou-ranking-results";
 import { Fields } from "./index";
 import SearchBuilder from "./search-builder";
 import { addDays, format } from "date-fns";
 import { RankingParams } from "./params";
+import NarouNovel from "./narou";
+import NarouNovelFetch from "./narou-fetch";
 
 export enum RankingType {
   Daily = "d",
   Weekly = "w",
   Monthly = "m",
-  Quarterly = "q"
+  Quarterly = "q",
 }
 
 const dateFormat = "yyyyMMdd";
@@ -26,7 +27,10 @@ export default class RankingBuilder {
    * constructor
    * @private
    */
-  constructor(protected params: Partial<RankingParams> = {}) {
+  constructor(
+    protected params: Partial<RankingParams> = {},
+    protected api: NarouNovel = new NarouNovelFetch()
+  ) {
     /**
      * クエリパラメータ
      * @protected
@@ -74,7 +78,7 @@ export default class RankingBuilder {
   execute(): Promise<NarouRankingResult[]> {
     const date = format(this.date$, dateFormat);
     this.set({ rtype: `${date}-${this.type$}` });
-    return api.executeRanking(this.params as RankingParams);
+    return this.api.executeRanking(this.params as RankingParams);
   }
 
   async executeWithFields(
@@ -89,7 +93,7 @@ export default class RankingBuilder {
       : [fields, Fields.ncode];
 
     const rankingNcodes = ranking.map(({ ncode }) => ncode);
-    const builder = new SearchBuilder();
+    const builder = new SearchBuilder({}, this.api);
     builder.fields(fields$);
     if (opt) {
       builder.opt(opt);
@@ -99,9 +103,9 @@ export default class RankingBuilder {
     const result = await builder.execute();
 
     // TODO: 型的にはNull許容ではないが許容しているのでなんとかする（削除されている小説がある）
-    return ranking.map<RankingResult>(r => ({
+    return ranking.map<RankingResult>((r) => ({
       ...r,
-      ...(result.values.find(novel => novel.ncode == r.ncode) ?? ({} as any))
+      ...(result.values.find((novel) => novel.ncode == r.ncode) ?? ({} as any)),
     }));
   }
 }
