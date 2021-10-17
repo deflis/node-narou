@@ -29,7 +29,7 @@ export default class RankingBuilder {
    */
   constructor(
     protected params: Partial<RankingParams> = {},
-    protected api: NarouNovel = new NarouNovelFetch()
+    protected api: NarouNovel
   ) {
     /**
      * クエリパラメータ
@@ -54,7 +54,7 @@ export default class RankingBuilder {
    *
    * 転送量上限を減らすためにも推奨
    * @param {number} level gzip圧縮レベル(1～5)
-   * @return {SearchBuilder} this
+   * @return {RankingBuilder} this
    */
   gzip(level: number) {
     this.set({ gzip: level });
@@ -64,7 +64,7 @@ export default class RankingBuilder {
   /**
    * クエリパラメータをセットする
    * @private
-   * @return {SearchBuilder} this
+   * @return {RankingBuilder} this
    */
   protected set(obj: any) {
     Object.assign(this.params, obj);

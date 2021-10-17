@@ -1,4 +1,4 @@
-import NarouNovelJsonp from "./narou-fetch";
+import NarouNovelJsonp from "./narou-jsonp";
 import NarouNovel from "./narou";
 import SearchBuilder from "./search-builder";
 import SearchBuilderR18 from "./search-builder-r18";
