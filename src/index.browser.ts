@@ -1,15 +1,14 @@
+import NarouNovelJsonp from "./narou-fetch";
 import NarouNovel from "./narou";
-import NarouNovelFetch from "./narou-fetch";
-import NarouNovelJsonp from "./narou-jsonp";
-import RankingBuilder from "./ranking";
-import { formatRankingHistory, RankingHistoryResult } from "./ranking-history";
 import SearchBuilder from "./search-builder";
 import SearchBuilderR18 from "./search-builder-r18";
+import RankingBuilder from "./ranking";
+import { formatRankingHistory, RankingHistoryResult } from "./ranking-history";
 
 export * from "./index.common";
-export { NarouNovelFetch, NarouNovelJsonp };
+export { NarouNovelJsonp };
 
-const narouNovelFetch = new NarouNovelFetch();
+const narouNovelJsonp = new NarouNovelJsonp();
 
 /**
  * 検索
@@ -18,7 +17,7 @@ const narouNovelFetch = new NarouNovelFetch();
  */
 export function search(
   word: string = "",
-  api: NarouNovel = narouNovelFetch
+  api: NarouNovel = narouNovelJsonp
 ): SearchBuilder {
   const builder = new SearchBuilder({}, api);
   if (word != "") builder.word(word);
@@ -32,21 +31,21 @@ export function search(
  */
 export function searchR18(
   word: string = "",
-  api: NarouNovel = narouNovelFetch
+  api: NarouNovel = narouNovelJsonp
 ): SearchBuilderR18 {
   const builder = new SearchBuilderR18({}, api);
   if (word != "") builder.word(word);
   return builder;
 }
 
-export function ranking(api: NarouNovel = narouNovelFetch): RankingBuilder {
+export function ranking(api: NarouNovel = narouNovelJsonp): RankingBuilder {
   const builder = new RankingBuilder({}, api);
   return builder;
 }
 
 export async function rankingHistory(
   ncode: string,
-  api: NarouNovel = narouNovelFetch
+  api: NarouNovel = narouNovelJsonp
 ): Promise<RankingHistoryResult[]> {
   const result = await api.executeRankingHistory({ ncode });
   if (Array.isArray(result)) {

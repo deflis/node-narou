@@ -21,10 +21,7 @@ export default class SearchBuilder {
    * constructor
    * @private
    */
-  constructor(
-    protected params: SearchParams = {},
-    protected api: NarouNovel = new NarouNovelFetch()
-  ) {}
+  constructor(protected params: SearchParams = {}, protected api: NarouNovel) {}
 
   /**
    * a
