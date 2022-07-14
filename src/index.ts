@@ -17,7 +17,7 @@ const narouNovelFetch = new NarouNovelFetch();
  * @returns {SearchBuilder}
  */
 export function search(
-  word: string = "",
+  word = "",
   api: NarouNovel = narouNovelFetch
 ): SearchBuilder {
   const builder = new SearchBuilder({}, api);
@@ -31,7 +31,7 @@ export function search(
  * @returns {SearchBuilder}
  */
 export function searchR18(
-  word: string = "",
+  word = "",
   api: NarouNovel = narouNovelFetch
 ): SearchBuilderR18 {
   const builder = new SearchBuilderR18({}, api);

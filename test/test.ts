@@ -1,18 +1,13 @@
-// LICENSE : MIT
-"use strict";
-import "source-map-support/register";
-import { assert } from "chai";
-
 import NarouAPI, { Fields } from "../src/";
 
 describe("narou-test", () => {
-  context("search", () => {
+  describe("search", () => {
     it("if limit = 1 then length = 1", async () => {
       const result = await NarouAPI.search()
         .limit(1)
         .fields([Fields.ncode])
         .execute();
-      assert(result.values.length === 1);
+      expect(result.values.length === 1).toBeTruthy();
     });
     it("if gzip = 0", async () => {
       const result = await NarouAPI.search()
@@ -20,33 +15,32 @@ describe("narou-test", () => {
         .fields([Fields.ncode])
         .gzip(0)
         .execute();
-      assert(result.values.length === 1);
+      expect(result.values.length === 1).toBeTruthy();
     });
   });
-  context("ranking", () => {
+  describe("ranking", () => {
     it("2020/01/01 is length 300", async () => {
       const result = await NarouAPI.ranking()
         .date(new Date(2020, 1, 1))
         .execute();
-      assert(result.length === 300);
+      expect(result.length === 300).toBeTruthy();
     });
     it("2020/01/01 with fields is length 300", async () => {
       const result = await NarouAPI.ranking()
         .date(new Date(2020, 1, 1))
         .executeWithFields([Fields.ncode]);
-      assert(result.length === 300);
+      expect(result.length === 300).toBeTruthy();
     });
   });
-  context("history", () => {
+  describe("history", () => {
     it("Error: Novel not found.", async () => {
-      try {
-        await NarouAPI.rankingHistory("n4444ge");
-        assert.fail();
-      } catch {}
+      await expect(
+        async () => await NarouAPI.rankingHistory("n0000a")
+      ).rejects.toBe("Error: Novel not found.");
     });
     it("n4444ge", async () => {
       const result = await NarouAPI.rankingHistory("n4444ge");
-      assert.isArray(result);
+      expect(Array.isArray(result)).toBe(true);
     });
   });
 });

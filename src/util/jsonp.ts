@@ -18,6 +18,8 @@ export type JsonpOption = {
   param?: string;
   timeout?: number;
 };
+
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = function () {};
 
 export function jsonp<T>(

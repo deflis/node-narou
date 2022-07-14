@@ -67,7 +67,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    *
    * @return {SearchBuilder} this
    */
-  byTitle(bool: boolean = true): this {
+  byTitle(bool = true): this {
     this.set({ title: bool ? BooleanNumber.True : BooleanNumber.False });
     return this;
   }
@@ -76,7 +76,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    *
    * @return {SearchBuilder} this
    */
-  byOutline(bool: boolean = true): this {
+  byOutline(bool = true): this {
     this.set({ ex: bool ? BooleanNumber.True : BooleanNumber.False });
     return this;
   }
@@ -85,7 +85,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    *
    * @return {SearchBuilder} this
    */
-  byKeyword(bool: boolean = true): this {
+  byKeyword(bool = true): this {
     this.set({ keyword: bool ? BooleanNumber.True : BooleanNumber.False });
     return this;
   }
@@ -94,7 +94,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    *
    * @return {SearchBuilder} this
    */
-  byAuthor(bool: boolean = true): this {
+  byAuthor(bool = true): this {
     this.set({ wname: bool ? BooleanNumber.True : BooleanNumber.False });
     return this;
   }
@@ -103,7 +103,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    *
    * @return {SearchBuilder} this
    */
-  isBL(bool: boolean = true): this {
+  isBL(bool = true): this {
     if (bool) {
       this.set({ isbl: BooleanNumber.True });
     } else {
@@ -116,7 +116,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    *
    * @return {SearchBuilder} this
    */
-  isGL(bool: boolean = true): this {
+  isGL(bool = true): this {
     if (bool) {
       this.set({ isgl: BooleanNumber.True });
     } else {
@@ -129,7 +129,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    *
    * @return {SearchBuilder} this
    */
-  isZankoku(bool: boolean = true): this {
+  isZankoku(bool = true): this {
     if (bool) {
       this.set({ iszankoku: BooleanNumber.True });
     } else {
@@ -142,7 +142,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    *
    * @return {SearchBuilder} this
    */
-  isTensei(bool: boolean = true): this {
+  isTensei(bool = true): this {
     if (bool) {
       this.set({ istensei: BooleanNumber.True });
     } else {
@@ -155,7 +155,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    *
    * @return {SearchBuilder} this
    */
-  isTenni(bool: boolean = true): this {
+  isTenni(bool = true): this {
     if (bool) {
       this.set({ istenni: BooleanNumber.True });
     } else {
@@ -249,7 +249,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    *
    * @return {SearchBuilder} this
    */
-  isStop(bool: boolean = true): this {
+  isStop(bool = true): this {
     this.set({ stop: bool ? Stop.Stopping : Stop.NoStopping });
     return this;
   }
@@ -258,7 +258,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    *
    * @return {SearchBuilder} this
    */
-  isPickup(bool: boolean = true): this {
+  isPickup(bool = true): this {
     this.set({ ispickup: bool ? BooleanNumber.True : BooleanNumber.False });
     return this;
   }
@@ -309,7 +309,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    *
    * @return {SearchBuilder} this
    */
-  page(no: number, count: number = 20): this {
+  page(no: number, count = 20): this {
     return this.limit(count).start(no * count);
   }
 
@@ -437,7 +437,7 @@ export default class SearchBuilder<
    *
    * @return {SearchBuilder} this
    */
-  isR15(bool: boolean = true): this {
+  isR15(bool = true): this {
     if (bool) {
       this.set({ isr15: 1 });
     } else {

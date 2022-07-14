@@ -24,21 +24,19 @@
     "date-fns": "^2.16.1"
   },
   "devDependencies": {
-    "@types/chai": "^4.1.2",
-    "@types/mocha": "^5.2.7",
+    "@types/jest": "^28.1.5",
     "@types/node": "^13.5.0",
     "@types/node-fetch": "^2.5.7",
-    "chai": "^4.1.2",
-    "mocha": "^9.1.3",
-    "mocha-typescript": "^1.1.12",
+    "@typescript-eslint/eslint-plugin": "^5.30.6",
+    "@typescript-eslint/parser": "^5.30.6",
+    "eslint": "^8.19.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "jest": "^28.1.3",
     "node-fetch": "^2.6.1",
     "npm-run-all": "^4.1.4",
-    "nyc": "^15.0.0",
-    "prettier": "^2.4.1",
-    "ts-node": "^10.3.0",
-    "tslint": "^6.0.0",
-    "tslint-config-prettier": "^1.16.0",
-    "tslint-plugin-prettier": "^2.0.1",
+    "prettier": "^2.7.1",
+    "ts-jest": "^28.0.6",
     "typescript": "^4.7.4"
   },
   "optionalDependencies": {
@@ -51,35 +49,15 @@
     "build:tsc:esm": "tsc -p ./tsconfig.esm.json",
     "build:tsc:es2017": "tsc -p ./tsconfig.es2017.json",
     "check": "npm-run-all --parallel check:lint check:build test",
-    "check:lint": "tslint --project .",
+    "check:lint": "eslint src/** test/**",
     "check:build": "tsc --noEmit",
     "prepare": "npm-run-all format build",
-    "format": "npm-run-all format:prettier format:tslint",
-    "format:prettier": "prettier --write src/**/*.ts",
-    "format:tslint": "tslint --project . --fix",
-    "test": "mocha --recursive --require ts-node/register \"test/**/*.ts\"",
-    "cover": "nyc mocha --recursive --require ts-node/register \"test/**/*.ts\"",
+    "format": "eslint --fix src/** test/**",
+    "test": "jest",
     "clean": "npx rimraf dist dist.*",
     "docs": "npm-run-all docs:clean docs:typedoc docs:nojekyll",
     "docs:clean": "npx rimraf docs",
     "docs:typedoc": "npx typedoc --out ./docs src/index.ts",
     "docs:nojekyll": "npx touch ./docs/.nojekyll"
-  },
-  "nyc": {
-    "include": [
-      "src/**/*.js"
-    ],
-    "extension": [
-      ".ts"
-    ],
-    "require": [
-      "ts-node/register"
-    ],
-    "reporter": [
-      "json",
-      "html",
-      "text"
-    ],
-    "sourceMap": true
   }
 }
