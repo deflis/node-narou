@@ -1,17 +1,15 @@
 import { NarouRankingResult, RankingResult } from "./narou-ranking-results";
-import { Fields } from "./index";
-import SearchBuilder from "./search-builder";
+import SearchBuilder, { DefaultSearchResultFields } from "./search-builder";
 import { addDays, format } from "date-fns";
-import { RankingParams } from "./params";
+import {
+  Fields,
+  GzipLevel,
+  OptionalFields,
+  RankingParams,
+  RankingType,
+} from "./params";
 import NarouNovel from "./narou";
-import NarouNovelFetch from "./narou-fetch";
-
-export enum RankingType {
-  Daily = "d",
-  Weekly = "w",
-  Monthly = "m",
-  Quarterly = "q",
-}
+import { SearchResultFields } from "./narou-search-results";
 
 const dateFormat = "yyyyMMdd";
 
@@ -53,10 +51,10 @@ export default class RankingBuilder {
    * gzip圧縮する。
    *
    * 転送量上限を減らすためにも推奨
-   * @param {number} level gzip圧縮レベル(1～5)
+   * @param {GzipLevel} level gzip圧縮レベル(1～5)
    * @return {RankingBuilder} this
    */
-  gzip(level: number) {
+  gzip(level: GzipLevel) {
     this.set({ gzip: level });
     return this;
   }
@@ -66,7 +64,7 @@ export default class RankingBuilder {
    * @private
    * @return {RankingBuilder} this
    */
-  protected set(obj: any) {
+  protected set(obj: Partial<RankingParams>) {
     Object.assign(this.params, obj);
     return this;
   }
@@ -81,16 +79,37 @@ export default class RankingBuilder {
     return this.api.executeRanking(this.params as RankingParams);
   }
 
+  async executeWithFields(): Promise<
+    RankingResult<DefaultSearchResultFields>[]
+  >;
+
+  async executeWithFields<TFields extends Fields>(
+    fields: TFields | TFields[]
+  ): Promise<RankingResult<SearchResultFields<TFields>>[]>;
+
   async executeWithFields(
-    fields: Fields | Fields[] = [],
-    opt?: "weekly"
-  ): Promise<RankingResult[]> {
+    fields: never[],
+    opt: OptionalFields | OptionalFields[]
+  ): Promise<RankingResult<DefaultSearchResultFields | "weekly_unique">[]>;
+
+  async executeWithFields<TFields extends Fields>(
+    fields: TFields | TFields[],
+    opt: OptionalFields | OptionalFields[]
+  ): Promise<RankingResult<SearchResultFields<TFields> | "weekly_unique">[]>;
+
+  async executeWithFields<
+    TFields extends Fields,
+    TOpt extends OptionalFields | undefined = undefined
+  >(
+    fields: TFields | TFields[] = [],
+    opt?: TOpt
+  ): Promise<RankingResult<SearchResultFields<TFields>>[]> {
     const ranking = await this.execute();
-    const fields$: Fields[] = Array.isArray(fields)
+    const fields$ = Array.isArray(fields)
       ? fields.length == 0
         ? []
-        : [...fields, Fields.ncode]
-      : [fields, Fields.ncode];
+        : ([...fields, Fields.ncode] as const)
+      : ([fields, Fields.ncode] as const);
 
     const rankingNcodes = ranking.map(({ ncode }) => ncode);
     const builder = new SearchBuilder({}, this.api);
@@ -102,10 +121,14 @@ export default class RankingBuilder {
     builder.limit(ranking.length);
     const result = await builder.execute();
 
-    // TODO: 型的にはNull許容ではないが許容しているのでなんとかする（削除されている小説がある）
-    return ranking.map<RankingResult>((r) => ({
+    return ranking.map<
+      RankingResult<
+        | SearchResultFields<TFields>
+        | (TOpt extends "weekly" ? "weekly_unique" : never)
+      >
+    >((r) => ({
       ...r,
-      ...(result.values.find((novel) => novel.ncode == r.ncode) ?? ({} as any)),
+      ...(result.values.find((novel) => novel.ncode == r.ncode) as any),
     }));
   }
 }

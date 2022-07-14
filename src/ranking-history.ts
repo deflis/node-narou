@@ -1,10 +1,10 @@
 import { parse } from "date-fns";
-import { RankingType } from "./ranking";
+import { RankingType } from "./params";
 
 const dateFormat = "yyyyMMdd";
 
 export interface RankingHistoryRawResult {
-  rtype: string;
+  rtype: `${string}-${RankingType}`;
   pt: number;
   rank: number;
 }

@@ -1,5 +1,5 @@
 import { NarouRankingResult } from "./narou-ranking-results";
-import NarouSearchResults from "./narou-search-results";
+import NarouSearchResults, { NarouSearchResult } from "./narou-search-results";
 import { RankingHistoryParams, RankingParams, SearchParams } from "./params";
 import { RankingHistoryRawResult } from "./ranking-history";
 
@@ -22,21 +22,28 @@ export default abstract class NarouNovel {
     endpoint: string
   ): Promise<T>;
 
-  async executeSearch(
+  async executeSearch<T extends keyof NarouSearchResult>(
     params: NarouParams,
     endpoint = "http://api.syosetu.com/novelapi/api/"
-  ): Promise<NarouSearchResults> {
-    return new NarouSearchResults(await this.execute(params, endpoint), params);
+  ): Promise<NarouSearchResults<T>> {
+    return new NarouSearchResults<T>(
+      await this.execute(params, endpoint),
+      params
+    );
   }
 
-  async executeNovel(params: SearchParams): Promise<NarouSearchResults> {
+  async executeNovel<T extends keyof NarouSearchResult>(
+    params: SearchParams
+  ): Promise<NarouSearchResults<T>> {
     return await this.executeSearch(
       params,
       "http://api.syosetu.com/novelapi/api/"
     );
   }
 
-  async executeNovel18(params: SearchParams): Promise<NarouSearchResults> {
+  async executeNovel18<T extends keyof NarouSearchResult>(
+    params: SearchParams
+  ): Promise<NarouSearchResults<T>> {
     return await this.executeSearch(
       params,
       "http://api.syosetu.com/novel18api/api/"

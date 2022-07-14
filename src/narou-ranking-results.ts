@@ -1,4 +1,6 @@
-import { NarouSearchResult } from "./narou-search-results";
+import { PickedNarouSearchResult } from "./narou-search-results";
+import { SearchResultFieldNames } from "./params";
+import { DefaultSearchResultFields } from "./search-builder";
 
 export interface NarouRankingResult {
   ncode: string;
@@ -6,4 +8,6 @@ export interface NarouRankingResult {
   pt: number;
 }
 
-export interface RankingResult extends NarouSearchResult, NarouRankingResult {}
+export type RankingResult<
+  T extends SearchResultFieldNames = DefaultSearchResultFields
+> = Partial<PickedNarouSearchResult<T>> & NarouRankingResult;

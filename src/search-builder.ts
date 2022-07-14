@@ -1,27 +1,49 @@
-import { NarouNovel } from ".";
-import api from "./narou";
-import NarouNovelFetch from "./narou-fetch";
-import INarouSearchResults from "./narou-search-results";
-import { BigGenre, Genre } from "./params";
+import NarouNovel from "./narou";
 import {
+  NarouSearchResult,
+  SearchResultFields,
+  SerachResultOptionalFields,
+} from "./narou-search-results";
+import NarouSearchResults from "./narou-search-results";
+import {
+  BigGenre,
+  BooleanNumber,
+  SearchResultFieldNames,
+  Genre,
+  Stop,
   SearchParams,
   Fields,
   Order,
   Buntai,
   NovelType,
   GzipLevel,
+  OptionalFields,
 } from "./params";
+import { Join } from "./util/type";
 
-/**
- * 検索ヘルパー
- * @class SearchBuilder
- */
-export default class SearchBuilder {
+export type DefaultSearchResultFields = keyof Omit<
+  NarouSearchResult,
+  "weekly_unique" | "noveltype" | "nocgenre" | "xid"
+>;
+
+export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
   /**
    * constructor
    * @private
    */
   constructor(protected params: SearchParams = {}, protected api: NarouNovel) {}
+
+  static distinct<T>(array: T[]): T[] {
+    return Array.from(new Set(array));
+  }
+
+  static array2string<T extends string | number>(n: T | readonly T[]): Join<T> {
+    if (Array.isArray(n)) {
+      return this.distinct(n).join("-") as Join<T>;
+    } else {
+      return n.toString() as Join<T>;
+    }
+  }
 
   /**
    * a
@@ -46,7 +68,7 @@ export default class SearchBuilder {
    * @return {SearchBuilder} this
    */
   byTitle(bool: boolean = true): this {
-    this.set({ title: bool ? 1 : 0 });
+    this.set({ title: bool ? BooleanNumber.True : BooleanNumber.False });
     return this;
   }
 
@@ -55,7 +77,7 @@ export default class SearchBuilder {
    * @return {SearchBuilder} this
    */
   byOutline(bool: boolean = true): this {
-    this.set({ ex: bool ? 1 : 0 });
+    this.set({ ex: bool ? BooleanNumber.True : BooleanNumber.False });
     return this;
   }
 
@@ -64,7 +86,7 @@ export default class SearchBuilder {
    * @return {SearchBuilder} this
    */
   byKeyword(bool: boolean = true): this {
-    this.set({ keyword: bool ? 1 : 0 });
+    this.set({ keyword: bool ? BooleanNumber.True : BooleanNumber.False });
     return this;
   }
 
@@ -73,65 +95,7 @@ export default class SearchBuilder {
    * @return {SearchBuilder} this
    */
   byAuthor(bool: boolean = true): this {
-    this.set({ wname: bool ? 1 : 0 });
-    return this;
-  }
-
-  /**
-   *
-   * @return {SearchBuilder} this
-   */
-  bigGenre(genre: BigGenre | BigGenre[]): this {
-    this.set({ biggenre: array2string(genre) });
-    return this;
-  }
-
-  /**
-   *
-   * @return {SearchBuilder} this
-   */
-  notBigGenre(genre: BigGenre | BigGenre[]): this {
-    this.set({ notbiggenre: array2string(genre) });
-    return this;
-  }
-
-  /**
-   *
-   * @return {SearchBuilder} this
-   */
-  genre(genre: Genre | Genre[]): this {
-    this.set({ genre: array2string(genre) });
-    return this;
-  }
-
-  /**
-   *
-   * @return {SearchBuilder} this
-   */
-  notGenre(genre: Genre | Genre[]): this {
-    this.set({ notgenre: array2string(genre) });
-    return this;
-  }
-
-  /**
-   *
-   * @return {SearchBuilder} this
-   */
-  userId(ids: number | number[]): this {
-    this.set({ userid: array2string(ids) });
-    return this;
-  }
-
-  /**
-   *
-   * @return {SearchBuilder} this
-   */
-  isR15(bool: boolean = true): this {
-    if (bool) {
-      this.set({ isr15: 1 });
-    } else {
-      this.set({ notr15: 1 });
-    }
+    this.set({ wname: bool ? BooleanNumber.True : BooleanNumber.False });
     return this;
   }
 
@@ -141,9 +105,9 @@ export default class SearchBuilder {
    */
   isBL(bool: boolean = true): this {
     if (bool) {
-      this.set({ isbl: 1 });
+      this.set({ isbl: BooleanNumber.True });
     } else {
-      this.set({ notbl: 1 });
+      this.set({ notbl: BooleanNumber.True });
     }
     return this;
   }
@@ -154,9 +118,9 @@ export default class SearchBuilder {
    */
   isGL(bool: boolean = true): this {
     if (bool) {
-      this.set({ isgl: 1 });
+      this.set({ isgl: BooleanNumber.True });
     } else {
-      this.set({ notgl: 1 });
+      this.set({ notgl: BooleanNumber.True });
     }
     return this;
   }
@@ -167,9 +131,9 @@ export default class SearchBuilder {
    */
   isZankoku(bool: boolean = true): this {
     if (bool) {
-      this.set({ iszankoku: 1 });
+      this.set({ iszankoku: BooleanNumber.True });
     } else {
-      this.set({ notzankoku: 1 });
+      this.set({ notzankoku: BooleanNumber.True });
     }
     return this;
   }
@@ -180,9 +144,9 @@ export default class SearchBuilder {
    */
   isTensei(bool: boolean = true): this {
     if (bool) {
-      this.set({ istensei: 1 });
+      this.set({ istensei: BooleanNumber.True });
     } else {
-      this.set({ nottensei: 1 });
+      this.set({ nottensei: BooleanNumber.True });
     }
     return this;
   }
@@ -193,9 +157,9 @@ export default class SearchBuilder {
    */
   isTenni(bool: boolean = true): this {
     if (bool) {
-      this.set({ istenni: 1 });
+      this.set({ istenni: BooleanNumber.True });
     } else {
-      this.set({ nottenni: 1 });
+      this.set({ nottenni: BooleanNumber.True });
     }
     return this;
   }
@@ -205,7 +169,7 @@ export default class SearchBuilder {
    * @return {SearchBuilder} this
    */
   isTT(): this {
-    this.set({ istt: 1 });
+    this.set({ istt: BooleanNumber.True });
     return this;
   }
 
@@ -214,7 +178,7 @@ export default class SearchBuilder {
    * @return {SearchBuilder} this
    */
   length(length: number | number[]): this {
-    this.set({ length: array2string(length) });
+    this.set({ length: SearchBuilderBase.array2string(length) });
     return this;
   }
 
@@ -241,7 +205,7 @@ export default class SearchBuilder {
    * @return {SearchBuilder} this
    */
   sasie(num: number | number[]): this {
-    this.set({ sasie: array2string(num) });
+    this.set({ sasie: SearchBuilderBase.array2string(num) });
     return this;
   }
 
@@ -250,7 +214,7 @@ export default class SearchBuilder {
    * @return {SearchBuilder} this
    */
   time(num: number | number[]): this {
-    this.set({ time: array2string(num) });
+    this.set({ time: SearchBuilderBase.array2string(num) });
     return this;
   }
 
@@ -259,7 +223,7 @@ export default class SearchBuilder {
    * @return {SearchBuilder} this
    */
   ncode(ncodes: string | string[]): this {
-    this.set({ ncode: array2string(ncodes) });
+    this.set({ ncode: SearchBuilderBase.array2string(ncodes) });
     return this;
   }
 
@@ -277,7 +241,7 @@ export default class SearchBuilder {
    * @return {SearchBuilder} this
    */
   buntai(buntai: Buntai | Buntai[]): this {
-    this.set({ buntai: array2string(buntai) });
+    this.set({ buntai: SearchBuilderBase.array2string(buntai) });
     return this;
   }
 
@@ -286,7 +250,7 @@ export default class SearchBuilder {
    * @return {SearchBuilder} this
    */
   isStop(bool: boolean = true): this {
-    this.set({ stop: bool ? 1 : 0 });
+    this.set({ stop: bool ? Stop.Stopping : Stop.NoStopping });
     return this;
   }
 
@@ -295,7 +259,7 @@ export default class SearchBuilder {
    * @return {SearchBuilder} this
    */
   isPickup(bool: boolean = true): this {
-    this.set({ ispickup: bool ? 1 : 0 });
+    this.set({ ispickup: bool ? BooleanNumber.True : BooleanNumber.False });
     return this;
   }
 
@@ -327,15 +291,6 @@ export default class SearchBuilder {
    *
    * @return {SearchBuilder} this
    */
-  fields(fields: Fields | Fields[]): this {
-    this.set({ of: array2string(fields) });
-    return this;
-  }
-
-  /**
-   *
-   * @return {SearchBuilder} this
-   */
   limit(num: number): this {
     this.set({ lim: num });
     return this;
@@ -356,10 +311,6 @@ export default class SearchBuilder {
    */
   page(no: number, count: number = 20): this {
     return this.limit(count).start(no * count);
-  }
-
-  opt(option: "weekly" | undefined): this {
-    return this.set({ opt: option });
   }
 
   /**
@@ -424,19 +375,91 @@ export default class SearchBuilder {
    * なろう小説APIへの検索リクエストを実行する
    * @returns {Promise<NarouSearchResults>} 検索結果
    */
-  execute(): Promise<INarouSearchResults> {
+  execute(): Promise<NarouSearchResults<T>> {
     return this.api.executeNovel(this.params);
   }
 }
 
-function distinct<T>(array: T[]): T[] {
-  return Array.from(new Set(array));
-}
+/**
+ * 検索ヘルパー
+ * @class SearchBuilder
+ */
+export default class SearchBuilder<
+  T extends keyof NarouSearchResult = DefaultSearchResultFields,
+  TOpt extends keyof NarouSearchResult = never
+> extends SearchBuilderBase<T | TOpt> {
+  /**
+   *
+   * @return {SearchBuilder} this
+   */
+  bigGenre(genre: BigGenre | BigGenre[]): this {
+    this.set({ biggenre: SearchBuilderBase.array2string(genre) });
+    return this;
+  }
 
-function array2string<T extends string | number>(n: T | T[]): string {
-  if (Array.isArray(n)) {
-    return distinct(n).join("-");
-  } else {
-    return n.toString();
+  /**
+   *
+   * @return {SearchBuilder} this
+   */
+  notBigGenre(genre: BigGenre | BigGenre[]): this {
+    this.set({ notbiggenre: SearchBuilderBase.array2string(genre) });
+    return this;
+  }
+
+  /**
+   *
+   * @return {SearchBuilder} this
+   */
+  genre(genre: Genre | Genre[]): this {
+    this.set({ genre: SearchBuilderBase.array2string(genre) });
+    return this;
+  }
+
+  /**
+   *
+   * @return {SearchBuilder} this
+   */
+  notGenre(genre: Genre | Genre[]): this {
+    this.set({ notgenre: SearchBuilderBase.array2string(genre) });
+    return this;
+  }
+
+  /**
+   *
+   * @return {SearchBuilder} this
+   */
+  userId(ids: number | number[]): this {
+    this.set({ userid: SearchBuilderBase.array2string(ids) });
+    return this;
+  }
+
+  /**
+   *
+   * @return {SearchBuilder} this
+   */
+  isR15(bool: boolean = true): this {
+    if (bool) {
+      this.set({ isr15: 1 });
+    } else {
+      this.set({ notr15: 1 });
+    }
+    return this;
+  }
+
+  /**
+   *
+   * @return {SearchBuilder} this
+   */
+  fields<TFields extends Fields>(
+    fields: TFields | readonly TFields[]
+  ): SearchBuilder<SearchResultFields<TFields>, TOpt> {
+    this.set({ of: SearchBuilderBase.array2string(fields) });
+    return this as any;
+  }
+
+  opt<TFields extends OptionalFields>(
+    option: TFields | TFields[]
+  ): SearchBuilder<T, SerachResultOptionalFields<TFields>> {
+    return this.set({ opt: SearchBuilderBase.array2string(option) }) as any;
   }
 }

@@ -1,4 +1,13 @@
-export type booleanNumber = 0 | 1;
+import { NarouSearchResult } from "./narou-search-results";
+import { Join } from "./util/type";
+
+export const RankingType = {
+  Daily: "d",
+  Weekly: "w",
+  Monthly: "m",
+  Quarterly: "q",
+} as const;
+export type RankingType = typeof RankingType[keyof typeof RankingType];
 
 /**
  * {@link SearchBuilder#Fields}メソッドにパラメータを指定する際のヘルパー。
@@ -39,40 +48,40 @@ export interface SearchParams {
 
   word?: string;
   notword?: string;
-  title?: booleanNumber;
-  ex?: booleanNumber;
-  keyword?: booleanNumber;
-  wname?: booleanNumber;
+  title?: BooleanNumber;
+  ex?: BooleanNumber;
+  keyword?: BooleanNumber;
+  wname?: BooleanNumber;
 
-  biggenre?: string | BigGenre;
-  notbiggenre?: string | BigGenre;
-  genre?: string | Genre;
-  notgenre?: string | Genre;
-  userid?: string | number;
+  biggenre?: Join<BigGenre> | BigGenre;
+  notbiggenre?: Join<BigGenre> | BigGenre;
+  genre?: Join<Genre> | Genre;
+  notgenre?: Join<Genre> | Genre;
+  userid?: Join<number> | number;
 
-  nocgenre?: string | number;
-  notnocgenre?: string | number;
-  xid?: string | number;
+  nocgenre?: Join<R18Site> | R18Site;
+  notnocgenre?: Join<R18Site> | R18Site;
+  xid?: Join<number> | number;
 
-  isr15?: booleanNumber;
-  isbl?: booleanNumber;
-  isgl?: booleanNumber;
-  iszankoku?: booleanNumber;
-  istensei?: booleanNumber;
-  istenni?: booleanNumber;
-  istt?: booleanNumber;
+  isr15?: BooleanNumber;
+  isbl?: BooleanNumber;
+  isgl?: BooleanNumber;
+  iszankoku?: BooleanNumber;
+  istensei?: BooleanNumber;
+  istenni?: BooleanNumber;
+  istt?: BooleanNumber;
 
-  notr15?: booleanNumber;
-  notbl?: booleanNumber;
-  notgl?: booleanNumber;
-  notzankoku?: booleanNumber;
-  nottensei?: booleanNumber;
-  nottenni?: booleanNumber;
-  nottt?: booleanNumber;
+  notr15?: BooleanNumber;
+  notbl?: BooleanNumber;
+  notgl?: BooleanNumber;
+  notzankoku?: BooleanNumber;
+  nottensei?: BooleanNumber;
+  nottenni?: BooleanNumber;
+  nottt?: BooleanNumber;
 
   minlen?: number;
   maxlen?: number;
-  length?: number | string;
+  length?: number | Join<number>;
 
   kaiwaritu?: number | string;
   sasie?: number | string;
@@ -81,22 +90,22 @@ export interface SearchParams {
   maxtime?: number;
   time?: number | string;
 
-  ncode?: string;
+  ncode?: string | Join<string>;
 
   type?: NovelType;
 
-  buntai?: Buntai | string;
+  buntai?: Buntai | Join<Buntai>;
 
   stop?: Stop;
 
-  ispickup?: booleanNumber;
+  ispickup?: BooleanNumber;
   lastup?: string;
 
-  opt?: string;
+  opt?: Join<OptionalFields>;
 }
 
 export interface RankingParams {
-  rtype: string;
+  rtype: `${string}-${RankingType}`;
   gzip?: GzipLevel;
   out?: "json";
 }
@@ -107,33 +116,114 @@ export interface RankingHistoryParams {
   out?: "json";
 }
 
-export enum Fields {
-  title = "t",
-  ncode = "n",
-  userid = "u",
-  writer = "w",
-  story = "s",
-  genre = "g",
-  keyword = "k",
-  general_firstup = "gf",
-  general_lastup = "gl",
-  noveltype = "nt",
-  end = "e",
-  general_all_no = "ga",
-  length = "l",
-  time = "ti",
-  isstop = "i",
-  pc_or_k = "p",
-  global_point = "gp",
-  fav_novel_cnt = "f",
-  review_cnt = "r",
-  all_point = "a",
-  all_hyoka_cnt = "ah",
-  sasie_cnt = "sa",
-  kaiwaritu = "ka",
-  novelupdated_at = "nu",
-  updated_at = "ua",
-}
+export const BooleanNumber = {
+  True: 1,
+  False: 0,
+} as const;
+export type BooleanNumber = typeof BooleanNumber[keyof typeof BooleanNumber];
+
+export type SearchResultFieldNames = keyof NarouSearchResult;
+
+export const Fields = {
+  title: "t",
+  ncode: "n",
+  userid: "u",
+  writer: "w",
+  story: "s",
+  biggenre: "bg",
+  genre: "g",
+  nocgenre: "ng",
+  keyword: "k",
+  general_firstup: "gf",
+  general_lastup: "gl",
+  noveltype: "nt",
+  end: "e",
+  general_all_no: "ga",
+  length: "l",
+  time: "ti",
+  isstop: "i",
+  isr15: "isr",
+  isbl: "ibl",
+  isgl: "igl",
+  iszankoku: "izk",
+  istensei: "its",
+  istenni: "iti",
+  pc_or_k: "p",
+  global_point: "gp",
+  daily_point: "dp",
+  weekly_point: "wp",
+  monthly_point: "mp",
+  quarter_point: "qp",
+  yearly_point: "yp",
+  fav_novel_cnt: "f",
+  impression_cnt: "imp",
+  review_cnt: "r",
+  all_point: "a",
+  all_hyoka_cnt: "ah",
+  sasie_cnt: "sa",
+  kaiwaritu: "ka",
+  novelupdated_at: "nu",
+  updated_at: "ua",
+} as const;
+
+export type Fields = typeof Fields[keyof Omit<
+  NarouSearchResult,
+  "novel_type" | "weekly_unique" | "nocgenre"
+>];
+
+export const R18Fields = {
+  title: "t",
+  ncode: "n",
+  userid: "u",
+  writer: "w",
+  story: "s",
+  nocgenre: "ng",
+  keyword: "k",
+  general_firstup: "gf",
+  general_lastup: "gl",
+  noveltype: "nt",
+  end: "e",
+  general_all_no: "ga",
+  length: "l",
+  time: "ti",
+  isstop: "i",
+  isr15: "isr",
+  isbl: "ibl",
+  isgl: "igl",
+  iszankoku: "izk",
+  istensei: "its",
+  istenni: "iti",
+  pc_or_k: "p",
+  global_point: "gp",
+  daily_point: "dp",
+  weekly_point: "wp",
+  monthly_point: "mp",
+  quarter_point: "qp",
+  yearly_point: "yp",
+  fav_novel_cnt: "f",
+  impression_cnt: "imp",
+  review_cnt: "r",
+  all_point: "a",
+  all_hyoka_cnt: "ah",
+  sasie_cnt: "sa",
+  kaiwaritu: "ka",
+  novelupdated_at: "nu",
+  updated_at: "ua",
+} as const;
+
+export type R18Fields = typeof R18Fields[keyof Omit<
+  NarouSearchResult,
+  "novel_type" | "weekly_unique" | "biggenre" | "genre"
+>];
+
+export const OptionalFields = {
+  weekly_unique: "weekly",
+} as const;
+
+export type OptionalFields = typeof OptionalFields[keyof Pick<
+  NarouSearchResult,
+  "weekly_unique"
+>];
 
 /*
  * new	新着更新順
@@ -156,125 +246,137 @@ export enum Fields {
  * ncodedesc	Nコードが新しい順
  * old	古い順
  */
-export enum Order {
-  FavoriteNovelCount = "favnovelcnt",
-  ReviewCount = "favnovelcnt",
-  HyokaDesc = "hyoka",
-  HyokaAsc = "hyokaasc",
-  ImpressionCount = "impressioncnt",
-  HyokaCountDesc = "hyokacnt",
-  HyokaCountAsc = "hyokacntasc",
-  Weekly = "weekly",
-  LengthDesc = "lengthdesc",
-  LengthAsc = "lengthasc",
-  NCodeDesc = "ncodedesc",
-  New = "new",
-  Old = "old",
-  DailyPoint = "dailypoint",
-  WeeklyPoint = "weeklypoint",
-  MonthlyPoint = "monthlypoint",
-  QuarterPoint = "quarterpoint",
-  YearlyPoint = "yearlypoint",
-}
+export const Order = {
+  FavoriteNovelCount: "favnovelcnt",
+  ReviewCount: "favnovelcnt",
+  HyokaDesc: "hyoka",
+  HyokaAsc: "hyokaasc",
+  ImpressionCount: "impressioncnt",
+  HyokaCountDesc: "hyokacnt",
+  HyokaCountAsc: "hyokacntasc",
+  Weekly: "weekly",
+  LengthDesc: "lengthdesc",
+  LengthAsc: "lengthasc",
+  NCodeDesc: "ncodedesc",
+  New: "new",
+  Old: "old",
+  DailyPoint: "dailypoint",
+  WeeklyPoint: "weeklypoint",
+  MonthlyPoint: "monthlypoint",
+  QuarterPoint: "quarterpoint",
+  YearlyPoint: "yearlypoint",
+};
 
-export enum R18Site {
-  Nocturne = 1,
-  MoonLight = 2,
-  MoonLightBL = 3,
-  Midnight = 4,
-}
+export type Order = typeof Order[keyof typeof Order];
 
-export enum R18SiteNotation {
-  "ノクターンノベルズ(男性向け)" = R18Site.Nocturne,
-  "ムーンライトノベルズ(女性向け)" = R18Site.MoonLight,
-  "ムーンライトノベルズ(BL)" = R18Site.MoonLightBL,
-  "ミッドナイトノベルズ(大人向け)" = R18Site.Midnight,
-}
+export const R18Site = {
+  Nocturne: 1,
+  MoonLight: 2,
+  MoonLightBL: 3,
+  Midnight: 4,
+} as const;
 
-export enum BigGenre {
-  Renai = 1,
-  Fantasy = 2,
-  Bungei = 3,
-  Sf = 4,
-  Sonota = 99,
-  NonGenre = 98,
-}
+export type R18Site = typeof R18Site[keyof typeof R18Site];
 
-export enum BigGenreNotation {
-  "恋愛" = BigGenre.Renai,
-  "ファンタジー" = BigGenre.Fantasy,
-  "文芸" = BigGenre.Bungei,
-  "SF" = BigGenre.Sf,
-  "その他" = BigGenre.Sonota,
-  "ノンジャンル" = BigGenre.NonGenre,
-}
+export const R18SiteNotation: { readonly [K in R18Site]: string } = {
+  [R18Site.Nocturne]: "ノクターンノベルズ(男性向け)",
+  [R18Site.MoonLight]: "ムーンライトノベルズ(女性向け)",
+  [R18Site.MoonLightBL]: "ムーンライトノベルズ(BL)",
+  [R18Site.Midnight]: "ミッドナイトノベルズ(大人向け)",
+} as const;
 
-export enum Genre {
-  RenaiIsekai = 101,
-  RenaiGenjitsusekai = 102,
-  FantasyHigh = 201,
-  FantasyLow = 202,
-  BungeiJyunbungei = 301,
-  BungeiHumanDrama = 302,
-  BungeiHistory = 303,
-  BungeiSuiri = 304,
-  BungeiHorror = 305,
-  BungeiAction = 306,
-  BungeiComedy = 307,
-  SfVrgame = 401,
-  SfSpace = 402,
-  SfKuusoukagaku = 403,
-  SfPanic = 404,
-  SonotaDouwa = 9901,
-  SonotaShi = 9902,
-  SonotaEssei = 9903,
-  SonotaReplay = 9904,
-  SonotaSonota = 9999,
-  NonGenre = 9801,
-}
+export const BigGenre = {
+  Renai: 1,
+  Fantasy: 2,
+  Bungei: 3,
+  Sf: 4,
+  Sonota: 99,
+  NonGenre: 98,
+} as const;
 
-export enum GenreNotation {
-  "異世界〔恋愛〕" = Genre.RenaiIsekai,
-  "現実世界〔恋愛〕" = Genre.RenaiGenjitsusekai,
-  "ハイファンタジー〔ファンタジー〕" = Genre.FantasyHigh,
-  "ローファンタジー〔ファンタジー〕" = Genre.FantasyLow,
-  "純文学〔文芸〕" = Genre.BungeiJyunbungei,
-  "ヒューマンドラマ〔文芸〕" = Genre.BungeiHumanDrama,
-  "歴史〔文芸〕" = Genre.BungeiHistory,
-  "推理〔文芸〕" = Genre.BungeiSuiri,
-  "ホラー〔文芸〕" = Genre.BungeiHorror,
-  "アクション〔文芸〕" = Genre.BungeiAction,
-  "コメディー〔文芸〕" = Genre.BungeiComedy,
-  "VRゲーム〔SF〕" = Genre.SfVrgame,
-  "宇宙〔SF〕" = Genre.SfSpace,
-  "空想科学〔SF〕" = Genre.SfKuusoukagaku,
-  "パニック〔SF〕" = Genre.SfPanic,
-  "童話〔その他〕" = Genre.SonotaDouwa,
-  "詩〔その他〕" = Genre.SonotaShi,
-  "エッセイ〔その他〕" = Genre.SonotaEssei,
-  "リプレイ〔その他〕" = Genre.SonotaReplay,
-  "その他〔その他〕" = Genre.SonotaSonota,
-  "ノンジャンル〔ノンジャンル〕" = Genre.NonGenre,
-}
+export type BigGenre = typeof BigGenre[keyof typeof BigGenre];
 
-export enum Buntai {
-  NoJisageKaigyouOoi = 1,
-  NoJisageKaigyoHutsuu = 2,
-  JisageKaigyoOoi = 4,
-  JisageKaigyoHutsuu = 6,
-}
+export const BigGenreNotation: { readonly [K in BigGenre]: string } = {
+  [BigGenre.Renai]: "恋愛",
+  [BigGenre.Fantasy]: "ファンタジー",
+  [BigGenre.Bungei]: "文芸",
+  [BigGenre.Sf]: "SF",
+  [BigGenre.Sonota]: "その他",
+  [BigGenre.NonGenre]: "ノンジャンル",
+} as const;
 
-export enum Stop {
-  NoStopping = 1,
-  Stopping = 2,
-}
+export const Genre = {
+  RenaiIsekai: 101,
+  RenaiGenjitsusekai: 102,
+  FantasyHigh: 201,
+  FantasyLow: 202,
+  BungeiJyunbungei: 301,
+  BungeiHumanDrama: 302,
+  BungeiHistory: 303,
+  BungeiSuiri: 304,
+  BungeiHorror: 305,
+  BungeiAction: 306,
+  BungeiComedy: 307,
+  SfVrgame: 401,
+  SfSpace: 402,
+  SfKuusoukagaku: 403,
+  SfPanic: 404,
+  SonotaDouwa: 9901,
+  SonotaShi: 9902,
+  SonotaEssei: 9903,
+  SonotaReplay: 9904,
+  SonotaSonota: 9999,
+  NonGenre: 9801,
+} as const;
+export type Genre = typeof Genre[keyof typeof Genre];
 
-export enum NovelType {
-  Short = "t",
-  RensaiNow = "r",
-  RensaiEnd = "er",
-  Rensai = "re",
-  ShortAndRensai = "ter",
-}
+export const GenreNotation: { readonly [K in Genre]: string } = {
+  [Genre.RenaiIsekai]: "異世界〔恋愛〕",
+  [Genre.RenaiGenjitsusekai]: "現実世界〔恋愛〕",
+  [Genre.FantasyHigh]: "ハイファンタジー〔ファンタジー〕",
+  [Genre.FantasyLow]: "ローファンタジー〔ファンタジー〕",
+  [Genre.BungeiJyunbungei]: "純文学〔文芸〕",
+  [Genre.BungeiHumanDrama]: "ヒューマンドラマ〔文芸〕",
+  [Genre.BungeiHistory]: "歴史〔文芸〕",
+  [Genre.BungeiSuiri]: "推理〔文芸〕",
+  [Genre.BungeiHorror]: "ホラー〔文芸〕",
+  [Genre.BungeiAction]: "アクション〔文芸〕",
+  [Genre.BungeiComedy]: "コメディー〔文芸〕",
+  [Genre.SfVrgame]: "VRゲーム〔SF〕",
+  [Genre.SfSpace]: "宇宙〔SF〕",
+  [Genre.SfKuusoukagaku]: "空想科学〔SF〕",
+  [Genre.SfPanic]: "パニック〔SF〕",
+  [Genre.SonotaDouwa]: "童話〔その他〕",
+  [Genre.SonotaShi]: "詩〔その他〕",
+  [Genre.SonotaEssei]: "エッセイ〔その他〕",
+  [Genre.SonotaReplay]: "リプレイ〔その他〕",
+  [Genre.SonotaSonota]: "その他〔その他〕",
+  [Genre.NonGenre]: "ノンジャンル〔ノンジャンル〕",
+} as const;
+
+export const Buntai = {
+  NoJisageKaigyouOoi: 1,
+  NoJisageKaigyoHutsuu: 2,
+  JisageKaigyoOoi: 4,
+  JisageKaigyoHutsuu: 6,
+} as const;
+
+export type Buntai = typeof Buntai[keyof typeof Buntai];
+
+export const Stop = {
+  NoStopping: 1,
+  Stopping: 2,
+} as const;
+
+export type Stop = typeof Stop[keyof typeof Stop];
+
+export const NovelType = {
+  Short: "t",
+  RensaiNow: "r",
+  RensaiEnd: "er",
+  Rensai: "re",
+  ShortAndRensai: "ter",
+};
+export type NovelType = typeof NovelType[keyof typeof NovelType];
 
 export type GzipLevel = 0 | 1 | 2 | 3 | 4 | 5;

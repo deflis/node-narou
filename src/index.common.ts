@@ -1,10 +1,13 @@
 import NarouNovel from "./narou";
-import { RankingHistoryResult } from "./ranking-history";
+import NarouSearchResults from "./narou-search-results";
 
-export { NarouNovel, RankingHistoryResult };
-export { RankingType } from "./ranking";
+export { NarouNovel, NarouSearchResults };
+
+export { RankingHistoryResult } from "./ranking-history";
 export {
+  RankingType,
   Fields,
+  SearchResultFieldNames,
   Order,
   BigGenre,
   BigGenreNotation,
@@ -12,6 +15,14 @@ export {
   GenreNotation,
   R18Site,
   R18SiteNotation,
+  BooleanNumber,
 } from "./params";
-export { NarouSearchResult } from "./narou-search-results";
+export {
+  NarouSearchResult,
+  PickedNarouSearchResult,
+  SearchResultFields,
+  SearchResultR18Fields,
+} from "./narou-search-results";
 export { NarouRankingResult, RankingResult } from "./narou-ranking-results";
+export { DefaultSearchResultFields } from "./search-builder";
+export { DefaultR18SearchResultFields } from "./search-builder-r18";

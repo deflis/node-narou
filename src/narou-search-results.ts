@@ -1,24 +1,35 @@
+import {
+  BooleanNumber as BooleanNumber,
+  Genre,
+  R18Site,
+  SearchParams,
+  Fields,
+  BigGenre,
+  R18Fields,
+  OptionalFields,
+} from "./params";
+
 /**
  * なろう小説API検索結果
  * @class NarouSearchResults
  */
-
-import { booleanNumber, Genre, R18Site, SearchParams } from "./params";
-
-export default class NarouSearchResults {
+export default class NarouSearchResults<T extends keyof NarouSearchResult> {
   allcount: number;
   limit: number;
   start: number;
   page: number;
   length: number;
-  values: NarouSearchResult[];
+  values: PickedNarouSearchResult<T>[];
 
   /**
    * @constractor
    * @private
    */
   constructor(
-    [header, ...result]: [{ allcount: number }, ...NarouSearchResult[]],
+    [header, ...result]: [
+      { allcount: number },
+      ...PickedNarouSearchResult<T>[]
+    ],
     params: SearchParams
   ) {
     const count = header.allcount;
@@ -52,7 +63,7 @@ export default class NarouSearchResults {
     this.length = result.length;
     /**
      * 検索結果
-     * @type {NarouSearchResult[]}
+     * @type {PickedNarouSearchResult<T>[]}
      */
     this.values = result;
   }
@@ -94,23 +105,24 @@ export interface NarouSearchResult {
   writer: string;
   story: string;
   nocgenre: R18Site;
+  biggenre: BigGenre;
   genre: Genre;
   keyword: string;
   general_firstup: string;
   general_lastup: string;
   novel_type: number;
   noveltype: number;
-  end: booleanNumber;
+  end: BooleanNumber;
   general_all_no: number;
   length: number;
   time: number;
-  isstop: booleanNumber;
-  isr15: booleanNumber;
-  isbl: booleanNumber;
-  isgl: booleanNumber;
-  iszankoku: booleanNumber;
-  istensei: booleanNumber;
-  istenni: booleanNumber;
+  isstop: BooleanNumber;
+  isr15: BooleanNumber;
+  isbl: BooleanNumber;
+  isgl: BooleanNumber;
+  iszankoku: BooleanNumber;
+  istensei: BooleanNumber;
+  istenni: BooleanNumber;
   pc_or_k: number;
   global_point: number;
   daily_point: number;
@@ -125,7 +137,26 @@ export interface NarouSearchResult {
   all_hyoka_cnt: number;
   sasie_cnt: number;
   kaiwaritu: number;
-  novelupdated_at: number;
-  update_at: number;
+  novelupdated_at: string;
+  updated_at: string;
   weekly_unique: number;
 }
+
+export type SearchResultFields<T extends Fields> = {
+  [K in keyof typeof Fields]: typeof Fields[K] extends T ? K : never;
+}[keyof typeof Fields];
+
+export type SerachResultOptionalFields<T extends OptionalFields> = {
+  [K in keyof typeof OptionalFields]: typeof OptionalFields[K] extends T
+    ? K
+    : never;
+}[keyof typeof OptionalFields];
+
+export type SearchResultR18Fields<T extends R18Fields> = {
+  [K in keyof typeof R18Fields]: typeof R18Fields[K] extends T ? K : never;
+}[keyof typeof R18Fields];
+
+export type PickedNarouSearchResult<T extends keyof NarouSearchResult> = Pick<
+  NarouSearchResult,
+  T
+>;
