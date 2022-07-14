@@ -48,6 +48,7 @@ export default class SearchBuilderR18<
     fields: TFields | TFields[]
   ): SearchBuilderR18<SearchResultR18Fields<R18Fields>> {
     this.set({ of: SearchBuilderBase.array2string(fields) });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return this as any;
   }
 }

@@ -454,6 +454,7 @@ export default class SearchBuilder<
     fields: TFields | readonly TFields[]
   ): SearchBuilder<SearchResultFields<TFields>, TOpt> {
     this.set({ of: SearchBuilderBase.array2string(fields) });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return this as any;
   }
 

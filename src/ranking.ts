@@ -128,6 +128,7 @@ export default class RankingBuilder {
       >
     >((r) => ({
       ...r,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ...(result.values.find((novel) => novel.ncode == r.ncode) as any),
     }));
   }
