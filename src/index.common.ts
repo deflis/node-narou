@@ -22,6 +22,9 @@ export {
   PickedNarouSearchResult,
   SearchResultFields,
   SearchResultR18Fields,
+  PcOrK,
+  NovelType,
+  End,
 } from "./narou-search-results";
 export { NarouRankingResult, RankingResult } from "./narou-ranking-results";
 export { DefaultSearchResultFields } from "./search-builder";

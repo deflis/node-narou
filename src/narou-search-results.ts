@@ -81,7 +81,7 @@ export default class NarouSearchResults<T extends keyof NarouSearchResult> {
  * @property {string} general_firstup 初回掲載日 YYYY-MM-DD HH:MM:SSの形式
  * @property {string} general_lastup 最終掲載日 YYYY-MM-DD HH:MM:SSの形式
  * @property {number} noveltype 連載の場合は1、短編の場合は2
- * @property {number} end 連載の場合は1、短編の場合は2
+ * @property {number} end 短編小説と完結済小説は0となっています。連載中は1です。
  * @property {number} general_all_no 全掲載話数です。短編の場合は1です。
  * @property {number} length 全掲載話数です。短編の場合は1です。
  * @property {number} time 読了時間(分単位)です。読了時間は小説文字数÷500を切り上げした数値です。
@@ -111,8 +111,8 @@ export interface NarouSearchResult {
   general_firstup: string;
   general_lastup: string;
   novel_type: number;
-  noveltype: number;
-  end: BooleanNumber;
+  noveltype: NovelType;
+  end: End;
   general_all_no: number;
   length: number;
   time: number;
@@ -123,7 +123,7 @@ export interface NarouSearchResult {
   iszankoku: BooleanNumber;
   istensei: BooleanNumber;
   istenni: BooleanNumber;
-  pc_or_k: number;
+  pc_or_k: PcOrK;
   global_point: number;
   daily_point: number;
   weekly_point: number;
@@ -141,6 +141,25 @@ export interface NarouSearchResult {
   updated_at: string;
   weekly_unique: number;
 }
+
+export const PcOrK = {
+  Ketai: 1,
+  Pc: 2,
+  PcAndKetai: 3,
+} as const;
+export type PcOrK = typeof PcOrK[keyof typeof PcOrK];
+
+export const NovelType = {
+  Rensai: 1,
+  Tanpen: 2,
+} as const;
+export type NovelType = typeof NovelType[keyof typeof NovelType];
+
+export const End = {
+  KanketsuOrTanpen: 0,
+  Rensai: 1,
+} as const;
+export type End = typeof End[keyof typeof End];
 
 export type SearchResultFields<T extends Fields> = {
   [K in keyof typeof Fields]: typeof Fields[K] extends T ? K : never;
