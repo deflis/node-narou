@@ -6,5 +6,6 @@
         "module": "esnext",
         "declaration": false,
         "declarationMap": false
-    }
+    },
+    "include": ["./src/**/*"]
 }
