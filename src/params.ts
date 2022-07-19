@@ -376,7 +376,7 @@ export const NovelTypeParam = {
   RensaiEnd: "er",
   Rensai: "re",
   ShortAndRensai: "ter",
-};
+} as const;
 export type NovelTypeParam = typeof NovelTypeParam[keyof typeof NovelTypeParam];
 
 export type GzipLevel = 0 | 1 | 2 | 3 | 4 | 5;
