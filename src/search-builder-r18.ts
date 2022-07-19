@@ -2,8 +2,14 @@ import { SearchBuilderBase } from "./search-builder";
 import NarouSearchResults, {
   NarouSearchResult,
   SearchResultR18Fields,
+  SerachResultOptionalFields,
 } from "./narou-search-results";
-import { R18Site, SearchResultFieldNames, R18Fields } from "./params";
+import {
+  R18Site,
+  SearchResultFieldNames,
+  R18Fields,
+  OptionalFields,
+} from "./params";
 
 export type DefaultR18SearchResultFields = keyof Omit<
   NarouSearchResult,
@@ -15,14 +21,15 @@ export type DefaultR18SearchResultFields = keyof Omit<
  * @class SearchBuilderR18
  */
 export default class SearchBuilderR18<
-  T extends SearchResultFieldNames = DefaultR18SearchResultFields
-> extends SearchBuilderBase<T> {
+  T extends SearchResultFieldNames = DefaultR18SearchResultFields,
+  TOpt extends keyof NarouSearchResult = never
+> extends SearchBuilderBase<T | TOpt> {
   /**
    * なろう小説APIへの検索リクエストを実行する
    * @override
    * @returns {Promise<NarouSearchResults>} 検索結果
    */
-  execute(): Promise<NarouSearchResults<T>> {
+  execute(): Promise<NarouSearchResults<T | TOpt>> {
     return this.api.executeNovel18(this.params);
   }
 
@@ -48,6 +55,14 @@ export default class SearchBuilderR18<
     fields: TFields | TFields[]
   ): SearchBuilderR18<SearchResultR18Fields<R18Fields>> {
     this.set({ of: SearchBuilderBase.array2string(fields) });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return this as any;
+  }
+
+  opt<TFields extends OptionalFields>(
+    option: TFields | TFields[]
+  ): SearchBuilderR18<T, SerachResultOptionalFields<TFields>> {
+    this.set({ opt: SearchBuilderBase.array2string(option) });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return this as any;
   }

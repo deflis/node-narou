@@ -461,6 +461,8 @@ export default class SearchBuilder<
   opt<TFields extends OptionalFields>(
     option: TFields | TFields[]
   ): SearchBuilder<T, SerachResultOptionalFields<TFields>> {
-    return this.set({ opt: SearchBuilderBase.array2string(option) }) as any;
+    this.set({ opt: SearchBuilderBase.array2string(option) });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return this as any;
   }
 }
