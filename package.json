@@ -1,6 +1,6 @@
 {
   "name": "narou",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "Narou API Wrapper",
   "main": "dist/index.js",
   "browser": "dist/index.browser.js",
