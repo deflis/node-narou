@@ -265,7 +265,7 @@ export const Order = {
   MonthlyPoint: "monthlypoint",
   QuarterPoint: "quarterpoint",
   YearlyPoint: "yearlypoint",
-};
+} as const;
 
 export type Order = typeof Order[keyof typeof Order];
 
