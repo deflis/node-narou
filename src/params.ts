@@ -92,11 +92,11 @@ export interface SearchParams {
 
   ncode?: string | Join<string>;
 
-  type?: NovelType;
+  type?: NovelTypeParam;
 
-  buntai?: Buntai | Join<Buntai>;
+  buntai?: BuntaiParam | Join<BuntaiParam>;
 
-  stop?: Stop;
+  stop?: StopParam;
 
   ispickup?: BooleanNumber;
   lastup?: string;
@@ -354,29 +354,29 @@ export const GenreNotation: { readonly [K in Genre]: string } = {
   [Genre.NonGenre]: "ノンジャンル〔ノンジャンル〕",
 } as const;
 
-export const Buntai = {
+export const BuntaiParam = {
   NoJisageKaigyouOoi: 1,
   NoJisageKaigyoHutsuu: 2,
   JisageKaigyoOoi: 4,
   JisageKaigyoHutsuu: 6,
 } as const;
 
-export type Buntai = typeof Buntai[keyof typeof Buntai];
+export type BuntaiParam = typeof BuntaiParam[keyof typeof BuntaiParam];
 
-export const Stop = {
+export const StopParam = {
   NoStopping: 1,
   Stopping: 2,
 } as const;
 
-export type Stop = typeof Stop[keyof typeof Stop];
+export type StopParam = typeof StopParam[keyof typeof StopParam];
 
-export const NovelType = {
+export const NovelTypeParam = {
   Short: "t",
   RensaiNow: "r",
   RensaiEnd: "er",
   Rensai: "re",
   ShortAndRensai: "ter",
 };
-export type NovelType = typeof NovelType[keyof typeof NovelType];
+export type NovelTypeParam = typeof NovelTypeParam[keyof typeof NovelTypeParam];
 
 export type GzipLevel = 0 | 1 | 2 | 3 | 4 | 5;

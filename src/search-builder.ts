@@ -10,12 +10,12 @@ import {
   BooleanNumber,
   SearchResultFieldNames,
   Genre,
-  Stop,
+  StopParam,
   SearchParams,
   Fields,
   Order,
-  Buntai,
-  NovelType,
+  BuntaiParam,
+  NovelTypeParam,
   GzipLevel,
   OptionalFields,
 } from "./params";
@@ -231,7 +231,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    *
    * @return {SearchBuilder} this
    */
-  type(type: NovelType): this {
+  type(type: NovelTypeParam): this {
     this.set({ type });
     return this;
   }
@@ -240,7 +240,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    *
    * @return {SearchBuilder} this
    */
-  buntai(buntai: Buntai | Buntai[]): this {
+  buntai(buntai: BuntaiParam | BuntaiParam[]): this {
     this.set({ buntai: SearchBuilderBase.array2string(buntai) });
     return this;
   }
@@ -250,7 +250,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    * @return {SearchBuilder} this
    */
   isStop(bool = true): this {
-    this.set({ stop: bool ? Stop.Stopping : Stop.NoStopping });
+    this.set({ stop: bool ? StopParam.Stopping : StopParam.NoStopping });
     return this;
   }
 

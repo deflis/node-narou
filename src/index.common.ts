@@ -15,6 +15,8 @@ export {
   GenreNotation,
   R18Site,
   R18SiteNotation,
+  BuntaiParam,
+  NovelTypeParam,
   BooleanNumber,
 } from "./params";
 export {
