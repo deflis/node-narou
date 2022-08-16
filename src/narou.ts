@@ -24,7 +24,7 @@ export default abstract class NarouNovel {
 
   async executeSearch<T extends keyof NarouSearchResult>(
     params: NarouParams,
-    endpoint = "http://api.syosetu.com/novelapi/api/"
+    endpoint = "https://api.syosetu.com/novelapi/api/"
   ): Promise<NarouSearchResults<T>> {
     return new NarouSearchResults<T>(
       await this.execute(params, endpoint),
@@ -37,7 +37,7 @@ export default abstract class NarouNovel {
   ): Promise<NarouSearchResults<T>> {
     return await this.executeSearch(
       params,
-      "http://api.syosetu.com/novelapi/api/"
+      "https://api.syosetu.com/novelapi/api/"
     );
   }
 
@@ -46,17 +46,17 @@ export default abstract class NarouNovel {
   ): Promise<NarouSearchResults<T>> {
     return await this.executeSearch(
       params,
-      "http://api.syosetu.com/novel18api/api/"
+      "https://api.syosetu.com/novel18api/api/"
     );
   }
 
   async executeRanking(params: RankingParams): Promise<NarouRankingResult[]> {
-    return await this.execute(params, "http://api.syosetu.com/rank/rankget/");
+    return await this.execute(params, "https://api.syosetu.com/rank/rankget/");
   }
 
   async executeRankingHistory(
     params: RankingHistoryParams
   ): Promise<RankingHistoryRawResult[]> {
-    return await this.execute(params, "http://api.syosetu.com/rank/rankin/");
+    return await this.execute(params, "https://api.syosetu.com/rank/rankin/");
   }
 }
