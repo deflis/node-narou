@@ -33,11 +33,13 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    */
   constructor(protected params: SearchParams = {}, protected api: NarouNovel) {}
 
-  static distinct<T>(array: T[]): T[] {
+  protected static distinct<T>(array: readonly T[]): T[] {
     return Array.from(new Set(array));
   }
 
-  static array2string<T extends string | number>(n: T | readonly T[]): Join<T> {
+  protected static array2string<T extends string | number>(
+    n: T | readonly T[]
+  ): Join<T> {
     if (Array.isArray(n)) {
       return this.distinct(n).join("-") as Join<T>;
     } else {
@@ -177,7 +179,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    *
    * @return {SearchBuilder} this
    */
-  length(length: number | number[]): this {
+  length(length: number | readonly number[]): this {
     this.set({ length: SearchBuilderBase.array2string(length) });
     return this;
   }
@@ -204,7 +206,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    *
    * @return {SearchBuilder} this
    */
-  sasie(num: number | number[]): this {
+  sasie(num: number | readonly number[]): this {
     this.set({ sasie: SearchBuilderBase.array2string(num) });
     return this;
   }
@@ -213,7 +215,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    *
    * @return {SearchBuilder} this
    */
-  time(num: number | number[]): this {
+  time(num: number | readonly number[]): this {
     this.set({ time: SearchBuilderBase.array2string(num) });
     return this;
   }
@@ -222,7 +224,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    *
    * @return {SearchBuilder} this
    */
-  ncode(ncodes: string | string[]): this {
+  ncode(ncodes: string | readonly string[]): this {
     this.set({ ncode: SearchBuilderBase.array2string(ncodes) });
     return this;
   }
@@ -240,7 +242,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    *
    * @return {SearchBuilder} this
    */
-  buntai(buntai: BuntaiParam | BuntaiParam[]): this {
+  buntai(buntai: BuntaiParam | readonly BuntaiParam[]): this {
     this.set({ buntai: SearchBuilderBase.array2string(buntai) });
     return this;
   }
@@ -392,7 +394,7 @@ export default class SearchBuilder<
    *
    * @return {SearchBuilder} this
    */
-  bigGenre(genre: BigGenre | BigGenre[]): this {
+  bigGenre(genre: BigGenre | readonly BigGenre[]): this {
     this.set({ biggenre: SearchBuilderBase.array2string(genre) });
     return this;
   }
@@ -401,7 +403,7 @@ export default class SearchBuilder<
    *
    * @return {SearchBuilder} this
    */
-  notBigGenre(genre: BigGenre | BigGenre[]): this {
+  notBigGenre(genre: BigGenre | readonly BigGenre[]): this {
     this.set({ notbiggenre: SearchBuilderBase.array2string(genre) });
     return this;
   }
@@ -410,7 +412,7 @@ export default class SearchBuilder<
    *
    * @return {SearchBuilder} this
    */
-  genre(genre: Genre | Genre[]): this {
+  genre(genre: Genre | readonly Genre[]): this {
     this.set({ genre: SearchBuilderBase.array2string(genre) });
     return this;
   }
@@ -419,7 +421,7 @@ export default class SearchBuilder<
    *
    * @return {SearchBuilder} this
    */
-  notGenre(genre: Genre | Genre[]): this {
+  notGenre(genre: Genre | readonly Genre[]): this {
     this.set({ notgenre: SearchBuilderBase.array2string(genre) });
     return this;
   }
@@ -428,7 +430,7 @@ export default class SearchBuilder<
    *
    * @return {SearchBuilder} this
    */
-  userId(ids: number | number[]): this {
+  userId(ids: number | readonly number[]): this {
     this.set({ userid: SearchBuilderBase.array2string(ids) });
     return this;
   }
@@ -459,7 +461,7 @@ export default class SearchBuilder<
   }
 
   opt<TFields extends OptionalFields>(
-    option: TFields | TFields[]
+    option: TFields | readonly TFields[]
   ): SearchBuilder<T, SerachResultOptionalFields<TFields>> {
     this.set({ opt: SearchBuilderBase.array2string(option) });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

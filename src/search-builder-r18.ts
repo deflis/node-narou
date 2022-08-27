@@ -33,7 +33,7 @@ export default class SearchBuilderR18<
     return this.api.executeNovel18(this.params);
   }
 
-  r18Site(sites: R18Site | R18Site[]) {
+  r18Site(sites: R18Site | readonly R18Site[]) {
     this.set({ nocgenre: SearchBuilderBase.array2string(sites) });
     return this;
   }
@@ -42,7 +42,7 @@ export default class SearchBuilderR18<
    *
    * @return {SearchBuilder} this
    */
-  xid(ids: number | number[]) {
+  xid(ids: number | readonly number[]) {
     this.set({ xid: SearchBuilderBase.array2string(ids) });
     return this;
   }
@@ -52,7 +52,7 @@ export default class SearchBuilderR18<
    * @return {SearchBuilder} this
    */
   fields<TFields extends R18Fields>(
-    fields: TFields | TFields[]
+    fields: TFields | readonly TFields[]
   ): SearchBuilderR18<SearchResultR18Fields<R18Fields>> {
     this.set({ of: SearchBuilderBase.array2string(fields) });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -60,7 +60,7 @@ export default class SearchBuilderR18<
   }
 
   opt<TFields extends OptionalFields>(
-    option: TFields | TFields[]
+    option: TFields | readonly TFields[]
   ): SearchBuilderR18<T, SerachResultOptionalFields<TFields>> {
     this.set({ opt: SearchBuilderBase.array2string(option) });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
