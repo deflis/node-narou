@@ -165,7 +165,7 @@ export type SearchResultFields<T extends Fields> = {
   [K in keyof typeof Fields]: typeof Fields[K] extends T ? K : never;
 }[keyof typeof Fields];
 
-export type SerachResultOptionalFields<T extends OptionalFields> = {
+export type SearchResultOptionalFields<T extends OptionalFields> = {
   [K in keyof typeof OptionalFields]: typeof OptionalFields[K] extends T
     ? K
     : never;

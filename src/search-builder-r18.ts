@@ -2,7 +2,7 @@ import { SearchBuilderBase } from "./search-builder";
 import NarouSearchResults, {
   NarouSearchResult,
   SearchResultR18Fields,
-  SerachResultOptionalFields,
+  SearchResultOptionalFields,
 } from "./narou-search-results";
 import {
   R18Site,
@@ -61,7 +61,7 @@ export default class SearchBuilderR18<
 
   opt<TFields extends OptionalFields>(
     option: TFields | readonly TFields[]
-  ): SearchBuilderR18<T, SerachResultOptionalFields<TFields>> {
+  ): SearchBuilderR18<T, SearchResultOptionalFields<TFields>> {
     this.set({ opt: SearchBuilderBase.array2string(option) });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return this as any;

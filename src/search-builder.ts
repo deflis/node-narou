@@ -2,7 +2,7 @@ import NarouNovel from "./narou";
 import {
   NarouSearchResult,
   SearchResultFields,
-  SerachResultOptionalFields,
+  SearchResultOptionalFields,
 } from "./narou-search-results";
 import NarouSearchResults from "./narou-search-results";
 import {
@@ -462,7 +462,7 @@ export default class SearchBuilder<
 
   opt<TFields extends OptionalFields>(
     option: TFields | readonly TFields[]
-  ): SearchBuilder<T, SerachResultOptionalFields<TFields>> {
+  ): SearchBuilder<T, SearchResultOptionalFields<TFields>> {
     this.set({ opt: SearchBuilderBase.array2string(option) });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return this as any;
