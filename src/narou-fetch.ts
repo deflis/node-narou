@@ -1,5 +1,4 @@
 import nodeFetch from "node-fetch";
-import nodeURL from "./util/url";
 
 import { unzipp } from "./util/unzipp";
 import NarouNovel, { NarouParams } from "./narou";
@@ -23,7 +22,7 @@ export default class NarouNovelFetch extends NarouNovel {
     if (query.gzip === undefined) {
       query.gzip = 5;
     }
-    const url = new nodeURL(endpoint);
+    const url = new URL(endpoint);
 
     Object.entries(query).forEach(([key, value]) => {
       if (value) {

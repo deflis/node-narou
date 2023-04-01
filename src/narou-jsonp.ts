@@ -1,5 +1,3 @@
-import nodeURL from "./util/url";
-
 import NarouNovel, { NarouParams } from "./narou";
 import { jsonp } from "./util/jsonp";
 
@@ -16,7 +14,7 @@ export default class NarouNovelJsonp extends NarouNovel {
     const query = { ...params, out: "jsonp" };
     query.gzip = 0;
 
-    const url = new nodeURL(endpoint);
+    const url = new URL(endpoint);
 
     Object.entries(query).forEach(([key, value]) => {
       if (value) {

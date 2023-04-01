@@ -1,7 +1,6 @@
 /**
  * MIT license
  */
-import nodeURL from "./url";
 
 // Callback index.
 let count = 0;
@@ -61,7 +60,7 @@ export function jsonp<T>(
 
     // Create script.
     const script = document.createElement("script");
-    const urlObj = new nodeURL(url);
+    const urlObj = new URL(url);
     urlObj.searchParams.set(param, id);
     script.setAttribute("src", urlObj.toString());
     target.insertBefore(script, targetChild);
