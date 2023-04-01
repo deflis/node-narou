@@ -19,3 +19,4 @@ export * from "./narou-search-results";
 export * from "./narou-ranking-results";
 export * from "./search-builder";
 export * from "./search-builder-r18";
+export * from "./user-search";

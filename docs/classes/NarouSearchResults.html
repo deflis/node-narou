@@ -14,7 +14,7 @@
 <ul class="tsd-breadcrumb">
 <li><a href="../modules.html">narou</a></li>
 <li><a href="NarouSearchResults.html">NarouSearchResults</a></li></ul>
-<h1>Class NarouSearchResults&lt;T&gt;</h1></div>
+<h1>Class NarouSearchResults&lt;T, TKey&gt;</h1></div>
 <section class="tsd-panel tsd-comment">
 <div class="tsd-comment tsd-typography"><p>なろう小説API検索結果</p>
 </div></section> 
@@ -22,13 +22,15 @@
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameters">
 <li>
-<h4>T<span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">keyof </span><a href="../interfaces/NarouSearchResult.html" class="tsd-signature-type" data-tsd-kind="Interface">NarouSearchResult</a></h4></li></ul></section> 
+<h4>T</h4></li>
+<li>
+<h4>TKey<span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span></h4></li></ul></section> 
 <section class="tsd-panel tsd-hierarchy">
 <h4>Hierarchy</h4>
 <ul class="tsd-hierarchy">
 <li><span class="target">NarouSearchResults</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/narou-search-results.ts#L16">narou-search-results.ts:16</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/narou-search-results.ts#L17">narou-search-results.ts:17</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -52,7 +54,7 @@
 <section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-private"><a id="constructor" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>constructor</span><a href="#constructor" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" id="icon-anchor-a"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" id="icon-anchor-b"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" id="icon-anchor-c"></path></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-private">
-<li class="tsd-signature tsd-anchor-link" id="constructor.new_NarouSearchResults">new <wbr/>Narou<wbr/>Search<wbr/>Results<span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-symbol">{ </span><br/><span>    </span>allcount<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">...</span><a href="../types/PickedNarouSearchResult.html" class="tsd-signature-type" data-tsd-kind="Type alias">PickedNarouSearchResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">]</span>, params<span class="tsd-signature-symbol">: </span><a href="../interfaces/SearchParams.html" class="tsd-signature-type" data-tsd-kind="Interface">SearchParams</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="NarouSearchResults.html" class="tsd-signature-type" data-tsd-kind="Class">NarouSearchResults</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><a href="#constructor.new_NarouSearchResults" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="constructor.new_NarouSearchResults">new <wbr/>Narou<wbr/>Search<wbr/>Results<span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TKey</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-symbol">{ </span><br/><span>    </span>allcount<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">...</span><span class="tsd-signature-type">Pick</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TKey</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">]</span>, params<span class="tsd-signature-symbol">: </span><a href="../interfaces/SearchParams.html" class="tsd-signature-type" data-tsd-kind="Interface">SearchParams</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="NarouSearchResults.html" class="tsd-signature-type" data-tsd-kind="Class">NarouSearchResults</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TKey</span><span class="tsd-signature-symbol">&gt;</span><a href="#constructor.new_NarouSearchResults" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description"><code class="tsd-tag ts-flagPrivate">Private</code> 
 <div class="tsd-comment tsd-typography">
 <h3>Constractor</h3></div>
@@ -60,49 +62,51 @@
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameters">
 <li>
-<h4>T<span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">keyof </span><a href="../interfaces/NarouSearchResult.html" class="tsd-signature-type" data-tsd-kind="Interface">NarouSearchResult</a></h4></li></ul></section>
+<h4>T</h4></li>
+<li>
+<h4>TKey<span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h4></li></ul></section>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>__namedParameters: <span class="tsd-signature-symbol">[</span><span class="tsd-signature-symbol">{ </span><br/><span>    </span>allcount<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">...</span><a href="../types/PickedNarouSearchResult.html" class="tsd-signature-type" data-tsd-kind="Type alias">PickedNarouSearchResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">]</span></h5></li>
+<h5>__namedParameters: <span class="tsd-signature-symbol">[</span><span class="tsd-signature-symbol">{ </span><br/><span>    </span>allcount<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">...</span><span class="tsd-signature-type">Pick</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TKey</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">]</span></h5></li>
 <li>
 <h5>params: <a href="../interfaces/SearchParams.html" class="tsd-signature-type" data-tsd-kind="Interface">SearchParams</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="NarouSearchResults.html" class="tsd-signature-type" data-tsd-kind="Class">NarouSearchResults</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<h4 class="tsd-returns-title">Returns <a href="NarouSearchResults.html" class="tsd-signature-type" data-tsd-kind="Class">NarouSearchResults</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TKey</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/narou-search-results.ts#L28">narou-search-results.ts:28</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/narou-search-results.ts#L29">narou-search-results.ts:29</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="allcount" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>allcount</span><a href="#allcount" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">allcount<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/narou-search-results.ts#L17">narou-search-results.ts:17</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/narou-search-results.ts#L18">narou-search-results.ts:18</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="length" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>length</span><a href="#length" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">length<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/narou-search-results.ts#L21">narou-search-results.ts:21</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/narou-search-results.ts#L22">narou-search-results.ts:22</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="limit" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>limit</span><a href="#limit" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">limit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/narou-search-results.ts#L18">narou-search-results.ts:18</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/narou-search-results.ts#L19">narou-search-results.ts:19</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="page" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>page</span><a href="#page" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">page<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/narou-search-results.ts#L20">narou-search-results.ts:20</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/narou-search-results.ts#L21">narou-search-results.ts:21</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="start" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>start</span><a href="#start" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">start<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/narou-search-results.ts#L19">narou-search-results.ts:19</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/narou-search-results.ts#L20">narou-search-results.ts:20</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="values" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>values</span><a href="#values" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature">values<span class="tsd-signature-symbol">:</span> <a href="../types/PickedNarouSearchResult.html" class="tsd-signature-type" data-tsd-kind="Type alias">PickedNarouSearchResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div><aside class="tsd-sources">
+<div class="tsd-signature">values<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-type">Pick</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TKey</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/narou-search-results.ts#L22">narou-search-results.ts:22</a></li></ul></aside></section></section></div>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/narou-search-results.ts#L23">narou-search-results.ts:23</a></li></ul></aside></section></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">

@@ -28,11 +28,11 @@
 <section class="tsd-panel tsd-hierarchy">
 <h4>Hierarchy</h4>
 <ul class="tsd-hierarchy">
-<li><a href="SearchBuilderBase.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilderBase</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span>
+<li><a href="NovelSearchBuilderBase.html" class="tsd-signature-type" data-tsd-kind="Class">NovelSearchBuilderBase</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span>
 <ul class="tsd-hierarchy">
 <li><span class="target">SearchBuilder</span></li></ul></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L389">search-builder.ts:389</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L383">search-builder.ts:383</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -84,7 +84,7 @@
 <a href="SearchBuilder.html#start" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>start</span></a>
 <a href="SearchBuilder.html#time" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>time</span></a>
 <a href="SearchBuilder.html#type" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>type</span></a>
-<a href="SearchBuilder.html#unset" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>unset</span></a>
+<a href="SearchBuilder.html#unset" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>unset</span></a>
 <a href="SearchBuilder.html#userId" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>user<wbr/>Id</span></a>
 <a href="SearchBuilder.html#word" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>word</span></a>
 <a href="SearchBuilder.html#array2string" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>array2string</span></a>
@@ -103,34 +103,34 @@
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameters">
 <li>
-<h4>T<span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">keyof </span><a href="../interfaces/NarouSearchResult.html" class="tsd-signature-type" data-tsd-kind="Interface">NarouSearchResult</a> = <span class="tsd-signature-type">&quot;length&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;end&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;time&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;title&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;novel_type&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ncode&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;userid&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;writer&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;story&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;biggenre&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;genre&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;keyword&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;general_firstup&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;general_lastup&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;general_all_no&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isstop&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isr15&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isbl&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isgl&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;iszankoku&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;istensei&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;istenni&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;pc_or_k&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;global_point&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;daily_point&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;weekly_point&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;monthly_point&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;quarter_point&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;yearly_point&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;fav_novel_cnt&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;impression_cnt&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;review_cnt&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;all_point&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;all_hyoka_cnt&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;sasie_cnt&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;kaiwaritu&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;novelupdated_at&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;updated_at&quot;</span></h4></li>
+<h4>T<span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">keyof </span><a href="../interfaces/NarouSearchResult.html" class="tsd-signature-type" data-tsd-kind="Interface">NarouSearchResult</a> = <span class="tsd-signature-type">&quot;length&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;end&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;time&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;title&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;keyword&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;biggenre&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;genre&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;userid&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isr15&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isbl&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isgl&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;iszankoku&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;istensei&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;istenni&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;kaiwaritu&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ncode&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;novel_type&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;writer&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;story&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;general_firstup&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;general_lastup&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;general_all_no&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isstop&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;pc_or_k&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;global_point&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;daily_point&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;weekly_point&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;monthly_point&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;quarter_point&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;yearly_point&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;fav_novel_cnt&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;impression_cnt&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;review_cnt&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;all_point&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;all_hyoka_cnt&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;sasie_cnt&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;novelupdated_at&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;updated_at&quot;</span></h4></li>
 <li>
 <h4>TOpt<span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">keyof </span><a href="../interfaces/NarouSearchResult.html" class="tsd-signature-type" data-tsd-kind="Interface">NarouSearchResult</a> = <span class="tsd-signature-type">never</span></h4></li></ul></section>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>params: <a href="../interfaces/SearchParams.html" class="tsd-signature-type" data-tsd-kind="Interface">SearchParams</a><span class="tsd-signature-symbol"> = {}</span></h5></li>
+<h5>params: <a href="../interfaces/SearchParams.html" class="tsd-signature-type" data-tsd-kind="Interface">SearchParams</a><span class="tsd-signature-symbol"> = ...</span></h5></li>
 <li>
 <h5>api: <a href="NarouNovel.html" class="tsd-signature-type" data-tsd-kind="Class">NarouNovel</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#constructor">constructor</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#constructor">constructor</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L34">search-builder.ts:34</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L38">search-builder.ts:38</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a id="api" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>api</span><a href="#api" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">api<span class="tsd-signature-symbol">:</span> <a href="NarouNovel.html" class="tsd-signature-type" data-tsd-kind="Class">NarouNovel</a></div><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#api">api</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#api">api</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L34">search-builder.ts:34</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L40">search-builder.ts:40</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a id="params" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>params</span><a href="#params" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature">params<span class="tsd-signature-symbol">:</span> <a href="../interfaces/SearchParams.html" class="tsd-signature-type" data-tsd-kind="Interface">SearchParams</a><span class="tsd-signature-symbol"> = {}</span></div><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#params">params</a></p>
+<div class="tsd-signature">params<span class="tsd-signature-symbol">:</span> <a href="../interfaces/SearchParams.html" class="tsd-signature-type" data-tsd-kind="Interface">SearchParams</a><span class="tsd-signature-symbol"> = ...</span></div><aside class="tsd-sources">
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#params">params</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L34">search-builder.ts:34</a></li></ul></aside></section></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L39">search-builder.ts:39</a></li></ul></aside></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="bigGenre" class="tsd-anchor"></a>
@@ -148,7 +148,7 @@
 <h5>genre: <a href="../variables/BigGenre-1.html" class="tsd-signature-type" data-tsd-kind="Variable">BigGenre</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><a href="../variables/BigGenre-1.html" class="tsd-signature-type" data-tsd-kind="Variable">BigGenre</a><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L397">search-builder.ts:397</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L391">search-builder.ts:391</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="buntai" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>buntai</span><a href="#buntai" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -163,9 +163,9 @@
 <li>
 <h5>buntai: <a href="../variables/BuntaiParam-1.html" class="tsd-signature-type" data-tsd-kind="Variable">BuntaiParam</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><a href="../variables/BuntaiParam-1.html" class="tsd-signature-type" data-tsd-kind="Variable">BuntaiParam</a><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#buntai">buntai</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#buntai">buntai</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L245">search-builder.ts:245</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L323">search-builder.ts:323</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="byAuthor" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>by<wbr/>Author</span><a href="#byAuthor" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -180,9 +180,9 @@
 <li>
 <h5>bool: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#byAuthor">byAuthor</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#byAuthor">byAuthor</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L99">search-builder.ts:99</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L177">search-builder.ts:177</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="byKeyword" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>by<wbr/>Keyword</span><a href="#byKeyword" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -197,9 +197,9 @@
 <li>
 <h5>bool: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#byKeyword">byKeyword</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#byKeyword">byKeyword</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L90">search-builder.ts:90</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L168">search-builder.ts:168</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="byOutline" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>by<wbr/>Outline</span><a href="#byOutline" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -214,9 +214,9 @@
 <li>
 <h5>bool: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#byOutline">byOutline</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#byOutline">byOutline</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L81">search-builder.ts:81</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L159">search-builder.ts:159</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="byTitle" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>by<wbr/>Title</span><a href="#byTitle" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -231,22 +231,22 @@
 <li>
 <h5>bool: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#byTitle">byTitle</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#byTitle">byTitle</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L72">search-builder.ts:72</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L150">search-builder.ts:150</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="execute" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>execute</span><a href="#execute" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-<li class="tsd-signature tsd-anchor-link" id="execute.execute-1">execute<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="NarouSearchResults.html" class="tsd-signature-type" data-tsd-kind="Class">NarouSearchResults</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><a href="#execute.execute-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="execute.execute-1">execute<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="NarouSearchResults.html" class="tsd-signature-type" data-tsd-kind="Class">NarouSearchResults</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/NarouSearchResult.html" class="tsd-signature-type" data-tsd-kind="Interface">NarouSearchResult</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><a href="#execute.execute-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>なろう小説APIへの検索リクエストを実行する</p>
 
 <h3>Returns</h3><p>検索結果</p>
 </div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="NarouSearchResults.html" class="tsd-signature-type" data-tsd-kind="Class">NarouSearchResults</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#execute">execute</a></p>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="NarouSearchResults.html" class="tsd-signature-type" data-tsd-kind="Class">NarouSearchResults</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/NarouSearchResult.html" class="tsd-signature-type" data-tsd-kind="Interface">NarouSearchResult</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#execute">execute</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L380">search-builder.ts:380</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L374">search-builder.ts:374</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="fields" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>fields</span><a href="#fields" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -267,7 +267,7 @@
 <h5>fields: <span class="tsd-signature-type" data-tsd-kind="Type parameter">TFields</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TFields</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><a href="../types/SearchResultFields.html" class="tsd-signature-type" data-tsd-kind="Type alias">SearchResultFields</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TFields</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L455">search-builder.ts:455</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L449">search-builder.ts:449</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="genre" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>genre</span><a href="#genre" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -283,7 +283,7 @@
 <h5>genre: <a href="../variables/Genre-1.html" class="tsd-signature-type" data-tsd-kind="Variable">Genre</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><a href="../variables/Genre-1.html" class="tsd-signature-type" data-tsd-kind="Variable">Genre</a><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L415">search-builder.ts:415</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L409">search-builder.ts:409</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="gzip" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>gzip</span><a href="#gzip" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -302,9 +302,9 @@
 <div class="tsd-comment tsd-typography"><p>gzip圧縮レベル(1～5)</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#gzip">gzip</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#gzip">gzip</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L351">search-builder.ts:351</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L101">search-builder.ts:101</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="isBL" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>isBL</span><a href="#isBL" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -319,9 +319,9 @@
 <li>
 <h5>bool: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#isBL">isBL</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#isBL">isBL</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L108">search-builder.ts:108</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L186">search-builder.ts:186</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="isGL" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>isGL</span><a href="#isGL" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -336,9 +336,9 @@
 <li>
 <h5>bool: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#isGL">isGL</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#isGL">isGL</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L121">search-builder.ts:121</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L199">search-builder.ts:199</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="isPickup" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>is<wbr/>Pickup</span><a href="#isPickup" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -353,9 +353,9 @@
 <li>
 <h5>bool: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#isPickup">isPickup</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#isPickup">isPickup</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L263">search-builder.ts:263</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L341">search-builder.ts:341</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="isR15" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>is<wbr/>R15</span><a href="#isR15" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -371,7 +371,7 @@
 <h5>bool: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L442">search-builder.ts:442</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L436">search-builder.ts:436</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="isStop" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>is<wbr/>Stop</span><a href="#isStop" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -386,9 +386,9 @@
 <li>
 <h5>bool: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#isStop">isStop</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#isStop">isStop</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L254">search-builder.ts:254</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L332">search-builder.ts:332</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="isTT" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>isTT</span><a href="#isTT" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -398,9 +398,9 @@
 <h3>Returns</h3><p>this</p>
 </div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#isTT">isTT</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#isTT">isTT</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L173">search-builder.ts:173</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L251">search-builder.ts:251</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="isTenni" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>is<wbr/>Tenni</span><a href="#isTenni" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -415,9 +415,9 @@
 <li>
 <h5>bool: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#isTenni">isTenni</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#isTenni">isTenni</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L160">search-builder.ts:160</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L238">search-builder.ts:238</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="isTensei" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>is<wbr/>Tensei</span><a href="#isTensei" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -432,9 +432,9 @@
 <li>
 <h5>bool: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#isTensei">isTensei</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#isTensei">isTensei</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L147">search-builder.ts:147</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L225">search-builder.ts:225</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="isZankoku" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>is<wbr/>Zankoku</span><a href="#isZankoku" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -449,9 +449,9 @@
 <li>
 <h5>bool: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#isZankoku">isZankoku</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#isZankoku">isZankoku</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L134">search-builder.ts:134</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L212">search-builder.ts:212</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="kaiwaritu" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>kaiwaritu</span><a href="#kaiwaritu" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -466,9 +466,9 @@
 <li>
 <h5>num: <span class="tsd-signature-type">number</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#kaiwaritu">kaiwaritu</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#kaiwaritu">kaiwaritu</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L191">search-builder.ts:191</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L269">search-builder.ts:269</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="kaiwaritu.kaiwaritu-2">kaiwaritu<span class="tsd-signature-symbol">(</span>min<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, max<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span><a href="#kaiwaritu.kaiwaritu-2" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-parameters">
@@ -479,9 +479,9 @@
 <li>
 <h5>max: <span class="tsd-signature-type">number</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#kaiwaritu">kaiwaritu</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#kaiwaritu">kaiwaritu</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L192">search-builder.ts:192</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L270">search-builder.ts:270</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="lastUpdate" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>last<wbr/>Update</span><a href="#lastUpdate" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -496,9 +496,9 @@
 <li>
 <h5>date: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#lastUpdate">lastUpdate</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#lastUpdate">lastUpdate</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L272">search-builder.ts:272</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L350">search-builder.ts:350</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="lastUpdate.lastUpdate-2">last<wbr/>Update<span class="tsd-signature-symbol">(</span>from<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, to<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span><a href="#lastUpdate.lastUpdate-2" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-parameters">
@@ -509,9 +509,9 @@
 <li>
 <h5>to: <span class="tsd-signature-type">number</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#lastUpdate">lastUpdate</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#lastUpdate">lastUpdate</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L273">search-builder.ts:273</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L351">search-builder.ts:351</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="lastUpdate.lastUpdate-3">last<wbr/>Update<span class="tsd-signature-symbol">(</span>from<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span>, to<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span><a href="#lastUpdate.lastUpdate-3" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-parameters">
@@ -522,9 +522,9 @@
 <li>
 <h5>to: <span class="tsd-signature-type">Date</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#lastUpdate">lastUpdate</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#lastUpdate">lastUpdate</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L274">search-builder.ts:274</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L352">search-builder.ts:352</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="length" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>length</span><a href="#length" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -539,9 +539,9 @@
 <li>
 <h5>length: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#length">length</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#length">length</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L182">search-builder.ts:182</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L260">search-builder.ts:260</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="limit" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>limit</span><a href="#limit" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -556,9 +556,9 @@
 <li>
 <h5>num: <span class="tsd-signature-type">number</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#limit">limit</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#limit">limit</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L296">search-builder.ts:296</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L61">search-builder.ts:61</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="ncode" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>ncode</span><a href="#ncode" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -573,9 +573,9 @@
 <li>
 <h5>ncodes: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#ncode">ncode</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#ncode">ncode</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L227">search-builder.ts:227</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L305">search-builder.ts:305</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="notBigGenre" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>not<wbr/>Big<wbr/>Genre</span><a href="#notBigGenre" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -591,7 +591,7 @@
 <h5>genre: <a href="../variables/BigGenre-1.html" class="tsd-signature-type" data-tsd-kind="Variable">BigGenre</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><a href="../variables/BigGenre-1.html" class="tsd-signature-type" data-tsd-kind="Variable">BigGenre</a><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L406">search-builder.ts:406</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L400">search-builder.ts:400</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="notGenre" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>not<wbr/>Genre</span><a href="#notGenre" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -607,7 +607,7 @@
 <h5>genre: <a href="../variables/Genre-1.html" class="tsd-signature-type" data-tsd-kind="Variable">Genre</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><a href="../variables/Genre-1.html" class="tsd-signature-type" data-tsd-kind="Variable">Genre</a><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L424">search-builder.ts:424</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L418">search-builder.ts:418</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="notWord" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>not<wbr/>Word</span><a href="#notWord" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -622,9 +622,9 @@
 <li>
 <h5>word: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#notWord">notWord</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#notWord">notWord</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L63">search-builder.ts:63</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L141">search-builder.ts:141</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="opt" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>opt</span><a href="#opt" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -642,27 +642,13 @@
 <h5>option: <span class="tsd-signature-type" data-tsd-kind="Type parameter">TFields</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TFields</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><a href="../types/SearchResultOptionalFields.html" class="tsd-signature-type" data-tsd-kind="Type alias">SearchResultOptionalFields</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TFields</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L463">search-builder.ts:463</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L457">search-builder.ts:457</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="order" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>order</span><a href="#order" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 <li class="tsd-signature tsd-anchor-link" id="order.order-1">order<span class="tsd-signature-symbol">(</span>order<span class="tsd-signature-symbol">: </span><a href="../variables/Order-1.html" class="tsd-signature-type" data-tsd-kind="Variable">Order</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span><a href="#order.order-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>出力順序を指定する。指定しない場合は新着順となります。</p>
-
-<h3>Description</h3><p>allunique	閲覧者の多い順(未実装)
-favnovelcnt	ブックマーク数の多い順
-reviewcnt	レビュー数の多い順
-hyoka	総合評価の高い順
-hyokaasc	総合評価の低い順
-impressioncnt	感想の多い順
-hyokacnt	評価者数の多い順
-hyokacntasc	評価者数の少ない順
-weekly	週間ユニークユーザの多い順 毎週火曜日早朝リセット
-(前週の日曜日から土曜日分)
-lengthdesc	小説本文の文字数が多い順
-lengthasc	小説本文の文字数が少ない順
-ncodedesc	Nコードが新しい順
+<div class="tsd-comment tsd-typography"><p>出力順序を指定する。指定しない場合は新着順となります。
 old	古い順</p>
 
 <h3>Returns</h3><p>this</p>
@@ -675,9 +661,9 @@ old	古い順</p>
 <div class="tsd-comment tsd-typography"><p>出力順序</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#order">order</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#order">order</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L339">search-builder.ts:339</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L89">search-builder.ts:89</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="page" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>page</span><a href="#page" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -694,9 +680,9 @@ old	古い順</p>
 <li>
 <h5>count: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 20</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#page">page</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#page">page</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L314">search-builder.ts:314</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L79">search-builder.ts:79</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="sasie" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>sasie</span><a href="#sasie" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -711,9 +697,9 @@ old	古い順</p>
 <li>
 <h5>num: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#sasie">sasie</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#sasie">sasie</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L209">search-builder.ts:209</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L287">search-builder.ts:287</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-inherited"><a id="set" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>set</span><a href="#set" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-inherited">
@@ -729,9 +715,9 @@ old	古い順</p>
 <li>
 <h5>obj: <a href="../interfaces/SearchParams.html" class="tsd-signature-type" data-tsd-kind="Interface">SearchParams</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#set">set</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#set">set</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L361">search-builder.ts:361</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L111">search-builder.ts:111</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="start" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>start</span><a href="#start" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -746,9 +732,9 @@ old	古い順</p>
 <li>
 <h5>num: <span class="tsd-signature-type">number</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#start">start</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#start">start</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L305">search-builder.ts:305</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L70">search-builder.ts:70</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="time" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>time</span><a href="#time" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -763,9 +749,9 @@ old	古い順</p>
 <li>
 <h5>num: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#time">time</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#time">time</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L218">search-builder.ts:218</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L296">search-builder.ts:296</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="type" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>type</span><a href="#type" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -780,17 +766,15 @@ old	古い順</p>
 <li>
 <h5>type: <a href="../variables/NovelTypeParam-1.html" class="tsd-signature-type" data-tsd-kind="Variable">NovelTypeParam</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#type">type</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#type">type</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L236">search-builder.ts:236</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-inherited"><a id="unset" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>unset</span><a href="#unset" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-inherited">
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L314">search-builder.ts:314</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a id="unset" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>unset</span><a href="#unset" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-inherited">
 <li class="tsd-signature tsd-anchor-link" id="unset.unset-1">unset<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">keyof </span><a href="../interfaces/SearchParams.html" class="tsd-signature-type" data-tsd-kind="Interface">SearchParams</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span><a href="#unset.unset-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
-<li class="tsd-description"><code class="tsd-tag ts-flagPrivate">Private</code> 
+<li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>クエリパラメータを削除する</p>
-
-<h3>Returns</h3><p>this</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -798,9 +782,9 @@ old	古い順</p>
 <li>
 <h5>key: <span class="tsd-signature-symbol">keyof </span><a href="../interfaces/SearchParams.html" class="tsd-signature-type" data-tsd-kind="Interface">SearchParams</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#unset">unset</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#unset">unset</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L371">search-builder.ts:371</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L119">search-builder.ts:119</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="userId" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>user<wbr/>Id</span><a href="#userId" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -816,7 +800,7 @@ old	古い順</p>
 <h5>ids: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L433">search-builder.ts:433</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L427">search-builder.ts:427</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="word" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>word</span><a href="#word" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -832,9 +816,9 @@ old	古い順</p>
 <li>
 <h5>word: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="SearchBuilder.html" class="tsd-signature-type" data-tsd-kind="Class">SearchBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">TOpt</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#word">word</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#word">word</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L54">search-builder.ts:54</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L132">search-builder.ts:132</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a id="array2string" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <code class="tsd-tag ts-flagProtected">Protected</code> <span>array2string</span><a href="#array2string" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-inherited">
@@ -851,9 +835,9 @@ old	古い順</p>
 <li>
 <h5>n: <span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Join</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#array2string">array2string</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#array2string">array2string</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L40">search-builder.ts:40</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L47">search-builder.ts:47</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a id="distinct" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <code class="tsd-tag ts-flagProtected">Protected</code> <span>distinct</span><a href="#distinct" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-inherited">
@@ -870,9 +854,9 @@ old	古い順</p>
 <li>
 <h5>array: <span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="SearchBuilderBase.html">SearchBuilderBase</a>.<a href="SearchBuilderBase.html#distinct">distinct</a></p>
+<p>Inherited from <a href="NovelSearchBuilderBase.html">NovelSearchBuilderBase</a>.<a href="NovelSearchBuilderBase.html#distinct">distinct</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/deflis/node-narou/blob/e8e088e/src/search-builder.ts#L36">search-builder.ts:36</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/deflis/node-narou/blob/a41cd69/src/search-builder.ts#L43">search-builder.ts:43</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
@@ -936,7 +920,7 @@ old	古い順</p>
 <li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="SearchBuilder.html#start" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>start</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="SearchBuilder.html#time" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>time</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="SearchBuilder.html#type" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>type</a></li>
-<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-inherited"><a href="SearchBuilder.html#unset" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>unset</a></li>
+<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a href="SearchBuilder.html#unset" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>unset</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="SearchBuilder.html#userId" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>user<wbr/>Id</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="SearchBuilder.html#word" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>word</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a href="SearchBuilder.html#array2string" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>array2string</a></li>

@@ -1,9 +1,21 @@
 import { NarouRankingResult } from "./narou-ranking-results";
-import NarouSearchResults, { NarouSearchResult } from "./narou-search-results";
-import { RankingHistoryParams, RankingParams, SearchParams } from "./params";
+import NarouSearchResults, {
+  NarouSearchResult,
+  UserSearchResult,
+} from "./narou-search-results";
+import {
+  RankingHistoryParams,
+  RankingParams,
+  SearchParams,
+  UserSearchParams,
+} from "./params";
 import { RankingHistoryRawResult } from "./ranking-history";
 
-export type NarouParams = SearchParams | RankingParams | RankingHistoryParams;
+export type NarouParams =
+  | SearchParams
+  | RankingParams
+  | RankingHistoryParams
+  | UserSearchParams;
 
 /**
  * なろう小説APIへのリクエストを実行する
@@ -23,18 +35,15 @@ export default abstract class NarouNovel {
   ): Promise<T>;
 
   async executeSearch<T extends keyof NarouSearchResult>(
-    params: NarouParams,
+    params: SearchParams,
     endpoint = "https://api.syosetu.com/novelapi/api/"
-  ): Promise<NarouSearchResults<T>> {
-    return new NarouSearchResults<T>(
-      await this.execute(params, endpoint),
-      params
-    );
+  ): Promise<NarouSearchResults<NarouSearchResult, T>> {
+    return new NarouSearchResults(await this.execute(params, endpoint), params);
   }
 
   async executeNovel<T extends keyof NarouSearchResult>(
     params: SearchParams
-  ): Promise<NarouSearchResults<T>> {
+  ): Promise<NarouSearchResults<NarouSearchResult, T>> {
     return await this.executeSearch(
       params,
       "https://api.syosetu.com/novelapi/api/"
@@ -43,7 +52,7 @@ export default abstract class NarouNovel {
 
   async executeNovel18<T extends keyof NarouSearchResult>(
     params: SearchParams
-  ): Promise<NarouSearchResults<T>> {
+  ): Promise<NarouSearchResults<NarouSearchResult, T>> {
     return await this.executeSearch(
       params,
       "https://api.syosetu.com/novel18api/api/"
@@ -58,5 +67,11 @@ export default abstract class NarouNovel {
     params: RankingHistoryParams
   ): Promise<RankingHistoryRawResult[]> {
     return await this.execute(params, "https://api.syosetu.com/rank/rankin/");
+  }
+
+  async executeUserSearch<T extends keyof UserSearchResult>(
+    params: UserSearchParams
+  ): Promise<NarouSearchResults<UserSearchResult, T>> {
+    return await this.execute(params, "https://api.syosetu.com/userapi/api/");
   }
 }

@@ -7,29 +7,27 @@ import {
   BigGenre,
   R18Fields,
   OptionalFields,
+  UserFields,
 } from "./params";
 
 /**
  * なろう小説API検索結果
  * @class NarouSearchResults
  */
-export default class NarouSearchResults<T extends keyof NarouSearchResult> {
+export default class NarouSearchResults<T, TKey extends keyof T> {
   allcount: number;
   limit: number;
   start: number;
   page: number;
   length: number;
-  values: PickedNarouSearchResult<T>[];
+  values: readonly Pick<T, TKey>[];
 
   /**
    * @constractor
    * @private
    */
   constructor(
-    [header, ...result]: [
-      { allcount: number },
-      ...PickedNarouSearchResult<T>[]
-    ],
+    [header, ...result]: [{ allcount: number }, ...Pick<T, TKey>[]],
     params: SearchParams
   ) {
     const count = header.allcount;
@@ -142,6 +140,17 @@ export interface NarouSearchResult {
   weekly_unique: number;
 }
 
+export interface UserSearchResult {
+  userid: number;
+  name: string;
+  yomikata: string;
+  name1st: string;
+  novel_cnt: number;
+  review_cnt: number;
+  novel_length: number;
+  sum_global_point: number;
+}
+
 export const PcOrK = {
   Ketai: 1,
   Pc: 2,
@@ -174,6 +183,10 @@ export type SearchResultOptionalFields<T extends OptionalFields> = {
 export type SearchResultR18Fields<T extends R18Fields> = {
   [K in keyof typeof R18Fields]: typeof R18Fields[K] extends T ? K : never;
 }[keyof typeof R18Fields];
+
+export type UserSearchResultFields<T extends UserFields> = {
+  [K in keyof typeof UserFields]: typeof UserFields[K] extends T ? K : never;
+}[keyof typeof UserFields];
 
 export type PickedNarouSearchResult<T extends keyof NarouSearchResult> = Pick<
   NarouSearchResult,

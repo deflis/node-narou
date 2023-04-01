@@ -5,6 +5,7 @@ import RankingBuilder from "./ranking";
 import { formatRankingHistory, RankingHistoryResult } from "./ranking-history";
 import SearchBuilder from "./search-builder";
 import SearchBuilderR18 from "./search-builder-r18";
+import UserSearchBuilder from "./user-search";
 
 export * from "./index.common";
 export { NarouNovelFetch, NarouNovelJsonp };
@@ -12,7 +13,7 @@ export { NarouNovelFetch, NarouNovelJsonp };
 const narouNovelFetch = new NarouNovelFetch();
 
 /**
- * 検索
+ * なろう小説 API で小説を検索する
  * @param {string} [word] - 検索ワード
  * @returns {SearchBuilder}
  */
@@ -26,7 +27,7 @@ export function search(
 }
 
 /**
- * 検索
+ * 18禁小説 API で小説を検索する
  * @param {string} [word] - 検索ワード
  * @returns {SearchBuilder}
  */
@@ -39,11 +40,26 @@ export function searchR18(
   return builder;
 }
 
+/**
+ * なろうユーザ検索 API でユーザを検索する
+ */
+export function searchUser(word = "", api: NarouNovel = narouNovelFetch) {
+  const builder = new UserSearchBuilder({}, api);
+  if (word != "") builder.word(word);
+  return builder;
+}
+
+/**
+ * なろう小説ランキング API でランキングを取得する
+ */
 export function ranking(api: NarouNovel = narouNovelFetch): RankingBuilder {
   const builder = new RankingBuilder({}, api);
   return builder;
 }
 
+/**
+ * なろう殿堂入り API でランキング履歴を取得する
+ */
 export async function rankingHistory(
   ncode: string,
   api: NarouNovel = narouNovelFetch
@@ -58,7 +74,8 @@ export async function rankingHistory(
 
 export default {
   search,
-  ranking,
   searchR18,
+  searchUser,
+  ranking,
   rankingHistory,
 };

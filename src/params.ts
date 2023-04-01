@@ -1,4 +1,4 @@
-import { NarouSearchResult } from "./narou-search-results";
+import { NarouSearchResult, UserSearchResult } from "./narou-search-results";
 import { Join } from "./util/type";
 
 export const RankingType = {
@@ -8,6 +8,18 @@ export const RankingType = {
   Quarterly: "q",
 } as const;
 export type RankingType = typeof RankingType[keyof typeof RankingType];
+
+export interface ParamsBase {
+  gzip?: GzipLevel;
+  out?: "json" | "jsonp";
+}
+
+export interface ParamsBaseWithOrder<TOrder extends string> extends ParamsBase {
+  of?: string;
+  lim?: number;
+  st?: number;
+  order?: TOrder;
+}
 
 /**
  * {@link SearchBuilder#Fields}メソッドにパラメータを指定する際のヘルパー。
@@ -38,14 +50,7 @@ export type RankingType = typeof RankingType[keyof typeof RankingType];
  * @property {string} novelupdated_at 小説の更新日時
  * @property {string} updated_at 最終更新日時(注意：システム用で小説更新時とは関係ありません)
  */
-export interface SearchParams {
-  gzip?: GzipLevel;
-  out?: "json";
-  of?: string;
-  lim?: number;
-  st?: number;
-  order?: Order;
-
+export interface SearchParams extends ParamsBaseWithOrder<Order> {
   word?: string;
   notword?: string;
   title?: BooleanNumber;
@@ -104,16 +109,34 @@ export interface SearchParams {
   opt?: Join<OptionalFields>;
 }
 
-export interface RankingParams {
+export interface RankingParams extends ParamsBase {
   rtype: `${string}-${RankingType}`;
-  gzip?: GzipLevel;
-  out?: "json";
 }
 
-export interface RankingHistoryParams {
+export interface RankingHistoryParams extends ParamsBase {
   ncode: string;
-  gzip?: GzipLevel;
-  out?: "json";
+}
+
+/**
+ * ユーザー検索パラメータ
+ */
+export interface UserSearchParams extends ParamsBaseWithOrder<UserOrder> {
+  /** 単語を指定できます。半角または全角スペースで区切るとAND抽出になります。部分一致でHITします。検索の対象はユーザ名とユーザ名のフリガナです。 */
+  word?: string;
+  /** 含みたくない単語を指定できます。スペースで区切ることにより含ませない単語を増やせます。部分一致で除外されます。除外の対象はユーザ名とユーザ名のフリガナです。 */
+  notword?: string;
+  /** ユーザIDで抽出可能。 */
+  userid?: number;
+  /** 抽出するユーザのユーザ名のフリガナの頭文字を指定できます。頭文字はユーザ名のフリガナをひらがなに変換し、最初の1文字が「ぁ」～「ん」の場合に対象となります。 */
+  name1st?: string;
+  /** 抽出するユーザの小説投稿数の下限を指定できます。小説投稿件数が指定された数値以上のユーザを抽出します。 */
+  minnovel?: number;
+  /** 抽出するユーザの小説投稿数の上限を指定できます。小説投稿件数が指定された数値以下のユーザを抽出します。 */
+  maxnovel?: number;
+  /** 抽出するユーザのレビュー投稿数の下限を指定できます。レビュー投稿件数が指定された数値以上のユーザを抽出します。 */
+  minreview?: number;
+  /** 抽出するユーザのレビュー投稿数の上限を指定できます。レビュー投稿件数が指定された数値以下のユーザを抽出します。 */
+  maxreview?: number;
 }
 
 export const BooleanNumber = {
@@ -215,6 +238,18 @@ export type R18Fields = typeof R18Fields[keyof Omit<
   NarouSearchResult,
   "novel_type" | "weekly_unique" | "biggenre" | "genre"
 >];
+
+export const UserFields = {
+  userid: "u",
+  name: "n",
+  yomikata: "y",
+  name1st: "1",
+  novel_cnt: "nc",
+  review_cnt: "rc",
+  novel_length: "nl",
+  sum_global_point: "sg",
+} as const;
+export type UserFields = typeof UserFields[keyof UserSearchResult];
 
 export const OptionalFields = {
   weekly_unique: "weekly",
@@ -378,5 +413,15 @@ export const NovelTypeParam = {
   ShortAndRensai: "ter",
 } as const;
 export type NovelTypeParam = typeof NovelTypeParam[keyof typeof NovelTypeParam];
+
+export const UserOrder = {
+  New: "new",
+  NovelCount: "novelcnt",
+  ReviewCount: "reviewcnt",
+  NovelLength: "novellength",
+  SumGlobalPoint: "sumglobalpoint",
+  Old: "old",
+} as const;
+export type UserOrder = typeof UserOrder[keyof typeof UserOrder];
 
 export type GzipLevel = 0 | 1 | 2 | 3 | 4 | 5;

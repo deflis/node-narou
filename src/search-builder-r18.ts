@@ -1,4 +1,4 @@
-import { SearchBuilderBase } from "./search-builder";
+import { NovelSearchBuilderBase } from "./search-builder";
 import NarouSearchResults, {
   NarouSearchResult,
   SearchResultR18Fields,
@@ -23,18 +23,18 @@ export type DefaultR18SearchResultFields = keyof Omit<
 export default class SearchBuilderR18<
   T extends SearchResultFieldNames = DefaultR18SearchResultFields,
   TOpt extends keyof NarouSearchResult = never
-> extends SearchBuilderBase<T | TOpt> {
+> extends NovelSearchBuilderBase<T | TOpt> {
   /**
    * なろう小説APIへの検索リクエストを実行する
    * @override
    * @returns {Promise<NarouSearchResults>} 検索結果
    */
-  execute(): Promise<NarouSearchResults<T | TOpt>> {
+  execute(): Promise<NarouSearchResults<NarouSearchResult, T | TOpt>> {
     return this.api.executeNovel18(this.params);
   }
 
   r18Site(sites: R18Site | readonly R18Site[]) {
-    this.set({ nocgenre: SearchBuilderBase.array2string(sites) });
+    this.set({ nocgenre: NovelSearchBuilderBase.array2string(sites) });
     return this;
   }
 
@@ -43,7 +43,7 @@ export default class SearchBuilderR18<
    * @return {SearchBuilder} this
    */
   xid(ids: number | readonly number[]) {
-    this.set({ xid: SearchBuilderBase.array2string(ids) });
+    this.set({ xid: NovelSearchBuilderBase.array2string(ids) });
     return this;
   }
 
@@ -54,7 +54,7 @@ export default class SearchBuilderR18<
   fields<TFields extends R18Fields>(
     fields: TFields | readonly TFields[]
   ): SearchBuilderR18<SearchResultR18Fields<R18Fields>> {
-    this.set({ of: SearchBuilderBase.array2string(fields) });
+    this.set({ of: NovelSearchBuilderBase.array2string(fields) });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return this as any;
   }
@@ -62,7 +62,7 @@ export default class SearchBuilderR18<
   opt<TFields extends OptionalFields>(
     option: TFields | readonly TFields[]
   ): SearchBuilderR18<T, SearchResultOptionalFields<TFields>> {
-    this.set({ opt: SearchBuilderBase.array2string(option) });
+    this.set({ opt: NovelSearchBuilderBase.array2string(option) });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return this as any;
   }

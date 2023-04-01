@@ -4,6 +4,7 @@ import SearchBuilder from "./search-builder";
 import SearchBuilderR18 from "./search-builder-r18";
 import RankingBuilder from "./ranking";
 import { formatRankingHistory, RankingHistoryResult } from "./ranking-history";
+import UserSearchBuilder from "./user-search";
 
 export * from "./index.common";
 export { NarouNovelJsonp };
@@ -38,6 +39,15 @@ export function searchR18(
   return builder;
 }
 
+/**
+ * ユーザ検索
+ */
+export function searchUser(word = "", api: NarouNovel = narouNovelJsonp) {
+  const builder = new UserSearchBuilder({}, api);
+  if (word != "") builder.word(word);
+  return builder;
+}
+
 export function ranking(api: NarouNovel = narouNovelJsonp): RankingBuilder {
   const builder = new RankingBuilder({}, api);
   return builder;
@@ -57,7 +67,8 @@ export async function rankingHistory(
 
 export default {
   search,
-  ranking,
   searchR18,
+  searchUser,
+  ranking,
   rankingHistory,
 };

@@ -18,6 +18,7 @@ import {
   NovelTypeParam,
   GzipLevel,
   OptionalFields,
+  ParamsBaseWithOrder,
 } from "./params";
 import { Join } from "./util/type";
 
@@ -26,12 +27,18 @@ export type DefaultSearchResultFields = keyof Omit<
   "weekly_unique" | "noveltype" | "nocgenre" | "xid"
 >;
 
-export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
+export abstract class SearchBuilderBase<
+  TParams extends ParamsBaseWithOrder<TOrder>,
+  TOrder extends string
+> {
   /**
    * constructor
    * @private
    */
-  constructor(protected params: SearchParams = {}, protected api: NarouNovel) {}
+  constructor(
+    protected params: TParams = {} as TParams,
+    protected api: NarouNovel
+  ) {}
 
   protected static distinct<T>(array: readonly T[]): T[] {
     return Array.from(new Set(array));
@@ -47,6 +54,77 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
     }
   }
 
+  /**
+   *
+   * @return {SearchBuilder} this
+   */
+  limit(num: number): this {
+    this.set({ lim: num } as TParams);
+    return this;
+  }
+
+  /**
+   *
+   * @return {SearchBuilder} this
+   */
+  start(num: number): this {
+    this.set({ st: num } as TParams);
+    return this;
+  }
+
+  /**
+   *
+   * @return {SearchBuilder} this
+   */
+  page(no: number, count = 20): this {
+    return this.limit(count).start(no * count);
+  }
+
+  /**
+   * 出力順序を指定する。指定しない場合は新着順となります。
+   * old	古い順
+   * @param {TOrder} order 出力順序
+   * @return {SearchBuilder} this
+   */
+  order(order: TOrder): this {
+    this.set({ order: order } as TParams);
+    return this;
+  }
+
+  /**
+   * gzip圧縮する。
+   *
+   * 転送量上限を減らすためにも推奨
+   * @param {GzipLevel} level gzip圧縮レベル(1～5)
+   * @return {SearchBuilder} this
+   */
+  gzip(level: GzipLevel): this {
+    this.set({ gzip: level } as TParams);
+    return this;
+  }
+
+  /**
+   * クエリパラメータをセットする
+   * @private
+   * @return {SearchBuilder} this
+   */
+  protected set(obj: TParams): this {
+    this.params = { ...this.params, ...obj };
+    return this;
+  }
+
+  /**
+   * クエリパラメータを削除する
+   */
+  protected unset(key: keyof TParams): this {
+    delete this.params[key];
+    return this;
+  }
+}
+
+export abstract class NovelSearchBuilderBase<
+  T extends SearchResultFieldNames
+> extends SearchBuilderBase<SearchParams, Order> {
   /**
    * a
    * @return {SearchBuilder} this
@@ -180,7 +258,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    * @return {SearchBuilder} this
    */
   length(length: number | readonly number[]): this {
-    this.set({ length: SearchBuilderBase.array2string(length) });
+    this.set({ length: NovelSearchBuilderBase.array2string(length) });
     return this;
   }
 
@@ -207,7 +285,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    * @return {SearchBuilder} this
    */
   sasie(num: number | readonly number[]): this {
-    this.set({ sasie: SearchBuilderBase.array2string(num) });
+    this.set({ sasie: NovelSearchBuilderBase.array2string(num) });
     return this;
   }
 
@@ -216,7 +294,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    * @return {SearchBuilder} this
    */
   time(num: number | readonly number[]): this {
-    this.set({ time: SearchBuilderBase.array2string(num) });
+    this.set({ time: NovelSearchBuilderBase.array2string(num) });
     return this;
   }
 
@@ -225,7 +303,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    * @return {SearchBuilder} this
    */
   ncode(ncodes: string | readonly string[]): this {
-    this.set({ ncode: SearchBuilderBase.array2string(ncodes) });
+    this.set({ ncode: NovelSearchBuilderBase.array2string(ncodes) });
     return this;
   }
 
@@ -243,7 +321,7 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
    * @return {SearchBuilder} this
    */
   buntai(buntai: BuntaiParam | readonly BuntaiParam[]): this {
-    this.set({ buntai: SearchBuilderBase.array2string(buntai) });
+    this.set({ buntai: NovelSearchBuilderBase.array2string(buntai) });
     return this;
   }
 
@@ -290,94 +368,10 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
   }
 
   /**
-   *
-   * @return {SearchBuilder} this
-   */
-  limit(num: number): this {
-    this.set({ lim: num });
-    return this;
-  }
-
-  /**
-   *
-   * @return {SearchBuilder} this
-   */
-  start(num: number): this {
-    this.set({ st: num });
-    return this;
-  }
-
-  /**
-   *
-   * @return {SearchBuilder} this
-   */
-  page(no: number, count = 20): this {
-    return this.limit(count).start(no * count);
-  }
-
-  /**
-   * 出力順序を指定する。指定しない場合は新着順となります。
-   *
-   * @description
-   * allunique	閲覧者の多い順(未実装)
-   * favnovelcnt	ブックマーク数の多い順
-   * reviewcnt	レビュー数の多い順
-   * hyoka	総合評価の高い順
-   * hyokaasc	総合評価の低い順
-   * impressioncnt	感想の多い順
-   * hyokacnt	評価者数の多い順
-   * hyokacntasc	評価者数の少ない順
-   * weekly	週間ユニークユーザの多い順 毎週火曜日早朝リセット
-   * (前週の日曜日から土曜日分)
-   * lengthdesc	小説本文の文字数が多い順
-   * lengthasc	小説本文の文字数が少ない順
-   * ncodedesc	Nコードが新しい順
-   * old	古い順
-   * @param {Order} order 出力順序
-   * @return {SearchBuilder} this
-   */
-  order(order: Order): this {
-    this.set({ order: order });
-    return this;
-  }
-
-  /**
-   * gzip圧縮する。
-   *
-   * 転送量上限を減らすためにも推奨
-   * @param {GzipLevel} level gzip圧縮レベル(1～5)
-   * @return {SearchBuilder} this
-   */
-  gzip(level: GzipLevel): this {
-    this.set({ gzip: level });
-    return this;
-  }
-
-  /**
-   * クエリパラメータをセットする
-   * @private
-   * @return {SearchBuilder} this
-   */
-  protected set(obj: SearchParams): this {
-    this.params = { ...this.params, ...obj };
-    return this;
-  }
-
-  /**
-   * クエリパラメータを削除する
-   * @private
-   * @return {SearchBuilder} this
-   */
-  protected unset(key: keyof SearchParams): this {
-    delete this.params[key];
-    return this;
-  }
-
-  /**
    * なろう小説APIへの検索リクエストを実行する
    * @returns {Promise<NarouSearchResults>} 検索結果
    */
-  execute(): Promise<NarouSearchResults<T>> {
+  execute(): Promise<NarouSearchResults<NarouSearchResult, T>> {
     return this.api.executeNovel(this.params);
   }
 }
@@ -389,13 +383,13 @@ export abstract class SearchBuilderBase<T extends SearchResultFieldNames> {
 export default class SearchBuilder<
   T extends keyof NarouSearchResult = DefaultSearchResultFields,
   TOpt extends keyof NarouSearchResult = never
-> extends SearchBuilderBase<T | TOpt> {
+> extends NovelSearchBuilderBase<T | TOpt> {
   /**
    *
    * @return {SearchBuilder} this
    */
   bigGenre(genre: BigGenre | readonly BigGenre[]): this {
-    this.set({ biggenre: SearchBuilderBase.array2string(genre) });
+    this.set({ biggenre: SearchBuilder.array2string(genre) });
     return this;
   }
 
@@ -404,7 +398,7 @@ export default class SearchBuilder<
    * @return {SearchBuilder} this
    */
   notBigGenre(genre: BigGenre | readonly BigGenre[]): this {
-    this.set({ notbiggenre: SearchBuilderBase.array2string(genre) });
+    this.set({ notbiggenre: SearchBuilder.array2string(genre) });
     return this;
   }
 
@@ -413,7 +407,7 @@ export default class SearchBuilder<
    * @return {SearchBuilder} this
    */
   genre(genre: Genre | readonly Genre[]): this {
-    this.set({ genre: SearchBuilderBase.array2string(genre) });
+    this.set({ genre: SearchBuilder.array2string(genre) });
     return this;
   }
 
@@ -422,7 +416,7 @@ export default class SearchBuilder<
    * @return {SearchBuilder} this
    */
   notGenre(genre: Genre | readonly Genre[]): this {
-    this.set({ notgenre: SearchBuilderBase.array2string(genre) });
+    this.set({ notgenre: SearchBuilder.array2string(genre) });
     return this;
   }
 
@@ -431,7 +425,7 @@ export default class SearchBuilder<
    * @return {SearchBuilder} this
    */
   userId(ids: number | readonly number[]): this {
-    this.set({ userid: SearchBuilderBase.array2string(ids) });
+    this.set({ userid: SearchBuilder.array2string(ids) });
     return this;
   }
 
@@ -455,7 +449,7 @@ export default class SearchBuilder<
   fields<TFields extends Fields>(
     fields: TFields | readonly TFields[]
   ): SearchBuilder<SearchResultFields<TFields>, TOpt> {
-    this.set({ of: SearchBuilderBase.array2string(fields) });
+    this.set({ of: SearchBuilder.array2string(fields) });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return this as any;
   }
@@ -463,7 +457,7 @@ export default class SearchBuilder<
   opt<TFields extends OptionalFields>(
     option: TFields | readonly TFields[]
   ): SearchBuilder<T, SearchResultOptionalFields<TFields>> {
-    this.set({ opt: SearchBuilderBase.array2string(option) });
+    this.set({ opt: SearchBuilder.array2string(option) });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return this as any;
   }
