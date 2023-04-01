@@ -3,11 +3,22 @@
   "version": "0.7.7",
   "description": "Narou API Wrapper",
   "main": "dist/index.js",
-  "browser": "dist/index.browser.js",
-  "types": "dist/index.d.ts",
-  "typings": "dist/index.d.ts",
-  "module": "dist.esm/index.js",
-  "esnext": "dist.es2017/index.js",
+  "types": "src/index.ts",
+  "exports": {
+    ".": {
+      "browser": {
+        "require": "./dist/index.browser.js",
+        "import": "./dist.esm/index.browser.js"
+      },
+      "node": {
+        "require": "./dist/index.js",
+        "import": "./dist.esm/index.js"
+      }
+    }
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "files": [
     "dist",
     "dist.*",
@@ -45,9 +56,8 @@
   "scripts": {
     "build": "npm-run-all check clean build:tsc",
     "build:tsc": "npm-run-all --parallel build:tsc:*",
-    "build:tsc:es5": "tsc -p ./tsconfig.es5.json",
+    "build:tsc:cjs": "tsc -p ./tsconfig.cjs.json",
     "build:tsc:esm": "tsc -p ./tsconfig.esm.json",
-    "build:tsc:es2017": "tsc -p ./tsconfig.es2017.json",
     "check": "npm-run-all --parallel check:lint check:build test",
     "check:lint": "eslint src/** test/**",
     "check:build": "tsc --noEmit",
