@@ -61,7 +61,7 @@
     "check": "npm-run-all --parallel check:lint check:build test",
     "check:lint": "eslint src/** test/**",
     "check:build": "tsc --noEmit",
-    "prepare": "npm-run-all format build",
+    "prepack": "npm-run-all format build",
     "format": "eslint --fix src/** test/**",
     "test": "jest",
     "clean": "npx rimraf dist dist.*",
