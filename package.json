@@ -65,9 +65,8 @@
     "format": "eslint --fix src/** test/**",
     "test": "jest",
     "clean": "npx rimraf dist dist.*",
-    "docs": "npm-run-all docs:clean docs:typedoc docs:nojekyll",
+    "docs": "npm-run-all docs:clean docs:typedoc",
     "docs:clean": "npx rimraf docs",
-    "docs:typedoc": "npx typedoc --out ./docs src/index.ts",
-    "docs:nojekyll": "npx touch ./docs/.nojekyll"
+    "docs:typedoc": "npx typedoc --out ./docs src/index.ts"
   }
 }
