@@ -81,3 +81,6 @@ typings/
 
 #DynamoDB Local files 
 .dynamodb/ 
+
+# document pages
+docs/
