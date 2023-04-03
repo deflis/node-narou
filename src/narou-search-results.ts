@@ -12,14 +12,31 @@ import {
 
 /**
  * なろう小説API検索結果
- * @class NarouSearchResults
  */
 export default class NarouSearchResults<T, TKey extends keyof T> {
+  /**
+   * 検索結果数
+   */
   allcount: number;
+  /**
+   * 結果表示上限数
+   */
   limit: number;
+  /**
+   * 結果表示開始数
+   */
   start: number;
+  /**
+   * 結果表示の現在ページ(=start/limit)
+   */
   page: number;
+  /**
+   * 今回取得できた検索結果の数
+   */
   length: number;
+  /**
+   * 検索結果
+   */
   values: readonly Pick<T, TKey>[];
 
   /**
@@ -34,138 +51,190 @@ export default class NarouSearchResults<T, TKey extends keyof T> {
     const limit = params.lim ?? 20;
     const start = params.st ?? 0;
 
-    /**
-     * 検索結果数
-     * @type {number}
-     */
     this.allcount = count;
-    /**
-     * 結果表示上限数
-     * @type {number}
-     */
     this.limit = limit;
-    /**
-     * 結果表示開始数
-     * @type {number}
-     */
     this.start = start;
-    /**
-     * 結果表示ページ数
-     * @type {number}
-     */
     this.page = start / limit;
-    /**
-     * 結果数
-     * @type {number}
-     */
     this.length = result.length;
-    /**
-     * 検索結果
-     * @type {PickedNarouSearchResult<T>[]}
-     */
     this.values = result;
   }
 }
 
 /**
- * @typedef {Object} NarouSearchResult
- * @property {number} title 小説名
- * @property {string} ncode Nコード
- * @property {number} userid 作者のユーザID(数値)
- * @property {string} writer 作者名
- * @property {string} story 小説のあらすじ
- * @property {number} genre ジャンル
- * @property {string} keyword キーワード
- * @property {string} general_firstup 初回掲載日 YYYY-MM-DD HH:MM:SSの形式
- * @property {string} general_lastup 最終掲載日 YYYY-MM-DD HH:MM:SSの形式
- * @property {number} noveltype 連載の場合は1、短編の場合は2
- * @property {number} end 短編小説と完結済小説は0となっています。連載中は1です。
- * @property {number} general_all_no 全掲載話数です。短編の場合は1です。
- * @property {number} length 全掲載話数です。短編の場合は1です。
- * @property {number} time 読了時間(分単位)です。読了時間は小説文字数÷500を切り上げした数値です。
- * @property {number} isstop 長期連載中は1、それ以外は0です。
- * @property {number} pc_or_k 1はケータイのみ、2はPCのみ、3はPCとケータイで投稿された作品です。対象は投稿と次話投稿時のみで、どの端末で執筆されたかを表すものではありません。
- * @property {number} global_point 総合得点(=(ブックマーク数×2)+評価点)
- * @property {number} fav_novel_cnt ブックマーク数
- * @property {number} review_cnt レビュー数
- * @property {number} all_point 評価点
- * @property {number} all_hyoka_cnt 評価者数
- * @property {number} sasie_cnt 挿絵の数
- * @property {number} kaiwaritu 会話率
- * @property {number} novelupdated_at 小説の更新日時
- * @property {number} updated_at 最終更新日時(注意：システム用で小説更新時とは関係ありません)
+ * 小説情報
+ * @see https://dev.syosetu.com/man/api/#output
+ * @see https://dev.syosetu.com/xman/api/#output
  */
-
 export interface NarouSearchResult {
+  /** 小説名 */
   title: string;
+  /** Nコード */
   ncode: string;
+  /** 作者のユーザID(数値) */
   userid: number;
+  /** 作者名 */
   writer: string;
+  /** 小説のあらすじ */
   story: string;
+  /** 掲載サイト */
   nocgenre: R18Site;
+  /** 大ジャンル */
   biggenre: BigGenre;
+  /** ジャンル */
   genre: Genre;
+  /** キーワード */
   keyword: string;
+  /** 初回掲載日 YYYY-MM-DD HH:MM:SSの形式 */
   general_firstup: string;
+  /** 最終掲載日 YYYY-MM-DD HH:MM:SSの形式 */
   general_lastup: string;
-  novel_type: number;
+  /** 連載の場合は1、短編の場合は2 */
+  novel_type: NovelType;
+  /** 連載の場合は1、短編の場合は2 */
   noveltype: NovelType;
+  /** 短編小説と完結済小説は0となっています。連載中は1です。 */
   end: End;
+  /** 全掲載話数です。短編の場合は1です。 */
   general_all_no: number;
+  /** 小説文字数です。スペースや改行は文字数としてカウントしません。 */
   length: number;
+  /** 読了時間(分単位)です。読了時間は小説文字数÷500を切り上げした数値です。 */
   time: number;
+  /** 長期連載中は1、それ以外は0です。 */
   isstop: BooleanNumber;
+  /** 登録必須キーワードに「R15」が含まれる場合は1、それ以外は0です。 */
   isr15: BooleanNumber;
+  /** 登録必須キーワードに「ボーイズラブ」が含まれる場合は1、それ以外は0です。 */
   isbl: BooleanNumber;
+  /** 登録必須キーワードに「ガールズラブ」が含まれる場合は1、それ以外は0です。 */
   isgl: BooleanNumber;
+  /** 登録必須キーワードに「残酷な描写あり」が含まれる場合は1、それ以外は0です。 */
   iszankoku: BooleanNumber;
+  /** 登録必須キーワードに「異世界転生」が含まれる場合は1、それ以外は0です。 */
   istensei: BooleanNumber;
+  /** 登録必須キーワードに「異世界転移」が含まれる場合は1、それ以外は0です。 */
   istenni: BooleanNumber;
+  /** 1はケータイのみ、2はPCのみ、3はPCとケータイで投稿された作品です。対象は投稿と次話投稿時のみで、どの端末で執筆されたかを表すものではありません。 */
   pc_or_k: PcOrK;
+  /** 総合得点(=(ブックマーク数×2)+評価点) */
   global_point: number;
+  /**
+   * 日間ポイント
+   * ランキング集計時点から過去24時間以内で新たに登録されたブックマークや評価が対象
+   */
   daily_point: number;
+  /**
+   * 週間ポイント
+   * ランキング集計時点から過去7日以内で新たに登録されたブックマークや評価が対象
+   */
   weekly_point: number;
+  /**
+   * 月間ポイント
+   * ランキング集計時点から過去30日以内で新たに登録されたブックマークや評価が対象
+   */
   monthly_point: number;
+  /**
+   * 四半期ポイント
+   * ランキング集計時点から過去90日以内で新たに登録されたブックマークや評価が対象
+   */
   quarter_point: number;
+  /**
+   * 年間ポイント
+   * ランキング集計時点から過去365日以内で新たに登録されたブックマークや評価が対象
+   */
   yearly_point: number;
+  /** ブックマーク数 */
   fav_novel_cnt: number;
+  /** 感想数 */
   impression_cnt: number;
+  /** レビュー数 */
   review_cnt: number;
+  /** 評価ポイント */
   all_point: number;
+  /** 評価者数 */
   all_hyoka_cnt: number;
+  /** 挿絵の数 */
   sasie_cnt: number;
+  /**
+   * 会話率
+   * @see https://dev.syosetu.com/man/kaiwa/
+   */
   kaiwaritu: number;
+  /**
+   * 小説の更新日時
+   */
   novelupdated_at: string;
+  /**
+   * 最終更新日時
+   * システム用で小説更新時とは関係ありません
+   */
   updated_at: string;
+  /** 週間ユニークユーザー数 */
   weekly_unique: number;
 }
 
+/**
+ * ユーザ情報
+ * @see https://dev.syosetu.com/man/userapi/#output
+ */
 export interface UserSearchResult {
+  /** ユーザID */
   userid: number;
+  /** ユーザ名 */
   name: string;
+  /** ユーザ名のフリガナ */
   yomikata: string;
+  /**
+   * ユーザ名のフリガナの頭文字
+   * ひらがな以外の場合はnullまたは空文字となります。
+   */
   name1st: string;
+  /** 小説投稿数 */
   novel_cnt: number;
+  /** レビュー投稿数 */
   review_cnt: number;
+  /**
+   * 小説累計文字数
+   * スペースや改行は文字数としてカウントしません。
+   */
   novel_length: number;
+  /**
+   * 総合評価ポイントの合計
+   * 投稿済小説でそれぞれ獲得した総合評価ポイントの合計です。
+   */
   sum_global_point: number;
 }
 
+/**
+ * pc_or_kの値ヘルパー
+ */
 export const PcOrK = {
+  /** ケータイのみで投稿された作品 */
   Ketai: 1,
+  /** PCのみで投稿された作品 */
   Pc: 2,
+  /** PCとケータイで投稿された作品 */
   PcAndKetai: 3,
 } as const;
 export type PcOrK = typeof PcOrK[keyof typeof PcOrK];
-
+/**
+ * noveltype/novel_typeの値ヘルパー
+ */
 export const NovelType = {
+  /** 連載 */
   Rensai: 1,
+  /** 短編 */
   Tanpen: 2,
 } as const;
 export type NovelType = typeof NovelType[keyof typeof NovelType];
 
+/**
+ * endの値ヘルパー
+ */
 export const End = {
+  /** 短編小説と完結済小説 */
   KanketsuOrTanpen: 0,
+  /** 連載中 */
   Rensai: 1,
 } as const;
 export type End = typeof End[keyof typeof End];

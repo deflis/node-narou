@@ -3,8 +3,6 @@ import { jsonp } from "./util/jsonp";
 
 /**
  * なろう小説APIへのリクエストを実行する
- * @class NarouNovel
- * @private
  */
 export default class NarouNovelJsonp extends NarouNovel {
   protected async execute<T>(

@@ -5,8 +5,6 @@ import NarouNovel, { NarouParams } from "./narou";
 
 /**
  * なろう小説APIへのリクエストを実行する
- * @class NarouNovel
- * @private
  */
 export default class NarouNovelFetch extends NarouNovel {
   constructor(private fetch = nodeFetch) {
