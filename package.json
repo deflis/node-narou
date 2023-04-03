@@ -1,6 +1,6 @@
 {
   "name": "narou",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Narou API Wrapper",
   "main": "dist/index.js",
   "types": "src/index.ts",
@@ -61,13 +61,12 @@
     "check": "npm-run-all --parallel check:lint check:build test",
     "check:lint": "eslint src/** test/**",
     "check:build": "tsc --noEmit",
-    "prepare": "npm-run-all format build",
+    "prepack": "npm-run-all format build",
     "format": "eslint --fix src/** test/**",
     "test": "jest",
     "clean": "npx rimraf dist dist.*",
-    "docs": "npm-run-all docs:clean docs:typedoc docs:nojekyll",
+    "docs": "npm-run-all docs:clean docs:typedoc",
     "docs:clean": "npx rimraf docs",
-    "docs:typedoc": "npx typedoc --out ./docs src/index.ts",
-    "docs:nojekyll": "npx touch ./docs/.nojekyll"
+    "docs:typedoc": "npx typedoc --out ./docs src/index.ts"
   }
 }
