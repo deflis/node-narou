@@ -1,4 +1,4 @@
-import parse from "date-fns/parse";
+import { parse } from "date-fns";
 import { RankingType } from "./params";
 
 const dateFormat = "yyyyMMdd";

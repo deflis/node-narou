@@ -1,13 +1,13 @@
-import nodeFetch from "node-fetch";
-
 import { unzipp } from "./util/unzipp";
 import NarouNovel, { NarouParams } from "./narou";
+
+type Fetch = typeof fetch;
 
 /**
  * なろう小説APIへのリクエストを実行する
  */
 export default class NarouNovelFetch extends NarouNovel {
-  constructor(private fetch = nodeFetch) {
+  constructor(private fetch: Fetch = require('node-fetch')) {
     super();
   }
 
@@ -34,15 +34,7 @@ export default class NarouNovelFetch extends NarouNovel {
       return (await res.json()) as T;
     }
 
-    const buffer = await res.buffer();
-    try {
-      return await unzipp(buffer);
-    } catch {
-      try {
-        throw JSON.stringify(buffer.toString());
-      } catch {
-        throw buffer.toString();
-      }
-    }
+    const buffer = await res.arrayBuffer();
+    return await unzipp(buffer);
   }
 }
