@@ -5,4 +5,6 @@ export default defineConfig({
   format: ["cjs", "esm"],
   clean: true,
   dts: true,
+  entry: ["src/index.ts", "src/index.browser.ts"],
+  sourcemap: true,
 });
