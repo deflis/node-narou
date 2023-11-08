@@ -31,7 +31,7 @@ export default class NarouNovelFetch extends NarouNovel {
     const res = await this.fetch(url);
 
     if (query.gzip === 0) {
-      return await res.json();
+      return (await res.json()) as T;
     }
 
     const buffer = await res.buffer();
