@@ -3,28 +3,31 @@
   "version": "0.8.1",
   "description": "Narou API Wrapper",
   "main": "dist/index.js",
-  "types": "src/index.ts",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.mjs",
   "exports": {
     ".": {
       "browser": {
         "require": "./dist/index.browser.js",
-        "import": "./dist.esm/index.browser.js"
+        "import": "./dist/index.browser.mjs",
+        "types": "./dist/index.browser.d.ts"
       },
       "node": {
         "require": "./dist/index.js",
-        "import": "./dist.esm/index.js"
+        "import": "./dist/index.mjs",
+        "types": "./dist/index.d.ts"
       }
     }
   },
+  "files": [
+    "dist",
+    "src",
+    "package.json",
+    "package-lock.json"
+  ],
   "engines": {
     "node": ">=16.0.0"
   },
-  "files": [
-    "dist",
-    "dist.*",
-    "src",
-    "package-lock.json"
-  ],
   "author": "deflis <deflis@gmail.com>",
   "license": "MIT",
   "repository": {
@@ -48,23 +51,21 @@
     "npm-run-all": "^4.1.4",
     "prettier": "^2.7.1",
     "ts-jest": "^28.0.6",
+    "tsup": "^7.2.0",
     "typescript": "^4.7.4"
   },
   "optionalDependencies": {
     "node-fetch": "^2.6.7"
   },
   "scripts": {
-    "build": "npm-run-all check clean build:tsc",
-    "build:tsc": "npm-run-all --parallel build:tsc:*",
-    "build:tsc:cjs": "tsc -p ./tsconfig.cjs.json",
-    "build:tsc:esm": "tsc -p ./tsconfig.esm.json",
+    "build": "npm-run-all check build:tsc",
+    "build:tsc": "tsup ./src",
     "check": "npm-run-all --parallel check:lint check:build test",
     "check:lint": "eslint src/** test/**",
     "check:build": "tsc --noEmit",
     "prepack": "npm-run-all format build",
     "format": "eslint --fix src/** test/**",
     "test": "jest",
-    "clean": "npx rimraf dist dist.*",
     "docs": "npm-run-all docs:clean docs:typedoc",
     "docs:clean": "npx rimraf docs",
     "docs:typedoc": "npx typedoc --out ./docs src/index.ts"
