@@ -23,7 +23,8 @@
     "dist",
     "src",
     "package.json",
-    "package-lock.json"
+    "package-lock.json",
+    "README.md"
   ],
   "engines": {
     "node": ">=16.0.0"
