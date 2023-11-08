@@ -114,8 +114,6 @@ export interface NarouSearchResult {
   istensei: BooleanNumber;
   /** 登録必須キーワードに「異世界転移」が含まれる場合は1、それ以外は0です。 */
   istenni: BooleanNumber;
-  /** 1はケータイのみ、2はPCのみ、3はPCとケータイで投稿された作品です。対象は投稿と次話投稿時のみで、どの端末で執筆されたかを表すものではありません。 */
-  pc_or_k: PcOrK;
   /** 総合得点(=(ブックマーク数×2)+評価点) */
   global_point: number;
   /**
@@ -206,18 +204,6 @@ export interface UserSearchResult {
 }
 
 /**
- * pc_or_kの値ヘルパー
- */
-export const PcOrK = {
-  /** ケータイのみで投稿された作品 */
-  Ketai: 1,
-  /** PCのみで投稿された作品 */
-  Pc: 2,
-  /** PCとケータイで投稿された作品 */
-  PcAndKetai: 3,
-} as const;
-export type PcOrK = typeof PcOrK[keyof typeof PcOrK];
-/**
  * noveltype/novel_typeの値ヘルパー
  */
 export const NovelType = {
@@ -245,8 +231,8 @@ export type SearchResultFields<T extends Fields> = {
 
 export type SearchResultOptionalFields<T extends OptionalFields> = {
   [K in keyof typeof OptionalFields]: typeof OptionalFields[K] extends T
-    ? K
-    : never;
+  ? K
+  : never;
 }[keyof typeof OptionalFields];
 
 export type SearchResultR18Fields<T extends R18Fields> = {

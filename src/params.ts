@@ -196,8 +196,6 @@ export const Fields = {
   istensei: "its",
   /** 登録必須キーワードに「異世界転移」が含まれる場合は1、それ以外は0です。 */
   istenni: "iti",
-  /** 1はケータイのみ、2はPCのみ、3はPCとケータイで投稿された作品です。 */
-  pc_or_k: "p",
   /** 総合評価ポイント */
   global_point: "gp",
   /** 日間ポイント */
@@ -283,8 +281,6 @@ export const R18Fields = {
   istensei: "its",
   /** 登録必須キーワードに「異世界転移」が含まれる場合は1、それ以外は0です。 */
   istenni: "iti",
-  /** 1はケータイのみ、2はPCのみ、3はPCとケータイで投稿された作品です。 */
-  pc_or_k: "p",
   /** 総合評価ポイント */
   global_point: "gp",
   /** 日間ポイント */
