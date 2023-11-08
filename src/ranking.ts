@@ -1,6 +1,7 @@
 import { NarouRankingResult, RankingResult } from "./narou-ranking-results";
 import SearchBuilder, { DefaultSearchResultFields } from "./search-builder";
-import { addDays, format } from "date-fns";
+import addDays from "date-fns/addDays";
+import format from "date-fns/format";
 import {
   Fields,
   GzipLevel,
