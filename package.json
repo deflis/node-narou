@@ -1,6 +1,6 @@
 {
   "name": "narou",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "Narou API Wrapper",
   "type": "module",
   "main": "dist/index.cjs",
@@ -8,15 +8,14 @@
   "module": "dist/index.js",
   "exports": {
     ".": {
+      "default": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts",
       "browser": {
         "require": "./dist/index.browser.cjs",
         "import": "./dist/index.browser.js",
         "types": "./dist/index.browser.d.ts"
-      },
-      "node": {
-        "require": "./dist/index.cjs",
-        "import": "./dist/index.js",
-        "types": "./dist/index.d.ts"
       }
     }
   },
