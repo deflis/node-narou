@@ -17,6 +17,24 @@
         "import": "./dist/index.browser.js",
         "types": "./dist/index.browser.d.ts"
       }
+    },
+    "./browser": {
+      "default": "./dist/index.browser.js",
+      "require": "./dist/index.browser.cjs",
+      "import": "./dist/index.browser.js",
+      "types": "./dist/index.browser.d.ts"
+    },
+    "./*": {
+      "default": "./dist/*.js",
+      "require": "./dist/*.cjs",
+      "import": "./dist/*.js",
+      "types": "./dist/*.d.ts"
+    },
+    "./utils": {
+      "default": "./dist/utils/*.js",
+      "require": "./dist/utils/*.cjs",
+      "import": "./dist/utils/*.js",
+      "types": "./dist/utils/*.d.ts"
     }
   },
   "files": [
