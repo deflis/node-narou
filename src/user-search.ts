@@ -1,8 +1,9 @@
-import NarouSearchResults, {
+import NarouSearchResults from "./narou-search-results";
+import type {
   UserSearchResult,
   UserSearchResultFields,
 } from "./narou-search-results";
-import { UserFields, UserOrder, UserSearchParams } from "./params";
+import type { UserFields, UserOrder, UserSearchParams } from "./params";
 import { SearchBuilderBase } from "./search-builder";
 
 /**

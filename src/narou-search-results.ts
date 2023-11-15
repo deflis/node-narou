@@ -1,4 +1,4 @@
-import {
+import type {
   BooleanNumber as BooleanNumber,
   Genre,
   R18Site,

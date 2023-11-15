@@ -1,5 +1,5 @@
+import type NarouNovel from "./narou";
 import NarouNovelJsonp from "./narou-jsonp";
-import NarouNovel from "./narou";
 import SearchBuilder from "./search-builder";
 import SearchBuilderR18 from "./search-builder-r18";
 import RankingBuilder from "./ranking";

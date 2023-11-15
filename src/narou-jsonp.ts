@@ -1,4 +1,5 @@
-import NarouNovel, { NarouParams } from "./narou";
+import NarouNovel from "./narou";
+import type { NarouParams } from "./narou";
 import { jsonp } from "./util/jsonp";
 
 /**

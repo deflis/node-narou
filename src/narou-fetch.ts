@@ -1,5 +1,6 @@
 import { unzipp } from "./util/unzipp";
-import NarouNovel, { NarouParams } from "./narou";
+import NarouNovel from "./narou";
+import type { NarouParams } from "./narou";
 
 type Fetch = typeof fetch;
 

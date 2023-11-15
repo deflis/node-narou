@@ -1,16 +1,14 @@
-import NarouNovel from "./narou";
-import {
+import type NarouNovel from "./narou";
+import type {
   NarouSearchResult,
   SearchResultFields,
   SearchResultOptionalFields,
 } from "./narou-search-results";
-import NarouSearchResults from "./narou-search-results";
-import {
+import type NarouSearchResults from "./narou-search-results";
+import type {
   BigGenre,
-  BooleanNumber,
   SearchResultFieldNames,
   Genre,
-  StopParam,
   SearchParams,
   Fields,
   Order,
@@ -20,7 +18,8 @@ import {
   OptionalFields,
   ParamsBaseWithOrder,
 } from "./params";
-import { Join } from "./util/type";
+import { BooleanNumber, StopParam } from "./params";
+import type { Join } from "./util/type";
 
 export type DefaultSearchResultFields = keyof Omit<
   NarouSearchResult,
@@ -38,7 +37,7 @@ export abstract class SearchBuilderBase<
   constructor(
     protected params: TParams = {} as TParams,
     protected api: NarouNovel
-  ) {}
+  ) { }
 
   protected static distinct<T>(array: readonly T[]): T[] {
     return Array.from(new Set(array));

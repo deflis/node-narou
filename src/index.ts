@@ -1,4 +1,4 @@
-import NarouNovel from "./narou";
+import type NarouNovel from "./narou";
 import NarouNovelFetch from "./narou-fetch";
 import NarouNovelJsonp from "./narou-jsonp";
 import RankingBuilder from "./ranking";

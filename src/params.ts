@@ -1,5 +1,5 @@
-import { NarouSearchResult, UserSearchResult } from "./narou-search-results";
-import { Join } from "./util/type";
+import type { NarouSearchResult, UserSearchResult } from "./narou-search-results";
+import type { Join } from "./util/type";
 
 export const RankingType = {
   Daily: "d",

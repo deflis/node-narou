@@ -1,15 +1,16 @@
-import { NarouRankingResult } from "./narou-ranking-results";
-import NarouSearchResults, {
+import type { NarouRankingResult } from "./narou-ranking-results";
+import NarouSearchResults from "./narou-search-results";
+import type {
   NarouSearchResult,
   UserSearchResult,
 } from "./narou-search-results";
-import {
+import type {
   RankingHistoryParams,
   RankingParams,
   SearchParams,
   UserSearchParams,
 } from "./params";
-import { RankingHistoryRawResult } from "./ranking-history";
+import type { RankingHistoryRawResult } from "./ranking-history";
 
 /**
  * なろう小説APIへのリクエストパラメータ

@@ -1,15 +1,18 @@
-import { NarouRankingResult, RankingResult } from "./narou-ranking-results";
-import SearchBuilder, { DefaultSearchResultFields } from "./search-builder";
+import type { NarouRankingResult, RankingResult } from "./narou-ranking-results";
+import SearchBuilder from "./search-builder";
+import type { DefaultSearchResultFields } from "./search-builder";
 import { addDays, format } from "date-fns";
-import {
-  Fields,
+import type {
   GzipLevel,
   OptionalFields,
+} from "./params";
+import {
   RankingParams,
   RankingType,
+  Fields,
 } from "./params";
-import NarouNovel from "./narou";
-import { SearchResultFields } from "./narou-search-results";
+import type NarouNovel from "./narou";
+import type { SearchResultFields } from "./narou-search-results";
 
 const dateFormat = "yyyyMMdd";
 

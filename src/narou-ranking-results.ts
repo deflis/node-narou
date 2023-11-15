@@ -1,6 +1,6 @@
-import { PickedNarouSearchResult } from "./narou-search-results";
-import { SearchResultFieldNames } from "./params";
-import { DefaultSearchResultFields } from "./search-builder";
+import type { PickedNarouSearchResult } from "./narou-search-results";
+import type { SearchResultFieldNames } from "./params";
+import type { DefaultSearchResultFields } from "./search-builder";
 
 /**
  * ランキングAPIの結果

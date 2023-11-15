@@ -14,9 +14,9 @@ export {
 
 export * from "./ranking-history";
 export * from "./params";
-export { NarouParams } from "./narou";
+export type { NarouParams } from "./narou";
 export * from "./narou-search-results";
-export * from "./narou-ranking-results";
+export type * from "./narou-ranking-results";
 export * from "./search-builder";
 export * from "./search-builder-r18";
 export * from "./user-search";

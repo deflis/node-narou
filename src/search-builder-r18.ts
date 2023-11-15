@@ -1,10 +1,11 @@
 import { NovelSearchBuilderBase } from "./search-builder";
-import NarouSearchResults, {
+import type NarouSearchResults from "./narou-search-results";
+import type {
   NarouSearchResult,
   SearchResultR18Fields,
   SearchResultOptionalFields,
 } from "./narou-search-results";
-import {
+import type {
   R18Site,
   SearchResultFieldNames,
   R18Fields,
