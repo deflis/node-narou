@@ -78,7 +78,7 @@
     "check:build": "tsc --noEmit",
     "prepack": "npm-run-all format build",
     "format": "eslint --fix src/** test/**",
-    "test": "vitest",
+    "test": "vitest run",
     "docs": "npm-run-all docs:clean docs:typedoc",
     "docs:clean": "npx rimraf docs",
     "docs:typedoc": "npx typedoc --out ./docs src/index.ts"
