@@ -16,6 +16,6 @@
     "./src/**/*",
     "./test/**/*",
     "./tsup.config.ts",
-    "jest.config.mjs",
+    "./vitest.config.ts"
   ],
 }
