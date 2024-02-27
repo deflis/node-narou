@@ -22,7 +22,7 @@ npm install narou
 
 https://deflis.github.io/node-narou/ を参照してください。
 
-ブラウザで利用したい場合 `narou/browser` をimportしてください。こちらを利用することで自動的にnodejsへの異存がなくなり、JSONPを利用するようになります。
+ブラウザで利用したい場合 `narou/browser` をimportしてください。こちらを利用することで自動的にfetch(nodejs)への依存がなくなり、JSONPを利用するようになります。
 
 ## Example
 

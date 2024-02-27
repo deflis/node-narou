@@ -8,7 +8,11 @@ type Fetch = typeof fetch;
  * なろう小説APIへのリクエストを実行する
  */
 export default class NarouNovelFetch extends NarouNovel {
-  constructor(private fetch: Fetch = require('node-fetch')) {
+  /**
+   * コンストラクタ
+   * @param fetch fetch関数（デフォルトはネイティブのfetch）
+   */
+  constructor(private fetch: Fetch = fetch) {
     super();
   }
 
