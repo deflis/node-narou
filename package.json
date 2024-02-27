@@ -45,7 +45,8 @@
     "README.md"
   ],
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=16.0.0",
+    "pnpm": ">=8"
   },
   "author": "deflis <deflis@gmail.com>",
   "license": "MIT",
@@ -57,30 +58,29 @@
     "date-fns": "^3.3.1"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.12",
     "@types/node": "^20.11.20",
     "@typescript-eslint/eslint-plugin": "^7.1.0",
     "@typescript-eslint/parser": "^7.1.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
-    "npm-run-all": "^4.1.5",
     "prettier": "^3.2.5",
+    "run-z": "^2.0.0",
     "tsup": "^8.0.2",
     "typescript": "^5.3.3",
     "vitest": "^1.3.1"
   },
   "scripts": {
-    "build": "npm-run-all check build:tsc",
+    "build": "run-z check build:tsc",
     "build:tsc": "tsup ./src",
-    "check": "npm-run-all --parallel check:lint check:build test",
+    "check": "run-z check:lint,check:build,test",
     "check:lint": "eslint src/** test/**",
     "check:build": "tsc --noEmit",
-    "prepack": "npm-run-all format build",
+    "prepack": "run-z format build",
     "format": "eslint --fix src/** test/**",
     "test": "vitest run",
-    "docs": "npm-run-all docs:clean docs:typedoc",
-    "docs:clean": "npx rimraf docs",
-    "docs:typedoc": "npx typedoc --out ./docs src/index.ts"
+    "docs": "run-z docs:clean docs:typedoc",
+    "docs:clean": "pnpm dlx rimraf docs",
+    "docs:typedoc": "pnpm dlx typedoc --out ./docs src/index.ts"
   }
 }
