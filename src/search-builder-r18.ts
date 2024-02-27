@@ -1,16 +1,16 @@
-import { NovelSearchBuilderBase } from "./search-builder";
-import type NarouSearchResults from "./narou-search-results";
+import { NovelSearchBuilderBase } from "./search-builder.js";
+import type NarouSearchResults from "./narou-search-results.js";
 import type {
   NarouSearchResult,
   SearchResultR18Fields,
   SearchResultOptionalFields,
-} from "./narou-search-results";
+} from "./narou-search-results.js";
 import type {
   R18Site,
   SearchResultFieldNames,
   R18Fields,
   OptionalFields,
-} from "./params";
+} from "./params.js";
 
 export type DefaultR18SearchResultFields = keyof Omit<
   NarouSearchResult,

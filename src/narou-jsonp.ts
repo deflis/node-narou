@@ -1,6 +1,6 @@
-import NarouNovel from "./narou";
-import type { NarouParams } from "./narou";
-import { jsonp } from "./util/jsonp";
+import NarouNovel from "./narou.js";
+import type { NarouParams } from "./narou.js";
+import { jsonp } from "./util/jsonp.js";
 
 /**
  * なろう小説APIへのリクエストを実行する

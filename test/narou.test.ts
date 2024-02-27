@@ -1,8 +1,9 @@
-import NarouAPI, { Fields, RankingType } from "../src/";
+import NarouAPI, { Fields, RankingType } from "../src";
+import { describe, it, expect, vi } from "vitest"
 
 describe("narou-test", () => {
   // まれに時間がかかるので30秒に設定
-  jest.setTimeout(30000);
+  vi.setConfig({ testTimeout: 30000 });
 
   describe("search", () => {
     it("if limit = 1 then length = 1", async () => {

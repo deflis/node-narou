@@ -1,10 +1,10 @@
-import type NarouNovel from "./narou";
+import type NarouNovel from "./narou.js";
 import type {
   NarouSearchResult,
   SearchResultFields,
   SearchResultOptionalFields,
-} from "./narou-search-results";
-import type NarouSearchResults from "./narou-search-results";
+} from "./narou-search-results.js";
+import type NarouSearchResults from "./narou-search-results.js";
 import type {
   BigGenre,
   SearchResultFieldNames,
@@ -17,9 +17,9 @@ import type {
   GzipLevel,
   OptionalFields,
   ParamsBaseWithOrder,
-} from "./params";
-import { BooleanNumber, StopParam } from "./params";
-import type { Join } from "./util/type";
+} from "./params.js";
+import { BooleanNumber, StopParam } from "./params.js";
+import type { Join } from "./util/type.js";
 
 export type DefaultSearchResultFields = keyof Omit<
   NarouSearchResult,

@@ -1,12 +1,12 @@
-import type NarouNovel from "./narou";
-import NarouNovelJsonp from "./narou-jsonp";
-import SearchBuilder from "./search-builder";
-import SearchBuilderR18 from "./search-builder-r18";
-import RankingBuilder from "./ranking";
-import { formatRankingHistory, RankingHistoryResult } from "./ranking-history";
-import UserSearchBuilder from "./user-search";
+import type NarouNovel from "./narou.js";
+import NarouNovelJsonp from "./narou-jsonp.js";
+import SearchBuilder from "./search-builder.js";
+import SearchBuilderR18 from "./search-builder-r18.js";
+import RankingBuilder from "./ranking.js";
+import { formatRankingHistory, RankingHistoryResult } from "./ranking-history.js";
+import UserSearchBuilder from "./user-search.js";
 
-export * from "./index.common";
+export * from "./index.common.js";
 export { NarouNovelJsonp };
 
 const narouNovelJsonp = new NarouNovelJsonp();

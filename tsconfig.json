@@ -9,12 +9,13 @@
     "sourceMap": true,
     "outDir": "./dist",
     "strict": true,
-    "moduleResolution": "node"
+    "esModuleInterop": true,
+    "moduleResolution": "Bundler"
   },
   "include": [
     "./src/**/*",
     "./test/**/*",
     "./tsup.config.ts",
-    "jest.config.mjs",
+    "./vitest.config.ts"
   ],
 }

@@ -1,10 +1,10 @@
-import NarouSearchResults from "./narou-search-results";
+import NarouSearchResults from "./narou-search-results.js";
 import type {
   UserSearchResult,
   UserSearchResultFields,
-} from "./narou-search-results";
-import type { UserFields, UserOrder, UserSearchParams } from "./params";
-import { SearchBuilderBase } from "./search-builder";
+} from "./narou-search-results.js";
+import type { UserFields, UserOrder, UserSearchParams } from "./params.js";
+import { SearchBuilderBase } from "./search-builder.js";
 
 /**
  * なろうユーザ検索API
