@@ -8,7 +8,7 @@ import type {
   R18Fields,
   OptionalFields,
   UserFields,
-} from "./params";
+} from "./params.js";
 
 /**
  * なろう小説API検索結果

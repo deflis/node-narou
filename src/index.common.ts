@@ -1,8 +1,8 @@
-import NarouNovel from "./narou";
-import NarouSearchResults from "./narou-search-results";
-import SearchBuilder from "./search-builder";
-import SearchBuilderR18 from "./search-builder-r18";
-import RankingBuilder from "./ranking";
+import NarouNovel from "./narou.js";
+import NarouSearchResults from "./narou-search-results.js";
+import SearchBuilder from "./search-builder.js";
+import SearchBuilderR18 from "./search-builder-r18.js";
+import RankingBuilder from "./ranking.js";
 
 export {
   NarouNovel,
@@ -12,11 +12,11 @@ export {
   RankingBuilder,
 };
 
-export * from "./ranking-history";
-export * from "./params";
-export type { NarouParams } from "./narou";
-export * from "./narou-search-results";
-export type * from "./narou-ranking-results";
-export * from "./search-builder";
-export * from "./search-builder-r18";
-export * from "./user-search";
+export * from "./ranking-history.js";
+export * from "./params.js";
+export type { NarouParams } from "./narou.js";
+export * from "./narou-search-results.js";
+export type * from "./narou-ranking-results.js";
+export * from "./search-builder.js";
+export * from "./search-builder-r18.js";
+export * from "./user-search.js";

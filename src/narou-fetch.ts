@@ -1,6 +1,6 @@
-import { unzipp } from "./util/unzipp";
-import NarouNovel from "./narou";
-import type { NarouParams } from "./narou";
+import { unzipp } from "./util/unzipp.js";
+import NarouNovel from "./narou.js";
+import type { NarouParams } from "./narou.js";
 
 type Fetch = typeof fetch;
 
@@ -12,7 +12,7 @@ export default class NarouNovelFetch extends NarouNovel {
    * コンストラクタ
    * @param fetch fetch関数（デフォルトはネイティブのfetch）
    */
-  constructor(private fetch: Fetch = fetch) {
+  constructor(private fetch?: Fetch) {
     super();
   }
 
@@ -33,7 +33,7 @@ export default class NarouNovelFetch extends NarouNovel {
       }
     });
 
-    const res = await this.fetch(url);
+    const res = await (this.fetch ?? fetch)(url);
 
     if (query.gzip === 0) {
       return (await res.json()) as T;
