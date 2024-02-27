@@ -25,6 +25,7 @@ https://deflis.github.io/node-narou/ を参照してください。
 ブラウザで利用したい場合 `narou/browser` をimportしてください。こちらを利用することで自動的にfetch(nodejs)への依存がなくなり、JSONPを利用するようになります。
 
 すでにサポート終了していますがfetchをサポートしないNode.jsバージョンで利用する場合は 、 `NarouNovelFetch` にfetchのNode.js実装を渡してください。
+なお、その場合の動作は確認していないので動かなければIssueを立ててください。
 
 
 ## Example
