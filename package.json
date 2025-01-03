@@ -74,6 +74,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "globals": "^15.14.0",
+    "msw": "^2.7.0",
     "prettier": "^3.4.2",
     "run-z": "^2.1.0",
     "tsup": "^8.3.5",
