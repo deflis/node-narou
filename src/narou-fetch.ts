@@ -25,17 +25,20 @@ export default class NarouNovelFetch extends NarouNovel {
     if (query.gzip === undefined) {
       query.gzip = 5;
     }
+    if (query.gzip === 0) {
+      delete query.gzip;
+    }
     const url = new URL(endpoint);
 
     Object.entries(query).forEach(([key, value]) => {
-      if (value) {
+      if (value !== undefined) {
         url.searchParams.append(key, value.toString());
       }
     });
 
     const res = await (this.fetch ?? fetch)(url);
 
-    if (query.gzip === 0) {
+    if (!query.gzip) {
       return (await res.json()) as T;
     }
 

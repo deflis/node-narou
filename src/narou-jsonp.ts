@@ -16,7 +16,7 @@ export default class NarouNovelJsonp extends NarouNovel {
     const url = new URL(endpoint);
 
     Object.entries(query).forEach(([key, value]) => {
-      if (value) {
+      if (value !== undefined) {
         url.searchParams.append(key, value.toString());
       }
     });
