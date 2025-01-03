@@ -1,4 +1,7 @@
-import type { NarouSearchResult, UserSearchResult } from "./narou-search-results.js";
+import type {
+  NarouSearchResult,
+  UserSearchResult,
+} from "./narou-search-results.js";
 import type { Join } from "./util/type.js";
 
 export const RankingType = {
@@ -7,7 +10,7 @@ export const RankingType = {
   Monthly: "m",
   Quarterly: "q",
 } as const;
-export type RankingType = typeof RankingType[keyof typeof RankingType];
+export type RankingType = (typeof RankingType)[keyof typeof RankingType];
 
 /**
  * すべてのAPIで共通のクエリパラメータ
@@ -143,7 +146,7 @@ export const BooleanNumber = {
   True: 1,
   False: 0,
 } as const;
-export type BooleanNumber = typeof BooleanNumber[keyof typeof BooleanNumber];
+export type BooleanNumber = (typeof BooleanNumber)[keyof typeof BooleanNumber];
 
 export type SearchResultFieldNames = keyof NarouSearchResult;
 
@@ -231,7 +234,7 @@ export const Fields = {
   updated_at: "ua",
 } as const;
 
-export type Fields = typeof Fields[keyof Omit<
+export type Fields = (typeof Fields)[keyof Omit<
   NarouSearchResult,
   "novel_type" | "weekly_unique" | "nocgenre"
 >];
@@ -316,7 +319,7 @@ export const R18Fields = {
   updated_at: "ua",
 } as const;
 
-export type R18Fields = typeof R18Fields[keyof Omit<
+export type R18Fields = (typeof R18Fields)[keyof Omit<
   NarouSearchResult,
   "novel_type" | "weekly_unique" | "biggenre" | "genre" | "isr15"
 >];
@@ -333,7 +336,7 @@ export const OptionalFields = {
   weekly_unique: "weekly",
 } as const;
 
-export type OptionalFields = typeof OptionalFields[keyof Pick<
+export type OptionalFields = (typeof OptionalFields)[keyof Pick<
   NarouSearchResult,
   "weekly_unique"
 >];
@@ -360,7 +363,7 @@ export const UserFields = {
   /** 総合評価ポイントの合計 */
   sum_global_point: "sg",
 } as const;
-export type UserFields = typeof UserFields[keyof UserSearchResult];
+export type UserFields = (typeof UserFields)[keyof UserSearchResult];
 
 /**
  * 出力順序
@@ -402,9 +405,11 @@ export const Order = {
   QuarterPoint: "quarterpoint",
   /** 年間ポイントの高い順 */
   YearlyPoint: "yearlypoint",
+  /** 初回掲載順 */
+  GeneralFirstUp: "generalfirstup",
 } as const;
 
-export type Order = typeof Order[keyof typeof Order];
+export type Order = (typeof Order)[keyof typeof Order];
 
 /** R18掲載サイト */
 export const R18Site = {
@@ -418,7 +423,7 @@ export const R18Site = {
   Midnight: 4,
 } as const;
 
-export type R18Site = typeof R18Site[keyof typeof R18Site];
+export type R18Site = (typeof R18Site)[keyof typeof R18Site];
 
 /** R18掲載サイト表記ヘルパー */
 export const R18SiteNotation: { readonly [K in R18Site]: string } = {
@@ -444,7 +449,7 @@ export const BigGenre = {
   NonGenre: 98,
 } as const;
 
-export type BigGenre = typeof BigGenre[keyof typeof BigGenre];
+export type BigGenre = (typeof BigGenre)[keyof typeof BigGenre];
 
 /** 大ジャンル表記ヘルパー */
 export const BigGenreNotation: { readonly [K in BigGenre]: string } = {
@@ -501,7 +506,7 @@ export const Genre = {
   /** ノンジャンル〔ノンジャンル〕*/
   NonGenre: 9801,
 } as const;
-export type Genre = typeof Genre[keyof typeof Genre];
+export type Genre = (typeof Genre)[keyof typeof Genre];
 
 /** ジャンル表記ヘルパー */
 export const GenreNotation: { readonly [K in Genre]: string } = {
@@ -540,7 +545,7 @@ export const BuntaiParam = {
   JisageKaigyoHutsuu: 6,
 } as const;
 
-export type BuntaiParam = typeof BuntaiParam[keyof typeof BuntaiParam];
+export type BuntaiParam = (typeof BuntaiParam)[keyof typeof BuntaiParam];
 
 /** 連載停止中指定 */
 export const StopParam = {
@@ -550,7 +555,7 @@ export const StopParam = {
   Stopping: 2,
 } as const;
 
-export type StopParam = typeof StopParam[keyof typeof StopParam];
+export type StopParam = (typeof StopParam)[keyof typeof StopParam];
 
 /** 小説タイプ指定 */
 export const NovelTypeParam = {
@@ -565,7 +570,8 @@ export const NovelTypeParam = {
   /** 短編と完結済連載小説 */
   ShortAndRensai: "ter",
 } as const;
-export type NovelTypeParam = typeof NovelTypeParam[keyof typeof NovelTypeParam];
+export type NovelTypeParam =
+  (typeof NovelTypeParam)[keyof typeof NovelTypeParam];
 
 export const UserOrder = {
   /** ユーザIDの新しい順 */
@@ -581,6 +587,6 @@ export const UserOrder = {
   /** ユーザIDの古い順 */
   Old: "old",
 } as const;
-export type UserOrder = typeof UserOrder[keyof typeof UserOrder];
+export type UserOrder = (typeof UserOrder)[keyof typeof UserOrder];
 
 export type GzipLevel = 0 | 1 | 2 | 3 | 4 | 5;
