@@ -1,6 +1,8 @@
 import NarouAPI, { Fields, RankingType } from "../src";
-import { describe, it, expect, vi } from "vitest"
+import { describe, it, expect, vi } from "vitest";
 
+// MEMO: このファイルのテストは外部APIを利用するため、結果が変わる可能性がある。
+// そのため、結果が変わる可能性が少ないものを選択してテストを行っているが、落ちるようになったら修正が必要。
 describe("narou-test", () => {
   // まれに時間がかかるので30秒に設定
   vi.setConfig({ testTimeout: 30000 });
