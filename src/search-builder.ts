@@ -17,6 +17,7 @@ import type {
   GzipLevel,
   OptionalFields,
   ParamsBaseWithOrder,
+  DateParam,
 } from "./params.js";
 import { BooleanNumber, StopParam } from "./params.js";
 import type { Join } from "./util/type.js";
@@ -28,7 +29,7 @@ export type DefaultSearchResultFields = keyof Omit<
 
 export abstract class SearchBuilderBase<
   TParams extends ParamsBaseWithOrder<TOrder>,
-  TOrder extends string
+  TOrder extends string,
 > {
   /**
    * constructor
@@ -37,7 +38,7 @@ export abstract class SearchBuilderBase<
   constructor(
     protected params: TParams = {} as TParams,
     protected api: NarouNovel
-  ) { }
+  ) {}
 
   protected static distinct<T>(array: readonly T[]): T[] {
     return Array.from(new Set(array));
@@ -122,7 +123,7 @@ export abstract class SearchBuilderBase<
 }
 
 export abstract class NovelSearchBuilderBase<
-  T extends SearchResultFieldNames
+  T extends SearchResultFieldNames,
 > extends SearchBuilderBase<SearchParams, Order> {
   /**
    * a
@@ -346,7 +347,7 @@ export abstract class NovelSearchBuilderBase<
    *
    * @return {SearchBuilder} this
    */
-  lastUpdate(date: string): this;
+  lastUpdate(date: DateParam): this;
   lastUpdate(from: number, to: number): this;
   lastUpdate(from: Date, to: Date): this;
 
@@ -366,6 +367,26 @@ export abstract class NovelSearchBuilderBase<
     return this;
   }
 
+  lastNovelUpdate(date: DateParam): this;
+  lastNovelUpdate(from: number, to: number): this;
+  lastNovelUpdate(from: Date, to: Date): this;
+
+  lastNovelUpdate(x: string | number | Date, y?: number | Date): this {
+    let date: string;
+    if (typeof x == "string") {
+      date = x;
+    } else if (x instanceof Date && y instanceof Date) {
+      date = `${Math.floor(x.getTime() / 1000)}-${Math.floor(
+        x.getTime() / 1000
+      )}`;
+    } else {
+      date = `${x}-${y}`;
+    }
+
+    this.set({ lastupdate: date });
+    return this;
+  }
+
   /**
    * なろう小説APIへの検索リクエストを実行する
    * @returns {Promise<NarouSearchResults>} 検索結果
@@ -381,7 +402,7 @@ export abstract class NovelSearchBuilderBase<
  */
 export default class SearchBuilder<
   T extends keyof NarouSearchResult = DefaultSearchResultFields,
-  TOpt extends keyof NarouSearchResult = never
+  TOpt extends keyof NarouSearchResult = never,
 > extends NovelSearchBuilderBase<T | TOpt> {
   /**
    *
