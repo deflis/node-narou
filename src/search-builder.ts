@@ -357,7 +357,7 @@ export abstract class NovelSearchBuilderBase<
       date = x;
     } else if (x instanceof Date && y instanceof Date) {
       date = `${Math.floor(x.getTime() / 1000)}-${Math.floor(
-        x.getTime() / 1000
+        y.getTime() / 1000
       )}`;
     } else {
       date = `${x}-${y}`;
@@ -377,7 +377,7 @@ export abstract class NovelSearchBuilderBase<
       date = x;
     } else if (x instanceof Date && y instanceof Date) {
       date = `${Math.floor(x.getTime() / 1000)}-${Math.floor(
-        x.getTime() / 1000
+        y.getTime() / 1000
       )}`;
     } else {
       date = `${x}-${y}`;
