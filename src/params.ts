@@ -85,11 +85,10 @@ export interface SearchParams extends ParamsBaseWithOrder<Order> {
   notzankoku?: BooleanNumber;
   nottensei?: BooleanNumber;
   nottenni?: BooleanNumber;
-  nottt?: BooleanNumber;
 
   minlen?: number;
   maxlen?: number;
-  length?: number | Join<number>;
+  length?: number | Join<number | "">;
 
   kaiwaritu?: number | string;
   sasie?: number | string;
@@ -108,6 +107,7 @@ export interface SearchParams extends ParamsBaseWithOrder<Order> {
 
   ispickup?: BooleanNumber;
   lastup?: string;
+  lastupdate?: string;
 
   opt?: Join<OptionalFields>;
 }
@@ -572,6 +572,16 @@ export const NovelTypeParam = {
 } as const;
 export type NovelTypeParam =
   (typeof NovelTypeParam)[keyof typeof NovelTypeParam];
+
+/** 日付指定パラメータ */
+export const DateParam = {
+  ThisWeek: "thisweek",
+  LastWeek: "lastweek",
+  SevenDays: "sevenday",
+  ThisMonth: "thismonth",
+  LastMonth: "lastmonth",
+};
+export type DateParam = (typeof DateParam)[keyof typeof DateParam];
 
 export const UserOrder = {
   /** ユーザIDの新しい順 */
