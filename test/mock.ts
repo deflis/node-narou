@@ -1,5 +1,4 @@
-import { http, HttpResponse } from "msw";
-import { NarouRankingResult, RankingHistoryRawResult } from "../src";
+import { HttpResponse } from "msw";
 import { gzipSync } from "zlib";
 
 export function responseGzipOrJson(response: any, url: URL) {
