@@ -48,6 +48,7 @@ describe("RankingBuilder", () => {
               pt: 1000 - i,
             })
           );
+          return responseGzipOrJson(response, url);
         })
       );
 
@@ -82,6 +83,7 @@ describe("RankingBuilder", () => {
               pt: 1000 - i,
             })
           );
+          return responseGzipOrJson(response, url);
         })
       );
 
@@ -325,7 +327,6 @@ describe("RankingBuilder", () => {
         }),
         http.get("https://api.syosetu.com/novelapi/api/", ({ request }) => {
           const url = new URL(request.url);
-          console.log(request.url);
           mockFn2(
             url.searchParams.get("ncode"),
             url.searchParams.get("of"),
@@ -442,7 +443,6 @@ describe("RankingBuilder", () => {
         }),
         http.get("https://api.syosetu.com/novelapi/api/", ({ request }) => {
           const url = new URL(request.url);
-          console.log(request.url);
           mockFn2(
             url.searchParams.get("ncode"),
             url.searchParams.get("of"),
