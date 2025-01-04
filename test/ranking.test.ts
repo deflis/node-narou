@@ -10,10 +10,8 @@ import {
 import { Fields, NarouRankingResult, ranking, RankingType } from "../src";
 import { setupServer } from "msw/node";
 import { http } from "msw";
-import { addDays, format, parseISO, startOfWeek } from "date-fns";
+import { addDays, format, parseISO } from "date-fns";
 import { responseGzipOrJson } from "./mock";
-import { ht } from "date-fns/locale";
-import exp from "constants";
 
 const server = setupServer();
 
