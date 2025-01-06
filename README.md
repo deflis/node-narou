@@ -1,5 +1,9 @@
 # node-narou
 
+[![npm version](https://badge.fury.io/js/narou.svg)](https://badge.fury.io/js/narou)
+[![Node.js CI](https://github.com/deflis/node-narou/actions/workflows/nodejs-test.yml/badge.svg)](https://github.com/deflis/node-narou/actions/workflows/nodejs-test.yml)
+
+
 [なろうデベロッパー](https://dev.syosetu.com/)の API を fluent interface で利用できるラッパーライブラリです。
 ブラウザでの JSONP の利用も可能です。
 
