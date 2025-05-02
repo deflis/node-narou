@@ -338,8 +338,8 @@ export abstract class NovelSearchBuilderBase<
    *
    * @return {SearchBuilder} this
    */
-  isPickup(bool = true): this {
-    this.set({ ispickup: bool ? BooleanNumber.True : BooleanNumber.False });
+  isPickup(): this {
+    this.set({ ispickup: BooleanNumber.True });
     return this;
   }
 
