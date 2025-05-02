@@ -1016,6 +1016,7 @@ describe("SearchBuilder", () => {
       expect(mockFn).toHaveBeenCalledTimes(1);
       expect(mockFn).toHaveBeenCalledWith(BooleanNumber.True.toString(), "5", "json", 3);
     });
+  });
 
   describe("lastUpdate", () => {
     test("default", async () => {
