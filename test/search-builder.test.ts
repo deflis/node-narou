@@ -1701,7 +1701,7 @@ describe("SearchBuilder", () => {
       expect(mockFn).toHaveBeenCalledWith(null, 2);
     });
 
-    test("if isPickup = true", async () => {
+    test("if isPickup", async () => {
       const mockFn = vi.fn();
       server.use(
         http.get("https://api.syosetu.com/novelapi/api/", ({ request }) => {
@@ -1720,27 +1720,6 @@ describe("SearchBuilder", () => {
       // MEMO: gzipとoutがついているのでsizeが3になる
       expect(mockFn).toHaveBeenCalledWith(BooleanNumber.True.toString(), 3);
     });
-
-    test("if isPickup = false", async () => {
-      const mockFn = vi.fn();
-      server.use(
-        http.get("https://api.syosetu.com/novelapi/api/", ({ request }) => {
-          const url = new URL(request.url);
-
-          const response = [{ allcount: 1 }];
-          mockFn(url.searchParams.get("ispickup"), url.searchParams.size);
-
-          return responseGzipOrJson(response, url);
-        })
-      );
-
-      const result = await NarouAPI.search().isPickup(false).execute();
-      expect(result.allcount).toBe(1);
-      expect(mockFn).toHaveBeenCalledTimes(1);
-      // MEMO: gzipとoutがついているのでsizeが3になる
-      expect(mockFn).toHaveBeenCalledWith(BooleanNumber.False.toString(), 3);
-    });
-  });
 
   describe("lastUpdate", () => {
     test("default", async () => {
