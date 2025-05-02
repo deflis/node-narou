@@ -36,5 +36,5 @@ jobs:
       - run: pnpm exec vitest --coverage.enabled true
 
       - name: "Report Coverage"
-        if: matrix.node-version == 'lts'
+        if: matrix.node-version == 'lts/*'
         uses: davelosert/vitest-coverage-report-action@v2
