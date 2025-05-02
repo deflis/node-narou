@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: "lts/*"
           cache: "pnpm"
-          repository-url: https://registry.npmjs.org/
+          registry-url: https://registry.npmjs.org/
 
       - name: Install dependencies
         run: pnpm install
