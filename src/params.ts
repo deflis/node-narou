@@ -105,7 +105,7 @@ export interface SearchParams extends ParamsBaseWithOrder<Order> {
 
   stop?: StopParam;
 
-  ispickup?: BooleanNumber;
+  ispickup?: typeof BooleanNumber.True;
   lastup?: string;
   lastupdate?: string;
 

@@ -1007,7 +1007,7 @@ describe("SearchBuilder", () => {
       expect(mockFn).toHaveBeenCalledWith("5", "json", 2);
     });
 
-    test("if isPickup = true", async () => {
+    test("if isPickup", async () => {
       const mockFn = vi.fn();
       setupMockHandler(mockFn, ["ispickup", "gzip", "out"]);
 
@@ -1015,16 +1015,6 @@ describe("SearchBuilder", () => {
       expect(result.allcount).toBe(1);
       expect(mockFn).toHaveBeenCalledTimes(1);
       expect(mockFn).toHaveBeenCalledWith(BooleanNumber.True.toString(), "5", "json", 3);
-    });
-
-    test("if isPickup = false", async () => {
-      const mockFn = vi.fn();
-      setupMockHandler(mockFn, ["ispickup", "gzip", "out"]);
-
-      const result = await NarouAPI.search().isPickup(false).execute();
-      expect(result.allcount).toBe(1);
-      expect(mockFn).toHaveBeenCalledTimes(1);
-      expect(mockFn).toHaveBeenCalledWith(BooleanNumber.False.toString(), "5", "json", 3);
     });
   });
 
