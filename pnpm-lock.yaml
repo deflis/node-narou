@@ -7,10 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      date-fns:
-        specifier: ^4.1.0
-        version: 4.1.0
     devDependencies:
       '@types/node':
         specifier: ^22.15.3
@@ -24,6 +20,9 @@ importers:
       '@vitest/coverage-v8':
         specifier: ^3.1.2
         version: 3.1.2(vitest@3.1.2(@types/node@22.15.3)(msw@2.7.5(@types/node@22.15.3)(typescript@5.8.3)))
+      date-fns:
+        specifier: ^4.1.0
+        version: 4.1.0
       eslint:
         specifier: ^9.25.1
         version: 9.25.1
