@@ -1,7 +1,6 @@
 import type { NarouRankingResult, RankingResult } from "./narou-ranking-results.js";
 import SearchBuilder from "./search-builder.js";
 import type { DefaultSearchResultFields } from "./search-builder.js";
-import { addDays, format } from "date-fns";
 import type {
   GzipLevel,
   OptionalFields,
@@ -13,8 +12,7 @@ import {
 } from "./params.js";
 import type NarouNovel from "./narou.js";
 import type { SearchResultFields } from "./narou-search-results.js";
-
-const dateFormat = "yyyyMMdd";
+import { addDays, formatDate } from "./util/date.js";
 
 /**
  * なろう小説ランキングAPIのヘルパークラス。
@@ -52,7 +50,7 @@ export default class RankingBuilder {
      * クエリパラメータ
      * @protected
      */
-    this.date$ = addDays(Date.now(), -1);
+    this.date$ = addDays(new Date(), -1);
     this.type$ = RankingType.Daily;
   }
 
@@ -114,7 +112,7 @@ export default class RankingBuilder {
    * @see https://dev.syosetu.com/man/rankapi/#output
    */
   execute(): Promise<NarouRankingResult[]> {
-    const date = format(this.date$, dateFormat);
+    const date = formatDate(this.date$);
     this.set({ rtype: `${date}-${this.type$}` });
     return this.api.executeRanking(this.params as RankingParams);
   }
