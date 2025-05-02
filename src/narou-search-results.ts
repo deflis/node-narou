@@ -8,6 +8,7 @@ import type {
   R18Fields,
   OptionalFields,
   UserFields,
+  UserSearchParams,
 } from "./params.js";
 
 /**
@@ -45,7 +46,7 @@ export default class NarouSearchResults<T, TKey extends keyof T> {
    */
   constructor(
     [header, ...result]: [{ allcount: number }, ...Pick<T, TKey>[]],
-    params: SearchParams
+    params: SearchParams | UserSearchParams
   ) {
     const count = header.allcount;
     const limit = params.lim ?? 20;

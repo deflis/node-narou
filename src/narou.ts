@@ -112,6 +112,9 @@ export default abstract class NarouNovel {
   async executeUserSearch<T extends keyof UserSearchResult>(
     params: UserSearchParams
   ): Promise<NarouSearchResults<UserSearchResult, T>> {
-    return await this.execute(params, "https://api.syosetu.com/userapi/api/");
+    return new NarouSearchResults<UserSearchResult, T>(
+      await this.execute(params, "https://api.syosetu.com/userapi/api/"),
+      params
+    );
   }
 }
