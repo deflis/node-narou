@@ -14,8 +14,9 @@ const narouNovelFetch = new NarouNovelFetch();
 
 /**
  * なろう小説 API で小説を検索する
- * @param {string} [word] - 検索ワード
+ * @param {string} [word] 検索ワード
  * @returns {SearchBuilder}
+ * @see https://dev.syosetu.com/man/api/
  */
 export function search(
   word = "",
@@ -28,8 +29,9 @@ export function search(
 
 /**
  * 18禁小説 API で小説を検索する
- * @param {string} [word] - 検索ワード
+ * @param {string} [word] 検索ワード
  * @returns {SearchBuilder}
+ * @see https://dev.syosetu.com/xman/api/
  */
 export function searchR18(
   word = "",
@@ -42,6 +44,9 @@ export function searchR18(
 
 /**
  * なろうユーザ検索 API でユーザを検索する
+ * @param {string} [word] - 検索ワード
+ * @returns {UserSearchBuilder}
+ * @see https://dev.syosetu.com/man/userapi/
  */
 export function searchUser(word = "", api: NarouNovel = narouNovelFetch) {
   const builder = new UserSearchBuilder({}, api);
@@ -51,6 +56,8 @@ export function searchUser(word = "", api: NarouNovel = narouNovelFetch) {
 
 /**
  * なろう小説ランキング API でランキングを取得する
+ * @returns {RankingBuilder}
+ * @see https://dev.syosetu.com/man/rankapi/
  */
 export function ranking(api: NarouNovel = narouNovelFetch): RankingBuilder {
   const builder = new RankingBuilder({}, api);
@@ -59,6 +66,8 @@ export function ranking(api: NarouNovel = narouNovelFetch): RankingBuilder {
 
 /**
  * なろう殿堂入り API でランキング履歴を取得する
+ * @param {string} ncode 小説のNコード
+ * @see https://dev.syosetu.com/man/rankinapi/
  */
 export async function rankingHistory(
   ncode: string,
