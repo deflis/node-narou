@@ -17,15 +17,31 @@ import type { SearchResultFields } from "./narou-search-results.js";
 const dateFormat = "yyyyMMdd";
 
 /**
- * ランキングヘルパー
- * @class Ranking
+ * なろう小説ランキングAPIのヘルパークラス。
+ *
+ * ランキング種別や日付を指定してランキングデータを取得します。
+ * また、取得したランキングデータに含まれるNコードを元に、
+ * なろう小説APIを利用して詳細な小説情報を取得することも可能です。
+ *
+ * @class RankingBuilder
+ * @see https://dev.syosetu.com/man/rankapi/ なろう小説ランキングAPI仕様
  */
 export default class RankingBuilder {
+  /**
+   * ランキング集計対象の日付
+   * @protected
+   */
   protected date$: Date;
+  /**
+   * ランキング種別
+   * @protected
+   */
   protected type$: RankingType;
 
   /**
    * constructor
+   * @param params - 初期クエリパラメータ
+   * @param api - API実行クラスのインスタンス
    * @private
    */
   constructor(
@@ -40,11 +56,28 @@ export default class RankingBuilder {
     this.type$ = RankingType.Daily;
   }
 
+  /**
+   * ランキング集計対象の日付を指定します。
+   *
+   * - 日間: 任意の日付
+   * - 週間: 火曜日の日付
+   * - 月間・四半期: 1日の日付
+   *
+   * @param date 集計対象の日付
+   * @returns {RankingBuilder} this
+   * @see https://dev.syosetu.com/man/rankapi/
+   */
   date(date: Date) {
     this.date$ = date;
     return this;
   }
 
+  /**
+   * ランキング種別を指定します。
+   * @param type ランキング種別
+   * @returns {RankingBuilder} this
+   * @see https://dev.syosetu.com/man/rankapi/
+   */
   type(type: RankingType) {
     this.type$ = type;
     return this;
@@ -63,9 +96,10 @@ export default class RankingBuilder {
   }
 
   /**
-   * クエリパラメータをセットする
+   * クエリパラメータを内部的にセットします。
+   * @param obj - セットするパラメータオブジェクト
+   * @returns {RankingBuilder} this
    * @private
-   * @return {RankingBuilder} this
    */
   protected set(obj: Partial<RankingParams>) {
     Object.assign(this.params, obj);
@@ -73,8 +107,11 @@ export default class RankingBuilder {
   }
 
   /**
-   * なろう小説APIへのリクエストを実行する
-   * @returns ランキング
+   * 設定されたパラメータに基づき、なろう小説ランキングAPIへのリクエストを実行します。
+   *
+   * 返される結果には、Nコード、ポイント、順位が含まれます。
+   * @returns {Promise<NarouRankingResult[]>} ランキング結果の配列
+   * @see https://dev.syosetu.com/man/rankapi/#output
    */
   execute(): Promise<NarouRankingResult[]> {
     const date = format(this.date$, dateFormat);
@@ -82,24 +119,53 @@ export default class RankingBuilder {
     return this.api.executeRanking(this.params as RankingParams);
   }
 
+  /**
+   * ランキングAPIを実行し、取得したNコードを元になろう小説APIで詳細情報を取得して結合します。
+   */
   async executeWithFields(): Promise<
     RankingResult<DefaultSearchResultFields>[]
   >;
-
+  /**
+   * ランキングAPIを実行し、取得したNコードを元になろう小説APIで詳細情報を取得して結合します。
+   *
+   * @template TFields - 取得する小説情報のフィールド型
+   * @param fields - 取得するフィールドの配列
+   * @returns {Promise<RankingResult<SearchResultFields<TFields>>[]>} 詳細情報を含むランキング結果の配列
+   */
   async executeWithFields<TFields extends Fields>(
     fields: TFields | TFields[]
   ): Promise<RankingResult<SearchResultFields<TFields>>[]>;
-
+  /**
+   * ランキングAPIを実行し、取得したNコードを元になろう小説APIで詳細情報を取得して結合します。
+   *
+   * @param opt - オプショナルな取得フィールド (`weekly` など)
+   * @returns {Promise<RankingResult<DefaultSearchResultFields | "weekly_unique">[]>} 詳細情報を含むランキング結果の配列
+   */
   async executeWithFields(
     fields: never[],
     opt: OptionalFields | OptionalFields[]
   ): Promise<RankingResult<DefaultSearchResultFields | "weekly_unique">[]>;
-
+  /**
+   * ランキングAPIを実行し、取得したNコードを元になろう小説APIで詳細情報を取得して結合します。
+   *
+   * @template TFields - 取得する小説情報のフィールド型
+   * @param fields - 取得するフィールドの配列
+   * @param opt - オプショナルな取得フィールド (`weekly` など)
+   * @returns {Promise<RankingResult<SearchResultFields<TFields> | "weekly_unique">[]>} 詳細情報を含むランキング結果の配列
+   */
   async executeWithFields<TFields extends Fields>(
     fields: TFields | TFields[],
     opt: OptionalFields | OptionalFields[]
   ): Promise<RankingResult<SearchResultFields<TFields> | "weekly_unique">[]>;
-
+  /**
+   * ランキングAPIを実行し、取得したNコードを元になろう小説APIで詳細情報を取得して結合します。
+   *
+   * @template TFields - 取得する小説情報のフィールド型
+   * @template TOpt - オプショナルな取得フィールドの型
+   * @param fields - 取得するフィールドの配列 (省略時はデフォルトフィールド)
+   * @param opt - オプショナルな取得フィールド (`weekly` など)
+   * @returns {Promise<RankingResult<SearchResultFields<TFields>>[]>} 詳細情報を含むランキング結果の配列
+   */
   async executeWithFields<
     TFields extends Fields,
     TOpt extends OptionalFields | undefined = undefined
