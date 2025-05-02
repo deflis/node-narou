@@ -1,4 +1,4 @@
-import NarouAPI, { Fields, RankingType } from "../src";
+import NarouAPI, { Fields, R18Fields, RankingType, UserFields } from "../src";
 import { describe, it, expect, vi } from "vitest";
 
 // MEMO: このファイルのテストは外部APIを利用するため、結果が変わる可能性がある。
@@ -29,7 +29,30 @@ describe("narou-test", () => {
       expect(result.length).toBe(1);
       expect(result.values).toHaveLength(1);
     });
-    // TODO: pageのテストを書く
+  });
+  describe("searchR18", () => {
+    it("if limit = 1 then length = 1", async () => {
+      const result = await NarouAPI.searchR18()
+        .limit(1)
+        .fields([R18Fields.ncode])
+        .execute();
+      expect(result.allcount).toBeGreaterThan(1);
+      expect(result.limit).toBe(1);
+      expect(result.length).toBe(1);
+      expect(result.values).toHaveLength(1);
+    });
+  });
+  describe("searchUser", () => {
+    it("if limit = 1 then length = 1", async () => {
+      const result = await NarouAPI.searchUser()
+        .limit(1)
+        .fields([UserFields.userid])
+        .execute();
+      expect(result.allcount).toBeGreaterThan(1);
+      expect(result.limit).toBe(1);
+      expect(result.length).toBe(1);
+      expect(result.values).toHaveLength(1);
+    });
   });
   describe("ranking", () => {
     // 2020/02/01のランキングをテスト
