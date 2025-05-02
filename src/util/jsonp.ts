@@ -19,8 +19,7 @@ export type JsonpOption = {
   timeout?: number;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-const noop = function () {};
+const noop = function () { };
 
 export function jsonp<T>(
   url: string,
@@ -47,9 +46,9 @@ export function jsonp<T>(
     const timer =
       timeout > 0
         ? setTimeout(() => {
-            cleanup();
-            reject(new Error("Timeout"));
-          }, timeout)
+          cleanup();
+          reject(new Error("Timeout"));
+        }, timeout)
         : undefined;
 
     const callback = (data: T) => {
