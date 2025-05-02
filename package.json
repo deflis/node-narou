@@ -11,33 +11,34 @@
   "type": "module",
   "exports": {
     ".": {
-      "default": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.js",
       "types": "./dist/index.d.ts",
+      "node": {
+        "import": "./dist/index.js",
+        "require": "./dist/index.cjs"
+      },
       "browser": {
-        "require": "./dist/index.browser.cjs",
         "import": "./dist/index.browser.js",
-        "types": "./dist/index.browser.d.ts"
-      }
+        "require": "./dist/index.browser.cjs"
+      },
+      "default": "./dist/index.js"
     },
     "./browser": {
-      "default": "./dist/index.browser.js",
-      "require": "./dist/index.browser.cjs",
+      "types": "./dist/index.browser.d.ts",
       "import": "./dist/index.browser.js",
-      "types": "./dist/index.browser.d.ts"
+      "require": "./dist/index.browser.cjs",
+      "default": "./dist/index.browser.js"
+    },
+    "./utils/*": {
+      "types": "./dist/utils/*.d.ts",
+      "import": "./dist/utils/*.js",
+      "require": "./dist/utils/*.cjs",
+      "default": "./dist/utils/*.js"
     },
     "./*": {
-      "default": "./dist/*.js",
-      "require": "./dist/*.cjs",
+      "types": "./dist/*.d.ts",
       "import": "./dist/*.js",
-      "types": "./dist/*.d.ts"
-    },
-    "./utils": {
-      "default": "./dist/utils/*.js",
-      "require": "./dist/utils/*.cjs",
-      "import": "./dist/utils/*.js",
-      "types": "./dist/utils/*.d.ts"
+      "require": "./dist/*.cjs",
+      "default": "./dist/*.js"
     }
   },
   "main": "dist/index.cjs",
