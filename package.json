@@ -64,6 +64,7 @@
     "docs:typedoc": "pnpm dlx typedoc --out ./docs src/index.ts"
   },
   "devDependencies": {
+    "@swc/core": "^1.11.29",
     "@types/node": "^22.15.3",
     "@typescript-eslint/eslint-plugin": "^8.31.1",
     "@typescript-eslint/parser": "^8.31.1",
