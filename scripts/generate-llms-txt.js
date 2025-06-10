@@ -137,7 +137,13 @@ async function processTypeDocJson(jsonPath) {
   const jsonContent = await readFile(jsonPath);
   if (!jsonContent) return '';
   
-  const apiDoc = JSON.parse(jsonContent);
+  let apiDoc;
+  try {
+    apiDoc = JSON.parse(jsonContent);
+  } catch (error) {
+    console.error(`Error: Failed to parse TypeDoc JSON at ${jsonPath}: ${error.message}`);
+    return '';
+  }
   let result = '';
   
   // Process main exports
