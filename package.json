@@ -59,9 +59,11 @@
     "prepack": "run-z format build",
     "format": "eslint --fix src/** test/**",
     "test": "vitest run",
-    "docs": "run-z docs:clean docs:typedoc",
+    "docs": "run-z docs:clean docs:typedoc docs:json docs:llms",
     "docs:clean": "pnpm dlx rimraf docs",
-    "docs:typedoc": "pnpm dlx typedoc --out ./docs src/index.ts"
+    "docs:typedoc": "pnpm dlx typedoc --out ./docs src/index.ts",
+    "docs:json": "pnpm dlx typedoc --json docs/api.json src/index.ts",
+    "docs:llms": "node scripts/generate-llms-txt.js"
   },
   "devDependencies": {
     "@swc/core": "^1.11.29",
