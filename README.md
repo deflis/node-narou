@@ -1,39 +1,74 @@
-# node-narou
+# 📚 node-narou
 
 [![npm version](https://badge.fury.io/js/narou.svg)](https://badge.fury.io/js/narou)
 [![Node.js CI](https://github.com/deflis/node-narou/actions/workflows/nodejs-test.yml/badge.svg)](https://github.com/deflis/node-narou/actions/workflows/nodejs-test.yml)
-
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/deflis/node-narou)
 
-[なろうデベロッパー](https://dev.syosetu.com/)の API を fluent interface で利用できるラッパーライブラリです。
-ブラウザでの JSONP の利用も可能です。
+[なろうデベロッパー](https://dev.syosetu.com/)の API を fluent interface で利用できる TypeScript ライブラリです。  
+A TypeScript wrapper library for Narou Developer APIs with fluent interface.
 
-以下の API をラップしています。
+## ✨ 特徴
 
-- [なろう小説 API](https://dev.syosetu.com/man/api/)
-- [なろう小説ランキング API](https://dev.syosetu.com/man/rankapi/)
-- [なろう殿堂入り API](https://dev.syosetu.com/man/rankinapi/)
-- [なろう R18 小説 API](https://dev.syosetu.com/xman/api/)
+- 🔗 **メソッドチェーン対応**: 直感的な fluent interface で API を操作
+- 🌐 **マルチ環境対応**: Node.js とブラウザの両方で動作
+- 📝 **TypeScript 完全対応**: 型安全性と IntelliSense サポート
+- 🔀 **デュアル実装**: fetch (Node.js) と JSONP (ブラウザ) を自動選択
+- 📚 **全 API カバー**: なろうデベロッパーの全 API に対応
 
-## Installation
+## 🚀 対応 API
 
-以下のコマンドでインストールできます。
+| API | 説明 | 関数 |
+|-----|------|------|
+| [なろう小説 API](https://dev.syosetu.com/man/api/) | 小説の検索・絞り込み | `search()` |
+| [なろう小説ランキング API](https://dev.syosetu.com/man/rankapi/) | ランキング取得 | `ranking()` |
+| [なろう殿堂入り API](https://dev.syosetu.com/man/rankinapi/) | ランキング履歴取得 | `rankingHistory()` |
+| [なろう R18 小説 API](https://dev.syosetu.com/xman/api/) | 18禁小説検索 | `searchR18()` |
+| [なろうユーザ検索 API](https://dev.syosetu.com/man/userapi/) | ユーザー検索 | `searchUser()` |
 
-```
+## 📦 インストール
+
+```bash
+# 推奨: pnpm
+pnpm add narou
+
+# または
 npm install narou
+yarn add narou
 ```
 
-## Usage - API
+## 🚀 クイックスタート
 
-https://deflis.github.io/node-narou/ を参照してください。
+### Node.js での使用
 
-ブラウザで利用したい場合 `narou/browser` をimportしてください。こちらを利用することで自動的にfetch(nodejs)への依存がなくなり、JSONPを利用するようになります。
+```typescript
+import { search, ranking } from "narou";
+import { Genre, Order, RankingType } from "narou";
 
-すでにサポート終了していますがfetchをサポートしないNode.jsバージョンで利用する場合は 、 `NarouNovelFetch` にfetchのNode.js実装を渡してください。
-なお、その場合の動作は確認していないので動かなければIssueを立ててください。
+// 異世界恋愛小説を検索
+const result = await search("異世界")
+  .genre(Genre.RenaiIsekai)
+  .order(Order.FavoriteNovelCount)
+  .limit(10)
+  .execute();
 
+console.log(`${result.allcount}件の小説が見つかりました`);
+```
 
-## Example
+### ブラウザでの使用
+
+```typescript
+// ブラウザでは専用のインポートを使用（JSONP対応）
+import { search } from "narou/browser";
+
+const result = await search("魔法").execute();
+```
+
+## 📖 詳細な API ドキュメント
+
+- **🔗 [完全な API ドキュメント](https://deflis.github.io/node-narou/)** - TypeDoc で生成された詳細なドキュメント
+- **🤖 [LLM 向けドキュメント](https://deflis.github.io/node-narou/llms.txt)** - AI/LLM が理解しやすい形式のドキュメント（TypeDoc JSON から自動生成）
+
+## 📝 使用例
 
 ```typescript
 import { search, ranking, rankingHistory, searchR18 } from "narou";
@@ -113,32 +148,35 @@ for (const novel of searchR18Result.values) {
 }
 ```
 
-## Development
+## 🛠️ 開発
 
+このプロジェクトでは pnpm を使用しています。
+
+```bash
+# 依存関係のインストール
+pnpm install
+
+# ビルド
+pnpm run build
+
+# テスト実行
+pnpm run test
+
+# 型チェック
+pnpm run check
+
+# ドキュメント生成（TypeDoc + llms.txt）
+pnpm run docs
 ```
 
-# watch
+## 🤝 コントリビューション
 
-npm run watch
+1. このリポジトリをフォーク
+2. フィーチャーブランチを作成: `git checkout -b my-new-feature`
+3. 変更をコミット: `git commit -am 'Add some feature'`
+4. ブランチにプッシュ: `git push origin my-new-feature`
+5. プルリクエストを作成
 
-# build
+## 📄 ライセンス
 
-npm run build
-
-# test
-
-npm run test
-
-```
-
-## Contributing
-
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request :D
-
-## License
-
-MIT
+MIT License - 詳細は [LICENSE](LICENSE) ファイルを参照してください。
