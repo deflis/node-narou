@@ -4,7 +4,7 @@ import { gzipSync } from "zlib";
 export function responseGzipOrJson<T extends JsonBodyType>(response: T, url: URL) {
   if (parseInt(url.searchParams.get("gzip") ?? "0") > 0) {
     return HttpResponse.arrayBuffer(
-      gzipSync(Buffer.from(JSON.stringify(response)))
+      gzipSync(Buffer.from(JSON.stringify(response))) as unknown as ArrayBuffer
     );
   }
   return HttpResponse.json(response);
