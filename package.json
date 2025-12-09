@@ -52,7 +52,7 @@
   ],
   "scripts": {
     "build": "run-z check build:tsc",
-    "build:tsc": "tsup ./src",
+    "build:tsc": "tsdown ./src",
     "check": "run-z check:lint,check:build,test",
     "check:lint": "eslint src/** test/**",
     "check:build": "tsc --noEmit",
@@ -79,7 +79,7 @@
     "msw": "^2.12.4",
     "prettier": "^3.7.4",
     "run-z": "^2.1.0",
-    "tsup": "^8.5.1",
+    "tsdown": "^0.17.2",
     "typescript": "^5.9.3",
     "vitest": "^3.2.4"
   },
