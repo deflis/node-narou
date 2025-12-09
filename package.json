@@ -11,38 +11,26 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./dist/index.d.mts",
       "node": {
-        "import": "./dist/index.js",
+        "import": "./dist/index.mjs",
         "require": "./dist/index.cjs"
       },
       "browser": {
-        "import": "./dist/index.browser.js",
+        "import": "./dist/index.browser.mjs",
         "require": "./dist/index.browser.cjs"
       },
-      "default": "./dist/index.js"
+      "default": "./dist/index.mjs"
     },
     "./browser": {
-      "types": "./dist/index.browser.d.ts",
-      "import": "./dist/index.browser.js",
+      "types": "./dist/index.browser.d.mts",
+      "import": "./dist/index.browser.mjs",
       "require": "./dist/index.browser.cjs",
-      "default": "./dist/index.browser.js"
-    },
-    "./utils/*": {
-      "types": "./dist/utils/*.d.ts",
-      "import": "./dist/utils/*.js",
-      "require": "./dist/utils/*.cjs",
-      "default": "./dist/utils/*.js"
-    },
-    "./*": {
-      "types": "./dist/*.d.ts",
-      "import": "./dist/*.js",
-      "require": "./dist/*.cjs",
-      "default": "./dist/*.js"
+      "default": "./dist/index.browser.mjs"
     }
   },
   "main": "dist/index.cjs",
-  "types": "dist/index.d.ts",
+  "types": "dist/index.d.mts",
   "files": [
     "dist",
     "src",
@@ -52,7 +40,7 @@
   ],
   "scripts": {
     "build": "run-z check build:tsc",
-    "build:tsc": "tsdown ./src",
+    "build:tsc": "tsdown",
     "check": "run-z check:lint,check:build,test",
     "check:lint": "eslint src/** test/**",
     "check:build": "tsc --noEmit",
