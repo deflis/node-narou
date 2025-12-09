@@ -95,6 +95,26 @@ describe('NarouNovelFetch', () => {
     expect(result).toEqual(mockData);
   });
 
+  it('should pass fetch options to fetch implementation', async () => {
+    const customFetchMock = vi.fn().mockResolvedValue({
+      json: vi.fn().mockResolvedValue(mockData)
+    });
+
+    const narouFetch = new NarouNovelFetch(customFetchMock);
+
+    // @ts-expect-error - Accessing protected method for testing
+    await narouFetch.execute(
+      { gzip: 0 },
+      'https://api.example.com',
+      { fetchOptions: { method: 'POST', headers: { 'X-Test': '1' } } }
+    );
+
+    expect(customFetchMock).toHaveBeenCalledWith(
+      new URL('https://api.example.com/?out=json'),
+      { method: 'POST', headers: { 'X-Test': '1' } }
+    );
+  });
+
   it('should set gzip to 5 when undefined', async () => {
     // URLパラメータをキャプチャするモック
     const requestSpy = vi.fn();

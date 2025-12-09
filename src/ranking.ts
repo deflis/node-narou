@@ -10,7 +10,7 @@ import {
   RankingType,
   Fields,
 } from "./params.js";
-import type NarouNovel from "./narou.js";
+import type NarouNovel, { ExecuteOptions } from "./narou.js";
 import type { SearchResultFields } from "./narou-search-results.js";
 import { addDays, formatDate } from "./util/date.js";
 
@@ -111,18 +111,18 @@ export default class RankingBuilder {
    * @returns {Promise<NarouRankingResult[]>} ランキング結果の配列
    * @see https://dev.syosetu.com/man/rankapi/#output
    */
-  execute(): Promise<NarouRankingResult[]> {
+  execute(options?: ExecuteOptions): Promise<NarouRankingResult[]> {
     const date = formatDate(this.date$);
     this.set({ rtype: `${date}-${this.type$}` });
-    return this.api.executeRanking(this.params as RankingParams);
+    return this.api.executeRanking(this.params as RankingParams, options);
   }
 
   /**
    * ランキングAPIを実行し、取得したNコードを元になろう小説APIで詳細情報を取得して結合します。
    */
-  async executeWithFields(): Promise<
-    RankingResult<DefaultSearchResultFields>[]
-  >;
+  async executeWithFields(
+    options?: ExecuteOptions
+  ): Promise<RankingResult<DefaultSearchResultFields>[]>;
   /**
    * ランキングAPIを実行し、取得したNコードを元になろう小説APIで詳細情報を取得して結合します。
    *
@@ -131,7 +131,8 @@ export default class RankingBuilder {
    * @returns {Promise<RankingResult<SearchResultFields<TFields>>[]>} 詳細情報を含むランキング結果の配列
    */
   async executeWithFields<TFields extends Fields>(
-    fields: TFields | TFields[]
+    fields: TFields | TFields[],
+    options?: ExecuteOptions
   ): Promise<RankingResult<SearchResultFields<TFields>>[]>;
   /**
    * ランキングAPIを実行し、取得したNコードを元になろう小説APIで詳細情報を取得して結合します。
@@ -141,7 +142,8 @@ export default class RankingBuilder {
    */
   async executeWithFields(
     fields: never[],
-    opt: OptionalFields | OptionalFields[]
+    opt: OptionalFields | OptionalFields[],
+    options?: ExecuteOptions
   ): Promise<RankingResult<DefaultSearchResultFields | "weekly_unique">[]>;
   /**
    * ランキングAPIを実行し、取得したNコードを元になろう小説APIで詳細情報を取得して結合します。
@@ -169,9 +171,10 @@ export default class RankingBuilder {
     TOpt extends OptionalFields | undefined = undefined
   >(
     fields: TFields | TFields[] = [],
-    opt?: TOpt
+    opt?: TOpt,
+    options?: ExecuteOptions
   ): Promise<RankingResult<SearchResultFields<TFields>>[]> {
-    const ranking = await this.execute();
+    const ranking = await this.execute(options);
     const fields$ = Array.isArray(fields)
       ? fields.length == 0
         ? []
@@ -186,7 +189,7 @@ export default class RankingBuilder {
     }
     builder.ncode(rankingNcodes);
     builder.limit(ranking.length);
-    const result = await builder.execute();
+    const result = await builder.execute(options);
 
     return ranking.map<
       RankingResult<

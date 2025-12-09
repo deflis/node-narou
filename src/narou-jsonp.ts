@@ -1,5 +1,5 @@
 import NarouNovel from "./narou.js";
-import type { NarouParams } from "./narou.js";
+import type { ExecuteOptions, NarouParams } from "./narou.js";
 import { jsonp } from "./util/jsonp.js";
 
 /**
@@ -8,7 +8,8 @@ import { jsonp } from "./util/jsonp.js";
 export default class NarouNovelJsonp extends NarouNovel {
   protected async execute<T>(
     params: NarouParams,
-    endpoint: string
+    endpoint: string,
+    _options?: ExecuteOptions
   ): Promise<T> {
     const query = { ...params, out: "jsonp" };
     query.gzip = 0;
