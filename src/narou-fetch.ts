@@ -1,6 +1,6 @@
 import { unzipp } from "./util/unzipp.js";
 import NarouNovel from "./narou.js";
-import type { NarouParams } from "./narou.js";
+import type { ExecuteOptions, NarouParams } from "./narou.js";
 
 type Fetch = typeof fetch;
 
@@ -18,7 +18,8 @@ export default class NarouNovelFetch extends NarouNovel {
 
   protected async execute<T>(
     params: NarouParams,
-    endpoint: string
+    endpoint: string,
+    options?: ExecuteOptions
   ): Promise<T> {
     const query = { ...params, out: "json" };
 
@@ -36,7 +37,7 @@ export default class NarouNovelFetch extends NarouNovel {
       }
     });
 
-    const res = await (this.fetch ?? fetch)(url);
+    const res = await (this.fetch ?? fetch)(url, options?.fetchOptions);
 
     if (!query.gzip) {
       return (await res.json()) as T;

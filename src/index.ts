@@ -77,7 +77,7 @@ export async function rankingHistory(
   if (Array.isArray(result)) {
     return result.map(formatRankingHistory);
   } else {
-    throw new Error(result);
+    throw result;
   }
 }
 

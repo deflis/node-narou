@@ -21,6 +21,10 @@ export type NarouParams =
   | RankingHistoryParams
   | UserSearchParams;
 
+export type ExecuteOptions = {
+  fetchOptions?: RequestInit;
+};
+
 /**
  * なろう小説APIへのリクエストを実行する
  * @class NarouNovel
@@ -35,7 +39,8 @@ export default abstract class NarouNovel {
    */
   protected abstract execute<T>(
     params: NarouParams,
-    endpoint: string
+    endpoint: string,
+    options?: ExecuteOptions
   ): Promise<T>;
 
   /**
@@ -46,9 +51,13 @@ export default abstract class NarouNovel {
    */
   protected async executeSearch<T extends keyof NarouSearchResult>(
     params: SearchParams,
-    endpoint = "https://api.syosetu.com/novelapi/api/"
+    endpoint = "https://api.syosetu.com/novelapi/api/",
+    options?: ExecuteOptions
   ): Promise<NarouSearchResults<NarouSearchResult, T>> {
-    return new NarouSearchResults(await this.execute(params, endpoint), params);
+    return new NarouSearchResults(
+      await this.execute(params, endpoint, options),
+      params
+    );
   }
 
   /**
@@ -58,11 +67,13 @@ export default abstract class NarouNovel {
    * @see https://dev.syosetu.com/man/api/
    */
   async executeNovel<T extends keyof NarouSearchResult>(
-    params: SearchParams
+    params: SearchParams,
+    options?: ExecuteOptions
   ): Promise<NarouSearchResults<NarouSearchResult, T>> {
     return await this.executeSearch(
       params,
-      "https://api.syosetu.com/novelapi/api/"
+      "https://api.syosetu.com/novelapi/api/",
+      options
     );
   }
 
@@ -73,11 +84,13 @@ export default abstract class NarouNovel {
    * @see https://dev.syosetu.com/xman/api/
    */
   async executeNovel18<T extends keyof NarouSearchResult>(
-    params: SearchParams
+    params: SearchParams,
+    options?: ExecuteOptions
   ): Promise<NarouSearchResults<NarouSearchResult, T>> {
     return await this.executeSearch(
       params,
-      "https://api.syosetu.com/novel18api/api/"
+      "https://api.syosetu.com/novel18api/api/",
+      options
     );
   }
 
@@ -87,8 +100,15 @@ export default abstract class NarouNovel {
    * @returns ランキング結果
    * @see https://dev.syosetu.com/man/rankapi/
    */
-  async executeRanking(params: RankingParams): Promise<NarouRankingResult[]> {
-    return await this.execute(params, "https://api.syosetu.com/rank/rankget/");
+  async executeRanking(
+    params: RankingParams,
+    options?: ExecuteOptions
+  ): Promise<NarouRankingResult[]> {
+    return await this.execute(
+      params,
+      "https://api.syosetu.com/rank/rankget/",
+      options
+    );
   }
 
   /**
@@ -98,9 +118,14 @@ export default abstract class NarouNovel {
    * @see https://dev.syosetu.com/man/rankinapi/
    */
   async executeRankingHistory(
-    params: RankingHistoryParams
+    params: RankingHistoryParams,
+    options?: ExecuteOptions
   ): Promise<RankingHistoryRawResult[]> {
-    return await this.execute(params, "https://api.syosetu.com/rank/rankin/");
+    return await this.execute(
+      params,
+      "https://api.syosetu.com/rank/rankin/",
+      options
+    );
   }
 
   /**
@@ -110,10 +135,15 @@ export default abstract class NarouNovel {
    * @see https://dev.syosetu.com/man/userapi/
    */
   async executeUserSearch<T extends keyof UserSearchResult>(
-    params: UserSearchParams
+    params: UserSearchParams,
+    options?: ExecuteOptions
   ): Promise<NarouSearchResults<UserSearchResult, T>> {
     return new NarouSearchResults<UserSearchResult, T>(
-      await this.execute(params, "https://api.syosetu.com/userapi/api/"),
+      await this.execute(
+        params,
+        "https://api.syosetu.com/userapi/api/",
+        options
+      ),
       params
     );
   }
