@@ -1,99 +1,11 @@
 import NarouAPI, { Fields, R18Fields, RankingType, UserFields } from "../src";
-import { describe, it, expect, vi, beforeAll, afterEach, afterAll } from "vitest";
-import { setupServer } from "msw/node";
-import { http } from "msw";
-import { responseGzipOrJson } from "./mock";
-
-const rankingEntries = Array.from({ length: 300 }, (_, index) => ({
-  ncode: index === 0 ? "N5180FZ" : `N${(index + 1).toString().padStart(6, "0")}`,
-  pt: index === 0 ? 3403 : 1000 - index,
-  rank: index + 1,
-}));
-
-const rankingHistoryEntries = [
-  { rtype: "20200426-d", pt: 308, rank: 169 },
-  { rtype: "20200512-w", pt: 2496, rank: 159 },
-  { rtype: "20200601-m", pt: 8882, rank: 197 },
-  { rtype: "20200801-q", pt: 17562, rank: 282 },
-];
-
-const searchResponse = (url: URL) =>
-  responseGzipOrJson(
-    [
-      { allcount: 10 },
-      { ncode: "NTEST1", userid: 1 },
-    ],
-    url
-  );
-
-const ncodeSearchResponse = (ncodeParam: string, url: URL) => {
-  const ncodes = ncodeParam.split("-");
-  const results = ncodes.map((code) => ({
-    ncode: code.toUpperCase(),
-    userid: code.toUpperCase() === "N5180FZ" ? 636551 : 123456,
-  }));
-  return responseGzipOrJson([{ allcount: ncodes.length }, ...results], url);
-};
-
-const userSearchResponse = (url: URL) =>
-  responseGzipOrJson(
-    [
-      { allcount: 5 },
-      { userid: 1000 },
-    ],
-    url
-  );
-
-const rankingResponse = (url: URL) => responseGzipOrJson(rankingEntries, url);
-
-const rankingHistoryResponse = (ncode: string, url: URL) => {
-  if (ncode.toLowerCase() === "n0000a") {
-    return responseGzipOrJson("Error: Novel not found.", url);
-  }
-  return responseGzipOrJson(rankingHistoryEntries, url);
-};
-
-const server = setupServer(
-  http.get("https://api.syosetu.com/novelapi/api/", ({ request }) => {
-    const url = new URL(request.url);
-    const ncodeParam = url.searchParams.get("ncode");
-    if (ncodeParam) {
-      return ncodeSearchResponse(ncodeParam, url);
-    }
-    return searchResponse(url);
-  }),
-  http.get("https://api.syosetu.com/novel18api/api/", ({ request }) => {
-    const url = new URL(request.url);
-    const ncodeParam = url.searchParams.get("ncode");
-    if (ncodeParam) {
-      return ncodeSearchResponse(ncodeParam, url);
-    }
-    return searchResponse(url);
-  }),
-  http.get("https://api.syosetu.com/userapi/api/", ({ request }) => {
-    const url = new URL(request.url);
-    return userSearchResponse(url);
-  }),
-  http.get("https://api.syosetu.com/rank/rankget/", ({ request }) => {
-    const url = new URL(request.url);
-    return rankingResponse(url);
-  }),
-  http.get("https://api.syosetu.com/rank/rankin/", ({ request }) => {
-    const url = new URL(request.url);
-    const ncode = url.searchParams.get("ncode") ?? "";
-    return rankingHistoryResponse(ncode, url);
-  })
-);
+import { describe, it, expect, vi } from "vitest";
 
 // MEMO: このファイルのテストは外部APIを利用するため、結果が変わる可能性がある。
 // そのため、結果が変わる可能性が少ないものを選択してテストを行っているが、落ちるようになったら修正が必要。
 describe("narou-test", () => {
   // まれに時間がかかるので30秒に設定
   vi.setConfig({ testTimeout: 30000 });
-
-  beforeAll(() => server.listen());
-  afterEach(() => server.resetHandlers());
-  afterAll(() => server.close());
 
   describe("search", () => {
     it("if limit = 1 then length = 1", async () => {
