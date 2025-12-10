@@ -7,10 +7,12 @@ import { jsonp } from "./util/jsonp.js";
  */
 export default class NarouNovelJsonp extends NarouNovel {
   protected async execute<T>(
-    params: NarouParams,
-    endpoint: string
+    params: NarouParams | undefined,
+    endpoint: string,
+    _fetchOptions?: RequestInit
   ): Promise<T> {
-    const query = { ...params, out: "jsonp" };
+    void _fetchOptions;
+    const query = { ...(params ?? {}), out: "jsonp" };
     query.gzip = 0;
 
     const url = new URL(endpoint);

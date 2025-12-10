@@ -102,9 +102,15 @@ export default class UserSearchBuilder<
 
   /**
    * なろう小説APIへのリクエストを実行する
+   * @param fetchOptions fetchのオプション
    * @returns ランキング
    */
-  execute(): Promise<NarouSearchResults<UserSearchResult, TField>> {
-    return this.api.executeUserSearch(this.params as UserSearchParams);
+  execute(
+    fetchOptions?: RequestInit
+  ): Promise<NarouSearchResults<UserSearchResult, TField>> {
+    return this.api.executeUserSearch(
+      this.params as UserSearchParams,
+      fetchOptions
+    );
   }
 }

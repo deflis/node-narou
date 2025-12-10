@@ -14,6 +14,10 @@ import type NarouNovel from "./narou.js";
 import type { SearchResultFields } from "./narou-search-results.js";
 import { addDays, formatDate } from "./util/date.js";
 
+function isRequestInit(value: unknown): value is RequestInit {
+  return typeof value == "object" && value !== null && !Array.isArray(value);
+}
+
 /**
  * なろう小説ランキングAPIのヘルパークラス。
  *
@@ -108,21 +112,22 @@ export default class RankingBuilder {
    * 設定されたパラメータに基づき、なろう小説ランキングAPIへのリクエストを実行します。
    *
    * 返される結果には、Nコード、ポイント、順位が含まれます。
+   * @param {RequestInit} [fetchOptions] fetch のオプション
    * @returns {Promise<NarouRankingResult[]>} ランキング結果の配列
    * @see https://dev.syosetu.com/man/rankapi/#output
    */
-  execute(): Promise<NarouRankingResult[]> {
+  execute(fetchOptions?: RequestInit): Promise<NarouRankingResult[]> {
     const date = formatDate(this.date$);
     this.set({ rtype: `${date}-${this.type$}` });
-    return this.api.executeRanking(this.params as RankingParams);
+    return this.api.executeRanking(this.params as RankingParams, fetchOptions);
   }
 
   /**
    * ランキングAPIを実行し、取得したNコードを元になろう小説APIで詳細情報を取得して結合します。
    */
-  async executeWithFields(): Promise<
-    RankingResult<DefaultSearchResultFields>[]
-  >;
+  async executeWithFields(
+    fetchOptions?: RequestInit
+  ): Promise<RankingResult<DefaultSearchResultFields>[]>;
   /**
    * ランキングAPIを実行し、取得したNコードを元になろう小説APIで詳細情報を取得して結合します。
    *
@@ -131,7 +136,8 @@ export default class RankingBuilder {
    * @returns {Promise<RankingResult<SearchResultFields<TFields>>[]>} 詳細情報を含むランキング結果の配列
    */
   async executeWithFields<TFields extends Fields>(
-    fields: TFields | TFields[]
+    fields: TFields | TFields[],
+    fetchOptions?: RequestInit
   ): Promise<RankingResult<SearchResultFields<TFields>>[]>;
   /**
    * ランキングAPIを実行し、取得したNコードを元になろう小説APIで詳細情報を取得して結合します。
@@ -141,7 +147,8 @@ export default class RankingBuilder {
    */
   async executeWithFields(
     fields: never[],
-    opt: OptionalFields | OptionalFields[]
+    opt: OptionalFields | OptionalFields[],
+    fetchOptions?: RequestInit
   ): Promise<RankingResult<DefaultSearchResultFields | "weekly_unique">[]>;
   /**
    * ランキングAPIを実行し、取得したNコードを元になろう小説APIで詳細情報を取得して結合します。
@@ -153,7 +160,8 @@ export default class RankingBuilder {
    */
   async executeWithFields<TFields extends Fields>(
     fields: TFields | TFields[],
-    opt: OptionalFields | OptionalFields[]
+    opt: OptionalFields | OptionalFields[],
+    fetchOptions?: RequestInit
   ): Promise<RankingResult<SearchResultFields<TFields> | "weekly_unique">[]>;
   /**
    * ランキングAPIを実行し、取得したNコードを元になろう小説APIで詳細情報を取得して結合します。
@@ -162,16 +170,30 @@ export default class RankingBuilder {
    * @template TOpt - オプショナルな取得フィールドの型
    * @param fields - 取得するフィールドの配列 (省略時はデフォルトフィールド)
    * @param opt - オプショナルな取得フィールド (`weekly` など)
-   * @returns {Promise<RankingResult<SearchResultFields<TFields>>[]>} 詳細情報を含むランキング結果の配列
-   */
+    * @param fetchOptions fetch のオプション
+    * @returns {Promise<RankingResult<SearchResultFields<TFields>>[]>} 詳細情報を含むランキング結果の配列
+    */
   async executeWithFields<
     TFields extends Fields,
     TOpt extends OptionalFields | undefined = undefined
   >(
-    fields: TFields | TFields[] = [],
-    opt?: TOpt
+    fields: TFields | TFields[] | RequestInit = [],
+    opt?: TOpt | RequestInit,
+    fetchOptions?: RequestInit
   ): Promise<RankingResult<SearchResultFields<TFields>>[]> {
-    const ranking = await this.execute();
+    let opt$ = opt;
+    let fetchOptions$ = fetchOptions;
+
+    if (isRequestInit(fields)) {
+      fetchOptions$ = fields;
+      fields = [] as TFields[];
+      opt$ = undefined;
+    } else if (isRequestInit(opt)) {
+      fetchOptions$ = opt;
+      opt$ = undefined;
+    }
+
+    const ranking = await this.execute(fetchOptions$);
     const fields$ = Array.isArray(fields)
       ? fields.length == 0
         ? []
@@ -181,12 +203,12 @@ export default class RankingBuilder {
     const rankingNcodes = ranking.map(({ ncode }) => ncode);
     const builder = new SearchBuilder({}, this.api);
     builder.fields(fields$);
-    if (opt) {
-      builder.opt(opt);
+    if (opt$) {
+      builder.opt(opt$);
     }
     builder.ncode(rankingNcodes);
     builder.limit(ranking.length);
-    const result = await builder.execute();
+    const result = await builder.execute(fetchOptions$);
 
     return ranking.map<
       RankingResult<

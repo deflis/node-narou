@@ -28,10 +28,13 @@ export default class SearchBuilderR18<
   /**
    * なろう小説APIへの検索リクエストを実行する
    * @override
+   * @param fetchOptions fetchのオプション
    * @returns {Promise<NarouSearchResults>} 検索結果
    */
-  execute(): Promise<NarouSearchResults<NarouSearchResult, T | TOpt>> {
-    return this.api.executeNovel18(this.params);
+  execute(
+    fetchOptions?: RequestInit
+  ): Promise<NarouSearchResults<NarouSearchResult, T | TOpt>> {
+    return this.api.executeNovel18(this.params, fetchOptions);
   }
 
   /**

@@ -29,6 +29,94 @@ describe("RankingBuilder", () => {
     server.close();
   });
 
+  test("fetchOptions をランキング API に渡せる", async () => {
+    const mockFn = vi.fn();
+
+    server.use(
+      http.get("https://api.syosetu.com/rank/rankget/", ({ request }) => {
+        const url = new URL(request.url);
+        mockFn(request.headers.get("x-test-header"));
+        const response: NarouRankingResult[] = Array.from({ length: 1 }, () => ({
+          ncode: "N0000AA",
+          rank: 1,
+          pt: 1000,
+        }));
+        return responseGzipOrJson(response, url);
+      })
+    );
+
+    const result = await ranking().execute({
+      headers: { "x-test-header": "ranking-header" },
+    });
+
+    expect(result).toHaveLength(1);
+    expect(mockFn).toHaveBeenCalledWith("ranking-header");
+  });
+
+  test("fetchOptions を executeWithFields の両 API に渡せる", async () => {
+    const rankingHeaderMock = vi.fn();
+    const detailHeaderMock = vi.fn();
+
+    server.use(
+      http.get("https://api.syosetu.com/rank/rankget/", ({ request }) => {
+        const url = new URL(request.url);
+        rankingHeaderMock(request.headers.get("x-test-header"));
+        const response: NarouRankingResult[] = [
+          { ncode: "N0000AA", rank: 1, pt: 1000 },
+        ];
+        return responseGzipOrJson(response, url);
+      }),
+      http.get("https://api.syosetu.com/novelapi/api/", ({ request }) => {
+        const url = new URL(request.url);
+        detailHeaderMock(request.headers.get("x-test-header"));
+        const response = [
+          { allcount: 1 },
+          {
+            ncode: "N0000AA",
+            title: "タイトル",
+            writer: "作者",
+            story: "あらすじ",
+            biggenre: 1,
+            genre: 101,
+            keyword: ["キーワード"],
+            general_firstup: "2021-01-01 00:00:00",
+            general_lastup: "2021-01-01 00:00:00",
+            novel_type: 1,
+            end: 0,
+            general_all_no: 100,
+            length: 100,
+            time: 100,
+            isstop: 0,
+            isr15: 0,
+            isbl: 0,
+            isgl: 0,
+            iszankoku: 0,
+            istensei: 0,
+            istenni: 0,
+            global_point: 100,
+            fav_novel_cnt: 100,
+            review_cnt: 100,
+            all_point: 100,
+            all_hyoka_cnt: 100,
+            sasie_cnt: 100,
+            kaiwaritu: 100,
+            novelupdated_at: "2021-01-01 00:00:00",
+            updated_at: "2021-01-01 00:00:00",
+          },
+        ];
+        return responseGzipOrJson(response, url);
+      })
+    );
+
+    const result = await ranking().executeWithFields({
+      headers: { "x-test-header": "ranking-detail-header" },
+    });
+
+    expect(result).toHaveLength(1);
+    expect(rankingHeaderMock).toHaveBeenCalledWith("ranking-detail-header");
+    expect(detailHeaderMock).toHaveBeenCalledWith("ranking-detail-header");
+  });
+
   describe("type = default", () => {
     test("date = default", async () => {
       const mockFn = vi.fn();

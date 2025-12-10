@@ -49,7 +49,11 @@ const result = await search("異世界")
   .genre(Genre.RenaiIsekai)
   .order(Order.FavoriteNovelCount)
   .limit(10)
-  .execute();
+  .execute({
+    headers: {
+      "user-agent": "example-client"
+    }
+  });
 
 console.log(`${result.allcount}件の小説が見つかりました`);
 ```
@@ -61,6 +65,7 @@ console.log(`${result.allcount}件の小説が見つかりました`);
 import { search } from "narou/browser";
 
 const result = await search("魔法").execute();
+
 ```
 
 ## 📖 詳細な API ドキュメント
@@ -101,7 +106,11 @@ for (const novel of searchResult.values) {
 const rankingResult = await ranking()
   .date(new Date("2023-04-01"))
   .type(RankingType.Daily)
-  .execute();
+  .execute({
+    headers: {
+      "user-agent": "example-client",
+    },
+  });
 
 for (const novel of rankingResult) {
   console.log(novel.ncode);
@@ -113,7 +122,11 @@ for (const novel of rankingResult) {
 const rankingResultWithDetail = await ranking()
   .date(new Date("2023-04-01"))
   .type(RankingType.Daily)
-  .executeWithFields();
+  .executeWithFields({
+    headers: {
+      "user-agent": "example-client",
+    },
+  });
 
 for (const novel of rankingResultWithDetail) {
   console.log(novel.ncode);

@@ -472,10 +472,11 @@ export abstract class NovelSearchBuilderBase<
 
   /**
    * なろう小説APIへの検索リクエストを実行する
+   * @param fetchOptions fetchのオプション
    * @returns {Promise<NarouSearchResults>} 検索結果
    */
-  execute(): Promise<NarouSearchResults<NarouSearchResult, T>> {
-    return this.api.executeNovel(this.params);
+  execute(fetchOptions?: RequestInit): Promise<NarouSearchResults<NarouSearchResult, T>> {
+    return this.api.executeNovel(this.params, fetchOptions);
   }
 }
 

@@ -17,10 +17,11 @@ export default class NarouNovelFetch extends NarouNovel {
   }
 
   protected async execute<T>(
-    params: NarouParams,
-    endpoint: string
+    params: NarouParams | undefined,
+    endpoint: string,
+    fetchOptions: RequestInit = {}
   ): Promise<T> {
-    const query = { ...params, out: "json" };
+    const query = { ...(params ?? {}), out: "json" };
 
     if (query.gzip === undefined) {
       query.gzip = 5;
@@ -36,7 +37,7 @@ export default class NarouNovelFetch extends NarouNovel {
       }
     });
 
-    const res = await (this.fetch ?? fetch)(url);
+    const res = await (this.fetch ?? fetch)(url, fetchOptions);
 
     if (!query.gzip) {
       return (await res.json()) as T;
