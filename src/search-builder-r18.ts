@@ -5,6 +5,7 @@ import type {
   SearchResultR18Fields,
   SearchResultOptionalFields,
 } from "./narou-search-results.js";
+import type { ExecuteOptions } from "./narou.js";
 import type {
   R18Site,
   SearchResultFieldNames,
@@ -30,8 +31,10 @@ export default class SearchBuilderR18<
    * @override
    * @returns {Promise<NarouSearchResults>} 検索結果
    */
-  execute(): Promise<NarouSearchResults<NarouSearchResult, T | TOpt>> {
-    return this.api.executeNovel18(this.params);
+  execute(
+    options?: ExecuteOptions
+  ): Promise<NarouSearchResults<NarouSearchResult, T | TOpt>> {
+    return this.api.executeNovel18(this.params, options);
   }
 
   /**

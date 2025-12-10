@@ -1,4 +1,5 @@
 import type NarouNovel from "./narou.js";
+import type { ExecuteOptions } from "./narou.js";
 import type {
   NarouSearchResult,
   SearchResultFields,
@@ -474,8 +475,10 @@ export abstract class NovelSearchBuilderBase<
    * なろう小説APIへの検索リクエストを実行する
    * @returns {Promise<NarouSearchResults>} 検索結果
    */
-  execute(): Promise<NarouSearchResults<NarouSearchResult, T>> {
-    return this.api.executeNovel(this.params);
+  execute(options?: ExecuteOptions): Promise<
+    NarouSearchResults<NarouSearchResult, T>
+  > {
+    return this.api.executeNovel(this.params, options);
   }
 }
 

@@ -478,5 +478,77 @@ describe("RankingBuilder", () => {
       expect(result[0].ncode).toBe("N0000AA");
       expect(result[0].title).toBe("タイトル");
     });
+
+    test("ExecuteOptions are passed when used as the only argument", async () => {
+      const rankingHeader = vi.fn();
+      const novelHeader = vi.fn();
+
+      server.use(
+        http.get("https://api.syosetu.com/rank/rankget/", ({ request }) => {
+          rankingHeader(request.headers.get("x-test"));
+          const url = new URL(request.url);
+          const response: NarouRankingResult[] = [
+            { ncode: "N0000AA", rank: 1, pt: 1000 },
+          ];
+          return responseGzipOrJson(response, url);
+        }),
+        http.get("https://api.syosetu.com/novelapi/api/", ({ request }) => {
+          novelHeader(request.headers.get("x-test"));
+          const url = new URL(request.url);
+          const response = [
+            { allcount: 1 },
+            {
+              ncode: "N0000AA",
+              title: "タイトル",
+            },
+          ];
+          return responseGzipOrJson(response, url);
+        })
+      );
+
+      const result = await ranking().executeWithFields({
+        fetchOptions: { headers: { "x-test": "option-only" } },
+      });
+
+      expect(rankingHeader).toHaveBeenCalledWith("option-only");
+      expect(novelHeader).toHaveBeenCalledWith("option-only");
+      expect(result[0].title).toBe("タイトル");
+    });
+
+    test("ExecuteOptions are passed when provided alongside fields", async () => {
+      const rankingHeader = vi.fn();
+      const novelHeader = vi.fn();
+
+      server.use(
+        http.get("https://api.syosetu.com/rank/rankget/", ({ request }) => {
+          rankingHeader(request.headers.get("x-test-2"));
+          const url = new URL(request.url);
+          const response: NarouRankingResult[] = [
+            { ncode: "N0001BB", rank: 1, pt: 500 },
+          ];
+          return responseGzipOrJson(response, url);
+        }),
+        http.get("https://api.syosetu.com/novelapi/api/", ({ request }) => {
+          novelHeader(request.headers.get("x-test-2"));
+          const url = new URL(request.url);
+          const response = [
+            { allcount: 1 },
+            {
+              ncode: "N0001BB",
+              title: "別タイトル",
+            },
+          ];
+          return responseGzipOrJson(response, url);
+        })
+      );
+
+      const result = await ranking().executeWithFields([Fields.title], {
+        fetchOptions: { headers: { "x-test-2": "fields-and-option" } },
+      });
+
+      expect(rankingHeader).toHaveBeenCalledWith("fields-and-option");
+      expect(novelHeader).toHaveBeenCalledWith("fields-and-option");
+      expect(result[0].title).toBe("別タイトル");
+    });
   });
 });

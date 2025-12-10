@@ -5,6 +5,7 @@ import type {
 } from "./narou-search-results.js";
 import type { UserFields, UserOrder, UserSearchParams } from "./params.js";
 import { SearchBuilderBase } from "./search-builder.js";
+import type { ExecuteOptions } from "./narou.js";
 
 /**
  * なろうユーザ検索API
@@ -104,7 +105,12 @@ export default class UserSearchBuilder<
    * なろう小説APIへのリクエストを実行する
    * @returns ランキング
    */
-  execute(): Promise<NarouSearchResults<UserSearchResult, TField>> {
-    return this.api.executeUserSearch(this.params as UserSearchParams);
+  execute(
+    options?: ExecuteOptions
+  ): Promise<NarouSearchResults<UserSearchResult, TField>> {
+    return this.api.executeUserSearch(
+      this.params as UserSearchParams,
+      options
+    );
   }
 }
