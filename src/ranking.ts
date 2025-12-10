@@ -10,7 +10,8 @@ import {
   RankingType,
   Fields,
 } from "./params.js";
-import type NarouNovel, { ExecuteOptions } from "./narou.js";
+import type NarouNovel from "./narou.js";
+import type { ExecuteOptions } from "./narou.js";
 import type { SearchResultFields } from "./narou-search-results.js";
 import { addDays, formatDate } from "./util/date.js";
 

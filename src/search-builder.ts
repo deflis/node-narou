@@ -1,4 +1,5 @@
-import type NarouNovel, { ExecuteOptions } from "./narou.js";
+import type NarouNovel from "./narou.js";
+import type { ExecuteOptions } from "./narou.js";
 import type {
   NarouSearchResult,
   SearchResultFields,
