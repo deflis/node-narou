@@ -372,7 +372,7 @@ export const Order = {
   /** ブックマーク数の多い順 */
   FavoriteNovelCount: "favnovelcnt",
   /** レビュー数の多い順 */
-  ReviewCount: "favnovelcnt",
+  ReviewCount: "reviewcnt",
   /** 総合ポイントの高い順 */
   HyokaDesc: "hyoka",
   /** 総合ポイントの低い順 */
