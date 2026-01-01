@@ -11,6 +11,7 @@ export default class NarouNovelJsonp extends NarouNovel {
     endpoint: string,
     _options?: ExecuteOptions
   ): Promise<T> {
+    void _options;
     const query = { ...params, out: "jsonp" };
     query.gzip = 0;
 
