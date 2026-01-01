@@ -15,6 +15,19 @@ import { responseGzipOrJson } from "./mock";
 
 const server = setupServer();
 
+const setupHeaderHandler = (mockFn: (...args: unknown[]) => void) => {
+  server.use(
+    http.get("https://api.syosetu.com/rank/rankget/", ({ request }) => {
+      const url = new URL(request.url);
+      mockFn(request.headers.get("x-test"));
+      const response: NarouRankingResult[] = [
+        { ncode: "N0001AA", rank: 1, pt: 1000 },
+      ];
+      return responseGzipOrJson(response, url);
+    })
+  );
+};
+
 describe("RankingBuilder", () => {
   beforeAll(() => {
     vi.useFakeTimers({
@@ -477,6 +490,24 @@ describe("RankingBuilder", () => {
 
       expect(result[0].ncode).toBe("N0000AA");
       expect(result[0].title).toBe("タイトル");
+    });
+  });
+
+  describe("execute options", () => {
+    test("fetchOptionsがリクエストに渡される", async () => {
+      const mockFn = vi.fn();
+      setupHeaderHandler(mockFn);
+
+      const result = await ranking().execute({
+        fetchOptions: { headers: { "x-test": "hello" } },
+      });
+
+      expect(result).toHaveLength(1);
+      expect(result[0].ncode).toBe("N0001AA");
+      expect(result[0].rank).toBe(1);
+      expect(result[0].pt).toBe(1000);
+      expect(mockFn).toHaveBeenCalledTimes(1);
+      expect(mockFn).toHaveBeenCalledWith("hello");
     });
   });
 });
