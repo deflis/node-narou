@@ -123,6 +123,8 @@ export default class RankingBuilder {
    * ランキングAPIを実行し、取得したNコードを元になろう小説APIで詳細情報を取得して結合します。
    */
   async executeWithFields(
+    fields?: never[] | undefined,
+    opt?: never[] | undefined,
     options?: ExecuteOptions
   ): Promise<RankingResult<DefaultSearchResultFields>[]>;
   /**
@@ -134,6 +136,7 @@ export default class RankingBuilder {
    */
   async executeWithFields<TFields extends Fields>(
     fields: TFields | TFields[],
+    opt?: never | never[],
     options?: ExecuteOptions
   ): Promise<RankingResult<SearchResultFields<TFields>>[]>;
   /**

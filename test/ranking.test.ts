@@ -510,4 +510,53 @@ describe("RankingBuilder", () => {
       expect(mockFn).toHaveBeenCalledWith("hello");
     });
   });
+
+  describe("executeWithFields options", async () => {
+    test("fetchOptionsがリクエストに渡される", async () => {
+      const mockRankingHeader = vi.fn();
+      const mockNovelRequest = vi.fn();
+
+      server.use(
+        http.get("https://api.syosetu.com/rank/rankget/", ({ request }) => {
+          const url = new URL(request.url);
+          mockRankingHeader(request.headers.get("x-test"));
+          const response: NarouRankingResult[] = [
+            { ncode: "N0001AA", rank: 1, pt: 1000 },
+          ];
+          return responseGzipOrJson(response, url);
+        }),
+        http.get("https://api.syosetu.com/novelapi/api/", ({ request }) => {
+          const url = new URL(request.url);
+          mockRankingHeader(request.headers.get("x-test"));
+          mockNovelRequest(
+            request.headers.get("x-test"),
+            url.searchParams.get("of"),
+            url.searchParams.size
+          );
+          const response = [
+            { allcount: 1 },
+            { ncode: "N0001AA", title: "タイトル" },
+          ];
+          return responseGzipOrJson(response, url);
+        })
+      );
+
+      const result = await ranking().executeWithFields(undefined, undefined, {
+        fetchOptions: { headers: { "x-test": "hello" } },
+      });
+
+      expect(result).toHaveLength(1);
+      expect(result[0].ncode).toBe("N0001AA");
+      expect(result[0].title).toBe("タイトル");
+      expect(mockRankingHeader).toHaveBeenCalledTimes(2);
+      expect(mockRankingHeader).toHaveBeenNthCalledWith(1, "hello");
+      expect(mockRankingHeader).toHaveBeenNthCalledWith(2, "hello");
+      expect(mockNovelRequest).toHaveBeenCalledTimes(1);
+      expect(mockNovelRequest).toHaveBeenCalledWith(
+        "hello",
+        "",
+        5 // ncode, gzip, out, of, lim
+      );
+    });
+  });
 });
