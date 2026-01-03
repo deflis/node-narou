@@ -1,4 +1,5 @@
 import type NarouNovel from "./narou.js";
+import type { ExecuteOptions } from "./narou.js";
 import type {
   NarouSearchResult,
   SearchResultFields,
@@ -40,7 +41,7 @@ export abstract class SearchBuilderBase<
   constructor(
     protected params: TParams = {} as TParams,
     protected api: NarouNovel
-  ) {}
+  ) { }
 
   /**
    * 配列から重複を除去する
@@ -472,10 +473,13 @@ export abstract class NovelSearchBuilderBase<
 
   /**
    * なろう小説APIへの検索リクエストを実行する
+   * @param options 実行オプション
    * @returns {Promise<NarouSearchResults>} 検索結果
    */
-  execute(): Promise<NarouSearchResults<NarouSearchResult, T>> {
-    return this.api.executeNovel(this.params);
+  execute(
+    options?: ExecuteOptions
+  ): Promise<NarouSearchResults<NarouSearchResult, T>> {
+    return this.api.executeNovel(this.params, options);
   }
 }
 

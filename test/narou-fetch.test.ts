@@ -166,4 +166,23 @@ describe('NarouNovelFetch', () => {
     // リクエストが呼ばれたことを確認
     expect(requestSpy).toHaveBeenCalled();
   });
+
+  it('should pass fetchOptions to fetch', async () => {
+    // MSWでエンドポイントをモック
+    server.use(
+      http.get('https://api.example.com', ({ request }) => {
+        expect(request.headers.get('user-agent')).toBe('node-narou');
+        return responseGzipOrJson(mockData, new URL(request.url));
+      })
+    );
+
+    const narouFetch = new NarouNovelFetch();
+
+    // @ts-expect-error - Accessing protected method for testing
+    await narouFetch.execute(
+      { gzip: 0 },
+      'https://api.example.com',
+      { fetchOptions: { headers: { 'user-agent': 'node-narou' } } }
+    );
+  });
 });

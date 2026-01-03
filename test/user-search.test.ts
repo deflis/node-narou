@@ -35,6 +35,19 @@ const setupMockHandler = (
   );
 };
 
+const setupHeaderHandler = (mockFn: (...args: unknown[]) => void) => {
+  server.use(
+    http.get("https://api.syosetu.com/userapi/api/", ({ request }) => {
+      const url = new URL(request.url);
+      const response = [{ allcount: 1 }, { userid: 1234, name: "テストユーザー" }];
+
+      mockFn(request.headers.get("x-test"));
+
+      return responseGzipOrJson(response, url);
+    })
+  );
+};
+
 describe("UserSearchBuilder", () => {
   beforeAll(() => server.listen());
   afterEach(() => server.resetHandlers());
@@ -77,6 +90,24 @@ describe("UserSearchBuilder", () => {
       expect(result.values[0].userid).toBe(1234);
       expect(mockFn).toHaveBeenCalledTimes(1);
       expect(mockFn).toHaveBeenCalledWith(gzip.toString(), "json", 2);
+    });
+  });
+
+  describe("execute options", () => {
+    test("fetchOptionsがリクエストに渡される", async () => {
+      const mockFn = vi.fn();
+      setupHeaderHandler(mockFn);
+
+      const result = await NarouAPI.searchUser().execute({
+        fetchOptions: { headers: { "x-test": "hello" } },
+      });
+
+      expect(result.allcount).toBe(1);
+      expect(result.length).toBe(1);
+      expect(result.values).toHaveLength(1);
+      expect(result.values[0].userid).toBe(1234);
+      expect(mockFn).toHaveBeenCalledTimes(1);
+      expect(mockFn).toHaveBeenCalledWith("hello");
     });
   });
 

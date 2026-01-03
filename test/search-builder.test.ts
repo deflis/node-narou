@@ -42,6 +42,19 @@ const setupMockHandler = (
   );
 };
 
+const setupHeaderHandler = (mockFn: (...args: unknown[]) => void) => {
+  server.use(
+    http.get("https://api.syosetu.com/novelapi/api/", ({ request }) => {
+      const url = new URL(request.url);
+      const response = [{ allcount: 1 }, { ncode: "N1234AB" }];
+
+      mockFn(request.headers.get("x-test"));
+
+      return responseGzipOrJson(response, url);
+    })
+  );
+};
+
 describe("SearchBuilder", () => {
   beforeAll(() => server.listen());
   afterEach(() => server.resetHandlers());
@@ -112,6 +125,24 @@ describe("SearchBuilder", () => {
       expect(result.values[0].ncode).toBe("N1234AB");
       expect(mockFn).toHaveBeenCalledTimes(1);
       expect(mockFn).toHaveBeenCalledWith(limit.toString(), "5", "json", 3);
+    });
+  });
+
+  describe("execute options", () => {
+    test("fetchOptionsがリクエストに渡される", async () => {
+      const mockFn = vi.fn();
+      setupHeaderHandler(mockFn);
+
+      const result = await NarouAPI.search().execute({
+        fetchOptions: { headers: { "x-test": "hello" } },
+      });
+
+      expect(result.allcount).toBe(1);
+      expect(result.length).toBe(1);
+      expect(result.values).toHaveLength(1);
+      expect(result.values[0].ncode).toBe("N1234AB");
+      expect(mockFn).toHaveBeenCalledTimes(1);
+      expect(mockFn).toHaveBeenCalledWith("hello");
     });
   });
 
