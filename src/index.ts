@@ -67,9 +67,9 @@ export function ranking(api: NarouNovel = narouNovelFetch): RankingBuilder {
 
 /**
  * なろう殿堂入り API でランキング履歴を取得する
- * @param ncode 小説のNコード
- * @param options 実行オプション
- * @param api API実行クラスのインスタンス
+ * @param {string} ncode 小説のNコード
+ * @param {ExecuteOptions} [options] 実行オプション
+ * @param {NarouNovel} [api] API実行クラスのインスタンス
  * @see https://dev.syosetu.com/man/rankinapi/
  */
 export async function rankingHistory(
