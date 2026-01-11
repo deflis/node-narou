@@ -1,4 +1,5 @@
 import type NarouNovel from "./narou.js";
+import type { ExecuteOptions } from "./narou.js";
 import NarouNovelJsonp from "./narou-jsonp.js";
 import SearchBuilder from "./search-builder.js";
 import SearchBuilderR18 from "./search-builder-r18.js";
@@ -67,13 +68,16 @@ export function ranking(api: NarouNovel = narouNovelJsonp): RankingBuilder {
 /**
  * なろう殿堂入り API でランキング履歴を取得する
  * @param {string} ncode 小説のNコード
+ * @param {ExecuteOptions} [options] 実行オプション
+ * @param {NarouNovel} [api] API実行クラスのインスタンス
  * @see https://dev.syosetu.com/man/rankinapi/
  */
 export async function rankingHistory(
   ncode: string,
+  options?: ExecuteOptions,
   api: NarouNovel = narouNovelJsonp
 ): Promise<RankingHistoryResult[]> {
-  const result = await api.executeRankingHistory({ ncode });
+  const result = await api.executeRankingHistory({ ncode }, options);
   if (Array.isArray(result)) {
     return result.map(formatRankingHistory);
   } else {
