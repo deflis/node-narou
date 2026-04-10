@@ -63,11 +63,14 @@ export abstract class SearchBuilderBase<
    */
   protected static range2string<T extends number>(
     n: T | readonly T[] | RangeParam<T>
-  ): Join<T | ""> {
+  ): Join<T | ""> | undefined {
     if (typeof n === "object" && n !== null && !Array.isArray(n)) {
       const obj = n as Extract<RangeParam<T>, object>;
       if ("equal" in obj) {
         return obj.equal.toString() as Join<T>;
+      }
+      if (obj.min === undefined && obj.max === undefined) {
+        return undefined;
       }
       return `${obj.min ?? ""}-${obj.max ?? ""}` as Join<T | "">;
     }
@@ -319,7 +322,10 @@ export abstract class NovelSearchBuilderBase<
    * @return {this}
    */
   length(length: number | readonly number[] | RangeParam<number>): this {
-    this.set({ length: NovelSearchBuilderBase.range2string(length) });
+    const val = NovelSearchBuilderBase.range2string(length);
+    if (val !== undefined) {
+      this.set({ length: val });
+    }
     return this;
   }
 
@@ -345,7 +351,10 @@ export abstract class NovelSearchBuilderBase<
 
   kaiwaritu(minOrRange: number | RangeParam<number>, max?: number): this {
     if (typeof minOrRange === "object" && minOrRange !== null) {
-      this.set({ kaiwaritu: NovelSearchBuilderBase.range2string(minOrRange) });
+      const val = NovelSearchBuilderBase.range2string(minOrRange);
+      if (val !== undefined) {
+        this.set({ kaiwaritu: val });
+      }
       return this;
     }
 
@@ -367,7 +376,10 @@ export abstract class NovelSearchBuilderBase<
    * @return {this}
    */
   sasie(num: number | readonly number[] | RangeParam<number>): this {
-    this.set({ sasie: NovelSearchBuilderBase.range2string(num) });
+    const val = NovelSearchBuilderBase.range2string(num);
+    if (val !== undefined) {
+      this.set({ sasie: val });
+    }
     return this;
   }
 
@@ -378,7 +390,10 @@ export abstract class NovelSearchBuilderBase<
    * @return {this}
    */
   time(num: number | readonly number[] | RangeParam<number>): this {
-    this.set({ time: NovelSearchBuilderBase.range2string(num) });
+    const val = NovelSearchBuilderBase.range2string(num);
+    if (val !== undefined) {
+      this.set({ time: val });
+    }
     return this;
   }
 

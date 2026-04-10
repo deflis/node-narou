@@ -29,4 +29,7 @@ export type Join<T extends Stringable> = `${T}-${T}` | `${T}`;
  * 範囲指定のためのオブジェクトの型。
  * @template T - 範囲指定する値の型
  */
-export type RangeParam<T extends number> = { min?: T; max?: T } | { equal: T };
+export type RangeParam<T extends number> =
+  | { min: T; max?: T }
+  | { min?: T; max: T }
+  | { equal: T };
