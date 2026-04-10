@@ -130,6 +130,10 @@ describe('jsonp', () => {
     const result = await jsonpPromise;
     expect(result).toEqual(mockData);
     expect(mockParentNode.insertBefore).toHaveBeenCalledWith(mockScript, expect.anything());
+
+    // Check if callback is cleaned up (deleted on success)
+    expect(window[callbackName]).toBeUndefined();
+    expect(callbackName in window).toBe(false);
   });
 
   test('should apply custom options', async () => {
@@ -161,6 +165,10 @@ describe('jsonp', () => {
 
     const result = await jsonpPromise;
     expect(result).toEqual(mockData);
+
+    // Check if callback is cleaned up (deleted on success)
+    expect(window[callbackName]).toBeUndefined();
+    expect(callbackName in window).toBe(false);
   });
 
   test('should timeout and reject the promise', async () => {
@@ -173,6 +181,12 @@ describe('jsonp', () => {
     vi.advanceTimersByTime(1001);
 
     await expect(promise).rejects.toThrow('Timeout');
+
+    // Check if callback is replaced by noop on timeout (not deleted)
+    const timeoutId = Object.keys(window).find(key => key.startsWith('__jp') && typeof window[key] === 'function');
+    expect(timeoutId).toBeDefined();
+    expect(typeof window[timeoutId!]).toBe('function');
+    expect(timeoutId! in window).toBe(true);
   });
 
   test('should use document.head if no script tags exist', async () => {
