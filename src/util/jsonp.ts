@@ -88,7 +88,7 @@ export function jsonp<T>(
         // 成功時は完全に削除してメモリリークを防止
         try {
           delete window[id];
-        } catch (e) {
+        } catch {
           window[id] = undefined as any;
         }
       }
