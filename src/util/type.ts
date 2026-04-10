@@ -24,3 +24,9 @@ type Stringable = string | number | bigint | boolean | null | undefined;
  * type JoinedNumbers = Join<Numbers>; // '1' | '2' | '3' | '1-1' | '1-2' | '1-3' | '2-1' | '2-2' | '2-3' | '3-1' | '3-2' | '3-3'
  */
 export type Join<T extends Stringable> = `${T}-${T}` | `${T}`;
+
+/**
+ * 範囲指定のためのオブジェクトの型。
+ * @template T - 範囲指定する値の型
+ */
+export type RangeParam<T extends number> = { min?: T; max?: T } | { equal: T };

@@ -787,6 +787,46 @@ describe("SearchBuilder", () => {
       expect(mockFn).toHaveBeenCalledTimes(1);
       expect(mockFn).toHaveBeenCalledWith(`0-${length}`, "5", "json", 3);
     });
+
+    test("if length = { min: 1000 }", async () => {
+      const mockFn = vi.fn();
+      setupMockHandler(mockFn, ["length", "gzip", "out"]);
+
+      const result = await NarouAPI.search().length({ min: 1000 }).execute();
+      expect(result.allcount).toBe(1);
+      expect(mockFn).toHaveBeenCalledTimes(1);
+      expect(mockFn).toHaveBeenCalledWith(`1000-`, "5", "json", 3);
+    });
+
+    test("if length = { max: 1000 }", async () => {
+      const mockFn = vi.fn();
+      setupMockHandler(mockFn, ["length", "gzip", "out"]);
+
+      const result = await NarouAPI.search().length({ max: 1000 }).execute();
+      expect(result.allcount).toBe(1);
+      expect(mockFn).toHaveBeenCalledTimes(1);
+      expect(mockFn).toHaveBeenCalledWith(`-1000`, "5", "json", 3);
+    });
+
+    test("if length = { min: 100, max: 1000 }", async () => {
+      const mockFn = vi.fn();
+      setupMockHandler(mockFn, ["length", "gzip", "out"]);
+
+      const result = await NarouAPI.search().length({ min: 100, max: 1000 }).execute();
+      expect(result.allcount).toBe(1);
+      expect(mockFn).toHaveBeenCalledTimes(1);
+      expect(mockFn).toHaveBeenCalledWith(`100-1000`, "5", "json", 3);
+    });
+
+    test("if length = { equal: 1000 }", async () => {
+      const mockFn = vi.fn();
+      setupMockHandler(mockFn, ["length", "gzip", "out"]);
+
+      const result = await NarouAPI.search().length({ equal: 1000 }).execute();
+      expect(result.allcount).toBe(1);
+      expect(mockFn).toHaveBeenCalledTimes(1);
+      expect(mockFn).toHaveBeenCalledWith(`1000`, "5", "json", 3);
+    });
   });
 
   describe("kaiwaritu", () => {
@@ -822,6 +862,26 @@ describe("SearchBuilder", () => {
       expect(result.allcount).toBe(1);
       expect(mockFn).toHaveBeenCalledTimes(1);
       expect(mockFn).toHaveBeenCalledWith(`${min}-${max}`, "5", "json", 3);
+    });
+
+    test("if kaiwaritu = { min: 10 }", async () => {
+      const mockFn = vi.fn();
+      setupMockHandler(mockFn, ["kaiwaritu", "gzip", "out"]);
+
+      const result = await NarouAPI.search().kaiwaritu({ min: 10 }).execute();
+      expect(result.allcount).toBe(1);
+      expect(mockFn).toHaveBeenCalledTimes(1);
+      expect(mockFn).toHaveBeenCalledWith(`10-`, "5", "json", 3);
+    });
+
+    test("if kaiwaritu = { max: 50 }", async () => {
+      const mockFn = vi.fn();
+      setupMockHandler(mockFn, ["kaiwaritu", "gzip", "out"]);
+
+      const result = await NarouAPI.search().kaiwaritu({ max: 50 }).execute();
+      expect(result.allcount).toBe(1);
+      expect(mockFn).toHaveBeenCalledTimes(1);
+      expect(mockFn).toHaveBeenCalledWith(`-50`, "5", "json", 3);
     });
   });
 
@@ -859,6 +919,16 @@ describe("SearchBuilder", () => {
       expect(mockFn).toHaveBeenCalledTimes(1);
       expect(mockFn).toHaveBeenCalledWith(`${min}-${max}`, "5", "json", 3);
     });
+
+    test("if sasie = { min: 5 }", async () => {
+      const mockFn = vi.fn();
+      setupMockHandler(mockFn, ["sasie", "gzip", "out"]);
+
+      const result = await NarouAPI.search().sasie({ min: 5 }).execute();
+      expect(result.allcount).toBe(1);
+      expect(mockFn).toHaveBeenCalledTimes(1);
+      expect(mockFn).toHaveBeenCalledWith(`5-`, "5", "json", 3);
+    });
   });
 
   describe("time", () => {
@@ -894,6 +964,16 @@ describe("SearchBuilder", () => {
       expect(result.allcount).toBe(1);
       expect(mockFn).toHaveBeenCalledTimes(1);
       expect(mockFn).toHaveBeenCalledWith(`${min}-${max}`, "5", "json", 3);
+    });
+
+    test("if time = { min: 10, max: 20 }", async () => {
+      const mockFn = vi.fn();
+      setupMockHandler(mockFn, ["time", "gzip", "out"]);
+
+      const result = await NarouAPI.search().time({ min: 10, max: 20 }).execute();
+      expect(result.allcount).toBe(1);
+      expect(mockFn).toHaveBeenCalledTimes(1);
+      expect(mockFn).toHaveBeenCalledWith(`10-20`, "5", "json", 3);
     });
   });
 
