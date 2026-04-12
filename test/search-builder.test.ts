@@ -929,6 +929,36 @@ describe("SearchBuilder", () => {
       expect(mockFn).toHaveBeenCalledTimes(1);
       expect(mockFn).toHaveBeenCalledWith(`5-`, "5", "json", 3);
     });
+
+    test("if sasie = { max: 10 }", async () => {
+      const mockFn = vi.fn();
+      setupMockHandler(mockFn, ["sasie", "gzip", "out"]);
+
+      const result = await NarouAPI.search().sasie({ max: 10 }).execute();
+      expect(result.allcount).toBe(1);
+      expect(mockFn).toHaveBeenCalledTimes(1);
+      expect(mockFn).toHaveBeenCalledWith(`-10`, "5", "json", 3);
+    });
+
+    test("if sasie = { min: 5, max: 10 }", async () => {
+      const mockFn = vi.fn();
+      setupMockHandler(mockFn, ["sasie", "gzip", "out"]);
+
+      const result = await NarouAPI.search().sasie({ min: 5, max: 10 }).execute();
+      expect(result.allcount).toBe(1);
+      expect(mockFn).toHaveBeenCalledTimes(1);
+      expect(mockFn).toHaveBeenCalledWith(`5-10`, "5", "json", 3);
+    });
+
+    test("if sasie = { equal: 5 }", async () => {
+      const mockFn = vi.fn();
+      setupMockHandler(mockFn, ["sasie", "gzip", "out"]);
+
+      const result = await NarouAPI.search().sasie({ equal: 5 }).execute();
+      expect(result.allcount).toBe(1);
+      expect(mockFn).toHaveBeenCalledTimes(1);
+      expect(mockFn).toHaveBeenCalledWith(`5`, "5", "json", 3);
+    });
   });
 
   describe("time", () => {
@@ -974,6 +1004,36 @@ describe("SearchBuilder", () => {
       expect(result.allcount).toBe(1);
       expect(mockFn).toHaveBeenCalledTimes(1);
       expect(mockFn).toHaveBeenCalledWith(`10-20`, "5", "json", 3);
+    });
+
+    test("if time = { min: 10 }", async () => {
+      const mockFn = vi.fn();
+      setupMockHandler(mockFn, ["time", "gzip", "out"]);
+
+      const result = await NarouAPI.search().time({ min: 10 }).execute();
+      expect(result.allcount).toBe(1);
+      expect(mockFn).toHaveBeenCalledTimes(1);
+      expect(mockFn).toHaveBeenCalledWith(`10-`, "5", "json", 3);
+    });
+
+    test("if time = { max: 20 }", async () => {
+      const mockFn = vi.fn();
+      setupMockHandler(mockFn, ["time", "gzip", "out"]);
+
+      const result = await NarouAPI.search().time({ max: 20 }).execute();
+      expect(result.allcount).toBe(1);
+      expect(mockFn).toHaveBeenCalledTimes(1);
+      expect(mockFn).toHaveBeenCalledWith(`-20`, "5", "json", 3);
+    });
+
+    test("if time = { equal: 10 }", async () => {
+      const mockFn = vi.fn();
+      setupMockHandler(mockFn, ["time", "gzip", "out"]);
+
+      const result = await NarouAPI.search().time({ equal: 10 }).execute();
+      expect(result.allcount).toBe(1);
+      expect(mockFn).toHaveBeenCalledTimes(1);
+      expect(mockFn).toHaveBeenCalledWith(`10`, "5", "json", 3);
     });
   });
 

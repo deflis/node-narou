@@ -65,14 +65,16 @@ export abstract class SearchBuilderBase<
     n: T | readonly T[] | RangeParam<T>
   ): Join<T | ""> | undefined {
     if (typeof n === "object" && n !== null && !Array.isArray(n)) {
-      const obj = n as Extract<RangeParam<T>, object>;
-      if ("equal" in obj) {
-        return obj.equal.toString() as Join<T>;
+      if ("equal" in n && typeof n.equal === "number") {
+        return n.equal.toString() as Join<T>;
+      } else if ("min" in n || "max" in n) {
+        const obj = n as Extract<RangeParam<T>, { min?: T, max?: T }>;
+        if (obj.min === undefined && obj.max === undefined) {
+          return undefined;
+        }
+        return `${obj.min ?? ""}-${obj.max ?? ""}` as Join<T | "">;
       }
-      if (obj.min === undefined && obj.max === undefined) {
-        return undefined;
-      }
-      return `${obj.min ?? ""}-${obj.max ?? ""}` as Join<T | "">;
+      return undefined;
     }
     return SearchBuilderBase.array2string(n) as Join<T>;
   }
