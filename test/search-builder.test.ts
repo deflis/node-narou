@@ -920,6 +920,14 @@ describe("SearchBuilder", () => {
       expect(mockFn).toHaveBeenCalledWith(`${min}-${max}`, "5", "json", 3);
     });
 
+    test("if sasie = array > 2 length throws", async () => {
+      const builder = NarouAPI.search();
+      expect(() => {
+        // @ts-expect-error Testing invalid runtime input
+        builder.sasie([1, 2, 3]);
+      }).toThrow("範囲指定の配列は要素数を2つ以内にする必要があります");
+    });
+
     test("if sasie = { min: 5 }", async () => {
       const mockFn = vi.fn();
       setupMockHandler(mockFn, ["sasie", "gzip", "out"]);

@@ -62,7 +62,7 @@ export abstract class SearchBuilderBase<
    * @returns ハイフン区切りの文字列
    */
   protected static range2string<T extends number>(
-    n: T | readonly T[] | RangeParam<T>
+    n: T | readonly [T, T] | RangeParam<T>
   ): Join<T | ""> | undefined {
     if (typeof n === "object" && n !== null && !Array.isArray(n)) {
       if ("equal" in n && typeof n.equal === "number") {
@@ -75,6 +75,9 @@ export abstract class SearchBuilderBase<
         return `${obj.min ?? ""}-${obj.max ?? ""}` as Join<T | "">;
       }
       return undefined;
+    }
+    if (Array.isArray(n) && n.length > 2) {
+      throw new Error("範囲指定の配列は要素数を2つ以内にする必要があります");
     }
     return SearchBuilderBase.array2string(n) as Join<T>;
   }
@@ -323,7 +326,7 @@ export abstract class NovelSearchBuilderBase<
    * @param length 文字数、または[最小文字数, 最大文字数]、またはオブジェクト指定
    * @return {this}
    */
-  length(length: number | readonly number[] | RangeParam<number>): this {
+  length(length: number | readonly [number, number] | RangeParam<number>): this {
     const val = NovelSearchBuilderBase.range2string(length);
     if (val !== undefined) {
       this.set({ length: val });
@@ -377,7 +380,7 @@ export abstract class NovelSearchBuilderBase<
    * @param num 挿絵数、または[最小挿絵数, 最大挿絵数]、またはオブジェクト指定
    * @return {this}
    */
-  sasie(num: number | readonly number[] | RangeParam<number>): this {
+  sasie(num: number | readonly [number, number] | RangeParam<number>): this {
     const val = NovelSearchBuilderBase.range2string(num);
     if (val !== undefined) {
       this.set({ sasie: val });
@@ -391,7 +394,7 @@ export abstract class NovelSearchBuilderBase<
    * @param num 読了時間(分)、または[最小読了時間, 最大読了時間]、またはオブジェクト指定
    * @return {this}
    */
-  time(num: number | readonly number[] | RangeParam<number>): this {
+  time(num: number | readonly [number, number] | RangeParam<number>): this {
     const val = NovelSearchBuilderBase.range2string(num);
     if (val !== undefined) {
       this.set({ time: val });
