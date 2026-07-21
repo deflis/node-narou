@@ -36,8 +36,8 @@ importers:
         specifier: ^5.5.4
         version: 5.5.6(eslint-config-prettier@10.1.8(eslint@10.7.0))(eslint@10.7.0)(prettier@3.9.6)
       globals:
-        specifier: ^16.5.0
-        version: 16.5.0
+        specifier: ^17.7.0
+        version: 17.7.0
       msw:
         specifier: ^2.12.4
         version: 2.15.0(@types/node@25.9.5)(typescript@5.9.3)
@@ -1115,8 +1115,8 @@ packages:
     deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     hasBin: true
 
-  globals@16.5.0:
-    resolution: {integrity: sha512-c/c15i26VrJ4IRt5Z89DnIzCGDn9EcebibhAOjw5ibqEHsE1wLUgkPn9RDmNcUKyU87GeaL633nyJ+pplFR2ZQ==}
+  globals@17.7.0:
+    resolution: {integrity: sha512-Czmyns5dUsq4seFBR/Kdydhmo8y9kC79hiSkPn0YcGtNnYWnrgt0vjrSjx9tspoDGWm2CMarffRuLjM4xUz8xg==}
     engines: {node: '>=18'}
 
   graphql@16.14.2:
@@ -2661,7 +2661,7 @@ snapshots:
       package-json-from-dist: 1.0.1
       path-scurry: 1.11.1
 
-  globals@16.5.0: {}
+  globals@17.7.0: {}
 
   graphql@16.14.2: {}
 
