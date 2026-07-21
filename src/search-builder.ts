@@ -21,7 +21,7 @@ import type {
   DateParam,
 } from "./params.js";
 import { BooleanNumber, StopParam } from "./params.js";
-import type { Join } from "./util/type.js";
+import type { Join, RangeParam } from "./util/type.js";
 
 export type DefaultSearchResultFields = keyof Omit<
   NarouSearchResult,
@@ -52,6 +52,34 @@ export abstract class SearchBuilderBase<
    */
   protected static distinct<T>(array: readonly T[]): T[] {
     return Array.from(new Set(array));
+  }
+
+  /**
+   * 範囲指定や配列をハイフン区切りの文字列に変換する
+   * @protected
+   * @static
+   * @param n 範囲指定オブジェクト、数値の配列、あるいは単一の数値
+   * @returns ハイフン区切りの文字列
+   */
+  protected static range2string<T extends number>(
+    n: T | readonly [T, T] | RangeParam<T>
+  ): Join<T | ""> | undefined {
+    if (typeof n === "object" && n !== null && !Array.isArray(n)) {
+      if ("equal" in n && typeof n.equal === "number") {
+        return n.equal.toString() as Join<T>;
+      } else if ("min" in n || "max" in n) {
+        const obj = n as Extract<RangeParam<T>, { min?: T, max?: T }>;
+        if (obj.min === undefined && obj.max === undefined) {
+          return undefined;
+        }
+        return `${obj.min ?? ""}-${obj.max ?? ""}` as Join<T | "">;
+      }
+      return undefined;
+    }
+    if (Array.isArray(n) && n.length > 2) {
+      throw new Error("範囲指定の配列は要素数を2つ以内にする必要があります");
+    }
+    return SearchBuilderBase.array2string(n) as Join<T>;
   }
 
   /**
@@ -294,11 +322,15 @@ export abstract class NovelSearchBuilderBase<
   /**
    * 抽出する作品の文字数を指定します (length)。
    * 範囲指定する場合は、最小文字数と最大文字数をハイフン(-)記号で区切ってください。
-   * @param length 文字数、または[最小文字数, 最大文字数]
+   * オブジェクトによる指定 ({ min?: number, max?: number } または { equal: number }) も可能です。
+   * @param length 文字数、または[最小文字数, 最大文字数]、またはオブジェクト指定
    * @return {this}
    */
-  length(length: number | readonly number[]): this {
-    this.set({ length: NovelSearchBuilderBase.array2string(length) });
+  length(length: number | readonly [number, number] | RangeParam<number>): this {
+    const val = NovelSearchBuilderBase.range2string(length);
+    if (val !== undefined) {
+      this.set({ length: val });
+    }
     return this;
   }
 
@@ -315,8 +347,23 @@ export abstract class NovelSearchBuilderBase<
    * @return {this}
    */
   kaiwaritu(min: number, max: number): this;
+  /**
+   * 抽出する作品の会話率を%単位で範囲指定またはオブジェクトで指定します (kaiwaritu)。
+   * @param range 範囲指定オブジェクト
+   * @return {this}
+   */
+  kaiwaritu(range: RangeParam<number>): this;
 
-  kaiwaritu(min: number, max?: number): this {
+  kaiwaritu(minOrRange: number | RangeParam<number>, max?: number): this {
+    if (typeof minOrRange === "object" && minOrRange !== null) {
+      const val = NovelSearchBuilderBase.range2string(minOrRange);
+      if (val !== undefined) {
+        this.set({ kaiwaritu: val });
+      }
+      return this;
+    }
+
+    const min = minOrRange;
     let n: number | string;
     if (max != null) {
       n = `${min}-${max}`;
@@ -329,21 +376,29 @@ export abstract class NovelSearchBuilderBase<
 
   /**
    * 抽出する作品の挿絵数を指定します (sasie)。
-   * @param num 挿絵数、または[最小挿絵数, 最大挿絵数]
+   * オブジェクトによる指定 ({ min?: number, max?: number } または { equal: number }) も可能です。
+   * @param num 挿絵数、または[最小挿絵数, 最大挿絵数]、またはオブジェクト指定
    * @return {this}
    */
-  sasie(num: number | readonly number[]): this {
-    this.set({ sasie: NovelSearchBuilderBase.array2string(num) });
+  sasie(num: number | readonly [number, number] | RangeParam<number>): this {
+    const val = NovelSearchBuilderBase.range2string(num);
+    if (val !== undefined) {
+      this.set({ sasie: val });
+    }
     return this;
   }
 
   /**
    * 抽出する作品の予想読了時間を分単位で指定します (time)。
-   * @param num 読了時間(分)、または[最小読了時間, 最大読了時間]
+   * オブジェクトによる指定 ({ min?: number, max?: number } または { equal: number }) も可能です。
+   * @param num 読了時間(分)、または[最小読了時間, 最大読了時間]、またはオブジェクト指定
    * @return {this}
    */
-  time(num: number | readonly number[]): this {
-    this.set({ time: NovelSearchBuilderBase.array2string(num) });
+  time(num: number | readonly [number, number] | RangeParam<number>): this {
+    const val = NovelSearchBuilderBase.range2string(num);
+    if (val !== undefined) {
+      this.set({ time: val });
+    }
     return this;
   }
 
