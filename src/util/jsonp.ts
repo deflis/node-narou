@@ -75,14 +75,23 @@ export function jsonp<T>(
     
     // リソース解放用の関数を定義
     // スクリプトタグの削除、コールバック関数のクリーンアップ、タイマーのクリアを行う
-    const cleanup = function () {
+    const cleanup = function (isTimeout = false) {
       // Remove the script tag.
       if (script && script.parentNode) {
         script.parentNode.removeChild(script);
       }
 
-      // コールバック関数を空の関数に置き換えてメモリリークを防止
-      window[id] = noop;
+      if (isTimeout) {
+        // タイムアウト時は遅延レスポンスによるコンソールエラーを避けるためにnoopを代入
+        window[id] = noop;
+      } else {
+        // 成功時は完全に削除してメモリリークを防止
+        try {
+          delete window[id];
+        } catch {
+          window[id] = undefined as any;
+        }
+      }
 
       if (timer) {
         clearTimeout(timer);
@@ -94,7 +103,7 @@ export function jsonp<T>(
     const timer =
       timeout > 0
         ? setTimeout(() => {
-          cleanup();
+          cleanup(true);
           reject(new Error("Timeout"));
         }, timeout)
         : undefined;
