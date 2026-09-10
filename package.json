@@ -69,7 +69,7 @@
     "run-z": "^2.1.0",
     "tsdown": "^0.17.2",
     "typescript": "^5.9.3",
-    "vitest": "^3.2.4"
+    "vitest": "^5.0.0"
   },
   "engines": {
     "node": ">=16.0.0",
