@@ -1,3 +1,4 @@
+import type { JsonpOption } from "./util/jsonp.js";
 import type { NarouRankingResult } from "./narou-ranking-results.js";
 import NarouSearchResults from "./narou-search-results.js";
 import type {
@@ -29,6 +30,10 @@ export interface ExecuteOptions {
    * fetch関数のオプション
    */
   fetchOptions?: RequestInit;
+  /**
+   * JSONPリクエストのオプション
+   */
+  jsonpOptions?: JsonpOption;
 }
 
 /**

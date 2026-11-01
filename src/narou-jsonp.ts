@@ -9,8 +9,7 @@ export default class NarouNovelJsonp extends NarouNovel {
   protected async execute<T>(
     params: NarouParams,
     endpoint: string,
-    // oxlint-disable-next-line typescript/no-unused-vars
-    _options?: ExecuteOptions
+    options?: ExecuteOptions
   ): Promise<T> {
     const query = { ...params, out: "jsonp" };
     query.gzip = 0;
@@ -23,6 +22,6 @@ export default class NarouNovelJsonp extends NarouNovel {
       }
     });
 
-    return await jsonp(url.toString());
+    return await jsonp<T>(url.toString(), options?.jsonpOptions);
   }
 }

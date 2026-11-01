@@ -1,204 +1,252 @@
-import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest';
-import { jsonp } from '../../src/util/jsonp';
+import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
+import { jsonp } from "../../src/util/jsonp";
 
-// グローバルなモックの作成
-interface MockWindow {
-  [key: string]: unknown;
-}
-const mockWindow: MockWindow = {};
-global.window = mockWindow as unknown as Window & typeof globalThis;
-// Create a type for accessing window with dynamic string keys
-declare global {
-  interface Window {
-    [key: string]: unknown;
-  }
-}
+describe("jsonp", () => {
+  let callbacks: Record<string, (data: unknown) => void>;
+  let script: {
+    setAttribute: ReturnType<typeof vi.fn>;
+    parentNode: typeof parent | null;
+    onerror: (() => void) | null;
+    onload: (() => void) | null;
+  };
+  let parent: {
+    insertBefore: ReturnType<typeof vi.fn>;
+    removeChild: ReturnType<typeof vi.fn>;
+  };
+  let documentMock: {
+    createElement: ReturnType<typeof vi.fn>;
+    getElementsByTagName: ReturnType<typeof vi.fn>;
+    head: typeof parent;
+  };
+  let requestUrl: URL;
 
-// グローバルなdocumentモックの作成
-interface MockDocument {
-  createElement: ReturnType<typeof vi.fn>;
-  getElementsByTagName: ReturnType<typeof vi.fn>;
-  head: object;
-}
-
-const mockDocument: MockDocument = {
-  createElement: vi.fn(),
-  getElementsByTagName: vi.fn(),
-  head: {}
-};
-global.document = mockDocument as unknown as Document;
-
-interface MockScript {
-  setAttribute: ReturnType<typeof vi.fn>;
-  parentNode: MockParentNode | null;
-}
-
-interface MockParentNode {
-  insertBefore: ReturnType<typeof vi.fn>;
-  removeChild: ReturnType<typeof vi.fn>;
-}
-
-interface MockHead {
-  insertBefore: ReturnType<typeof vi.fn>;
-}
-
-describe('jsonp', () => {
-  let mockScript: MockScript;
-  let mockHead: MockHead;
-  let mockParentNode: MockParentNode;
-  let mockUrl: string;
+  const callbackName = (param = "callback") =>
+    requestUrl.searchParams.get(param)!;
 
   beforeEach(() => {
-    // Reset DOM mocks
-    mockScript = {
-      setAttribute: vi.fn((name, value) => {
-        if (name === 'src') {
-          mockUrl = value;
-        }
+    vi.useFakeTimers();
+    callbacks = {};
+    parent = {
+      insertBefore: vi.fn((element: typeof script) => {
+        element.parentNode = parent;
+      }),
+      removeChild: vi.fn((element: typeof script) => {
+        element.parentNode = null;
+      }),
+    };
+    script = {
+      setAttribute: vi.fn((_name: string, value: string) => {
+        requestUrl = new URL(value);
       }),
       parentNode: null,
+      onerror: null,
+      onload: null,
     };
-
-    mockParentNode = {
-      insertBefore: vi.fn(),
-      removeChild: vi.fn(),
+    documentMock = {
+      createElement: vi.fn(() => script),
+      getElementsByTagName: vi.fn(() => ({
+        item: () => ({ parentNode: parent }),
+      })),
+      head: parent,
     };
-
-    mockHead = {
-      insertBefore: vi.fn(),
-    };
-
-    // Mock document methods
-    document.createElement = vi.fn().mockImplementation(() => mockScript);
-    document.getElementsByTagName = vi.fn().mockImplementation(() => ({
-      item: vi.fn().mockReturnValue({
-        parentNode: mockParentNode
-      })
-    }));
-
-    // Mock document.head
-    Object.defineProperty(document, 'head', {
-      value: mockHead,
-      configurable: true
-    });
-
-    // Mock setTimeout
-    vi.useFakeTimers();
-
-    // Clear global object of any previous callback functions
-    Object.keys(window).forEach(key => {
-      if (key.startsWith('__jp') || key.startsWith('custom')) {
-        delete window[key];
-      }
-    });
-
-    mockUrl = '';
+    vi.stubGlobal("window", callbacks);
+    vi.stubGlobal("document", documentMock);
   });
 
   afterEach(() => {
+    vi.clearAllTimers();
     vi.useRealTimers();
+    vi.unstubAllGlobals();
     vi.restoreAllMocks();
   });
 
-  test('should create a script tag with the correct URL', async () => {
-    const url = 'https://example.com/api';
+  const expectCleanedUp = () => {
+    expect(Object.keys(callbacks)).toEqual([]);
+    expect(script.parentNode).toBeNull();
+    expect(script.onload).toBeNull();
+    expect(script.onerror).toBeNull();
+    expect(vi.getTimerCount()).toBe(0);
+  };
 
-    // Create a promise that will resolve when the JSONP callback is triggered
-    const jsonpPromise = jsonp(url);
-
-    // Check if the script was created
-    expect(document.createElement).toHaveBeenCalledWith('script');
-
-    // mockScriptにsetAttributeが呼ばれたことを確認
-    expect(mockScript.setAttribute).toHaveBeenCalled();
-
-    // mockUrlからコールバック名を抽出
-    const match = mockUrl.match(/callback=(__jp\d+)/);
-    expect(match).not.toBeNull();
-
-    const callbackName = match![1];
-    expect(callbackName).toMatch(/^__jp\d+$/);
-
-    // コールバック関数が登録されているか確認
-    expect(typeof window[callbackName]).toBe('function');
-
-    // Simulate JSONP callback with mock data
-    const mockData = { result: 'success' };
-    (window[callbackName] as (data: unknown) => void)(mockData);
-
-    // Check results
-    const result = await jsonpPromise;
-    expect(result).toEqual(mockData);
-    expect(mockParentNode.insertBefore).toHaveBeenCalledWith(mockScript, expect.anything());
+  test("returns data and releases all resources on success", async () => {
+    const promise = jsonp(
+      "https://example.com/api?word=test&callback=old#fragment"
+    );
+    expect(documentMock.createElement).toHaveBeenCalledWith("script");
+    expect(requestUrl.searchParams.get("word")).toBe("test");
+    expect(requestUrl.searchParams.getAll("callback")).toEqual([
+      callbackName(),
+    ]);
+    expect(requestUrl.hash).toBe("#fragment");
+    expect(callbackName()).toMatch(/^__jp\d+$/);
+    expect(parent.insertBefore).toHaveBeenCalledWith(script, expect.anything());
+    callbacks[callbackName()]({ result: "success" });
+    await expect(promise).resolves.toEqual({ result: "success" });
+    expect(parent.removeChild).toHaveBeenCalledWith(script);
+    expectCleanedUp();
   });
 
-  test('should apply custom options', async () => {
-    const url = 'https://example.com/api';
-    const options = {
-      prefix: 'custom',
-      param: 'cb',
-      timeout: 5000
-    };
-
-    const jsonpPromise = jsonp(url, options);
-
-    // mockScriptにsetAttributeが呼ばれたことを確認
-    expect(mockScript.setAttribute).toHaveBeenCalled();
-
-    // mockUrlからコールバック名を抽出 - カスタムパラメータ名を使用
-    const match = mockUrl.match(new RegExp(`${options.param}=(${options.prefix}\\d+)`));
-    expect(match).not.toBeNull();
-
-    const callbackName = match![1];
-    expect(callbackName).toMatch(new RegExp(`^${options.prefix}\\d+$`));
-
-    // コールバック関数が登録されているか確認
-    expect(typeof window[callbackName]).toBe('function');
-
-    // Trigger callback
-    const mockData = { custom: true };
-    (window[callbackName] as (data: unknown) => void)(mockData);
-
-    const result = await jsonpPromise;
-    expect(result).toEqual(mockData);
+  test("applies custom options", async () => {
+    const promise = jsonp("https://example.com", {
+      prefix: "custom",
+      param: "cb",
+      timeout: 5000,
+    });
+    expect(callbackName("cb")).toMatch(/^custom\d+$/);
+    vi.advanceTimersByTime(4999);
+    callbacks[callbackName("cb")]({ ok: true });
+    await expect(promise).resolves.toEqual({ ok: true });
+    expectCleanedUp();
   });
 
-  test('should timeout and reject the promise', async () => {
-    const url = 'https://example.com/api';
-    const options = { timeout: 1000 };
-
-    const promise = jsonp(url, options);
-
-    // Advance timers to trigger timeout
-    vi.advanceTimersByTime(1001);
-
-    await expect(promise).rejects.toThrow('Timeout');
+  test("uses document.head when no scripts exist", async () => {
+    documentMock.getElementsByTagName.mockReturnValue({ item: () => null });
+    const promise = jsonp("https://example.com");
+    expect(parent.insertBefore).toHaveBeenCalledWith(script, null);
+    callbacks[callbackName()](null);
+    await expect(promise).resolves.toBeNull();
+    expectCleanedUp();
   });
 
-  test('should use document.head if no script tags exist', async () => {
-    document.getElementsByTagName = vi.fn().mockImplementation(() => ({
-      item: vi.fn().mockReturnValue(null)
-    }));
+  test("rejects load failures immediately, even with timeout disabled", async () => {
+    const promise = jsonp("https://example.com", { timeout: 0 });
+    script.onerror!();
+    await expect(promise).rejects.toThrow("JSONP script failed to load");
+    expectCleanedUp();
+  });
 
-    const url = 'https://example.com/api';
-    const jsonpPromise = jsonp(url);
+  test("rejects scripts that load without calling the callback", async () => {
+    const promise = jsonp("https://example.com", { timeout: 0 });
+    script.onload!();
+    await expect(promise).rejects.toThrow("JSONP callback was not called");
+    expectCleanedUp();
+  });
 
-    // mockScriptにsetAttributeが呼ばれたことを確認
-    expect(mockScript.setAttribute).toHaveBeenCalled();
+  test("times out and removes the temporary callback after the grace period", async () => {
+    const promise = jsonp("https://example.com", { timeout: 1000 });
+    const name = callbackName();
+    vi.advanceTimersByTime(1000);
+    await expect(promise).rejects.toThrow("Timeout");
+    expect(script.parentNode).toBeNull();
+    expect(typeof callbacks[name]).toBe("function");
+    vi.advanceTimersByTime(15000);
+    expectCleanedUp();
+  });
 
-    // mockUrlからコールバック名を抽出
-    const match = mockUrl.match(/callback=(__jp\d+)/);
-    expect(match).not.toBeNull();
+  test("discards a late response and immediately releases the temporary callback", async () => {
+    const promise = jsonp("https://example.com", { timeout: 1000 });
+    const name = callbackName();
+    vi.advanceTimersByTime(1000);
+    await expect(promise).rejects.toThrow("Timeout");
+    expect(() => callbacks[name]({ late: true })).not.toThrow();
+    expectCleanedUp();
+  });
 
-    const callbackName = match![1];
+  test("does not schedule a timeout when disabled", async () => {
+    const promise = jsonp("https://example.com", { timeout: 0 });
+    expect(vi.getTimerCount()).toBe(0);
+    callbacks[callbackName()](123);
+    await expect(promise).resolves.toBe(123);
+    expectCleanedUp();
+  });
 
-    // コールバック関数が登録されているか確認
-    expect(typeof window[callbackName]).toBe('function');
+  test("rejects invalid URLs without registering callbacks or timers", async () => {
+    await expect(jsonp("invalid-url")).rejects.toThrow();
+    expect(documentMock.createElement).not.toHaveBeenCalled();
+    expectCleanedUp();
+  });
 
-    // Trigger callback
-    (window[callbackName] as (data: unknown) => void)({ success: true });
+  test("releases resources when setting the script URL fails", async () => {
+    script.setAttribute.mockImplementation(() => {
+      throw new Error("blocked src");
+    });
+    await expect(jsonp("https://example.com")).rejects.toThrow("blocked src");
+    expectCleanedUp();
+  });
 
-    await jsonpPromise;
-    expect(mockHead.insertBefore).toHaveBeenCalledWith(mockScript, null);
+  test("releases resources when script creation fails", async () => {
+    documentMock.createElement.mockImplementation(() => {
+      throw new Error("creation failed");
+    });
+    await expect(jsonp("https://example.com")).rejects.toThrow(
+      "creation failed"
+    );
+    expectCleanedUp();
+  });
+
+  test("releases resources when DOM insertion throws after attaching the script", async () => {
+    parent.insertBefore.mockImplementation(() => {
+      script.parentNode = parent;
+      throw new Error("insertion failed");
+    });
+    await expect(jsonp("https://example.com")).rejects.toThrow(
+      "insertion failed"
+    );
+    expectCleanedUp();
+  });
+
+  test("ignores events and callbacks retained after settlement", async () => {
+    const promise = jsonp("https://example.com");
+    const callback = callbacks[callbackName()];
+    const onerror = script.onerror!;
+    const onload = script.onload!;
+    callback("first");
+    callback("second");
+    onerror();
+    onload();
+    await expect(promise).resolves.toBe("first");
+    expect(parent.removeChild).toHaveBeenCalledTimes(1);
+    expectCleanedUp();
+  });
+
+  test("skips occupied callback names without overwriting existing properties", async () => {
+    const first = jsonp("https://example.com");
+    const previousName = callbackName();
+    callbacks[previousName](null);
+    await first;
+
+    const nextCount = Number(previousName.slice(4)) + 1;
+    const occupiedName = `__jp${nextCount}`;
+    const undefinedName = `__jp${nextCount + 1}`;
+    const existing = vi.fn();
+    callbacks[occupiedName] = existing;
+    Object.defineProperty(callbacks, undefinedName, {
+      value: undefined,
+      configurable: true,
+    });
+
+    const second = jsonp("https://example.com");
+    expect(callbackName()).not.toBe(occupiedName);
+    expect(callbackName()).not.toBe(undefinedName);
+    callbacks[callbackName()](null);
+    await second;
+
+    expect(callbacks[occupiedName]).toBe(existing);
+    expect(Object.getOwnPropertyDescriptor(callbacks, undefinedName)).toBeDefined();
+    expect(callbacks[undefinedName]).toBeUndefined();
+    delete callbacks[occupiedName];
+    delete callbacks[undefinedName];
+    expectCleanedUp();
+  });
+
+  test("keeps concurrent requests independent", async () => {
+    const first = jsonp("https://example.com");
+    const firstScript = script;
+    const firstName = callbackName();
+    script = { ...script, parentNode: null };
+    const second = jsonp("https://example.com");
+    const secondName = callbackName();
+    expect(secondName).not.toBe(firstName);
+    callbacks[secondName]("second");
+    expect(typeof callbacks[firstName]).toBe("function");
+    expect(vi.getTimerCount()).toBe(1);
+    callbacks[firstName]("first");
+    await expect(Promise.all([first, second])).resolves.toEqual([
+      "first",
+      "second",
+    ]);
+    expect(firstScript.parentNode).toBeNull();
+    expect(firstScript.onload).toBeNull();
+    expectCleanedUp();
   });
 });
