@@ -161,6 +161,10 @@ export abstract class SearchBuilderBase<
   }
 }
 
+/**
+ * 要素の抽出条件と除外条件は独立して保持します。
+ * 同じ条件にtrueとfalseを指定すると両方をAPIへ送信し、検索結果は0件になります。
+ */
 export abstract class NovelSearchBuilderBase<
   T extends SearchResultFieldNames,
 > extends SearchBuilderBase<SearchParams, Order> {

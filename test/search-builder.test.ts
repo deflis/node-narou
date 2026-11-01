@@ -60,6 +60,41 @@ describe("SearchBuilder", () => {
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
 
+  describe("抽出・除外条件の併存", () => {
+    test.each([
+      ["isBL", "isbl", "notbl"],
+      ["isGL", "isgl", "notgl"],
+      ["isZankoku", "iszankoku", "notzankoku"],
+      ["isTensei", "istensei", "nottensei"],
+      ["isTenni", "istenni", "nottenni"],
+    ] as const)(
+      "%sの両条件を呼び出し順に関係なく保持する",
+      async (method, include, exclude) => {
+        const queries: URLSearchParams[] = [];
+        server.use(
+          http.get(`https://api.syosetu.com/novelapi/api/`, ({ request }) => {
+            queries.push(new URL(request.url).searchParams);
+            return responseGzipOrJson([{ allcount: 0 }], new URL(request.url));
+          })
+        );
+        for (const first of [true, false]) {
+          const result = await NarouAPI.search()
+            .gzip(0)
+            [method](first)
+            [method](!first)
+            .execute();
+          expect(result.allcount).toBe(0);
+          expect(result.values).toEqual([]);
+        }
+        expect(queries).toHaveLength(2);
+        for (const query of queries) {
+          expect(query.get(include)).toBe("1");
+          expect(query.get(exclude)).toBe("1");
+        }
+      }
+    );
+  });
+
   describe("gzip", () => {
     test("default", async () => {
       const mockFn = vi.fn();
@@ -176,11 +211,13 @@ describe("SearchBuilder", () => {
 
   describe("page", () => {
     describe("default count", () => {
-      test.each([1, 2, 3, 4, 5] as const)("if page = %i", async (page) => {
+      test.each([0, 1, 2, 3, 4, 5] as const)("if page = %i", async (page) => {
         const mockFn = vi.fn();
         setupMockHandler(mockFn, ["lim", "st", "gzip", "out"]);
 
         const result = await NarouAPI.search().page(page).execute();
+        expect(result.start).toBe(page * 20);
+        expect(result.page).toBe(page);
         expect(result.allcount).toBe(1);
         expect(result.length).toBe(1);
         expect(result.values).toHaveLength(1);
@@ -197,11 +234,13 @@ describe("SearchBuilder", () => {
     });
 
     describe.each([1, 10, 100, 500] as const)("if count = %i", (count) => {
-      test.each([1, 2, 3, 4, 5] as const)("if page = %i", async (page) => {
+      test.each([0, 1, 2, 3, 4, 5] as const)("if page = %i", async (page) => {
         const mockFn = vi.fn();
         setupMockHandler(mockFn, ["lim", "st", "gzip", "out"]);
 
         const result = await NarouAPI.search().page(page, count).execute();
+        expect(result.start).toBe(page * count);
+        expect(result.page).toBe(page);
         expect(result.allcount).toBe(1);
         expect(result.length).toBe(1);
         expect(result.values).toHaveLength(1);
@@ -1319,6 +1358,24 @@ describe("SearchBuilder", () => {
   });
 
   describe("isR15", () => {
+    test("R15の抽出・除外条件を両方保持する", async () => {
+      const queries: URLSearchParams[] = [];
+      server.use(
+        http.get("https://api.syosetu.com/novelapi/api/", ({ request }) => {
+          queries.push(new URL(request.url).searchParams);
+          return responseGzipOrJson([{ allcount: 0 }], new URL(request.url));
+        })
+      );
+      for (const first of [true, false]) {
+        await NarouAPI.search().gzip(0).isR15(first).isR15(!first).execute();
+      }
+      expect(queries).toHaveLength(2);
+      for (const query of queries) {
+        expect(query.get("isr15")).toBe("1");
+        expect(query.get("notr15")).toBe("1");
+      }
+    });
+
     test("default", async () => {
       const mockFn = vi.fn();
       setupMockHandler(mockFn, ["gzip", "out"]);

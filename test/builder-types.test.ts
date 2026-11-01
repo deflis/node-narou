@@ -70,6 +70,35 @@ describe.each([
     >().toEqualTypeOf<readonly { noveltype: 1 | 2 }[]>();
   });
 
+  test("R18検索はuseridを取得項目に含めない", () => {
+    const r18 = api.searchR18();
+    const novel = api.search();
+    expectTypeOf<
+      Awaited<ReturnType<typeof r18.execute>>["values"][number]
+    >().not.toHaveProperty("userid");
+    expectTypeOf<
+      Awaited<ReturnType<typeof novel.execute>>["values"][number]
+    >().toHaveProperty("userid").toEqualTypeOf<number>();
+    expectTypeOf(R18Fields).not.toHaveProperty("userid");
+
+    function invalidUsage() {
+      // @ts-expect-error R18 APIはユーザーIDの出力に対応していない
+      api.searchR18().fields(Fields.userid);
+    }
+    expectTypeOf(invalidUsage).returns.toBeVoid();
+  });
+
+  test("ユーザーのname1stはnullを許容する", () => {
+    const all = api.searchUser();
+    const selected = api.searchUser().fields(UserFields.name1st);
+    expectTypeOf<
+      Awaited<ReturnType<typeof all.execute>>["values"][number]["name1st"]
+    >().toEqualTypeOf<string | null>();
+    expectTypeOf<
+      Awaited<ReturnType<typeof selected.execute>>["values"]
+    >().toEqualTypeOf<readonly { name1st: string | null }[]>();
+  });
+
   test("通常検索のoptとfieldsの順序に依存しない型推論", () => {
     const optFirst = api
       .search()

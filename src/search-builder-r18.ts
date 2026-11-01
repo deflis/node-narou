@@ -15,7 +15,7 @@ import type {
 
 export type DefaultR18SearchResultFields = keyof Omit<
   NarouSearchResult,
-  "weekly_unique" | "noveltype" | "biggenre" | "genre" | "isr15" | "id"
+  "weekly_unique" | "noveltype" | "biggenre" | "genre" | "isr15" | "userid"
 >;
 
 /**

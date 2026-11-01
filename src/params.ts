@@ -248,8 +248,6 @@ export const R18Fields = {
   title: "t",
   /** Nコード */
   ncode: "n",
-  /** 作者のユーザID(数値) */
-  userid: "u",
   /** 作者名 */
   writer: "w",
   /** 小説のあらすじ */
@@ -321,7 +319,7 @@ export const R18Fields = {
 
 export type R18Fields = (typeof R18Fields)[keyof Omit<
   NarouSearchResult,
-  "novel_type" | "weekly_unique" | "biggenre" | "genre" | "isr15"
+  "novel_type" | "weekly_unique" | "biggenre" | "genre" | "isr15" | "userid"
 >];
 
 /**

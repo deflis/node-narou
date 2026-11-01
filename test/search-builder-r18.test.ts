@@ -56,6 +56,52 @@ describe("SearchBuilderR18", () => {
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
 
+  describe("抽出・除外条件の併存", () => {
+    test.each([
+      ["isBL", "isbl", "notbl"],
+      ["isGL", "isgl", "notgl"],
+      ["isZankoku", "iszankoku", "notzankoku"],
+      ["isTensei", "istensei", "nottensei"],
+      ["isTenni", "istenni", "nottenni"],
+    ] as const)(
+      "%sの両条件を呼び出し順に関係なく保持する",
+      async (method, include, exclude) => {
+        const queries: URLSearchParams[] = [];
+        server.use(
+          http.get(`https://api.syosetu.com/novel18api/api/`, ({ request }) => {
+            queries.push(new URL(request.url).searchParams);
+            return responseGzipOrJson([{ allcount: 0 }], new URL(request.url));
+          })
+        );
+        for (const first of [true, false]) {
+          const result = await NarouAPI.searchR18()
+            .gzip(0)
+            [method](first)
+            [method](!first)
+            .execute();
+          expect(result.allcount).toBe(0);
+          expect(result.values).toEqual([]);
+        }
+        expect(queries).toHaveLength(2);
+        for (const query of queries) {
+          expect(query.get(include)).toBe("1");
+          expect(query.get(exclude)).toBe("1");
+        }
+      }
+    );
+  });
+
+  describe("page", () => {
+    test.each([0, 1, 2])("page=%iの従来の開始位置を維持する", async (page) => {
+      const mockFn = vi.fn();
+      setupMockHandler(mockFn, ["st", "lim"], { ncode: "N1234AB" });
+      const result = await NarouAPI.searchR18().page(page, 20).execute();
+      expect(mockFn).toHaveBeenCalledWith(String(page * 20), "20", 4);
+      expect(result.start).toBe(page * 20);
+      expect(result.page).toBe(page);
+    });
+  });
+
   describe("execute", () => {
     test("execute should call executeNovel18", async () => {
       const mockFn = vi.fn();
