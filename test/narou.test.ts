@@ -43,6 +43,29 @@ describe("narou-test", () => {
     });
   });
   describe.each(["search", "searchR18"] as const)(
+    "%s novel_typeとnoveltypeの出力名（実API）",
+    (searchMethod) => {
+      it("項目未指定時はnovel_typeのみを返す", async () => {
+        const result = await NarouAPI[searchMethod]().limit(1).execute();
+
+        expect(result.values).toHaveLength(1);
+        expect([1, 2]).toContain(result.values[0].novel_type);
+        expect(result.values[0]).not.toHaveProperty("noveltype");
+      });
+
+      it("of=nt指定時はnoveltypeのみを返す", async () => {
+        const builder = searchMethod === "search"
+          ? NarouAPI.search().fields(Fields.noveltype)
+          : NarouAPI.searchR18().fields(R18Fields.noveltype);
+        const result = await builder.limit(1).execute();
+
+        expect(result.values).toHaveLength(1);
+        expect([1, 2]).toContain(result.values[0].noveltype);
+        expect(Object.keys(result.values[0])).toEqual(["noveltype"]);
+      });
+    }
+  );
+  describe.each(["search", "searchR18"] as const)(
     "%s 日付範囲の片側省略（実API）",
     (searchMethod) => {
       describe.each(["lastUpdate", "lastNovelUpdate"] as const)(
