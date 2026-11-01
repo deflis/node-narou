@@ -82,6 +82,7 @@ describe('NarouNovelFetch', () => {
   it('should use custom fetch function when provided', async () => {
     // カスタムフェッチ関数をモック
     const customFetchMock = vi.fn().mockResolvedValue({
+      ok: true,
       json: vi.fn().mockResolvedValue(mockData)
     });
 
@@ -93,6 +94,33 @@ describe('NarouNovelFetch', () => {
     // カスタムフェッチ関数が呼ばれたことを確認
     expect(customFetchMock).toHaveBeenCalled();
     expect(result).toEqual(mockData);
+  });
+
+  it.each([403, 404, 429, 500])('should reject HTTP %i before reading the body', async (status) => {
+    for (const gzip of [0, 5] as const) {
+      const response = Response.json(mockData, { status });
+      const jsonSpy = vi.spyOn(response, 'json');
+      const bufferSpy = vi.spyOn(response, 'arrayBuffer');
+      const narouFetch = new NarouNovelFetch(vi.fn().mockResolvedValue(response));
+
+      await expect(narouFetch.executeRanking({ rtype: '20260101-d', gzip }))
+        .rejects.toThrow(`HTTP ${status}:`);
+      expect(jsonSpy).not.toHaveBeenCalled();
+      expect(bufferSpy).not.toHaveBeenCalled();
+      expect(response.bodyUsed).toBe(false);
+    }
+  });
+
+  it.each([0, 5] as const)('should still reject plain API errors returned with HTTP 200 (gzip=%i)', async (gzip) => {
+    const response = new Response('Error: Invalid date.', { status: 200 });
+    const narouFetch = new NarouNovelFetch(vi.fn().mockResolvedValue(response));
+    const result = narouFetch.executeRanking({ rtype: '20260101-d', gzip });
+
+    if (gzip === 0) {
+      await expect(result).rejects.toBeInstanceOf(SyntaxError);
+    } else {
+      await expect(result).rejects.toBe('Error: Invalid date.');
+    }
   });
 
   it('should set gzip to 5 when undefined', async () => {
