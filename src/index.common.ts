@@ -14,7 +14,8 @@ export {
 
 export * from "./ranking-history.js";
 export * from "./params.js";
-export type { NarouParams } from "./narou.js";
+export type { JsonpOption } from "./util/jsonp.js";
+export type { ExecuteOptions, NarouParams } from "./narou.js";
 export * from "./narou-search-results.js";
 export type * from "./narou-ranking-results.js";
 export * from "./search-builder.js";
