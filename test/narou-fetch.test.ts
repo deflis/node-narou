@@ -111,7 +111,7 @@ describe('NarouNovelFetch', () => {
     }
   });
 
-  it.each([0, 5] as const)('should still reject plain API errors returned with HTTP 200 (gzip=%i)', async (gzip) => {
+  it.each([0, 5, undefined] as const)('should still reject plain API errors returned with HTTP 200 (gzip=%s)', async (gzip) => {
     const response = new Response('Error: Invalid date.', { status: 200 });
     const narouFetch = new NarouNovelFetch(vi.fn().mockResolvedValue(response));
     const result = narouFetch.executeRanking({ rtype: '20260101-d', gzip });
