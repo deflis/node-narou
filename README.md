@@ -70,14 +70,8 @@ console.log(`${result.allcount}件の小説が見つかりました`);
 // ブラウザでは専用のインポートを使用（JSONP対応）
 import { search } from "narou/browser";
 
-const result = await search("魔法").execute({
-  jsonpOptions: { timeout: 10000 },
-});
+const result = await search("魔法").execute();
 ```
-
-`jsonpOptions` で `timeout`（ミリ秒、既定値15000）、`prefix`（コールバック名のプレフィックス、既定値 `__jp`）、`param`（コールバックのクエリパラメータ名、既定値 `callback`）を指定できます。`timeout` が0以下の場合はタイムアウトしません。読み込み失敗やコールバックを呼ばないレスポンスはエラーになります。
-
-リクエスト終了時には script とコールバックを削除します。ただし、タイムアウト後は遅延レスポンスを受け流す関数を最大15秒間保持し、応答時または期限後に削除します。猶予期間を過ぎたレスポンスはコールバックを呼べなくなります。
 
 ## 📖 詳細な API ドキュメント
 
