@@ -68,7 +68,7 @@ export default class SearchBuilderR18<
     fields: TFields | readonly TFields[]
   ): SearchBuilderR18<SearchResultR18Fields<R18Fields>> {
     this.set({ of: NovelSearchBuilderBase.array2string(fields) });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     return this as any;
   }
 
@@ -81,7 +81,7 @@ export default class SearchBuilderR18<
     option: TFields | readonly TFields[]
   ): SearchBuilderR18<T, SearchResultOptionalFields<TFields>> {
     this.set({ opt: NovelSearchBuilderBase.array2string(option) });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     return this as any;
   }
 }

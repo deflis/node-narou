@@ -1,4 +1,5 @@
-import { HttpResponse, JsonBodyType } from "msw";
+import type { JsonBodyType } from "msw";
+import { HttpResponse } from "msw/http";
 import { gzipSync } from "zlib";
 
 export function responseGzipOrJson<T extends JsonBodyType>(response: T, url: URL) {

@@ -123,8 +123,8 @@ export default class RankingBuilder {
    * ランキングAPIを実行し、取得したNコードを元になろう小説APIで詳細情報を取得して結合します。
    */
   async executeWithFields(
-    fields?: never[] | undefined,
-    opt?: never[] | undefined,
+    fields?: never[],
+    opt?: never[],
     options?: ExecuteOptions
   ): Promise<RankingResult<DefaultSearchResultFields>[]>;
   /**
@@ -136,7 +136,7 @@ export default class RankingBuilder {
    */
   async executeWithFields<TFields extends Fields>(
     fields: TFields | TFields[],
-    opt?: never | never[],
+    opt?: never[],
     options?: ExecuteOptions
   ): Promise<RankingResult<SearchResultFields<TFields>>[]>;
   /**
@@ -204,7 +204,7 @@ export default class RankingBuilder {
       >
     >((r) => ({
       ...r,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // oxlint-disable-next-line typescript/no-explicit-any
       ...(result.values.find((novel) => novel.ncode == r.ncode) as any),
     }));
   }

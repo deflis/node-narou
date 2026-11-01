@@ -14,7 +14,7 @@ import NarouAPI, {
   R18Fields,
   R18Site,
 } from "../src";
-import { http } from "msw";
+import { http } from "msw/http";
 
 const server = setupServer();
 

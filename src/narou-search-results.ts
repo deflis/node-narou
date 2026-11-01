@@ -1,5 +1,5 @@
 import type {
-  BooleanNumber as BooleanNumber,
+  BooleanNumber,
   Genre,
   R18Site,
   SearchParams,

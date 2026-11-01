@@ -427,7 +427,7 @@ export abstract class NovelSearchBuilderBase<
         y.getTime() / 1000
       )}`;
     } else {
-      date = `${x}-${y}`;
+      date = `${String(x)}-${String(y)}`;
     }
 
     this.set({ lastup: date });
@@ -464,7 +464,7 @@ export abstract class NovelSearchBuilderBase<
         y.getTime() / 1000
       )}`;
     } else {
-      date = `${x}-${y}`;
+      date = `${String(x)}-${String(y)}`;
     }
 
     this.set({ lastupdate: date });
@@ -571,7 +571,7 @@ export default class SearchBuilder<
     fields: TFields | readonly TFields[]
   ): SearchBuilder<SearchResultFields<TFields>, TOpt> {
     this.set({ of: SearchBuilder.array2string(fields) });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     return this as any;
   }
 
@@ -585,7 +585,7 @@ export default class SearchBuilder<
     option: TFields | readonly TFields[]
   ): SearchBuilder<T, SearchResultOptionalFields<TFields>> {
     this.set({ opt: SearchBuilder.array2string(option) });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     return this as any;
   }
 }

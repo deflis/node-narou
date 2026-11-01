@@ -39,42 +39,48 @@
     "README.md"
   ],
   "scripts": {
-    "build": "run-z check build:tsc",
+    "build": "pnpm run check && pnpm run build:tsc",
     "build:tsc": "tsdown",
-    "check": "run-z check:lint,check:build,test",
-    "check:lint": "eslint src/** test/**",
+    "check": "pnpm run check:lint && pnpm run check:build && pnpm run test",
+    "check:lint": "oxlint --type-aware --deny-warnings src test",
     "check:build": "tsc --noEmit",
-    "prepack": "run-z format build",
-    "format": "eslint --fix src/** test/**",
+    "prepack": "pnpm run build",
+    "format": "oxlint --type-aware --fix src test && oxfmt src test scripts *.ts *.json .oxlintrc.json .oxfmtrc.json tools/docs/package.json",
     "test": "vitest run",
-    "docs": "run-z docs:clean docs:typedoc docs:json docs:llms",
-    "docs:clean": "pnpm dlx rimraf docs",
-    "docs:typedoc": "pnpm dlx typedoc --out ./docs src/index.ts",
-    "docs:json": "pnpm dlx typedoc --json docs/api.json src/index.ts",
-    "docs:llms": "node scripts/generate-llms-txt.js"
+    "docs": "pnpm run docs:clean && pnpm run docs:typedoc && pnpm run docs:json && pnpm run docs:llms",
+    "docs:clean": "node -e \"require('node:fs').rmSync('docs', { recursive: true, force: true })\"",
+    "docs:typedoc": "pnpm --dir tools/docs exec typedoc --tsconfig ../../tsconfig.json --out ../../docs ../../src/index.ts",
+    "docs:json": "pnpm --dir tools/docs exec typedoc --tsconfig ../../tsconfig.json --json ../../docs/api.json ../../src/index.ts",
+    "docs:llms": "node scripts/generate-llms-txt.js",
+    "test:coverage": "vitest run --coverage.enabled true"
   },
   "devDependencies": {
-    "@swc/core": "^1.15.3",
-    "@types/node": "^25.6.0",
-    "@typescript-eslint/eslint-plugin": "^8.49.0",
-    "@typescript-eslint/parser": "^8.49.0",
-    "@vitest/coverage-v8": "^3.2.4",
-    "date-fns": "^4.1.0",
-    "eslint": "^10.7.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.4",
-    "globals": "^16.5.0",
-    "msw": "^2.12.4",
-    "prettier": "^3.7.4",
-    "run-z": "^2.1.0",
-    "tsdown": "^0.17.2",
-    "typescript": "^5.9.3",
-    "vitest": "^3.2.4"
+    "@types/node": "^26.6.6",
+    "@vitest/coverage-v8": "^5.0.5",
+    "msw": "^3.0.3",
+    "oxfmt": "^0.75.0",
+    "oxlint": "^1.90.0",
+    "oxlint-tsgolint": "^7.0.2005",
+    "tsdown": "^0.23.4",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
   },
   "engines": {
-    "node": ">=16.0.0",
-    "pnpm": ">=8"
+    "node": ">=16.0.0"
   },
-  "module": "dist/index.js",
-  "packageManager": "pnpm@10.10.0"
+  "module": "dist/index.mjs",
+  "packageManager": "pnpm@12.16.1",
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": ">=24.11.0",
+      "onFail": "error"
+    },
+    "packageManager": {
+      "name": "pnpm",
+      "version": ">=12.16.1",
+      "onFail": "error"
+    }
+  }
 }

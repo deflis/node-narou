@@ -9,7 +9,7 @@ type CallbackId<Prefix extends string = string> = `${Prefix}${number}`;
 
 declare global {
   interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     [key: CallbackId]: (data: any) => void;
   }
 }

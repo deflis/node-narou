@@ -2,9 +2,8 @@ import { describe, it, expect, beforeAll, afterEach, afterAll, vi } from 'vitest
 import { formatRankingHistory } from '../src/ranking-history.js';
 import NarouAPI from '../src';
 import { RankingType } from '../src/params.js';
-import { parse } from 'date-fns';
 import { setupServer } from 'msw/node';
-import { http } from 'msw';
+import { http } from 'msw/http';
 import { responseGzipOrJson } from './mock';
 
 const server = setupServer();
@@ -25,7 +24,7 @@ describe('formatRankingHistory', () => {
 
     expect(result).toEqual({
       type: 'd' as RankingType,
-      date: parse('20230101', 'yyyyMMdd', new Date()),
+      date: new Date(2023, 0, 1),
       pt: 100,
       rank: 5
     });
@@ -42,7 +41,7 @@ describe('formatRankingHistory', () => {
 
     expect(result).toEqual({
       type: 'w' as RankingType,
-      date: parse('20230215', 'yyyyMMdd', new Date()),
+      date: new Date(2023, 1, 15),
       pt: 500,
       rank: 1
     });
@@ -59,7 +58,7 @@ describe('formatRankingHistory', () => {
 
     expect(result).toEqual({
       type: 'm' as RankingType,
-      date: parse('20221231', 'yyyyMMdd', new Date()),
+      date: new Date(2022, 11, 31),
       pt: 250,
       rank: 10
     });
@@ -76,7 +75,7 @@ describe('formatRankingHistory', () => {
 
     expect(result).toEqual({
       type: 'q' as RankingType,
-      date: parse('20240331', 'yyyyMMdd', new Date()),
+      date: new Date(2024, 2, 31),
       pt: 1000,
       rank: 3
     });
@@ -101,7 +100,7 @@ describe('formatRankingHistory', () => {
     expect(result).toHaveLength(1);
     expect(result[0]).toEqual({
       type: 'd' as RankingType,
-      date: parse('20230101', 'yyyyMMdd', new Date()),
+      date: new Date(2023, 0, 1),
       pt: 100,
       rank: 5
     });

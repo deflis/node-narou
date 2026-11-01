@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, afterEach, beforeAll, afterAll } from 'vitest';
 import NarouNovelFetch from '../src/narou-fetch';
 import { setupServer } from 'msw/node';
-import { http } from 'msw';
+import { http } from 'msw/http';
 import { responseGzipOrJson } from './mock';
 
 // テスト用データ

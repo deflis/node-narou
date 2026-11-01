@@ -1,5 +1,3 @@
-onlyBuiltDependencies:
-  - esbuild
-  - msw
-publicHoistPattern:
-  - "*eslint*"
+packages:
+  - .
+  - tools/docs

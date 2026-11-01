@@ -4,7 +4,40 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      vitest:
+        patterns:
+          - "vitest"
+          - "@vitest/*"
+      vitest-security:
+        applies-to: "security-updates"
+        patterns:
+          - "vitest"
+          - "@vitest/*"
+      oxc:
+        patterns:
+          - "oxlint"
+          - "oxlint-tsgolint"
+          - "oxfmt"
+      oxc-security:
+        applies-to: "security-updates"
+        patterns:
+          - "oxlint"
+          - "oxlint-tsgolint"
+          - "oxfmt"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      pages:
+        patterns:
+          - "actions/configure-pages"
+          - "actions/upload-pages-artifact"
+          - "actions/deploy-pages"
+      pages-security:
+        applies-to: "security-updates"
+        patterns:
+          - "actions/configure-pages"
+          - "actions/upload-pages-artifact"
+          - "actions/deploy-pages"
