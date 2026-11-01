@@ -22,6 +22,20 @@ import type {
 } from "./params.js";
 import { BooleanNumber, StopParam } from "./params.js";
 import type { Join } from "./util/type.js";
+import type {
+  DateSearchCondition,
+  NumberSearchCondition,
+} from "./util/search-condition.js";
+import {
+  formatNumberCondition,
+  formatDateCondition,
+  formatExactDate,
+} from "./util/search-condition.js";
+
+export type {
+  DateSearchCondition,
+  NumberSearchCondition,
+} from "./util/search-condition.js";
 
 export type DefaultSearchResultFields = keyof Omit<
   NarouSearchResult,
@@ -293,12 +307,32 @@ export abstract class NovelSearchBuilderBase<
 
   /**
    * 抽出する作品の文字数を指定します (length)。
-   * 範囲指定する場合は、最小文字数と最大文字数をハイフン(-)記号で区切ってください。
-   * @param length 文字数、または[最小文字数, 最大文字数]
-   * @return {this}
+   *
+   * @remarks
+   * 単一の数値は完全一致、配列は `[最小値, 最大値]` の範囲指定です。
+   * オブジェクトの `min`・`max` は境界値を含み、片側だけでも指定できます。
+   * オブジェクトの値には0以上の整数を指定してください。
+   *
+   * @param length - 文字数（文字）、範囲の配列、または {@link NumberSearchCondition}
+   * @returns このビルダー
+   * @throws TypeError — オブジェクトの上下限が両方とも未指定の場合。
+   * @throws RangeError — オブジェクトの値が無効、または下限が上限を超える場合。
+   *
+   * @example
+   * ```ts
+   * search().length(10);
+   * search().length([10, 20]);
+   * search().length({ min: 10, max: 20 });
+   * search().length({ min: 10 });
+   * search().length({ max: 20 });
+   * ```
    */
-  length(length: number | readonly number[]): this {
-    this.set({ length: NovelSearchBuilderBase.array2string(length) });
+  length(length: number | readonly number[] | NumberSearchCondition): this {
+    const value =
+      typeof length === "number" || Array.isArray(length)
+        ? NovelSearchBuilderBase.array2string(length)
+        : formatNumberCondition(length as NumberSearchCondition);
+    this.set({ length: value });
     return this;
   }
 
@@ -316,7 +350,33 @@ export abstract class NovelSearchBuilderBase<
    */
   kaiwaritu(min: number, max: number): this;
 
-  kaiwaritu(min: number, max?: number): this {
+  /**
+   * 抽出する作品の会話率をオブジェクトで範囲指定します (kaiwaritu)。
+   *
+   * @remarks
+   * `min`・`max` は境界値を含み、片側だけでも指定できます。
+   * 値は0以上の整数で、単位はパーセントです。
+   * 完全一致には単一の数値を渡すオーバーロードを使用してください。
+   *
+   * @param condition - 会話率の下限・上限
+   * @returns このビルダー
+   * @throws TypeError — 上下限が両方とも未指定の場合。
+   * @throws RangeError — 値が無効、または下限が上限を超える場合。
+   *
+   * @example
+   * ```ts
+   * search().kaiwaritu({ min: 20, max: 50 });
+   * search().kaiwaritu({ min: 20 });
+   * search().kaiwaritu({ max: 50 });
+   * ```
+   */
+  kaiwaritu(condition: NumberSearchCondition): this;
+
+  kaiwaritu(min: number | NumberSearchCondition, max?: number): this {
+    if (typeof min === "object") {
+      this.set({ kaiwaritu: formatNumberCondition(min) });
+      return this;
+    }
     let n: number | string;
     if (max != null) {
       n = `${min}-${max}`;
@@ -329,21 +389,64 @@ export abstract class NovelSearchBuilderBase<
 
   /**
    * 抽出する作品の挿絵数を指定します (sasie)。
-   * @param num 挿絵数、または[最小挿絵数, 最大挿絵数]
-   * @return {this}
+   *
+   * @remarks
+   * 単一の数値は完全一致、配列は `[最小値, 最大値]` の範囲指定です。
+   * オブジェクトの `min`・`max` は境界値を含み、片側だけでも指定できます。
+   * オブジェクトの値には0以上の整数を指定してください。
+   *
+   * @param num - 挿絵数（枚）、範囲の配列、または {@link NumberSearchCondition}
+   * @returns このビルダー
+   * @throws TypeError — オブジェクトの上下限が両方とも未指定の場合。
+   * @throws RangeError — オブジェクトの値が無効、または下限が上限を超える場合。
+   *
+   * @example
+   * ```ts
+   * search().sasie(10);
+   * search().sasie([10, 20]);
+   * search().sasie({ min: 10, max: 20 });
+   * search().sasie({ min: 10 });
+   * search().sasie({ max: 20 });
+   * ```
    */
-  sasie(num: number | readonly number[]): this {
-    this.set({ sasie: NovelSearchBuilderBase.array2string(num) });
+  sasie(num: number | readonly number[] | NumberSearchCondition): this {
+    const value =
+      typeof num === "number" || Array.isArray(num)
+        ? NovelSearchBuilderBase.array2string(num)
+        : formatNumberCondition(num as NumberSearchCondition);
+    this.set({ sasie: value });
     return this;
   }
 
   /**
-   * 抽出する作品の予想読了時間を分単位で指定します (time)。
-   * @param num 読了時間(分)、または[最小読了時間, 最大読了時間]
-   * @return {this}
+   * 抽出する作品の予想読了時間を指定します (time)。
+   *
+   * @remarks
+   * 単一の数値は完全一致、配列は `[最小値, 最大値]` の範囲指定です。
+   * オブジェクトの `min`・`max` は境界値を含み、片側だけでも指定できます。
+   * オブジェクトの値には0以上の整数を指定してください。
+   * 読了時間は文字数条件と併用できません。
+   *
+   * @param num - 予想読了時間（分）、範囲の配列、または {@link NumberSearchCondition}
+   * @returns このビルダー
+   * @throws TypeError — オブジェクトの上下限が両方とも未指定の場合。
+   * @throws RangeError — オブジェクトの値が無効、または下限が上限を超える場合。
+   *
+   * @example
+   * ```ts
+   * search().time(10);
+   * search().time([10, 20]);
+   * search().time({ min: 10, max: 20 });
+   * search().time({ min: 10 });
+   * search().time({ max: 20 });
+   * ```
    */
-  time(num: number | readonly number[]): this {
-    this.set({ time: NovelSearchBuilderBase.array2string(num) });
+  time(num: number | readonly number[] | NumberSearchCondition): this {
+    const value =
+      typeof num === "number" || Array.isArray(num)
+        ? NovelSearchBuilderBase.array2string(num)
+        : formatNumberCondition(num as NumberSearchCondition);
+    this.set({ time: value });
     return this;
   }
 
@@ -398,27 +501,89 @@ export abstract class NovelSearchBuilderBase<
   }
 
   /**
-   * 最終更新日時を指定します (lastup)。
-   * @param date 最終更新日時 (YYYYMMDDhhmmss形式またはUNIXタイムスタンプ)
-   * @return {this}
+   * 最終掲載日時を期間キーワードまたはAPI形式の文字列で指定します (lastup)。
+   *
+   * @remarks
+   * 対象は `general_lastup` です。文字列は変換せずAPIへ渡します。
+   * 期間キーワードには {@link DateParam} を使用できます。
+   *
+   * @param date - 期間キーワード、または `開始UNIX秒-終了UNIX秒` 形式の文字列
+   * @returns このビルダー
    */
   lastUpdate(date: DateParam): this;
   /**
-   * 最終更新日時の範囲を指定します (lastup)。
-   * @param from 開始日時 (UNIXタイムスタンプ)
-   * @param to 終了日時 (UNIXタイムスタンプ)
+   * 最終掲載日時の範囲を指定します (lastup)。
+   * 範囲は両端を含みます。
+   * @param from 開始日時 (UNIXタイムスタンプ、秒)
+   * @param to 終了日時 (UNIXタイムスタンプ、秒)
    * @return {this}
    */
   lastUpdate(from: number, to: number): this;
   /**
-   * 最終更新日時の範囲を指定します (lastup)。
+   * 最終掲載日時の範囲を指定します (lastup)。
+   * 範囲は両端を含み、ミリ秒部分は切り捨てます。
    * @param from 開始日時 (Dateオブジェクト)
    * @param to 終了日時 (Dateオブジェクト)
    * @return {this}
    */
   lastUpdate(from: Date, to: Date): this;
 
-  lastUpdate(x: string | number | Date, y?: number | Date): this {
+  /**
+   * 最終掲載日時に秒単位で一致する条件を指定します (lastup)。
+   *
+   * @remarks
+   * `Date` のミリ秒部分は切り捨てます。日付全体ではなく、その1秒に一致します。
+   *
+   * @param date - Dateオブジェクト、または0以上の整数のUNIXタイムスタンプ（秒）
+   * @returns このビルダー
+   * @throws RangeError — 無効な日付、負数、非整数、または非有限の数値の場合。
+   *
+   * @example
+   * ```ts
+   * search().lastUpdate(new Date("2026-01-01T00:00:00+09:00"));
+   * search().lastUpdate(1767193200);
+   * ```
+   */
+  lastUpdate(date: number | Date): this;
+  /**
+   * 最終掲載日時の範囲をオブジェクトで指定します (lastup)。
+   *
+   * @remarks
+   * `from`・`to` は境界値を含み、片側だけでも指定できます。
+   * `from` の省略時はUNIXタイムスタンプ0、`to` の省略時はこのメソッドの呼び出し時刻を使用します。
+   * ライブラリ側で両端を補い、APIには `開始UNIX秒-終了UNIX秒` 形式で送信します。
+   * 値には `Date` または0以上の整数のUNIXタイムスタンプ（秒）を使用できます。
+   * 両者の混在も可能です。`Date` のミリ秒部分は切り捨てます。
+   *
+   * @param condition - 開始日時・終了日時
+   * @returns このビルダー
+   * @throws TypeError — 開始日時・終了日時が両方とも未指定の場合。
+   * @throws RangeError — 日時が無効、または開始日時が終了日時を超える場合。
+   *
+   * @example
+   * ```ts
+   * search().lastUpdate({
+   *   from: new Date("2026-01-01T00:00:00+09:00"),
+   *   to: new Date("2026-01-31T23:59:59+09:00"),
+   * });
+   * search().lastUpdate({ from: 1767193200 });
+   * search().lastUpdate({ to: 1769871599 });
+   * ```
+   */
+  lastUpdate(condition: DateSearchCondition): this;
+
+  lastUpdate(
+    x: string | number | Date | DateSearchCondition,
+    y?: number | Date
+  ): this {
+    if (typeof x === "object" && !(x instanceof Date)) {
+      this.set({ lastup: formatDateCondition(x) });
+      return this;
+    }
+    if (typeof x !== "string" && y === undefined) {
+      this.set({ lastup: formatExactDate(x) });
+      return this;
+    }
     let date: string;
     if (typeof x == "string") {
       date = x;
@@ -435,27 +600,89 @@ export abstract class NovelSearchBuilderBase<
   }
 
   /**
-   * 作品の更新日時を指定します (lastupdate)。
-   * @param date 作品の更新日時 (YYYYMMDDhhmmss形式またはUNIXタイムスタンプ)
-   * @return {this}
+   * 作品の最終更新日時を期間キーワードまたはAPI形式の文字列で指定します (lastupdate)。
+   *
+   * @remarks
+   * 対象は `novelupdated_at` です。文字列は変換せずAPIへ渡します。
+   * 期間キーワードには {@link DateParam} を使用できます。
+   *
+   * @param date - 期間キーワード、または `開始UNIX秒-終了UNIX秒` 形式の文字列
+   * @returns このビルダー
    */
   lastNovelUpdate(date: DateParam): this;
   /**
    * 作品の更新日時の範囲を指定します (lastupdate)。
-   * @param from 開始日時 (UNIXタイムスタンプ)
-   * @param to 終了日時 (UNIXタイムスタンプ)
+   * 範囲は両端を含みます。
+   * @param from 開始日時 (UNIXタイムスタンプ、秒)
+   * @param to 終了日時 (UNIXタイムスタンプ、秒)
    * @return {this}
    */
   lastNovelUpdate(from: number, to: number): this;
   /**
    * 作品の更新日時の範囲を指定します (lastupdate)。
+   * 範囲は両端を含み、ミリ秒部分は切り捨てます。
    * @param from 開始日時 (Dateオブジェクト)
    * @param to 終了日時 (Dateオブジェクト)
    * @return {this}
    */
   lastNovelUpdate(from: Date, to: Date): this;
 
-  lastNovelUpdate(x: string | number | Date, y?: number | Date): this {
+  /**
+   * 作品の最終更新日時に秒単位で一致する条件を指定します (lastupdate)。
+   *
+   * @remarks
+   * `Date` のミリ秒部分は切り捨てます。日付全体ではなく、その1秒に一致します。
+   *
+   * @param date - Dateオブジェクト、または0以上の整数のUNIXタイムスタンプ（秒）
+   * @returns このビルダー
+   * @throws RangeError — 無効な日付、負数、非整数、または非有限の数値の場合。
+   *
+   * @example
+   * ```ts
+   * search().lastNovelUpdate(new Date("2026-01-01T00:00:00+09:00"));
+   * search().lastNovelUpdate(1767193200);
+   * ```
+   */
+  lastNovelUpdate(date: number | Date): this;
+  /**
+   * 作品の最終更新日時の範囲をオブジェクトで指定します (lastupdate)。
+   *
+   * @remarks
+   * `from`・`to` は境界値を含み、片側だけでも指定できます。
+   * `from` の省略時はUNIXタイムスタンプ0、`to` の省略時はこのメソッドの呼び出し時刻を使用します。
+   * ライブラリ側で両端を補い、APIには `開始UNIX秒-終了UNIX秒` 形式で送信します。
+   * 値には `Date` または0以上の整数のUNIXタイムスタンプ（秒）を使用できます。
+   * 両者の混在も可能です。`Date` のミリ秒部分は切り捨てます。
+   *
+   * @param condition - 開始日時・終了日時
+   * @returns このビルダー
+   * @throws TypeError — 開始日時・終了日時が両方とも未指定の場合。
+   * @throws RangeError — 日時が無効、または開始日時が終了日時を超える場合。
+   *
+   * @example
+   * ```ts
+   * search().lastNovelUpdate({
+   *   from: new Date("2026-01-01T00:00:00+09:00"),
+   *   to: new Date("2026-01-31T23:59:59+09:00"),
+   * });
+   * search().lastNovelUpdate({ from: 1767193200 });
+   * search().lastNovelUpdate({ to: 1769871599 });
+   * ```
+   */
+  lastNovelUpdate(condition: DateSearchCondition): this;
+
+  lastNovelUpdate(
+    x: string | number | Date | DateSearchCondition,
+    y?: number | Date
+  ): this {
+    if (typeof x === "object" && !(x instanceof Date)) {
+      this.set({ lastupdate: formatDateCondition(x) });
+      return this;
+    }
+    if (typeof x !== "string" && y === undefined) {
+      this.set({ lastupdate: formatExactDate(x) });
+      return this;
+    }
     let date: string;
     if (typeof x == "string") {
       date = x;

@@ -42,6 +42,87 @@ describe("narou-test", () => {
       expect(result.values).toHaveLength(1);
     });
   });
+  describe.each(["search", "searchR18"] as const)(
+    "%s 日付範囲の片側省略（実API）",
+    (searchMethod) => {
+      describe.each(["lastUpdate", "lastNovelUpdate"] as const)(
+        "%s",
+        (dateMethod) => {
+          it("終了日時を補完せず送信しても下限で絞り込める", async () => {
+            const builder =
+              searchMethod === "search"
+                ? NarouAPI.search().fields([Fields.ncode])
+                : NarouAPI.searchR18().fields([R18Fields.ncode]);
+            // 2100年以降の更新は存在しない。条件が無視されれば0件にはならない。
+            const from = Math.floor(
+              new Date("2100-01-01T00:00:00Z").getTime() / 1000
+            );
+            const result = await builder
+              .limit(1)
+              [dateMethod](`${from}-`)
+              .execute();
+
+            expect(result.allcount).toBe(0);
+            expect(result.values).toHaveLength(0);
+          });
+
+          it("開始日時を補完せず送信しても上限で絞り込める", async () => {
+            const builder =
+              searchMethod === "search"
+                ? NarouAPI.search().fields([
+                    Fields.ncode,
+                    Fields.general_lastup,
+                    Fields.novelupdated_at,
+                  ])
+                : NarouAPI.searchR18().fields([
+                    R18Fields.ncode,
+                    R18Fields.general_lastup,
+                    R18Fields.novelupdated_at,
+                  ]);
+            const result = await builder
+              .limit(1)
+              [dateMethod]("-1262304000")
+              .execute();
+
+            expect(result.allcount).toBeGreaterThan(0);
+            expect(result.values).toHaveLength(1);
+            const date =
+              dateMethod === "lastUpdate"
+                ? result.values[0].general_lastup
+                : result.values[0].novelupdated_at;
+            // APIの日付表記はJST。上限は2010-01-01T00:00:00Z。
+            expect(
+              Date.parse(`${date.replace(" ", "T")}+09:00`)
+            ).toBeLessThanOrEqual(1262304000000);
+          });
+
+          it.each([
+            {
+              name: "終了日時を省略",
+              condition: { from: new Date("2000-01-01T00:00:00Z") },
+            },
+            {
+              name: "開始日時を省略",
+              condition: { to: new Date() },
+            },
+          ])("$name して検索結果を取得できる", async ({ condition }) => {
+            const builder =
+              searchMethod === "search"
+                ? NarouAPI.search().fields([Fields.ncode])
+                : NarouAPI.searchR18().fields([R18Fields.ncode]);
+            const result = await builder
+              .limit(1)
+              [dateMethod](condition)
+              .execute();
+
+            expect(result.allcount).toBeGreaterThan(0);
+            expect(result.values).toHaveLength(1);
+            expect(result.values[0].ncode).toEqual(expect.any(String));
+          });
+        }
+      );
+    }
+  );
   describe("searchUser", () => {
     it("if limit = 1 then length = 1", async () => {
       const result = await NarouAPI.searchUser()
