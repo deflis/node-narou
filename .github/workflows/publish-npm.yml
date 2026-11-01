@@ -63,6 +63,7 @@ jobs:
   publish:
     needs: build
     runs-on: ubuntu-latest
+    environment: npm
     timeout-minutes: 10
     permissions:
       id-token: write
