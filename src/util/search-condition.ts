@@ -3,7 +3,7 @@
  *
  * @remarks
  * `from`・`to` は境界を含み、少なくとも片方の指定が必要です。
- * 省略した側には制限を設けません。
+ * `from` の省略時はUNIXタイムスタンプ0、`to` の省略時は条件指定時の現在時刻を使用します。
  * 値は `Date` または0以上の整数のUNIXタイムスタンプ（秒）で、混在も可能です。
  * `Date` のミリ秒部分は切り捨てます。開始日時は終了日時以下にしてください。
  *
@@ -55,7 +55,14 @@ function conditionValue(value: number | Date): number {
 
 /** 日付条件をAPIの範囲指定に変換する。 */
 export function formatDateCondition(condition: DateSearchCondition): string {
-  return formatRange(condition.from, condition.to);
+  const { from, to } = condition;
+  if (from === undefined && to === undefined) {
+    throw new TypeError("開始日時または終了日時を指定してください");
+  }
+  return formatRange(
+    from === undefined ? 0 : from,
+    to === undefined ? Math.floor(Date.now() / 1000) : to
+  );
 }
 
 /** 単一日時を秒単位の一致条件に変換する。 */

@@ -1,4 +1,4 @@
-import { describe, expect, test, vi } from "vitest";
+import { afterEach, describe, expect, test, vi } from "vitest";
 import { search, searchR18 } from "../src/index.js";
 import type {
   DateSearchCondition,
@@ -11,6 +11,8 @@ import NarouNovelFetch from "../src/narou-fetch.js";
 describe.each([search, searchR18])(
   "オブジェクト検索条件: %s",
   (createBuilder) => {
+    afterEach(() => vi.restoreAllMocks());
+
     function setup() {
       const api = new NarouNovelFetch();
       const execute = vi.fn<(params: SearchParams) => Promise<never>>();
@@ -59,15 +61,27 @@ describe.each([search, searchR18])(
       ["lastNovelUpdate", "lastupdate"],
     ] as const)("%s", (method, param) => {
       test.each<[DateSearchCondition, string]>([
-        [{ from: 0 }, "0-"],
-        [{ to: new Date(10999) }, "-10"],
+        [{ from: 0 }, "0-20"],
+        [{ from: new Date(10999) }, "10-20"],
+        [{ to: 0 }, "0-0"],
+        [{ to: new Date(10999) }, "0-10"],
         [{ from: new Date(0), to: 10 }, "0-10"],
         [{ from: 10, to: new Date(10999) }, "10-10"],
       ])("%j → %s", async (condition, expected) => {
+        vi.spyOn(Date, "now").mockReturnValue(20999);
         const { builder, execute } = setup();
         expect(builder[method](condition)).toBe(builder);
         await builder.execute();
         expect(execute).toHaveBeenCalledWith({ [param]: expected }, undefined);
+      });
+
+      test("終了省略時の現在時刻は条件指定時に確定する", async () => {
+        const now = vi.spyOn(Date, "now").mockReturnValue(20999);
+        const { builder, execute } = setup();
+        builder[method]({ from: 10 });
+        now.mockReturnValue(30999);
+        await builder.execute();
+        expect(execute).toHaveBeenCalledWith({ [param]: "10-20" }, undefined);
       });
 
       test.each([

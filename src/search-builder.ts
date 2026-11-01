@@ -550,6 +550,8 @@ export abstract class NovelSearchBuilderBase<
    *
    * @remarks
    * `from`・`to` は境界値を含み、片側だけでも指定できます。
+   * `from` の省略時はUNIXタイムスタンプ0、`to` の省略時はこのメソッドの呼び出し時刻を使用します。
+   * ライブラリ側で両端を補い、APIには `開始UNIX秒-終了UNIX秒` 形式で送信します。
    * 値には `Date` または0以上の整数のUNIXタイムスタンプ（秒）を使用できます。
    * 両者の混在も可能です。`Date` のミリ秒部分は切り捨てます。
    *
@@ -647,6 +649,8 @@ export abstract class NovelSearchBuilderBase<
    *
    * @remarks
    * `from`・`to` は境界値を含み、片側だけでも指定できます。
+   * `from` の省略時はUNIXタイムスタンプ0、`to` の省略時はこのメソッドの呼び出し時刻を使用します。
+   * ライブラリ側で両端を補い、APIには `開始UNIX秒-終了UNIX秒` 形式で送信します。
    * 値には `Date` または0以上の整数のUNIXタイムスタンプ（秒）を使用できます。
    * 両者の混在も可能です。`Date` のミリ秒部分は切り捨てます。
    *
