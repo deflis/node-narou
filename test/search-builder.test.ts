@@ -211,11 +211,13 @@ describe("SearchBuilder", () => {
 
   describe("page", () => {
     describe("default count", () => {
-      test.each([1, 2, 3, 4, 5] as const)("if page = %i", async (page) => {
+      test.each([0, 1, 2, 3, 4, 5] as const)("if page = %i", async (page) => {
         const mockFn = vi.fn();
         setupMockHandler(mockFn, ["lim", "st", "gzip", "out"]);
 
         const result = await NarouAPI.search().page(page).execute();
+        expect(result.start).toBe(page * 20);
+        expect(result.page).toBe(page);
         expect(result.allcount).toBe(1);
         expect(result.length).toBe(1);
         expect(result.values).toHaveLength(1);
@@ -232,11 +234,13 @@ describe("SearchBuilder", () => {
     });
 
     describe.each([1, 10, 100, 500] as const)("if count = %i", (count) => {
-      test.each([1, 2, 3, 4, 5] as const)("if page = %i", async (page) => {
+      test.each([0, 1, 2, 3, 4, 5] as const)("if page = %i", async (page) => {
         const mockFn = vi.fn();
         setupMockHandler(mockFn, ["lim", "st", "gzip", "out"]);
 
         const result = await NarouAPI.search().page(page, count).execute();
+        expect(result.start).toBe(page * count);
+        expect(result.page).toBe(page);
         expect(result.allcount).toBe(1);
         expect(result.length).toBe(1);
         expect(result.values).toHaveLength(1);

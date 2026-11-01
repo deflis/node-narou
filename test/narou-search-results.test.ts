@@ -49,6 +49,14 @@ describe('NarouSearchResults', () => {
     expect(results.values).toEqual(data);
   });
 
+  it('開始位置がページ境界でなくても従来の計算を維持する', () => {
+    const results = new NarouSearchResults<MockData, 'id'>(
+      [{ allcount: 100 }], { st: 21, lim: 20 }
+    );
+    expect(results.start).toBe(21);
+    expect(results.page).toBe(1.05);
+  });
+
   it('should handle empty results', () => {
     const header = { allcount: 0 };
     const data: Pick<MockData, 'id'>[] = [];

@@ -91,6 +91,17 @@ describe("SearchBuilderR18", () => {
     );
   });
 
+  describe("page", () => {
+    test.each([0, 1, 2])("page=%iの従来の開始位置を維持する", async (page) => {
+      const mockFn = vi.fn();
+      setupMockHandler(mockFn, ["st", "lim"], { ncode: "N1234AB" });
+      const result = await NarouAPI.searchR18().page(page, 20).execute();
+      expect(mockFn).toHaveBeenCalledWith(String(page * 20), "20", 4);
+      expect(result.start).toBe(page * 20);
+      expect(result.page).toBe(page);
+    });
+  });
+
   describe("execute", () => {
     test("execute should call executeNovel18", async () => {
       const mockFn = vi.fn();
