@@ -174,10 +174,16 @@ pnpm run build
 # テスト実行
 pnpm run test
 
-# カバレッジ計測
+# 単体テスト（外部通信なし）
+pnpm run test:unit
+
+# 実APIテスト（外部通信あり）
+pnpm run test:integration
+
+# 単体テストのカバレッジ計測
 pnpm run test:coverage
 
-# 型チェック
+# Lint・型チェック・単体テスト
 pnpm run check
 
 # ドキュメント生成（TypeDoc + llms.txt）

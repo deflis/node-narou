@@ -41,18 +41,20 @@
   "scripts": {
     "build": "pnpm run check && pnpm run build:tsc",
     "build:tsc": "tsdown",
-    "check": "pnpm run check:lint && pnpm run check:build && pnpm run test",
+    "check": "pnpm run check:lint && pnpm run check:build && pnpm run test:unit",
     "check:lint": "oxlint --type-aware --deny-warnings src test",
     "check:build": "tsc --noEmit",
     "prepack": "pnpm run build",
     "format": "oxlint --type-aware --fix src test && oxfmt src test scripts *.ts *.json .oxlintrc.json .oxfmtrc.json tools/docs/package.json",
     "test": "vitest run",
+    "test:unit": "vitest run --exclude test/narou.test.ts",
+    "test:integration": "vitest run test/narou.test.ts",
     "docs": "pnpm run docs:clean && pnpm run docs:typedoc && pnpm run docs:json && pnpm run docs:llms",
     "docs:clean": "node -e \"require('node:fs').rmSync('docs', { recursive: true, force: true })\"",
     "docs:typedoc": "pnpm --dir tools/docs exec typedoc --tsconfig ../../tsconfig.json --out ../../docs ../../src/index.ts",
     "docs:json": "pnpm --dir tools/docs exec typedoc --tsconfig ../../tsconfig.json --json ../../docs/api.json ../../src/index.ts",
     "docs:llms": "node scripts/generate-llms-txt.js",
-    "test:coverage": "vitest run --coverage.enabled true"
+    "test:coverage": "vitest run --coverage.enabled true --exclude test/narou.test.ts"
   },
   "devDependencies": {
     "@types/node": "^26.6.6",
