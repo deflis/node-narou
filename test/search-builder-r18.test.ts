@@ -16,8 +16,16 @@ import NarouAPI, {
   R18Site,
 } from "../src";
 import { http } from "msw/http";
+import NarouBrowserAPI from "../src/index.browser.js";
+import NarouNovelFetch from "../src/narou-fetch.js";
 
 const server = setupServer();
+
+// ブラウザ入口でもfetch実装を注入し、外部通信なしで互換性を確認する。
+const apiEntries = [
+  { name: "Node", api: NarouAPI },
+  { name: "browser", api: NarouBrowserAPI },
+];
 
 const setupMockHandler = (
   mockFn: (...args: unknown[]) => void,
@@ -91,7 +99,68 @@ describe("SearchBuilderR18", () => {
     );
   });
 
+  describe("word", () => {
+    test.each(apiEntries)("$name: 戻り値を受け取らずに再指定できる", async ({ api }) => {
+      const mockFn = vi.fn();
+      setupMockHandler(mockFn, ["word"], { ncode: "N1234AB" });
+      const builder = api.searchR18("初期条件", new NarouNovelFetch());
+      builder.word("変更後");
+
+      const result = await builder.execute();
+      expect(mockFn).toHaveBeenCalledTimes(1);
+      expect(mockFn).toHaveBeenCalledWith("変更後", 3);
+      expect(result.allcount).toBe(1);
+    });
+  });
+
+  describe("limit", () => {
+    test.each(apiEntries)("$name: 戻り値を受け取らずに再指定できる", async ({ api }) => {
+      const mockFn = vi.fn();
+      setupMockHandler(mockFn, ["lim"], { ncode: "N1234AB" });
+      const builder = api.searchR18("", new NarouNovelFetch());
+      builder.limit(3);
+      builder.limit(10);
+
+      const result = await builder.execute();
+      expect(mockFn).toHaveBeenCalledTimes(1);
+      expect(mockFn).toHaveBeenCalledWith("10", 3);
+      expect(result.limit).toBe(10);
+    });
+  });
+
   describe("page", () => {
+    test.each(apiEntries)("$name: 再指定は開始位置と件数を上書きし、既定の20件に戻す", async ({ api }) => {
+      const queries: URLSearchParams[] = [];
+      server.use(
+        http.get("https://api.syosetu.com/novel18api/api/", ({ request }) => {
+          const url = new URL(request.url);
+          queries.push(url.searchParams);
+          return responseGzipOrJson([{ allcount: 100 }], url);
+        })
+      );
+
+      const builder = api.searchR18("", new NarouNovelFetch());
+      builder.start(7).limit(3);
+      builder.page(2, 10);
+      const custom = await builder.execute();
+      expect(custom).toMatchObject({ start: 20, limit: 10, page: 2 });
+
+      builder.page(1);
+      const defaults = await builder.execute();
+      expect(defaults).toMatchObject({ start: 20, limit: 20, page: 1 });
+
+      builder.page(0);
+      const first = await builder.execute();
+      expect(first).toMatchObject({ start: 0, limit: 20, page: 0 });
+      expect(
+        queries.map((query) => [query.get("st"), query.get("lim")])
+      ).toEqual([
+        ["20", "10"],
+        ["20", "20"],
+        ["0", "20"],
+      ]);
+    });
+
     test.each([0, 1, 2])("page=%iの従来の開始位置を維持する", async (page) => {
       const mockFn = vi.fn();
       setupMockHandler(mockFn, ["st", "lim"], { ncode: "N1234AB" });
@@ -220,6 +289,33 @@ describe("SearchBuilderR18", () => {
   });
 
   describe("fields", () => {
+    test.each(apiEntries)("$name: 別の参照からの項目再指定を保持する", async ({ api }) => {
+      const queries: URLSearchParams[] = [];
+      server.use(
+        http.get("https://api.syosetu.com/novel18api/api/", ({ request }) => {
+          const url = new URL(request.url);
+          queries.push(url.searchParams);
+          return responseGzipOrJson(
+            [{ allcount: 1 }, { ncode: "N1234AB", weekly_unique: 100 }],
+            url
+          );
+        })
+      );
+
+      const builder = api.searchR18("", new NarouNovelFetch());
+      builder.opt(OptionalFields.weekly_unique);
+      const first = builder.fields(R18Fields.title);
+      expect(first).toBe(builder);
+      expect(builder.fields(R18Fields.ncode)).toBe(builder);
+
+      // 取得項目の再指定後は、以前の参照から実行しても最後の設定を使用する。
+      const result = await first.execute();
+      expect(result.values).toEqual([{ ncode: "N1234AB", weekly_unique: 100 }]);
+      expect(queries).toHaveLength(1);
+      expect(queries[0].get("of")).toBe(R18Fields.ncode);
+      expect(queries[0].get("opt")).toBe(OptionalFields.weekly_unique);
+    });
+
     test("default", async () => {
       const mockFn = vi.fn();
       setupMockHandler(mockFn, ["of", "out"], { ncode: "N1234AB" });
