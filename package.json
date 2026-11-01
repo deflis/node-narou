@@ -52,7 +52,6 @@
     "docs:typedoc": "pnpm --dir tools/docs exec typedoc --tsconfig ../../tsconfig.json --out ../../docs ../../src/index.ts",
     "docs:json": "pnpm --dir tools/docs exec typedoc --tsconfig ../../tsconfig.json --json ../../docs/api.json ../../src/index.ts",
     "docs:llms": "node scripts/generate-llms-txt.js",
-    "test:runtime": "node scripts/test-runtime.mjs",
     "test:coverage": "vitest run --coverage.enabled true"
   },
   "devDependencies": {

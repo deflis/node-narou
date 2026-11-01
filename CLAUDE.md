@@ -77,4 +77,4 @@ Tests use Vitest with MSW (Mock Service Worker) for API mocking. Tests are organ
 - **Oxlint / Oxfmt** - Type-aware linting and explicit formatting
 - **Package Manager** - Uses pnpm (required >= 12.16.1)
 
-Library runtime support is Node.js >= 16, separate from development tool requirements. Inject a fetch implementation on Node.js 16. Use `pnpm run test:runtime` to check the built ESM/CJS bundles without development dependencies. Avoid unrelated bulk formatting during dependency updates; Oxfmt runs explicitly through `pnpm run format`.
+Library runtime support is Node.js >= 16, separate from development tool requirements. Inject a fetch implementation on Node.js 16. Avoid unrelated bulk formatting during dependency updates; Oxfmt runs explicitly through `pnpm run format`.
