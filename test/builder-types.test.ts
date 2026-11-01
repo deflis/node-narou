@@ -88,6 +88,17 @@ describe.each([
     expectTypeOf(invalidUsage).returns.toBeVoid();
   });
 
+  test("ユーザーのname1stはnullを許容する", () => {
+    const all = api.searchUser();
+    const selected = api.searchUser().fields(UserFields.name1st);
+    expectTypeOf<
+      Awaited<ReturnType<typeof all.execute>>["values"][number]["name1st"]
+    >().toEqualTypeOf<string | null>();
+    expectTypeOf<
+      Awaited<ReturnType<typeof selected.execute>>["values"]
+    >().toEqualTypeOf<readonly { name1st: string | null }[]>();
+  });
+
   test("通常検索のoptとfieldsの順序に依存しない型推論", () => {
     const optFirst = api
       .search()

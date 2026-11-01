@@ -187,7 +187,7 @@ export interface UserSearchResult {
    * ユーザ名のフリガナの頭文字
    * ひらがな以外の場合はnullまたは空文字となります。
    */
-  name1st: string;
+  name1st: string | null;
   /** 小説投稿数 */
   novel_cnt: number;
   /** レビュー投稿数 */

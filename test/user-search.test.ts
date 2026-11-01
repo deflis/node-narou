@@ -326,6 +326,22 @@ describe("UserSearchBuilder", () => {
   });
 
   describe("name1st", () => {
+    test.each([null, "", "あ"])(
+      "ユーザーのname1st=%sを保持する",
+      async (name1st) => {
+        server.use(
+          http.get("https://api.syosetu.com/userapi/api/", ({ request }) =>
+            responseGzipOrJson([{ allcount: 1 }, { name1st }], new URL(request.url))
+          )
+        );
+        const result = await NarouAPI.searchUser()
+          .gzip(0)
+          .fields(UserFields.name1st)
+          .execute();
+        expect(result.values).toEqual([{ name1st }]);
+      }
+    );
+
     test("default", async () => {
       const mockFn = vi.fn();
       setupMockHandler(mockFn, ["gzip", "out"]);
