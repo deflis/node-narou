@@ -40,6 +40,36 @@ describe.each([
     >().toEqualTypeOf<readonly { title: string; ncode: string }[]>();
   });
 
+  test("項目未指定時はnovel_typeを返す", () => {
+    const novel = api.search();
+    const r18 = api.searchR18();
+
+    expectTypeOf<Awaited<ReturnType<typeof novel.execute>>["values"][number]>()
+      .toHaveProperty("novel_type")
+      .toEqualTypeOf<1 | 2>();
+    expectTypeOf<
+      Awaited<ReturnType<typeof novel.execute>>["values"][number]
+    >().not.toHaveProperty("noveltype");
+    expectTypeOf<Awaited<ReturnType<typeof r18.execute>>["values"][number]>()
+      .toHaveProperty("novel_type")
+      .toEqualTypeOf<1 | 2>();
+    expectTypeOf<
+      Awaited<ReturnType<typeof r18.execute>>["values"][number]
+    >().not.toHaveProperty("noveltype");
+  });
+
+  test("of=nt指定時はnovel_typeではなくnoveltypeを返す", () => {
+    const novel = api.search().fields(Fields.noveltype);
+    const r18 = api.searchR18().fields(R18Fields.noveltype);
+
+    expectTypeOf<
+      Awaited<ReturnType<typeof novel.execute>>["values"]
+    >().toEqualTypeOf<readonly { noveltype: 1 | 2 }[]>();
+    expectTypeOf<
+      Awaited<ReturnType<typeof r18.execute>>["values"]
+    >().toEqualTypeOf<readonly { noveltype: 1 | 2 }[]>();
+  });
+
   test("通常検索のoptとfieldsの順序に依存しない型推論", () => {
     const optFirst = api
       .search()
