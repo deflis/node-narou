@@ -1,4 +1,4 @@
-name: Publish Package to npmjs
+name: Stage Package for npmjs
 permissions:
   contents: read
 on:
@@ -60,7 +60,7 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-  publish:
+  stage:
     needs: build
     runs-on: ubuntu-latest
     environment: npm
@@ -80,7 +80,11 @@ jobs:
           package-manager-cache: false
           registry-url: https://registry.npmjs.org/
 
-      - name: Publish to npm
-        run: npm publish ./package.tgz --ignore-scripts --provenance --access public --tag "$NPM_DIST_TAG"
+      # Staged publishing requires npm >=11.15.0.
+      - name: Install npm
+        run: npm install --global npm@11.19.1
+
+      - name: Stage for npm publishing
+        run: npm stage publish ./package.tgz --ignore-scripts --provenance --access public --tag "$NPM_DIST_TAG"
         env:
           NPM_DIST_TAG: ${{ github.event.release.prerelease && 'next' || 'latest' }}
