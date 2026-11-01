@@ -181,6 +181,10 @@ export default class RankingBuilder {
     options?: ExecuteOptions
   ): Promise<RankingResult<SearchResultFields<TFields>>[]> {
     const ranking = await this.execute(options);
+    if (ranking.length === 0) {
+      return [];
+    }
+
     const fields$ = Array.isArray(fields)
       ? fields.length == 0
         ? []

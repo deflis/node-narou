@@ -314,6 +314,31 @@ describe("RankingBuilder", () => {
   });
 
   describe("executeWithFields", async () => {
+    test.each([{ fields: [] }, { fields: [Fields.title] }])(
+      "ランキングが空なら詳細取得を行わない (fields = $fields)",
+      async ({ fields }) => {
+        const mockRankingRequest = vi.fn();
+        const mockNovelRequest = vi.fn();
+
+        server.use(
+          http.get("https://api.syosetu.com/rank/rankget/", ({ request }) => {
+            mockRankingRequest();
+            return responseGzipOrJson([], new URL(request.url));
+          }),
+          http.get("https://api.syosetu.com/novelapi/api/", ({ request }) => {
+            mockNovelRequest();
+            return responseGzipOrJson([{ allcount: 0 }], new URL(request.url));
+          })
+        );
+
+        const result = await ranking().executeWithFields(fields);
+
+        expect(result).toEqual([]);
+        expect(mockRankingRequest).toHaveBeenCalledTimes(1);
+        expect(mockNovelRequest).not.toHaveBeenCalled();
+      }
+    );
+
     test("fields = default", async () => {
       const mockFn = vi.fn();
       const mockFn2 = vi.fn();
