@@ -1,8 +1,3 @@
 packages:
   - .
   - tools/docs
-# TypeDoc's minimatch 10 dependency has no fix for the reported glob DoS.
-overrides:
-  typedoc>minimatch: ^11.0.3
-patchedDependencies:
-  typedoc@0.28.20: patches/typedoc@0.28.20.patch
