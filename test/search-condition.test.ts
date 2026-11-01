@@ -123,7 +123,7 @@ describe.each([search, searchR18])(
         expect(execute).toHaveBeenCalledWith({ [param]: expected }, undefined);
       });
 
-      test.each([new Date(NaN), -1, Infinity, 0.5])(
+      test.each([new Date(NaN), new Date(-1), -1, Infinity, 0.5])(
         "無効な単一日時 %s を拒否",
         (value) => {
           const { builder } = setup();
@@ -135,8 +135,11 @@ describe.each([search, searchR18])(
         {},
         { from: 2, to: 1 },
         { from: new Date(NaN) },
+        { to: new Date(NaN) },
+        { from: new Date(-1) },
         { to: Infinity },
         { from: -1 },
+        { to: 0.5 },
       ])("不正な条件 %j を拒否", (condition) => {
         const { builder, execute } = setup();
         expect(() =>

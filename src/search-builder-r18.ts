@@ -1,3 +1,4 @@
+import { formatListCondition } from "./util/search-condition.js";
 import { NovelSearchBuilderBase } from "./search-builder.js";
 import type { ExecuteOptions } from "./narou.js";
 import type NarouSearchResults from "./narou-search-results.js";
@@ -44,7 +45,7 @@ export default class SearchBuilderR18<
    * @return {this}
    */
   r18Site(sites: R18Site | readonly R18Site[]) {
-    this.set({ nocgenre: NovelSearchBuilderBase.array2string(sites) });
+    this.set({ nocgenre: formatListCondition(sites) });
     return this;
   }
 
@@ -54,7 +55,7 @@ export default class SearchBuilderR18<
    * @return {this}
    */
   xid(ids: number | readonly number[]) {
-    this.set({ xid: NovelSearchBuilderBase.array2string(ids) });
+    this.set({ xid: formatListCondition(ids) });
     return this;
   }
 
@@ -67,7 +68,7 @@ export default class SearchBuilderR18<
   fields<TFields extends R18Fields>(
     fields: TFields | readonly TFields[]
   ): SearchBuilderR18<SearchResultR18Fields<TFields>, TOpt> {
-    this.set({ of: NovelSearchBuilderBase.array2string(fields) });
+    this.set({ of: formatListCondition(fields) });
     // oxlint-disable-next-line typescript/no-explicit-any
     return this as any;
   }
@@ -80,7 +81,7 @@ export default class SearchBuilderR18<
   opt<TFields extends OptionalFields>(
     option: TFields | readonly TFields[]
   ): SearchBuilderR18<T, SearchResultOptionalFields<TFields>> {
-    this.set({ opt: NovelSearchBuilderBase.array2string(option) });
+    this.set({ opt: formatListCondition(option) });
     // oxlint-disable-next-line typescript/no-explicit-any
     return this as any;
   }

@@ -1,3 +1,5 @@
+import type { Join } from "./type.js";
+
 /**
  * {@link NovelSearchBuilderBase.lastUpdate}・{@link NovelSearchBuilderBase.lastNovelUpdate} の日時範囲。
  *
@@ -35,53 +37,95 @@ export type NumberSearchCondition =
   | { min: number; max?: number }
   | { min?: number; max: number };
 
-/** 数値条件をAPIの範囲指定に変換する。 */
+/** 配列から重複を除去する。 */
+function distinct<T>(values: readonly T[]): T[] {
+  return Array.from(new Set(values));
+}
+
+/** 複数指定を重複のないハイフン区切りの文字列に変換する。 */
+export function formatListCondition<T extends string | number>(
+  value: T | readonly T[]
+): Join<T> {
+  return (typeof value === "object"
+    ? distinct(value).join("-")
+    : value.toString()) as Join<T>;
+}
+
+/** 数値・配列・オブジェクトの検索条件をAPIの文字列に変換する。 */
 export function formatNumberCondition(
-  condition: NumberSearchCondition
-): `${number | ""}-${number | ""}` {
-  return formatRange(condition.min, condition.max);
-}
-
-function conditionValue(value: number | Date): number {
-  const number =
-    value instanceof Date ? Math.floor(value.getTime() / 1000) : value;
-  if (!Number.isFinite(number) || !Number.isInteger(number) || number < 0) {
-    throw new RangeError(
-      "検索条件には有効な日付または0以上の整数を指定してください"
-    );
+  condition: number | readonly number[] | NumberSearchCondition
+): Join<number | ""> {
+  if (typeof condition === "number" || Array.isArray(condition)) {
+    return formatListCondition(condition);
   }
-  return number;
+  const { min, max } = condition as NumberSearchCondition;
+  return formatRange(min, max);
 }
 
-/** 日付条件をAPIの範囲指定に変換する。 */
-export function formatDateCondition(condition: DateSearchCondition): string {
+/** 数値の1引数・2引数形式とオブジェクト形式を変換する。 */
+export function formatNumberBounds(
+  min: number | NumberSearchCondition,
+  max?: number
+): number | string {
+  if (typeof min === "object") return formatNumberCondition(min);
+  return max == null ? min : `${min}-${max}`;
+}
+
+/** 日時の文字列・一致・2引数の範囲・オブジェクト形式を変換する。 */
+export function formatDateCondition(
+  condition: string | number | Date | DateSearchCondition,
+  end: number | Date | undefined
+): string {
+  if (typeof condition === "string") return condition;
+  if (typeof condition === "number" || condition instanceof Date) {
+    if (end === undefined) return formatExactDate(condition);
+    // 両端がDateの場合は秒に変換する。
+    if (condition instanceof Date && end instanceof Date) {
+      return `${toTimestamp(condition)}-${toTimestamp(end)}`;
+    }
+    return `${String(condition)}-${String(end)}`;
+  }
   const { from, to } = condition;
   if (from === undefined && to === undefined) {
     throw new TypeError("開始日時または終了日時を指定してください");
   }
   return formatRange(
-    from === undefined ? 0 : from,
-    to === undefined ? Math.floor(Date.now() / 1000) : to
+    from === undefined ? 0 : toTimestamp(from),
+    to === undefined ? Math.floor(Date.now() / 1000) : toTimestamp(to)
   );
 }
 
 /** 単一日時を秒単位の一致条件に変換する。 */
-export function formatExactDate(value: number | Date): string {
-  const timestamp = conditionValue(value);
-  return `${timestamp}-${timestamp}`;
+function formatExactDate(value: number | Date): string {
+  const timestamp = toTimestamp(value);
+  return formatRange(timestamp, timestamp);
 }
 
+/** 日時を秒単位に揃える。値の検証は共通の範囲処理で行う。 */
+function toTimestamp(value: number | Date): number {
+  return value instanceof Date ? Math.floor(value.getTime() / 1000) : value;
+}
+
+/** 数値の境界を検証し、片側省略を許すAPIの範囲指定を生成する。 */
 function formatRange(
-  from: number | Date | undefined,
-  to: number | Date | undefined
+  min: number | undefined,
+  max: number | undefined
 ): `${number | ""}-${number | ""}` {
-  if (from === undefined && to === undefined) {
+  if (min === undefined && max === undefined) {
     throw new TypeError("範囲の下限または上限を指定してください");
   }
-  const min = from === undefined ? undefined : conditionValue(from);
-  const max = to === undefined ? undefined : conditionValue(to);
+  if (min !== undefined) validateRangeValue(min);
+  if (max !== undefined) validateRangeValue(max);
   if (min !== undefined && max !== undefined && min > max) {
     throw new RangeError("範囲の下限は上限以下にしてください");
   }
   return `${min ?? ""}-${max ?? ""}`;
+}
+
+function validateRangeValue(value: number): void {
+  if (!Number.isFinite(value) || !Number.isInteger(value) || value < 0) {
+    throw new RangeError(
+      "検索条件には有効な日付または0以上の整数を指定してください"
+    );
+  }
 }
