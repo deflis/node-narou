@@ -9,8 +9,7 @@ import {
 } from "vitest";
 import { Fields, NarouRankingResult, ranking, RankingType } from "../src";
 import { setupServer } from "msw/node";
-import { http } from "msw";
-import { addDays, format, parseISO } from "date-fns";
+import { http } from "msw/http";
 import { responseGzipOrJson } from "./mock";
 
 const server = setupServer();
@@ -31,7 +30,7 @@ const setupHeaderHandler = (mockFn: (...args: unknown[]) => void) => {
 describe("RankingBuilder", () => {
   beforeAll(() => {
     vi.useFakeTimers({
-      now: new Date("2021-01-01T00:00:00Z"),
+      now: new Date(2021, 0, 1),
       shouldAdvanceTime: true,
     });
     server.listen();
@@ -45,7 +44,6 @@ describe("RankingBuilder", () => {
   describe("type = default", () => {
     test("date = default", async () => {
       const mockFn = vi.fn();
-      const yesterday = addDays(Date.now(), -1);
 
       server.use(
         http.get("https://api.syosetu.com/rank/rankget/", ({ request }) => {
@@ -67,7 +65,7 @@ describe("RankingBuilder", () => {
       expect(result).toHaveLength(300);
       expect(mockFn).toHaveBeenCalledTimes(1);
       expect(mockFn).toHaveBeenCalledWith(
-        `${format(yesterday, "yyyyMMdd")}-d`,
+        "20201231-d",
         3 // rtype, out, gzip
       );
       expect(result[0].ncode).toBe("N0000AA");
@@ -76,9 +74,9 @@ describe("RankingBuilder", () => {
     });
 
     test.each([
-      [parseISO("2021-01-01"), "20210101-d"],
-      [parseISO("2021-12-31"), "20211231-d"],
-      [parseISO("2022-01-01"), "20220101-d"],
+      [new Date(2021, 0, 1), "20210101-d"],
+      [new Date(2021, 11, 31), "20211231-d"],
+      [new Date(2022, 0, 1), "20220101-d"],
     ])("date = %p", async (date, expected) => {
       const mockFn = vi.fn();
 
@@ -114,7 +112,6 @@ describe("RankingBuilder", () => {
   describe("type = daily", async () => {
     test("date = default", async () => {
       const mockFn = vi.fn();
-      const yesterday = addDays(Date.now(), -1);
 
       server.use(
         http.get("https://api.syosetu.com/rank/rankget/", ({ request }) => {
@@ -136,7 +133,7 @@ describe("RankingBuilder", () => {
       expect(result).toHaveLength(300);
       expect(mockFn).toHaveBeenCalledTimes(1);
       expect(mockFn).toHaveBeenCalledWith(
-        `${format(yesterday, "yyyyMMdd")}-d`,
+        "20201231-d",
         3 // rtype, out, gzip
       );
       expect(result[0].ncode).toBe("N0000AA");
@@ -145,9 +142,9 @@ describe("RankingBuilder", () => {
     });
 
     test.each([
-      [parseISO("2021-01-01"), "20210101-d"],
-      [parseISO("2021-12-31"), "20211231-d"],
-      [parseISO("2022-01-01"), "20220101-d"],
+      [new Date(2021, 0, 1), "20210101-d"],
+      [new Date(2021, 11, 31), "20211231-d"],
+      [new Date(2022, 0, 1), "20220101-d"],
     ])("date = %p", async (date, expected) => {
       const mockFn = vi.fn();
 
@@ -190,9 +187,9 @@ describe("RankingBuilder", () => {
 
     test.each([
       // 火曜日を指定すると、その週のランキングが取得できる
-      [parseISO("2021-01-05"), "20210105-w"],
-      [parseISO("2021-12-28"), "20211228-w"],
-      [parseISO("2022-01-04"), "20220104-w"],
+      [new Date(2021, 0, 5), "20210105-w"],
+      [new Date(2021, 11, 28), "20211228-w"],
+      [new Date(2022, 0, 4), "20220104-w"],
     ])("date = %p", async (date, expected) => {
       const mockFn = vi.fn();
 
@@ -235,8 +232,8 @@ describe("RankingBuilder", () => {
 
     test.each([
       // 1日を指定すると、その月のランキングが取得できる
-      [parseISO("2021-01-01"), "20210101-m"],
-      [parseISO("2022-01-01"), "20220101-m"],
+      [new Date(2021, 0, 1), "20210101-m"],
+      [new Date(2022, 0, 1), "20220101-m"],
     ])("date = %p", async (date, expected) => {
       const mockFn = vi.fn();
 
@@ -279,8 +276,8 @@ describe("RankingBuilder", () => {
 
     test.each([
       // 1日を指定すると、その四半期のランキングが取得できる
-      [parseISO("2021-01-01"), "20210101-q"],
-      [parseISO("2022-01-01"), "20220101-q"],
+      [new Date(2021, 0, 1), "20210101-q"],
+      [new Date(2022, 0, 1), "20220101-q"],
     ])("date = %p", async (date, expected) => {
       const mockFn = vi.fn();
 
@@ -320,7 +317,6 @@ describe("RankingBuilder", () => {
     test("fields = default", async () => {
       const mockFn = vi.fn();
       const mockFn2 = vi.fn();
-      const yesterday = addDays(Date.now(), -1);
 
       server.use(
         http.get("https://api.syosetu.com/rank/rankget/", ({ request }) => {
@@ -386,7 +382,7 @@ describe("RankingBuilder", () => {
       expect(result).toHaveLength(300);
       expect(mockFn).toHaveBeenCalledTimes(1);
       expect(mockFn).toHaveBeenCalledWith(
-        `${format(yesterday, "yyyyMMdd")}-d`,
+        "20201231-d",
         3 // rtype, out, gzip
       );
 
@@ -436,7 +432,6 @@ describe("RankingBuilder", () => {
     test("fields = [Fields.title]", async () => {
       const mockFn = vi.fn();
       const mockFn2 = vi.fn();
-      const yesterday = addDays(Date.now(), -1);
 
       server.use(
         http.get("https://api.syosetu.com/rank/rankget/", ({ request }) => {
@@ -474,7 +469,7 @@ describe("RankingBuilder", () => {
       expect(result).toHaveLength(300);
       expect(mockFn).toHaveBeenCalledTimes(1);
       expect(mockFn).toHaveBeenCalledWith(
-        `${format(yesterday, "yyyyMMdd")}-d`,
+        "20201231-d",
         3 // rtype, out, gzip
       );
 

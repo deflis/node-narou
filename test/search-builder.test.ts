@@ -20,7 +20,7 @@ import NarouAPI, {
   Order,
   StopParam,
 } from "../src";
-import { http } from "msw";
+import { http } from "msw/http";
 
 const server = setupServer();
 

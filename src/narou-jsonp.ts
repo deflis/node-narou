@@ -9,7 +9,7 @@ export default class NarouNovelJsonp extends NarouNovel {
   protected async execute<T>(
     params: NarouParams,
     endpoint: string,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // oxlint-disable-next-line typescript/no-unused-vars
     _options?: ExecuteOptions
   ): Promise<T> {
     const query = { ...params, out: "jsonp" };

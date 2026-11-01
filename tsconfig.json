@@ -10,12 +10,12 @@
     "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,
+    "types": ["node"],
     "moduleResolution": "Bundler"
   },
   "include": [
     "./src/**/*",
     "./test/**/*",
-    "./tsup.config.ts",
-    "./vitest.config.ts"
+    "./tsdown.config.ts"
   ],
 }

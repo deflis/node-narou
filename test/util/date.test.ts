@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
 import { parseDate, formatDate, addDays } from '../../src/util/date';
-import { format, isEqual, addDays as dateAdd } from 'date-fns';
 
 describe('parseDate', () => {
   const testCases = [
@@ -16,13 +15,12 @@ describe('parseDate', () => {
 
   it.each(testCases)('$description: "$input" を正しく解析する', ({ input, expected }) => {
     const result = parseDate(input);
-    expect(isEqual(result, expected)).toBe(true);
-    expect(format(result, 'yyyy-MM-dd')).toBe(format(expected, 'yyyy-MM-dd'));
+    expect(result).toEqual(expected);
   });
 
   it('時刻コンポーネントが0に設定されることを確認する', () => {
     const result = parseDate('20230101');
-    expect(format(result, 'HH:mm:ss.SSS')).toBe('00:00:00.000');
+    expect([result.getHours(), result.getMinutes(), result.getSeconds(), result.getMilliseconds()]).toEqual([0, 0, 0, 0]);
   });
 });
 
@@ -60,9 +58,7 @@ describe('addDays', () => {
 
   it.each(testCases)('$description: $base に $days 日を加算すると $expected になる', ({ base, days, expected }) => {
     const result = addDays(base, days);
-    const dateAddResult = dateAdd(new Date(base), days);
-    expect(isEqual(result, expected)).toBe(true);
-    expect(isEqual(result, dateAddResult)).toBe(true);
-    expect(format(result, 'yyyy-MM-dd')).toBe(format(expected, 'yyyy-MM-dd'));
+    expect(result).toEqual(expected);
+    expect(result).not.toBe(base);
   });
 });

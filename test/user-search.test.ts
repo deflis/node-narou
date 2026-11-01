@@ -13,7 +13,7 @@ import NarouAPI, {
   UserFields,
   UserOrder,
 } from "../src";
-import { http } from "msw";
+import { http } from "msw/http";
 
 const server = setupServer();
 

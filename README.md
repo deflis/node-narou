@@ -36,6 +36,16 @@ npm install narou
 yarn add narou
 ```
 
+ライブラリは Node.js 16 以上に対応します。Node.js 16 には標準の `fetch` がないため、fetch 互換実装を `NarouNovelFetch` のコンストラクタに渡してください。開発ツールの実行には Node.js 24.11 以上が必要です。
+
+```typescript
+import { NarouNovelFetch, search } from "narou";
+
+// fetchImpl は利用環境で用意した fetch 互換関数
+const api = new NarouNovelFetch(fetchImpl);
+const result = await search("異世界", api).limit(10).execute();
+```
+
 ## 🚀 クイックスタート
 
 ### Node.js での使用
@@ -150,7 +160,9 @@ for (const novel of searchR18Result.values) {
 
 ## 🛠️ 開発
 
-このプロジェクトでは pnpm を使用しています。
+開発には Node.js 24.11 以上と pnpm 12.16.1 以上を使用します。pnpm のバージョンは `package.json` の `packageManager` で固定しています。
+
+型チェックは TypeScript 7、Lint は Oxlint（型情報を使用）、フォーマットは Oxfmt、ビルドは tsdown、テストは Vitest を使用します。TypeDoc は TypeScript 7 未対応のため、`tools/docs/` の専用ワークスペースに TypeScript 6 とともに分離しています。
 
 ```bash
 # 依存関係のインストール
@@ -161,6 +173,9 @@ pnpm run build
 
 # テスト実行
 pnpm run test
+
+# カバレッジ計測
+pnpm run test:coverage
 
 # 型チェック
 pnpm run check

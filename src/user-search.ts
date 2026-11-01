@@ -97,7 +97,7 @@ export default class UserSearchBuilder<
     fields: TFields | readonly TFields[]
   ): UserSearchBuilder<UserSearchResultFields<TFields>> {
     this.set({ of: UserSearchBuilder.array2string(fields) });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     return this as any;
   }
 

@@ -97,7 +97,7 @@ export interface SearchParams extends ParamsBaseWithOrder<Order> {
   maxtime?: number;
   time?: number | string;
 
-  ncode?: string | Join<string>;
+  ncode?: string;
 
   type?: NovelTypeParam;
 

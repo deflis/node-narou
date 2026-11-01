@@ -7,12 +7,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Common Development Commands
 
 ### Building and Development
-- `pnpm run build` - Build the TypeScript project using tsup
-- `pnpm run build:tsc` - Run TypeScript compiler directly
-- `pnpm run check` - Run all checks (lint, build, test)
-- `pnpm run check:lint` - Run ESLint on source and test files
+- `pnpm run build` - Build the TypeScript project using tsdown
+- `pnpm run build:tsc` - Build library bundles and declarations with tsdown
+- `pnpm run check` - Run all checks (lint, types, tests)
+- `pnpm run check:lint` - Run type-aware Oxlint on source and test files
 - `pnpm run check:build` - Type check without emitting files
-- `pnpm run format` - Auto-fix linting issues with ESLint
+- `pnpm run format` - Auto-fix with Oxlint and format with Oxfmt
 
 ### Testing
 - `pnpm run test` - Run tests with Vitest
@@ -24,8 +24,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `pnpm run docs:typedoc` - Generate documentation with TypeDoc
 
 ### Package Management
-- `pnpm install` - Install dependencies (pnpm >= 8 required)
-- `pnpm dlx <command>` - Execute packages directly (used in docs generation)
+- `pnpm install` - Install dependencies (Node.js >= 24.11 and pnpm >= 12.16.1 required)
+- Documentation tools are locked in the `tools/docs` workspace (TypeDoc with TypeScript 6); application checks use TypeScript 7.
 
 ## Code Architecture
 
@@ -72,7 +72,9 @@ Tests use Vitest with MSW (Mock Service Worker) for API mocking. Tests are organ
 
 ## Build Configuration
 
-- **tsup** - Primary build tool configured to output both CJS and ESM formats
+- **tsdown** - Primary build tool configured to output both CJS and ESM formats
 - **TypeScript** - Targets ES2020 with strict mode enabled
-- **ESLint** - Uses TypeScript ESLint configuration with Prettier integration
-- **Package Manager** - Uses pnpm (required >= 8)
+- **Oxlint / Oxfmt** - Type-aware linting and explicit formatting
+- **Package Manager** - Uses pnpm (required >= 12.16.1)
+
+Library runtime support is Node.js >= 16, separate from development tool requirements. Inject a fetch implementation on Node.js 16. Use `pnpm run test:runtime` to check the built ESM/CJS bundles without development dependencies. Avoid unrelated bulk formatting during dependency updates; Oxfmt runs explicitly through `pnpm run format`.
