@@ -62,11 +62,11 @@ export default class SearchBuilderR18<
    * 出力する項目を個別に指定します (of)。
    * 未指定時は全項目出力されます。転送量軽減のため、このパラメータの使用が推奨されます。
    * @param fields 出力するR18フィールド名、またはR18フィールド名の配列
-   * @return {SearchBuilderR18<SearchResultR18Fields<R18Fields>>} 型が更新されたビルダー
+   * @return {SearchBuilderR18<SearchResultR18Fields<TFields>, TOpt>} 型が更新されたビルダー
    */
   fields<TFields extends R18Fields>(
     fields: TFields | readonly TFields[]
-  ): SearchBuilderR18<SearchResultR18Fields<R18Fields>> {
+  ): SearchBuilderR18<SearchResultR18Fields<TFields>, TOpt> {
     this.set({ of: NovelSearchBuilderBase.array2string(fields) });
     // oxlint-disable-next-line typescript/no-explicit-any
     return this as any;

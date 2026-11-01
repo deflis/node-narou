@@ -5,6 +5,7 @@ import {
   describe,
   test,
   expect,
+  expectTypeOf,
   vi,
 } from "vitest";
 import { setupServer } from "msw/node";
@@ -20,13 +21,14 @@ const server = setupServer();
 
 const setupMockHandler = (
   mockFn: (...args: unknown[]) => void,
-  watchParams: string[] = ["out"]
+  watchParams: string[] = ["out"],
+  novel: { ncode?: string; title?: string }
 ) => {
   server.use(
     http.get("https://api.syosetu.com/novel18api/api/", ({ request }) => {
       const url = new URL(request.url);
       const params = url.searchParams;
-      const response = [{ allcount: 1 }, { ncode: "N1234AB" }];
+      const response = [{ allcount: 1 }, novel];
 
       const values = watchParams.map(param => params.get(param));
       mockFn(...values, params.size);
@@ -57,7 +59,7 @@ describe("SearchBuilderR18", () => {
   describe("execute", () => {
     test("execute should call executeNovel18", async () => {
       const mockFn = vi.fn();
-      setupMockHandler(mockFn, ["out"]);
+      setupMockHandler(mockFn, ["out"], { ncode: "N1234AB" });
 
       const result = await NarouAPI.searchR18().execute();
       expect(result.allcount).toBe(1);
@@ -72,7 +74,7 @@ describe("SearchBuilderR18", () => {
   describe("r18Site", () => {
     test("default", async () => {
       const mockFn = vi.fn();
-      setupMockHandler(mockFn, ["nocgenre", "out"]);
+      setupMockHandler(mockFn, ["nocgenre", "out"], { ncode: "N1234AB" });
 
       const result = await NarouAPI.searchR18().execute();
       expect(result.allcount).toBe(1);
@@ -85,7 +87,7 @@ describe("SearchBuilderR18", () => {
 
     test.each(Object.values(R18Site))("if r18Site = %i", async (site) => {
       const mockFn = vi.fn();
-      setupMockHandler(mockFn, ["nocgenre", "out"]);
+      setupMockHandler(mockFn, ["nocgenre", "out"], { ncode: "N1234AB" });
 
       const result = await NarouAPI.searchR18().r18Site(site).execute();
       expect(result.allcount).toBe(1);
@@ -98,7 +100,7 @@ describe("SearchBuilderR18", () => {
 
     test("if r18Site = [1, 2, 3]", async () => {
       const mockFn = vi.fn();
-      setupMockHandler(mockFn, ["nocgenre", "out"]);
+      setupMockHandler(mockFn, ["nocgenre", "out"], { ncode: "N1234AB" });
 
       const result = await NarouAPI.searchR18()
         .r18Site([R18Site.Nocturne, R18Site.MoonLight, R18Site.MoonLightBL])
@@ -133,7 +135,7 @@ describe("SearchBuilderR18", () => {
   describe("xid", () => {
     test("default", async () => {
       const mockFn = vi.fn();
-      setupMockHandler(mockFn, ["xid", "out"]);
+      setupMockHandler(mockFn, ["xid", "out"], { ncode: "N1234AB" });
 
       const result = await NarouAPI.searchR18().execute();
       expect(result.allcount).toBe(1);
@@ -146,7 +148,7 @@ describe("SearchBuilderR18", () => {
 
     test.each([123, 456, 789])("if xid = %i", async (id) => {
       const mockFn = vi.fn();
-      setupMockHandler(mockFn, ["xid", "out"]);
+      setupMockHandler(mockFn, ["xid", "out"], { ncode: "N1234AB" });
 
       const result = await NarouAPI.searchR18().xid(id).execute();
       expect(result.allcount).toBe(1);
@@ -159,7 +161,7 @@ describe("SearchBuilderR18", () => {
 
     test("if xid = [123, 456, 789]", async () => {
       const mockFn = vi.fn();
-      setupMockHandler(mockFn, ["xid", "out"]);
+      setupMockHandler(mockFn, ["xid", "out"], { ncode: "N1234AB" });
 
       const result = await NarouAPI.searchR18().xid([123, 456, 789]).execute();
       expect(result.allcount).toBe(1);
@@ -174,7 +176,7 @@ describe("SearchBuilderR18", () => {
   describe("fields", () => {
     test("default", async () => {
       const mockFn = vi.fn();
-      setupMockHandler(mockFn, ["of", "out"]);
+      setupMockHandler(mockFn, ["of", "out"], { ncode: "N1234AB" });
 
       const result = await NarouAPI.searchR18().execute();
       expect(result.allcount).toBe(1);
@@ -187,7 +189,7 @@ describe("SearchBuilderR18", () => {
 
     test("if fields = R18Fields.title", async () => {
       const mockFn = vi.fn();
-      setupMockHandler(mockFn, ["of", "out"]);
+      setupMockHandler(mockFn, ["of", "out"], { title: "テスト作品" });
 
       const result = await NarouAPI.searchR18()
         .fields(R18Fields.title)
@@ -195,18 +197,22 @@ describe("SearchBuilderR18", () => {
       expect(result.allcount).toBe(1);
       expect(result.length).toBe(1);
       expect(result.values).toHaveLength(1);
-      expect(result.values[0].ncode).toBe("N1234AB");
+      expect(result.values[0].title).toBe("テスト作品");
+      expectTypeOf(result.values).toEqualTypeOf<readonly { title: string }[]>();
       expect(mockFn).toHaveBeenCalledTimes(1);
       expect(mockFn).toHaveBeenCalledWith("t", "json", 3);
     });
 
     test("if fields = [R18Fields.title, R18Fields.ncode]", async () => {
       const mockFn = vi.fn();
-      setupMockHandler(mockFn, ["of", "out"]);
+      setupMockHandler(mockFn, ["of", "out"], { ncode: "N1234AB" });
 
       const result = await NarouAPI.searchR18()
         .fields([R18Fields.title, R18Fields.ncode])
         .execute();
+      expectTypeOf(result.values).toEqualTypeOf<
+        readonly { title: string; ncode: string }[]
+      >();
       expect(result.allcount).toBe(1);
       expect(result.length).toBe(1);
       expect(result.values).toHaveLength(1);
@@ -214,12 +220,43 @@ describe("SearchBuilderR18", () => {
       expect(mockFn).toHaveBeenCalledTimes(1);
       expect(mockFn).toHaveBeenCalledWith("t-n", "json", 3);
     });
+
+    test("readonly fields should narrow the result type", () => {
+      const fields = [R18Fields.title, R18Fields.ncode] as const;
+      const builder = NarouAPI.searchR18().fields(fields);
+
+      expectTypeOf<Awaited<ReturnType<typeof builder.execute>>["values"]>()
+        .toEqualTypeOf<readonly { title: string; ncode: string }[]>();
+    });
+
+    test("fields should preserve optional fields in either chain order", () => {
+      const optFirst = NarouAPI.searchR18()
+        .opt(OptionalFields.weekly_unique)
+        .fields(R18Fields.title);
+      const fieldsFirst = NarouAPI.searchR18()
+        .fields(R18Fields.title)
+        .opt(OptionalFields.weekly_unique);
+
+      expectTypeOf<Awaited<ReturnType<typeof optFirst.execute>>["values"]>()
+        .toEqualTypeOf<readonly { title: string; weekly_unique: number }[]>();
+      expectTypeOf<Awaited<ReturnType<typeof fieldsFirst.execute>>["values"]>()
+        .toEqualTypeOf<readonly { title: string; weekly_unique: number }[]>();
+    });
+
+    test("fields should replace previously selected fields", () => {
+      const builder = NarouAPI.searchR18()
+        .fields([R18Fields.title, R18Fields.ncode])
+        .fields(R18Fields.title);
+
+      expectTypeOf<Awaited<ReturnType<typeof builder.execute>>["values"]>()
+        .toEqualTypeOf<readonly { title: string }[]>();
+    });
   });
 
   describe("opt", () => {
     test("default", async () => {
       const mockFn = vi.fn();
-      setupMockHandler(mockFn, ["opt", "out"]);
+      setupMockHandler(mockFn, ["opt", "out"], { ncode: "N1234AB" });
 
       const result = await NarouAPI.searchR18().execute();
       expect(result.allcount).toBe(1);
@@ -232,7 +269,7 @@ describe("SearchBuilderR18", () => {
 
     test("if opt = OptionalFields.weekly_unique", async () => {
       const mockFn = vi.fn();
-      setupMockHandler(mockFn, ["opt", "out"]);
+      setupMockHandler(mockFn, ["opt", "out"], { ncode: "N1234AB" });
 
       const result = await NarouAPI.searchR18()
         .opt(OptionalFields.weekly_unique)
