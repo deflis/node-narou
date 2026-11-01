@@ -21,7 +21,6 @@ import type {
   DateParam,
 } from "./params.js";
 import { BooleanNumber, StopParam } from "./params.js";
-import type { Join } from "./util/type.js";
 import type {
   DateSearchCondition,
   NumberSearchCondition,
@@ -29,7 +28,8 @@ import type {
 import {
   formatNumberCondition,
   formatDateCondition,
-  formatExactDate,
+  formatNumberBounds,
+  formatListCondition,
 } from "./util/search-condition.js";
 
 export type {
@@ -56,34 +56,6 @@ export abstract class SearchBuilderBase<
     protected params: TParams = {} as TParams,
     protected api: NarouNovel
   ) { }
-
-  /**
-   * 配列から重複を除去する
-   * @protected
-   * @static
-   * @param array 配列
-   * @returns 重複を除去した配列
-   */
-  protected static distinct<T>(array: readonly T[]): T[] {
-    return Array.from(new Set(array));
-  }
-
-  /**
-   * 配列をハイフン区切りの文字列に変換する
-   * @protected
-   * @static
-   * @param n 文字列または数値の配列、あるいは単一の文字列または数値
-   * @returns ハイフン区切りの文字列
-   */
-  protected static array2string<T extends string | number>(
-    n: T | readonly T[]
-  ): Join<T> {
-    if (Array.isArray(n)) {
-      return this.distinct(n).join("-") as Join<T>;
-    } else {
-      return n.toString() as Join<T>;
-    }
-  }
 
   /**
    * 取得件数を指定する (lim)
@@ -332,11 +304,7 @@ export abstract class NovelSearchBuilderBase<
    * ```
    */
   length(length: number | readonly number[] | NumberSearchCondition): this {
-    const value =
-      typeof length === "number" || Array.isArray(length)
-        ? NovelSearchBuilderBase.array2string(length)
-        : formatNumberCondition(length as NumberSearchCondition);
-    this.set({ length: value });
+    this.set({ length: formatNumberCondition(length) });
     return this;
   }
 
@@ -377,17 +345,7 @@ export abstract class NovelSearchBuilderBase<
   kaiwaritu(condition: NumberSearchCondition): this;
 
   kaiwaritu(min: number | NumberSearchCondition, max?: number): this {
-    if (typeof min === "object") {
-      this.set({ kaiwaritu: formatNumberCondition(min) });
-      return this;
-    }
-    let n: number | string;
-    if (max != null) {
-      n = `${min}-${max}`;
-    } else {
-      n = min;
-    }
-    this.set({ kaiwaritu: n });
+    this.set({ kaiwaritu: formatNumberBounds(min, max) });
     return this;
   }
 
@@ -414,11 +372,7 @@ export abstract class NovelSearchBuilderBase<
    * ```
    */
   sasie(num: number | readonly number[] | NumberSearchCondition): this {
-    const value =
-      typeof num === "number" || Array.isArray(num)
-        ? NovelSearchBuilderBase.array2string(num)
-        : formatNumberCondition(num as NumberSearchCondition);
-    this.set({ sasie: value });
+    this.set({ sasie: formatNumberCondition(num) });
     return this;
   }
 
@@ -446,11 +400,7 @@ export abstract class NovelSearchBuilderBase<
    * ```
    */
   time(num: number | readonly number[] | NumberSearchCondition): this {
-    const value =
-      typeof num === "number" || Array.isArray(num)
-        ? NovelSearchBuilderBase.array2string(num)
-        : formatNumberCondition(num as NumberSearchCondition);
-    this.set({ time: value });
+    this.set({ time: formatNumberCondition(num) });
     return this;
   }
 
@@ -460,7 +410,7 @@ export abstract class NovelSearchBuilderBase<
    * @return {this}
    */
   ncode(ncodes: string | readonly string[]): this {
-    this.set({ ncode: NovelSearchBuilderBase.array2string(ncodes) });
+    this.set({ ncode: formatListCondition(ncodes) });
     return this;
   }
 
@@ -481,7 +431,7 @@ export abstract class NovelSearchBuilderBase<
    * @return {this}
    */
   buntai(buntai: BuntaiParam | readonly BuntaiParam[]): this {
-    this.set({ buntai: NovelSearchBuilderBase.array2string(buntai) });
+    this.set({ buntai: formatListCondition(buntai) });
     return this;
   }
 
@@ -580,26 +530,7 @@ export abstract class NovelSearchBuilderBase<
     x: string | number | Date | DateSearchCondition,
     y?: number | Date
   ): this {
-    if (typeof x === "object" && !(x instanceof Date)) {
-      this.set({ lastup: formatDateCondition(x) });
-      return this;
-    }
-    if (typeof x !== "string" && y === undefined) {
-      this.set({ lastup: formatExactDate(x) });
-      return this;
-    }
-    let date: string;
-    if (typeof x == "string") {
-      date = x;
-    } else if (x instanceof Date && y instanceof Date) {
-      date = `${Math.floor(x.getTime() / 1000)}-${Math.floor(
-        y.getTime() / 1000
-      )}`;
-    } else {
-      date = `${String(x)}-${String(y)}`;
-    }
-
-    this.set({ lastup: date });
+    this.set({ lastup: formatDateCondition(x, y) });
     return this;
   }
 
@@ -679,26 +610,7 @@ export abstract class NovelSearchBuilderBase<
     x: string | number | Date | DateSearchCondition,
     y?: number | Date
   ): this {
-    if (typeof x === "object" && !(x instanceof Date)) {
-      this.set({ lastupdate: formatDateCondition(x) });
-      return this;
-    }
-    if (typeof x !== "string" && y === undefined) {
-      this.set({ lastupdate: formatExactDate(x) });
-      return this;
-    }
-    let date: string;
-    if (typeof x == "string") {
-      date = x;
-    } else if (x instanceof Date && y instanceof Date) {
-      date = `${Math.floor(x.getTime() / 1000)}-${Math.floor(
-        y.getTime() / 1000
-      )}`;
-    } else {
-      date = `${String(x)}-${String(y)}`;
-    }
-
-    this.set({ lastupdate: date });
+    this.set({ lastupdate: formatDateCondition(x, y) });
     return this;
   }
 
@@ -729,7 +641,7 @@ export default class SearchBuilder<
    * @return {this}
    */
   bigGenre(genre: BigGenre | readonly BigGenre[]): this {
-    this.set({ biggenre: SearchBuilder.array2string(genre) });
+    this.set({ biggenre: formatListCondition(genre) });
     return this;
   }
 
@@ -740,7 +652,7 @@ export default class SearchBuilder<
    * @return {this}
    */
   notBigGenre(genre: BigGenre | readonly BigGenre[]): this {
-    this.set({ notbiggenre: SearchBuilder.array2string(genre) });
+    this.set({ notbiggenre: formatListCondition(genre) });
     return this;
   }
 
@@ -751,7 +663,7 @@ export default class SearchBuilder<
    * @return {this}
    */
   genre(genre: Genre | readonly Genre[]): this {
-    this.set({ genre: SearchBuilder.array2string(genre) });
+    this.set({ genre: formatListCondition(genre) });
     return this;
   }
 
@@ -762,7 +674,7 @@ export default class SearchBuilder<
    * @return {this}
    */
   notGenre(genre: Genre | readonly Genre[]): this {
-    this.set({ notgenre: SearchBuilder.array2string(genre) });
+    this.set({ notgenre: formatListCondition(genre) });
     return this;
   }
 
@@ -773,7 +685,7 @@ export default class SearchBuilder<
    * @return {this}
    */
   userId(ids: number | readonly number[]): this {
-    this.set({ userid: SearchBuilder.array2string(ids) });
+    this.set({ userid: formatListCondition(ids) });
     return this;
   }
 
@@ -801,7 +713,7 @@ export default class SearchBuilder<
   fields<TFields extends Fields>(
     fields: TFields | readonly TFields[]
   ): SearchBuilder<SearchResultFields<TFields>, TOpt> {
-    this.set({ of: SearchBuilder.array2string(fields) });
+    this.set({ of: formatListCondition(fields) });
     // oxlint-disable-next-line typescript/no-explicit-any
     return this as any;
   }
@@ -815,7 +727,7 @@ export default class SearchBuilder<
   opt<TFields extends OptionalFields>(
     option: TFields | readonly TFields[]
   ): SearchBuilder<T, SearchResultOptionalFields<TFields>> {
-    this.set({ opt: SearchBuilder.array2string(option) });
+    this.set({ opt: formatListCondition(option) });
     // oxlint-disable-next-line typescript/no-explicit-any
     return this as any;
   }

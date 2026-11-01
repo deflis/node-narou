@@ -1,3 +1,4 @@
+import { formatListCondition } from "./util/search-condition.js";
 import NarouSearchResults from "./narou-search-results.js";
 import type {
   UserSearchResult,
@@ -96,7 +97,7 @@ export default class UserSearchBuilder<
   fields<TFields extends UserFields>(
     fields: TFields | readonly TFields[]
   ): UserSearchBuilder<UserSearchResultFields<TFields>> {
-    this.set({ of: UserSearchBuilder.array2string(fields) });
+    this.set({ of: formatListCondition(fields) });
     // oxlint-disable-next-line typescript/no-explicit-any
     return this as any;
   }
